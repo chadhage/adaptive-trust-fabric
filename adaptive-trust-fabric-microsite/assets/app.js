@@ -79,10 +79,10 @@
 
   $('#challenge-list').innerHTML = data.adversarialFindings.map((item, i) => `
     <article class="challenge reveal">
-      <p class="hypothesis">TEST ${String(i + 1).padStart(2, '0')}</p>
+      <p class="hypothesis">REVIEW ${String(i + 1).padStart(2, '0')}</p>
       <h3>${esc(item.position)}</h3>
       <p>${esc(item.test)}</p>
-      <p class="verdict"><strong>Verdict:</strong> ${esc(item.result)}</p>
+      <p class="verdict"><strong>Assessment:</strong> ${esc(item.result)}</p>
       ${chips(item.sources)}
     </article>`).join('');
 
@@ -113,8 +113,8 @@
         <span class="source-id">${esc(s.id)}</span>
         <span class="provenance">${esc(s.provenance)}</span>
         <div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a><p>${esc(s.evidence_use)}</p></div>
-        <span class="source-date">Accessed ${esc(s.accessed)}${s.last_updated ? `<br>Updated ${esc(s.last_updated)}` : ''}</span>
-      </article>`).join('') : '<p class="no-results">No evidence records match.</p>';
+        <span class="source-date">Recorded access ${esc(s.accessed)}${s.last_updated ? `<br>Updated ${esc(s.last_updated)}` : ''}</span>
+      </article>`).join('') : '<p class="no-results">No source records match.</p>';
   }
   sourceSearch.addEventListener('input', renderSources);
   sourceClass.addEventListener('change', renderSources);
@@ -140,45 +140,45 @@
 
     if (survivability >= 4) {
       primary = 'T4';
-      reasons.push('S4 requires an intentionally disconnected local identity, policy, security-operations and recovery stack.');
-      disqualifiers.push('A connected-only global control plane cannot satisfy the mission-duration requirement.');
+      reasons.push('S4 requires local identity, policy, security operations and recovery services for disconnected operation.');
+      disqualifiers.push('A cloud-dependent control plane does not meet the required disconnected operating duration.');
     } else if (boundary === 'identity' || sovereignty === 'control') {
       primary = 'T3';
-      reasons.push('Independent identity/recovery or local control-plane authority is a hard boundary, not a score.');
-      disqualifiers.push('A shared corporate identity root would violate the selected authority constraint.');
+      reasons.push('The selected requirement calls for independent identity, recovery or local control-plane administration.');
+      disqualifiers.push('Shared corporate identity administration does not satisfy the selected independence requirement.');
     } else if (survivability >= 3) {
       primary = 'T3';
       reasons.push('S3 independent operations require locally authoritative identity, policy, telemetry and recovery.');
     } else if (boundary === 'regulatory' || sovereignty === 'keys' || autonomy === 'high' || ma === 'high') {
       primary = 'T2';
-      reasons.push('Regulatory, key-authority, business-autonomy or continuous-composability requirements justify federated control planes.');
+      reasons.push('The selected regulatory, key-management, business-autonomy or acquisition requirements call for separate tenant control planes.');
     } else {
-      reasons.push('No selected hard constraint defeats the Microsoft-documented single-tenant default.');
-      reasons.push('Use delegated administration, landing-zone policy, information protection and scoped operations before adding tenants.');
+      reasons.push('No selected mandatory constraint requires a separate identity or control-plane authority.');
+      reasons.push('Assess delegated administration, landing-zone policies, information protection and scoped operations before adding tenants.');
     }
 
     if (ma === 'high') companions.push('T5 · Acquisition transition zone');
     if (ot) {
-      companions.push('Safety-aware OT cell');
+      companions.push('OT environment with local safety procedures');
       reasons.push('Cyber response must be reviewed against physical-process safety and local operating authority.');
-      if (survivability < 2) disqualifiers.push('Safety-critical OT should not inherit a cloud-only response dependency without a documented local fallback.');
+      if (survivability < 2) disqualifiers.push('A cloud-only OT response dependency requires a documented local fallback for safety-critical functions.');
     }
-    if (survivability >= 2 && primary !== 'T4') companions.push(`S${survivability} local survivability services`);
+    if (survivability >= 2 && primary !== 'T4') companions.push(`S${survivability} local operating services`);
 
     const topology = data.topologies.find(t => t.id === primary);
     const warning = maturity === 'developing' && ['T2','T3','T4'].includes(primary)
-      ? 'Operability threshold: the selected pattern exceeds a developing operating model. Stage it through a bounded transition zone, establish cross-boundary identity, policy, SecOps and recovery capabilities, and expand only after drills prove control.'
-      : 'Capability fit: proceed only after the authority graph, failure scenarios and recovery drills confirm that the operating model can sustain this pattern.';
+      ? 'Operating-model gap: the developing option does not establish that the identity, policy, monitoring and recovery capabilities required by this pattern are available. Implement and test those capabilities before extending deployment.'
+      : 'Implementation review: document administrative authority and dependencies, test failure scenarios and verify recovery procedures before deployment.';
 
     result.innerHTML = `
       <p class="result-kicker">Derived assessment</p>
       <h3>${esc(topology.name)}</h3>
       <p>${esc(topology.use_when)}</p>
       <div class="result-badges"><span class="result-badge">Primary ${esc(primary)}</span><span class="result-badge">Survivability S${survivability}</span>${companions.map(c => `<span class="result-badge">${esc(c)}</span>`).join('')}</div>
-      <h4>Why this pattern</h4>
+      <h4>Selection rationale</h4>
       <ul class="result-list">${reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>
-      ${disqualifiers.length ? `<h4>Disqualifying constraints</h4><ul class="result-list">${disqualifiers.map(r => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
-      <div class="result-warning"><strong>Maturity gate.</strong> ${esc(warning)}</div>
+      ${disqualifiers.length ? `<h4>Constraints excluding alternatives</h4><ul class="result-list">${disqualifiers.map(r => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
+      <div class="result-warning"><strong>Maturity check.</strong> ${esc(warning)}</div>
       ${chips(topology.sources)}
     `;
   });

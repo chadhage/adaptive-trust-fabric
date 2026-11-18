@@ -8,7 +8,7 @@
 * { box-sizing: border-box; }
 html { font-family: "Segoe UI", Aptos, Arial, sans-serif; color: #122038; font-size: 9.6pt; line-height: 1.44; }
 body { margin: 0; }
-h1, h2, h3, h4 { margin: 0; line-height: 1.1; color: #0a1830; page-break-after: avoid; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.1; color: #0a1830; page-break-after: avoid; break-inside: avoid; }
 h1 { font-size: 34pt; letter-spacing: -1.4pt; }
 h2 { font-size: 22pt; letter-spacing: -.7pt; margin: 0 0 6mm; }
 h3 { font-size: 13pt; letter-spacing: -.2pt; margin: 5mm 0 2mm; }

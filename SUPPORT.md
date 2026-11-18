@@ -2,7 +2,7 @@
 
 ## Community support
 
-This repository provides architecture, research and decision-support material. It is provided "AS IS", without warranty of any kind, under the [MIT License](./LICENSE).
+This repository contains architecture analysis, proposed control requirements, source records and a browser-based topology assessor. It is provided "AS IS", without warranty of any kind, under the [MIT License](./LICENSE).
 
 For content corrections, broken links, accessibility issues or questions about the material, [open a GitHub issue](https://github.com/chadhage/adaptive-trust-fabric/issues). Include the affected page or file, the expected and actual behavior, and relevant source identifiers. For display or interaction problems, include your browser and operating system.
 

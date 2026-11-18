@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A browser-native, 12-slide briefing on Adaptive Trust Fabric: boundaries, topology, survivability, identity, recovery and adoption.">
+  <meta name="description" content="Twelve slides describing tenant topology, control responsibilities, outage requirements, identity, recovery and implementation criteria.">
   <title>Adaptive Trust Fabric | Presentation</title>
   <script>
     (() => {
@@ -270,144 +270,144 @@
   <noscript><p class="no-script">JavaScript is disabled. All slides are shown below; use your browser's Print command for a handout.</p></noscript>
 
   <main class="deck" id="deck" aria-label="Adaptive Trust Fabric slide presentation">
-    <section class="slide" id="slide-1" data-label="The governing position" aria-labelledby="slide-1-title">
+    <section class="slide" id="slide-1" data-label="Architecture scope" aria-labelledby="slide-1-title">
       <header>
-        <p class="eyebrow">01 / Executive position / 17 November 2026</p>
+        <p class="eyebrow">01 / Scope and review method / 17 November 2026</p>
         <h1 id="slide-1-title" tabindex="-1">Adaptive<br><span>Trust Fabric</span></h1>
-        <p class="lead">One enterprise. Explicit trust. An architecture for identity, security and compliance that adapts to real boundaries.</p>
+        <p class="lead">Reference architecture and control requirements for identity, security and compliance across tenants, cloud providers, OT and disconnected environments.</p>
       </header>
       <div class="two-up content">
         <div>
-          <p>Do not optimize for tenant count or centralization. Optimize for sovereignty, survivability, recoverability and the capacity to operate safely.</p>
+          <p>Select topology from mandatory isolation, jurisdiction, outage and recovery requirements. Then compare operating costs, dependencies and available capabilities.</p>
           <div class="principle-grid">
-            <div class="principle"><span>01 / INTENT</span>Centralize intent.</div>
-            <div class="principle"><span>02 / AUTHORITY</span>Federate enforcement.</div>
-            <div class="principle"><span>03 / CONTINUITY</span>Localize survival.</div>
-            <div class="principle"><span>04 / ASSURANCE</span>Prove recovery.</div>
+            <div class="principle"><span>01 / POLICY</span>Policy ownership</div>
+            <div class="principle"><span>02 / ENFORCEMENT</span>Enforcement locations</div>
+            <div class="principle"><span>03 / CONTINUITY</span>Local operating requirements</div>
+            <div class="principle"><span>04 / RECOVERY</span>Recovery procedures</div>
           </div>
         </div>
         <div class="panel emphasis">
-          <h3>A Microsoft-aligned connected core</h3>
+          <h3>Microsoft cloud services</h3>
           <div class="pill-grid">
             <span class="pill">Entra</span><span class="pill">Defender</span><span class="pill">Sentinel</span>
             <span class="pill">Purview</span><span class="pill">Intune</span><span class="pill">Azure governance</span>
           </div>
-          <p>Composed with native-cloud, sovereign, local and disconnected capabilities where verified constraints require them.</p>
+          <p>Use supported service functions alongside cloud-provider and local controls where separate administration, jurisdiction or outage requirements apply.</p>
         </div>
       </div>
-      <p class="source">Derived architectural position, not an official Microsoft product commitment. Evidence: MS-01, STD-01. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Proposed architecture, not an official Microsoft product commitment. Sources: MS-01, STD-01. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
-    <section class="slide" id="slide-2" data-label="One tenant is the default, not the objective" aria-labelledby="slide-2-title">
+    <section class="slide" id="slide-2" data-label="Tenant isolation requirements" aria-labelledby="slide-2-title">
       <header>
-        <p class="eyebrow">02 / Boundary before topology</p>
-        <h2 id="slide-2-title" tabindex="-1">One tenant is the default.<br>Not the objective.</h2>
-        <p class="lead">Prefer a single Microsoft Entra tenant when it can meet all hard requirements. Introduce another control plane only for a defensible boundary outcome.</p>
+        <p class="eyebrow">02 / Tenant isolation</p>
+        <h2 id="slide-2-title" tabindex="-1">Single-tenant and multitenant selection criteria</h2>
+        <p class="lead">Prefer one Microsoft Entra tenant when it meets the mandatory requirements. Document the requirement for each additional tenant or independently managed identity domain.</p>
       </header>
       <div class="two-up content">
         <div class="panel emphasis">
           <span class="big-marker">01</span>
-          <h3>Start with delegated boundaries</h3>
-          <p>Common collaboration, scoped administration and shared operating standards avoid unnecessary lifecycle complexity.</p>
-          <p>Do not create tenants merely to mirror an organization chart or allocate cost.</p>
+          <h3>Single-tenant administration</h3>
+          <p>Use shared collaboration and delegated administration where they meet the requirements.</p>
+          <p>An organization-chart difference or cost-allocation preference does not establish an isolation requirement.</p>
         </div>
         <div class="panel">
-          <h3>Prove the exception</h3>
+          <h3>Separate administration requirements</h3>
           <ul>
             <li>Independent identity or recovery authority</li>
             <li>Sovereign, legal or regulatory constraints</li>
-            <li>Safety or prolonged mission independence</li>
-            <li>Bounded acquisition and divestiture transitions</li>
+            <li>Safety or operation without upstream services</li>
+            <li>Scoped acquisition and divestiture access</li>
           </ul>
         </div>
       </div>
-      <p class="callout">Separate resources do not automatically mean separate identity risk. Shared identities and privileged integrations can reconnect the boundary.</p>
-      <p class="source">Microsoft Explicit guidance with derived admission criteria. Evidence: MS-02, MS-03, MS-21. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="callout">Shared identities and cross-tenant administration can retain common authentication or privilege dependencies even when resources are in separate tenants.</p>
+      <p class="source">Microsoft guidance and proposed additional-tenant criteria. Sources: MS-02, MS-03, MS-21. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
-    <section class="slide" id="slide-3" data-label="A fabric of interoperating authorities" aria-labelledby="slide-3-title">
+    <section class="slide" id="slide-3" data-label="Control responsibilities and dependencies" aria-labelledby="slide-3-title">
       <header>
         <p class="eyebrow">03 / Reference architecture</p>
-        <h2 id="slide-3-title" tabindex="-1">Common intent. Explicit authority.</h2>
-        <p class="lead">Policy ownership, identity, enforcement, telemetry and recovery are related concerns, not a single runtime dependency.</p>
+        <h2 id="slide-3-title" tabindex="-1">Control responsibilities and dependencies</h2>
+        <p class="lead">Assign policy, identity, enforcement, telemetry and recovery functions to implementations and accountable owners. Record dependencies between them.</p>
       </header>
-      <div class="architecture content" role="img" aria-label="Adaptive governance and independent recovery above a Microsoft connected core, with enforcement zones and local services below.">
+      <div class="architecture content" role="img" aria-label="Policy ownership and independent recovery administration, Microsoft cloud services, cloud-provider enforcement and local operating services.">
         <div class="two-up">
-          <div class="panel"><h3>Adaptive governance</h3><p>Obligations, policy as code, accountable owners and evidence.</p></div>
-          <div class="panel"><h3>Independent recovery authority</h3><p>Clean identities, keys, communications and known-good state.</p></div>
+          <div class="panel"><h3>Policy ownership</h3><p>Requirements, versioned policies, accountable owners and audit records.</p></div>
+          <div class="panel"><h3>Independent recovery authority</h3><p>Recovery identities, keys, communications and configuration baselines.</p></div>
         </div>
         <div class="connector" aria-hidden="true">&darr;</div>
         <div class="panel emphasis architecture-core">
-          <h3>Microsoft connected core</h3>
+          <h3>Microsoft cloud services</h3>
           <div class="pill-grid"><span class="pill">Entra</span><span class="pill">Defender XDR</span><span class="pill">Sentinel</span><span class="pill">Purview</span><span class="pill">Intune</span><span class="pill">Azure governance</span></div>
         </div>
         <div class="connector" aria-hidden="true">&darr;</div>
         <div class="two-up">
-          <div class="panel"><h3>Authoritative enforcement zones</h3><p>Tenant, native cloud, application, workload, data and facility.</p></div>
+          <div class="panel"><h3>Enforcement locations</h3><p>Tenant, cloud provider, application, workload, data and facility.</p></div>
           <div class="panel"><h3>S2-S4 local control planes</h3><p>Identity, policy, detection, updates, evidence and recovery.</p></div>
         </div>
       </div>
-      <p class="source">Derived reference architecture. Evidence: MS-01, MS-11, MS-18, MS-19. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Proposed allocation of control responsibilities. Sources: MS-01, MS-11, MS-18, MS-19. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
-    <section class="slide" id="slide-4" data-label="The decision hierarchy" aria-labelledby="slide-4-title">
+    <section class="slide" id="slide-4" data-label="Evaluation sequence" aria-labelledby="slide-4-title">
       <header>
-        <p class="eyebrow">04 / Architecture fitness</p>
-        <h2 id="slide-4-title" tabindex="-1">A fatal constraint cannot be averaged away.</h2>
-        <p class="lead">Apply the decision hierarchy in order. A good aggregate score cannot compensate for a sovereignty violation, unsafe action or circular recovery dependency.</p>
+        <p class="eyebrow">04 / Evaluation sequence</p>
+        <h2 id="slide-4-title" tabindex="-1">Check mandatory constraints before comparing alternatives.</h2>
+        <p class="lead">Eliminate designs that violate applicable legal, safety, isolation or continuity requirements. Review the remaining options using the following sequence.</p>
       </header>
       <ol class="decision-list content">
-        <li class="emphasis"><span class="step-number">01</span><div><h3>Hard constraints</h3><p>Identify non-negotiable legal, safety, authority and continuity requirements.</p></div></li>
-        <li><span class="step-number">02</span><div><h3>Trust, authority and dependency graph</h3><p>Trace who can act, through which integrations, on which systems.</p></div></li>
-        <li><span class="step-number">03</span><div><h3>Scenario stress tests</h3><p>Test compromise, outages, isolation, recovery and organizational change.</p></div></li>
-        <li><span class="step-number">04</span><div><h3>Risk-adjusted optimization</h3><p>Compare feasible options on risk, cost, complexity and reversibility.</p></div></li>
-        <li><span class="step-number">05</span><div><h3>Capability and maturity feasibility</h3><p>Adopt only what the organization can operate, observe and recover safely.</p></div></li>
+        <li class="emphasis"><span class="step-number">01</span><div><h3>Mandatory constraints</h3><p>Record the required legal, safety, administrative and continuity conditions.</p></div></li>
+        <li><span class="step-number">02</span><div><h3>Authority and dependency analysis</h3><p>Trace principals, permissions, integrations and the systems they can affect.</p></div></li>
+        <li><span class="step-number">03</span><div><h3>Failure-scenario testing</h3><p>Test compromise, outages, isolation, recovery and organizational change.</p></div></li>
+        <li><span class="step-number">04</span><div><h3>Risk, cost and complexity comparison</h3><p>Compare feasible options, including the effort required to change or separate them.</p></div></li>
+        <li><span class="step-number">05</span><div><h3>Operating-capability assessment</h3><p>Confirm the staffing, skills, monitoring and recovery procedures required.</p></div></li>
       </ol>
-      <p class="source">Derived architectural decision method. Evidence: STD-03, STD-05. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Proposed review method; no optimization algorithm is implemented. Sources: STD-03, STD-05. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
     <section class="slide" id="slide-5" data-label="Five topology patterns" aria-labelledby="slide-5-title">
       <header>
-        <p class="eyebrow">05 / Topology library</p>
-        <h2 id="slide-5-title" tabindex="-1">Five patterns. No universal winner.</h2>
-        <p class="lead">Select the primary authority structure and add companion patterns where the mission requires them.</p>
+        <p class="eyebrow">05 / Topology patterns</p>
+        <h2 id="slide-5-title" tabindex="-1">Topology patterns and selection criteria</h2>
+        <p class="lead">Select a primary topology and any companion patterns required for local operation or acquisition integration.</p>
       </header>
       <div class="topologies content">
-        <div class="topology"><span class="step-number">T1</span><h3>One global tenant with delegated boundaries</h3><p>Hard requirements fit within a common connected identity plane.</p></div>
+        <div class="topology"><span class="step-number">T1</span><h3>One global tenant with delegated boundaries</h3><p>One tenant meets the requirements, and shared administration is appropriate.</p></div>
         <div class="topology"><span class="step-number">T2</span><h3>Federated multi-tenant enterprise</h3><p>Separate control planes with governed cross-boundary collaboration.</p></div>
-        <div class="topology"><span class="step-number">T3</span><h3>Sovereign or independently recoverable tenant</h3><p>Local identity, administrative or recovery authority is non-negotiable.</p></div>
-        <div class="topology"><span class="step-number">T4</span><h3>Disconnected enclave / cyber-physical cell</h3><p>Intentional isolation or mission independence from upstream services.</p></div>
-        <div class="topology"><span class="step-number">T5</span><h3>Acquisition transition zone</h3><p>Isolation-first discovery, staged trust and a tested detach path.</p></div>
+        <div class="topology"><span class="step-number">T3</span><h3>Sovereign or independently recoverable tenant</h3><p>Local identity, administration or recovery authority is required.</p></div>
+        <div class="topology"><span class="step-number">T4</span><h3>Disconnected enclave / cyber-physical cell</h3><p>Required functions must operate without upstream services.</p></div>
+        <div class="topology"><span class="step-number">T5</span><h3>Acquisition transition zone</h3><p>Restricted access during assessment, followed by reviewed access expansion and tested separation.</p></div>
       </div>
-      <p class="source">Derived topology patterns. Evidence: MS-02, MS-03, MS-11, MS-18, MS-19, MS-20, STD-02. <a href="index.html#topologies">Explore use and rejection criteria</a></p>
+      <p class="source">Proposed topology patterns. Sources: MS-02, MS-03, MS-11, MS-18, MS-19, MS-20, STD-02. <a href="index.html#topologies">Read use and rejection criteria</a></p>
     </section>
 
     <section class="slide" id="slide-6" data-label="Five survivability tiers" aria-labelledby="slide-6-title">
       <header>
-        <p class="eyebrow">06 / Mission continuity</p>
-        <h2 id="slide-6-title" tabindex="-1">What must work when upstream does not?</h2>
-        <p class="lead">Assign a required tier to each environment. Design identity, policy, security operations and recovery to match it.</p>
+        <p class="eyebrow">06 / Operation during outages</p>
+        <h2 id="slide-6-title" tabindex="-1">Functions required during upstream outages</h2>
+        <p class="lead">Assign an S0-S4 tier, identify the required local functions and specify the outage duration to test.</p>
       </header>
       <div class="tiers content">
         <div class="tier"><span class="big-marker">S0</span><h3>Cloud-dependent</h3><p>Online SaaS and cloud operations.</p><p>Central identity, policy and SOC.</p></div>
-        <div class="tier"><span class="big-marker">S1</span><h3>Transient outage</h3><p>Hours of safe continuity.</p><p>Sessions, cached behavior and tested emergency access.</p></div>
+        <div class="tier"><span class="big-marker">S1</span><h3>Transient outage</h3><p>Required functions during outages measured in hours.</p><p>Sessions, cached behavior and tested emergency access.</p></div>
         <div class="tier"><span class="big-marker">S2</span><h3>Extended degraded</h3><p>Days of reduced function.</p><p>Selected local authorization, collection and restore capability.</p></div>
-        <div class="tier"><span class="big-marker">S3</span><h3>Independent operations</h3><p>Mission operation without upstream control planes.</p><p>Local authority, detection, keys and recovery.</p></div>
-        <div class="tier"><span class="big-marker">S4</span><h3>Disconnected / air-gapped</h3><p>Intentional isolation.</p><p>Local identity/PKI, signed updates and offline recovery roots.</p></div>
+        <div class="tier"><span class="big-marker">S3</span><h3>Independent operations</h3><p>Required functions without upstream control planes.</p><p>Local administration, detection, keys and recovery.</p></div>
+        <div class="tier"><span class="big-marker">S4</span><h3>Disconnected / air-gapped</h3><p>Intentional isolation.</p><p>Local identity/PKI, signed updates and offline recovery credentials.</p></div>
       </div>
-      <p class="callout">A survivability tier is an operational contract to prove, not a product SLA or a claim that disconnected features match the cloud.</p>
-      <p class="source">Derived survivability model. Evidence: MS-18, MS-19, MS-20, STD-02. <a href="index.html#survivability">Explore tier requirements</a></p>
+      <p class="callout">The tiers define requirements for testing. They are not product SLAs or statements of connected/disconnected feature equivalence.</p>
+      <p class="source">Proposed operating tiers. Sources: MS-18, MS-19, MS-20, STD-02. <a href="index.html#survivability">Read tier requirements</a></p>
     </section>
 
     <section class="slide" id="slide-7" data-label="Sovereignty and physical safety" aria-labelledby="slide-7-title">
       <header>
         <p class="eyebrow">07 / Sovereignty and safety</p>
-        <h2 id="slide-7-title" tabindex="-1">Location is not the whole boundary.</h2>
-        <p class="lead">Data residency, cryptographic control and physical-process safety solve different problems. Evaluate each explicitly.</p>
+        <h2 id="slide-7-title" tabindex="-1">Residency, key control and physical-safety requirements</h2>
+        <p class="lead">Assess storage, processing, administration, key control, legal jurisdiction and physical-process effects separately.</p>
       </header>
       <div class="two-up content">
         <div class="panel">
-          <h3>Sovereignty has multiple dimensions</h3>
+          <h3>Sovereignty assessment inputs</h3>
           <div class="boundary-grid">
             <span>Data residency</span><span>Processing location</span>
             <span>Operator and administrator access</span><span>Cryptographic authority</span>
@@ -417,40 +417,40 @@
         </div>
         <div class="panel emphasis">
           <span class="big-marker">OT</span>
-          <h3>Cyber response needs a safety case</h3>
+          <h3>Review response actions against the safety case</h3>
           <ul>
-            <li>Keep local operating authority proportional to mission risk.</li>
-            <li>Compensate for constrained assets with segmentation and monitoring.</li>
+            <li>Assign local approval authority for actions that affect physical processes.</li>
+            <li>Document missing device controls and compensating segmentation or monitoring.</li>
             <li>Specify safe fail states, manual override and restoration conditions.</li>
           </ul>
         </div>
       </div>
-      <p class="source">Derived positions informed by Microsoft controls and OT guidance. Evidence: MS-14, MS-15, MS-18, STD-02. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Proposed requirements based on Microsoft controls and OT guidance. Sources: MS-14, MS-15, MS-18, STD-02. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
     <section class="slide" id="slide-8" data-label="Human, workload and agent identity" aria-labelledby="slide-8-title">
       <header>
         <p class="eyebrow">08 / Identity and authority</p>
-        <h2 id="slide-8-title" tabindex="-1">Every action needs accountable authority.</h2>
-        <p class="lead">Preserve the acting identity, its delegated authority and the evidence of what it did.</p>
+        <h2 id="slide-8-title" tabindex="-1">Identity, delegated permissions and audit records</h2>
+        <p class="lead">Record the acting identity, delegated permissions and action outcome. Select authentication methods from the privilege, data-protection and physical-safety requirements.</p>
       </header>
       <div class="three-up content">
-        <div class="panel"><span class="big-marker">H</span><h3>Humans</h3><ul><li>Phishing-resistant access for high-consequence roles</li><li>Least privilege and just-in-time elevation</li><li>Separately monitored emergency authority</li></ul></div>
+        <div class="panel"><span class="big-marker">H</span><h3>Humans</h3><ul><li>Phishing-resistant authentication for privileged access</li><li>Least privilege and just-in-time elevation</li><li>Emergency access monitored separately</li></ul></div>
         <div class="panel"><span class="big-marker">W</span><h3>Workloads</h3><ul><li>Managed identities or workload federation</li><li>Bounded permissions and explicit trust relationships</li><li>Replace long-lived stored secrets where supported</li></ul></div>
-        <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Unique identity and accountable sponsor</li><li>Blueprint-level guardrails and lifecycle governance</li><li>Least privilege, monitoring and revocation controls</li></ul></div>
+        <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Unique identity and accountable sponsor</li><li>Policies for agent blueprints and identity lifecycle</li><li>Least privilege, monitoring and revocation controls</li></ul></div>
       </div>
-      <p class="source">Microsoft and standards guidance with derived control composition. Evidence: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Explore the control standard</a></p>
+      <p class="source">Microsoft and standards guidance with proposed control requirements. Sources: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Read the control requirements</a></p>
     </section>
 
     <section class="slide" id="slide-9" data-label="Independent cyber recovery" aria-labelledby="slide-9-title">
       <header>
         <p class="eyebrow">09 / Cyber recovery</p>
-        <h2 id="slide-9-title" tabindex="-1">Recovery cannot depend on what failed.</h2>
-        <p class="lead">Availability keeps services running. Cyber recovery restores trustworthy authority after compromise.</p>
+        <h2 id="slide-9-title" tabindex="-1">Recovery credentials and service dependencies</h2>
+        <p class="lead">Plan restoration after compromise separately from restoration after a service outage. Identify the credentials and services required by each recovery step.</p>
       </header>
       <div class="two-up content">
         <div class="panel">
-          <h3>Reject circular recovery</h3>
+          <h3>Circular recovery dependency</h3>
           <div class="dependency-loop" role="img" aria-label="A circular dependency: compromised identity is needed to access the vault, which is needed for the tools that restore the same identity.">
             <span>Compromised identity</span><span aria-hidden="true">&darr;</span>
             <span>Vault and recovery tools</span><span aria-hidden="true">&darr;</span>
@@ -458,77 +458,77 @@
           </div>
         </div>
         <div class="panel emphasis">
-          <h3>Build a separate recovery graph</h3>
+          <h3>Independent recovery access</h3>
           <ol class="recovery-path">
-            <li>Independent roots, keys and known-good state</li>
-            <li>Clean identities, devices and communications</li>
+            <li>Independent credentials, keys and configuration baselines</li>
+            <li>Recovery identities, devices and communications isolated from the suspected compromise</li>
             <li>Security operations and critical applications</li>
-            <li>Evidence, validation and controlled restoration of trust</li>
+            <li>Audit records, acceptance checks and controlled restoration of access</li>
           </ol>
-          <p>Define recovery objectives and exercise the complete dependency path.</p>
+          <p>Test the sequence against documented recovery-time and data-loss objectives.</p>
         </div>
       </div>
-      <p class="source">Derived recovery architecture. Evidence: MS-07, MS-08, MS-26. <a href="../position-paper/position-paper.html#s7">Read the operations and recovery position</a></p>
+      <p class="source">Proposed recovery requirements. Sources: MS-07, MS-08, MS-26. <a href="../position-paper/position-paper.html#s7">Read the operations and recovery analysis</a></p>
     </section>
 
-    <section class="slide" id="slide-10" data-label="Evidence and adversarial validation" aria-labelledby="slide-10-title">
+    <section class="slide" id="slide-10" data-label="Sources and assumption reviews" aria-labelledby="slide-10-title">
       <header>
-        <p class="eyebrow">10 / Assurance</p>
-        <h2 id="slide-10-title" tabindex="-1">Challenge the architecture before deployment.</h2>
-        <p class="lead">Trace material positions to evidence and keep direct guidance distinct from architectural inference.</p>
+        <p class="eyebrow">10 / Source review</p>
+        <h2 id="slide-10-title" tabindex="-1">Source records and assumption reviews</h2>
+        <p class="lead">The dataset links claims and proposed requirements to cited sources. Provenance separates product statements from project analysis.</p>
       </header>
       <div class="evidence-content content">
         <div class="metrics">
-          <div class="metric"><strong>33</strong><span>sources in the research catalog</span></div>
-          <div class="metric"><strong>18</strong><span>machine-readable claims</span></div>
-          <div class="metric"><strong>26</strong><span>normative architecture controls</span></div>
-          <div class="metric"><strong>10</strong><span>documented adversarial challenges</span></div>
+          <div class="metric"><strong>33</strong><span>source references</span></div>
+          <div class="metric"><strong>18</strong><span>claims with source identifiers</span></div>
+          <div class="metric"><strong>26</strong><span>proposed control requirements</span></div>
+          <div class="metric"><strong>10</strong><span>source-based assumption reviews</span></div>
         </div>
         <div class="three-up">
-          <div class="panel"><h3>More tenants = isolation?</h3><p>Shared identities and authority paths can preserve shared risk.</p></div>
-          <div class="panel"><h3>Keys = sovereignty?</h3><p>Key control is one dimension; processing, operators and jurisdiction still matter.</p></div>
-          <div class="panel"><h3>Air gaps = security?</h3><p>Local detection, updates, evidence and recovery remain essential.</p></div>
+          <div class="panel"><h3>Tenant and identity isolation</h3><p>Separate tenants can retain shared authentication and administration dependencies.</p></div>
+          <div class="panel"><h3>Key control and jurisdiction</h3><p>Assess processing, operators and legal jurisdiction separately from key control.</p></div>
+          <div class="panel"><h3>Disconnected operation</h3><p>Specify local detection, update transfer, audit records and recovery procedures.</p></div>
         </div>
-        <p class="callout">MUST / SHOULD / MAY are the framework's control language, not an automatic compliance certification.</p>
+        <p class="callout">MUST / SHOULD / MAY express this framework's requirements and recommendations. Source citations do not establish compliance certification.</p>
       </div>
-      <p class="source">Evidence classes: Microsoft Explicit / External Standard / Research Supported / Derived Architectural Position / Open/Contested. Examples: MS-02, MS-14, MS-18. <a href="index.html#challenge">Review all challenges</a></p>
+      <p class="source">Provenance classes: Microsoft Explicit / External Standard / Research Supported / Derived Architectural Position / Open/Contested. Examples: MS-02, MS-14, MS-18. <a href="index.html#challenge">Read the assumption reviews</a></p>
     </section>
 
-    <section class="slide" id="slide-11" data-label="The adoption roadmap" aria-labelledby="slide-11-title">
+    <section class="slide" id="slide-11" data-label="Implementation sequence" aria-labelledby="slide-11-title">
       <header>
-        <p class="eyebrow">11 / Transition roadmap</p>
-        <h2 id="slide-11-title" tabindex="-1">Build capability before complexity.</h2>
-        <p class="lead">Stage adoption through operability gates. Expand only when ownership, monitoring, response and recovery can sustain the next boundary.</p>
+        <p class="eyebrow">11 / Implementation sequence</p>
+        <h2 id="slide-11-title" tabindex="-1">Check prerequisites before adding control planes.</h2>
+        <p class="lead">The phases are a proposed ordering. Confirm ownership, staffing, monitoring, response and recovery requirements before extending the deployment.</p>
       </header>
       <div class="four-up roadmap content">
-        <div class="panel"><span class="big-marker">01</span><span class="phase-time">0-90 days</span><h3>Control the roots</h3><ul><li>Boundary and authority register</li><li>Test emergency access</li><li>Export known-good configuration</li></ul></div>
-        <div class="panel"><span class="big-marker">02</span><span class="phase-time">3-9 months</span><h3>Standardize the core</h3><ul><li>Phishing-resistant privileged access</li><li>Policy as code</li><li>Information and collaboration controls</li></ul></div>
-        <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Federate operations</h3><ul><li>S2-S4 local capabilities</li><li>Regional and tenant SOC authority</li><li>Acquisition detachability tests</li></ul></div>
-        <div class="panel emphasis"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Prove recovery</h3><ul><li>Clean-room recovery drills</li><li>Combined control-plane failures</li><li>Continuous evidence and drift remediation</li></ul></div>
+        <div class="panel"><span class="big-marker">01</span><span class="phase-time">0-90 days</span><h3>Inventory administrative access</h3><ul><li>Boundary and authority register</li><li>Test emergency access</li><li>Export configuration baselines</li></ul></div>
+        <div class="panel"><span class="big-marker">02</span><span class="phase-time">3-9 months</span><h3>Standardize cloud configuration</h3><ul><li>Phishing-resistant privileged access</li><li>Policy as code</li><li>Information and collaboration controls</li></ul></div>
+        <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Implement local operations</h3><ul><li>S2-S4 local services</li><li>Regional and tenant SOC responsibilities</li><li>Acquisition separation tests</li></ul></div>
+        <div class="panel emphasis"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Test recovery procedures</h3><ul><li>Isolated recovery exercises</li><li>Combined control-plane failures</li><li>Configuration monitoring and drift correction</li></ul></div>
       </div>
-      <p class="source">Derived roadmap, not a guaranteed implementation schedule. Evidence: STD-05 and the package's control standard. <a href="index.html#roadmap">Explore the full roadmap</a></p>
+      <p class="source">Proposed planning ranges, not delivery estimates. Source: STD-05 and the framework's control requirements. <a href="index.html#roadmap">Read the implementation phases</a></p>
     </section>
 
-    <section class="slide" id="slide-12" data-label="Make a decision you can prove" aria-labelledby="slide-12-title">
+    <section class="slide" id="slide-12" data-label="Deployment review inputs" aria-labelledby="slide-12-title">
       <header>
-        <p class="eyebrow">12 / Your next architecture review</p>
-        <h2 id="slide-12-title" tabindex="-1">Choose the architecture you can prove.</h2>
-        <p class="lead">Start with the organization's mission, then justify each boundary and dependency with evidence.</p>
+        <p class="eyebrow">12 / Deployment review</p>
+        <h2 id="slide-12-title" tabindex="-1">Inputs required for a deployment review</h2>
+        <p class="lead">Use organization-specific requirements, access relationships, dependencies and test results to evaluate the design.</p>
       </header>
       <div class="content">
         <div class="two-up">
-          <div class="panel"><span class="big-marker">01</span><h3>Which boundaries are non-negotiable?</h3><p>Identity, sovereignty, legal authority, safety and reversibility.</p></div>
-          <div class="panel"><span class="big-marker">02</span><h3>What must survive locally?</h3><p>Specify the required S-tier and the duration and impact of lost dependencies.</p></div>
-          <div class="panel"><span class="big-marker">03</span><h3>Can you recover without the compromised core?</h3><p>Prove independent authority, known-good state and clean recovery paths.</p></div>
-          <div class="panel"><span class="big-marker">04</span><h3>Can your operating model sustain it?</h3><p>Gate sophistication on ownership, skills, evidence and exercised runbooks.</p></div>
+          <div class="panel"><span class="big-marker">01</span><h3>Mandatory requirements</h3><p>List identity isolation, jurisdiction, safety, continuity and separation requirements.</p></div>
+          <div class="panel"><span class="big-marker">02</span><h3>Outage functions and duration</h3><p>Assign an S-tier, list required local functions and specify outage duration.</p></div>
+          <div class="panel"><span class="big-marker">03</span><h3>Independent recovery access</h3><p>Document credentials, baselines and steps usable when production services are unavailable or compromised.</p></div>
+          <div class="panel"><span class="big-marker">04</span><h3>Staffing and procedures</h3><p>Assign owners and specify skills, monitoring, response and recovery tests.</p></div>
         </div>
         <div class="actions">
           <a class="button primary" href="index.html#assess">Run the topology assessment</a>
           <a class="button" href="../position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read the position paper</a>
-          <a class="button" href="index.html#evidence">Explore the evidence</a>
+          <a class="button" href="index.html#evidence">Search sources</a>
         </div>
       </div>
-      <p class="source">Microsoft-aligned architectural position, not an official product commitment. Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements. <a href="../index.html">Choose another format</a></p>
+      <p class="source">Architectural guidance based on cited sources, not an official product commitment. Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements. <a href="../index.html">Choose another format</a></p>
     </section>
   </main>
 
