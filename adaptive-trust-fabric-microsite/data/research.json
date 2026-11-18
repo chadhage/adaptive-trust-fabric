@@ -1,0 +1,1122 @@
+{
+  "meta": {
+    "title": "Adaptive Trust Fabric for Global Enterprise Identity, Security and Compliance",
+    "subtitle": "Microsoft-aligned, evidence-backed normative architecture and decision framework",
+    "version": "1.0",
+    "research_cutoff": "2026-11-17",
+    "generated": "2026-11-17",
+    "disclaimer": "This is a Microsoft-aligned architectural position, not an official Microsoft product commitment or substitute for legal, regulatory, safety, product, or licensing validation."
+  },
+  "thesis": "Do not optimize for tenant count or centralization. Optimize for explicit trust boundaries, survivability, sovereignty, recoverability, operational maturity, and reversible change - with Microsoft Entra, Defender, Sentinel, Purview, Intune, Azure governance, and local/disconnected capabilities composed according to verified constraints.",
+  "provenanceLegend": [
+    {
+      "class": "Microsoft Explicit",
+      "meaning": "Direct statement in opened Microsoft documentation. Product scope, licensing, limits, and preview status still require implementation-time validation."
+    },
+    {
+      "class": "External Standard",
+      "meaning": "Normative or authoritative guidance from NIST, CISA, or another standards/government body."
+    },
+    {
+      "class": "Research Supported",
+      "meaning": "Primary or research-grade publication that supports, bounds, or challenges an architectural proposition."
+    },
+    {
+      "class": "Derived Architectural Position",
+      "meaning": "A conclusion synthesized in this paper from multiple sources and the agreed decision criteria; not represented as an explicit Microsoft mandate."
+    },
+    {
+      "class": "Open/Contested",
+      "meaning": "Evidence is incomplete, context-dependent, fast-moving, or materially disputed; decision requires local legal, safety, operational, or product validation."
+    }
+  ],
+  "sources": [
+    {
+      "id": "MS-01",
+      "title": "Microsoft Cybersecurity Reference Architectures (MCRA) | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/security/zero-trust/microsoft-reference-architecture",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "11/06/2026",
+      "evidence_use": "Microsoft reference-architecture collection; use as the product/capability map, not as proof that one topology fits every enterprise."
+    },
+    {
+      "id": "MS-02",
+      "title": "Resource isolation with multiple tenants to secure with Microsoft Entra ID - Microsoft Entra | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "10/23/2023",
+      "evidence_use": "Explicitly prefers one tenant when requirements can be met, warns that multitenancy increases complexity, and distinguishes resource isolation from identity isolation."
+    },
+    {
+      "id": "MS-03",
+      "title": "Topologies for cross-tenant synchronization - Microsoft Entra ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-topology",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "03/18/2026",
+      "evidence_use": "Documents hub-and-spoke, mesh, and just-in-time cross-tenant patterns, including M&A and joint-venture scenarios."
+    },
+    {
+      "id": "MS-04",
+      "title": "Plan Your Microsoft Entra Conditional Access Deployment - Microsoft Entra ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "Documents Conditional Access planning, emergency exclusions, report-only deployment, policy-as-code practices, and a 240-policy tenant limit."
+    },
+    {
+      "id": "MS-05",
+      "title": "Manage emergency access admin accounts - Microsoft Entra ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "06/05/2026",
+      "evidence_use": "Documents two or more cloud-only emergency accounts, independent authentication, monitoring, and regular validation drills."
+    },
+    {
+      "id": "MS-06",
+      "title": "Build more resilient hybrid authentication in Microsoft Entra ID - Microsoft Entra | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/architecture/resilience-in-hybrid",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "04/17/2026",
+      "evidence_use": "Recommends password hash synchronization when possible and describes why it reduces runtime dependence on on-premises identity components."
+    },
+    {
+      "id": "MS-07",
+      "title": "Plan for tenant recoverability - Microsoft Entra | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "Separates resilience from recoverability and calls for external versioned known-good state, extended coverage, logs, RTO/RPO, and drills."
+    },
+    {
+      "id": "MS-08",
+      "title": "Microsoft Entra Backup and Recovery overview - Microsoft Entra | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/backup/overview",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "11/17/2026",
+      "evidence_use": "Product overview for Entra Backup and Recovery; coverage and retention are product-specific and must be checked during implementation."
+    },
+    {
+      "id": "MS-09",
+      "title": "Governing Agent Identities - Microsoft Entra ID Governance | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/id-governance/agent-id-governance-overview",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "11/11/2026",
+      "evidence_use": "Defines agent identities, sponsors, lifecycle governance, access packages, and Conditional Access for agents."
+    },
+    {
+      "id": "MS-10",
+      "title": "Best practices for Microsoft Entra Agent ID - Microsoft Entra Agent ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/agent-id/best-practices-agent-id",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "08/13/2026",
+      "evidence_use": "Recommends unique agent identities, blueprint-level policy, managed identities or certificates, dedicated agent policies, least privilege, and monitoring."
+    },
+    {
+      "id": "MS-11",
+      "title": "Prepare for multiple workspaces and tenants in Microsoft Sentinel | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/sentinel/prepare-multiple-workspaces",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "04/22/2026",
+      "evidence_use": "Explains when multiple Sentinel workspaces are required and states that each Entra tenant requires a separate workspace for tenant-bound SaaS collection."
+    },
+    {
+      "id": "MS-12",
+      "title": "Incident Response with XDR and Integrated SIEM | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/security/zero-trust/siem-xdr-overview",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "02/12/2025",
+      "evidence_use": "Describes integrated Defender XDR and Sentinel operations across identities, devices, applications, email, and multicloud sources."
+    },
+    {
+      "id": "MS-13",
+      "title": "Learn about sensitivity labels | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/purview/sensitivity-labels",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "Documents persistent sensitivity labels, encryption, container protection, Teams/meeting controls, and third-party integration."
+    },
+    {
+      "id": "MS-14",
+      "title": "Sovereign Controls in Microsoft 365 | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/microsoft-365-sovereign-controls",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "03/31/2026",
+      "evidence_use": "Documents Microsoft 365 sovereign controls and also the Customer Key availability-key design."
+    },
+    {
+      "id": "MS-15",
+      "title": "Service encryption and key management - Microsoft Purview | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/purview/microsoft-365-service-encryption",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "09/26/2025",
+      "evidence_use": "Documents service encryption and the scope of Customer Key; key control is one sovereignty dimension, not the whole sovereignty model."
+    },
+    {
+      "id": "MS-16",
+      "title": "Start to Plan Multicloud Protection in Microsoft Defender for Cloud - Microsoft Defender for Cloud | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-multicloud-security-get-started",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "09/21/2026",
+      "evidence_use": "Defender for Cloud multicloud planning guidance; Microsoft provides an overlay while native cloud controls remain part of enforcement."
+    },
+    {
+      "id": "MS-17",
+      "title": "What is Multicloud connector enabled by Azure Arc? - Azure Arc | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-arc/multicloud-connector/overview",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "05/26/2026",
+      "evidence_use": "Documents Azure Arc multicloud inventory/onboarding and its preview, region, national-cloud, and API limitations."
+    },
+    {
+      "id": "MS-18",
+      "title": "Hybrid or air-gapped deployment path for sensor management - Microsoft Defender for IoT | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/ot-deploy/air-gapped-deploy",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "04/28/2026",
+      "evidence_use": "Documents local monitoring patterns for air-gapped OT and notes that MFA-centric Zero Trust can be difficult in isolated networks."
+    },
+    {
+      "id": "MS-19",
+      "title": "Disconnected operations for Azure Local overview - Azure Local | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-overview?view=azloc-2610",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "10/06/2026",
+      "evidence_use": "Documents a local Azure control plane with selected Arc-enabled services for disconnected Azure Local deployments."
+    },
+    {
+      "id": "MS-20",
+      "title": "Azure disconnected deployment decisions for Azure Stack Hub integrated systems - Azure Stack Hub | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure-stack/operator/azure-stack-disconnected-deployment?view=azs-2604",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "01/07/2026",
+      "evidence_use": "Documents Azure Stack Hub disconnected-mode identity and feature impairments, including local AD FS and loss of some connected capabilities."
+    },
+    {
+      "id": "MS-21",
+      "title": "Management groups - Cloud Adoption Framework | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "12/19/2025",
+      "evidence_use": "Recommends shallow, policy-oriented management-group hierarchies and warns against mirroring the organization or geography without a requirement."
+    },
+    {
+      "id": "MS-22",
+      "title": "Workload Identity Federation - Microsoft Entra Workload ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "04/09/2025",
+      "evidence_use": "Documents secretless workload federation for Kubernetes, GitHub, AWS, GCP, SPIFFE/SPIRE, and other external identity providers."
+    },
+    {
+      "id": "MS-23",
+      "title": "Overview of the ServiceNow integration - Microsoft Defender for Cloud | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/integration-servicenow",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "06/16/2026",
+      "evidence_use": "Documents bidirectional Defender for Cloud and ServiceNow ticket/compliance integration, including a 24-hour synchronization interval."
+    },
+    {
+      "id": "MS-24",
+      "title": "Zero Trust with Microsoft Intune - Microsoft Intune | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/intune/fundamentals/zero-trust",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "05/21/2026",
+      "evidence_use": "Documents the device pillar and Intune integration in Microsoft Zero Trust."
+    },
+    {
+      "id": "MS-25",
+      "title": "Block legacy authentication with Conditional Access - Microsoft Entra ID | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": "03/24/2026",
+      "evidence_use": "Documents blocking legacy authentication because older protocols cannot enforce modern authentication requirements."
+    },
+    {
+      "id": "MS-26",
+      "title": "Design a Ransomware-Resilient Backup Architecture by Using Azure Backup - Azure Architecture Center | Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/security/ransomware-resilient-backup-architecture/",
+      "provenance": "Microsoft Explicit",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "Microsoft architecture guidance for immutable, logically isolated, monitored backup and ransomware-resilient recovery."
+    },
+    {
+      "id": "STD-01",
+      "title": "Zero Trust Architecture",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "NIST defines Zero Trust as removing implicit trust based on network location or asset ownership and warns against a single deployment plan."
+    },
+    {
+      "id": "STD-02",
+      "title": "Guide to Operational Technology (OT) Security",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "NIST OT guidance requires security controls to account for performance, reliability, and safety."
+    },
+    {
+      "id": "STD-03",
+      "title": "The NIST Cybersecurity Framework (CSF) 2",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf?utm_source__c=Email-Campaign&utm_medium__c=Email&activation_channel__c=Email_Campaign&field_insight_category_target_id=191&page=1#!/Resilience",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "NIST CSF 2.0 is outcome-based, risk-oriented, and explicitly not one-size-fits-all."
+    },
+    {
+      "id": "STD-04",
+      "title": "NIST Special Publication 800-63B",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "Current NIST digital-identity guidance requires phishing-resistant options at AAL2 and phishing resistance with non-exportable keys at AAL3."
+    },
+    {
+      "id": "STD-05",
+      "title": "Zero Trust Maturity Model Version 2",
+      "url": "https://www.cisa.gov/sites/default/files/2023-04/zero_trust_maturity_model_v2_508.pdf?hss_channel=lcp-65741",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "CISA maturity guidance supports staged adoption and explicitly omits detailed recovery, OT/IoT, and emerging-AI treatment."
+    },
+    {
+      "id": "STD-06",
+      "title": "Secure By Design",
+      "url": "https://www.cisa.gov/sites/default/files/2023-10/SecureByDesign_1025_508c.pdf",
+      "provenance": "External Standard",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "CISA and partners place security responsibility and secure defaults into product design and lifecycle governance."
+    },
+    {
+      "id": "RES-01",
+      "title": "BeyondCorp A New Approach to Enterprise Security SECURITY",
+      "url": "https://www.usenix.org/system/files/login/articles/login_dec14_02_ward.pdf",
+      "provenance": "Research Supported",
+      "retrieval_status": "Opened and inspected",
+      "accessed": "2026-11-17",
+      "last_updated": null,
+      "evidence_use": "The BeyondCorp case study is research evidence for identity- and device-aware access independent of network location; it is not a universal OT or disconnected blueprint."
+    }
+  ],
+  "claims": [
+    {
+      "id": "C-01",
+      "claim": "Use a single Entra tenant as the default when requirements can be met; create additional tenants only for explicit boundary outcomes whose value exceeds added complexity.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-02",
+        "MS-03",
+        "STD-03"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-02",
+      "claim": "A separate tenant provides administrative, configuration, object, quota, and visibility separation; shared corporate identities can still defeat identity isolation.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-02"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-03",
+      "claim": "M&A readiness is a standing architecture capability: hub-and-spoke, mesh, and just-in-time patterns can support attach, coexist, transform, and detach states.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-03"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-04",
+      "claim": "Conditional Access is the strategic Entra policy engine, but the enterprise authorization architecture also needs workload, data, API, OT, cloud-native, and disconnected enforcement points.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-04",
+        "STD-01",
+        "MS-18"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-05",
+      "claim": "Emergency access must not share the normal authentication and policy dependency chain; maintain at least two cloud-only accounts, monitor every use, and drill them regularly.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-05",
+        "MS-04"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-06",
+      "claim": "For hybrid users who rely on AD passwords, password hash synchronization is Microsoft’s simplest and most resilient option because authentication does not depend on on-premises components after synchronization.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-06"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-07",
+      "claim": "Identity resilience and identity recoverability are different: continuity controls do not restore malicious or erroneous tenant changes, so external known-good configuration, logs, broader backup coverage, and drills are required.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-07",
+        "MS-08"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-08",
+      "claim": "AI agents require unique first-class identities, accountable sponsors, blueprint policy, separate noninteractive access controls, least privilege, monitored lifecycle, and a rapid revocation path.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-09",
+        "MS-10"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-09",
+      "claim": "A global SOC should be hierarchical rather than dependency-centralized: Microsoft Sentinel supports cross-workspace and cross-tenant management, but many features and tenant-bound connectors remain workspace-local.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-11",
+        "MS-12"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-10",
+      "claim": "Persistent classification and rights should travel with information across Microsoft 365, devices, third-party services, meetings, chats, and collaboration containers.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-13"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-11",
+      "claim": "Data residency is not equivalent to sovereignty; evaluate storage and processing location, administrative authority, key authority, metadata/telemetry, legal access, and recoverability separately.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-14",
+        "MS-15",
+        "MS-11"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-12",
+      "claim": "Microsoft can provide a multicloud security and governance overlay, but native cloud controls remain authoritative enforcement points and preview/region/national-cloud limitations prevent assuming universal parity.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-16",
+        "MS-17"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-13",
+      "claim": "Air-gapped does not mean implicitly trusted: isolated OT still needs local monitoring, segmentation, identity, backup, update transfer, evidence, and response capabilities that account for physical safety.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-18",
+        "MS-19",
+        "MS-20",
+        "STD-02"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-14",
+      "claim": "Authentication assurance, not “MFA” as a checkbox, is the design objective; phishing-resistant cryptographic authentication is the baseline for high-value human access.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "STD-04",
+        "MS-04",
+        "MS-05"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-15",
+      "claim": "Policy and configuration should be versioned, tested, report-only where supported, observable, and reversible; policy count and interaction complexity are security constraints.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-04",
+        "MS-07",
+        "STD-05"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-16",
+      "claim": "Architecture sophistication must not exceed operational maturity; staged adoption and prerequisite capabilities are part of the security design.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "STD-03",
+        "STD-05"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-17",
+      "claim": "ITSM integration is workflow coordination, not a privileged recovery root or real-time containment dependency; documented synchronization latency must be reflected in response design.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-23"
+      ],
+      "confidence": "High"
+    },
+    {
+      "id": "C-18",
+      "claim": "Workload identities should prefer managed identity or workload federation over long-lived client secrets and certificates where supported.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-22",
+        "MS-10"
+      ],
+      "confidence": "High"
+    }
+  ],
+  "normativeControls": [
+    {
+      "id": "N-01",
+      "level": "MUST",
+      "domain": "Boundaries",
+      "text": "Maintain a machine-readable boundary register that distinguishes trust/security, tenant, administrative, regulatory, data, network, workload, and physical-safety boundaries.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-02",
+        "STD-01"
+      ]
+    },
+    {
+      "id": "N-02",
+      "level": "SHOULD",
+      "domain": "Topology",
+      "text": "Prefer one tenant when all hard requirements can be met; require a documented boundary case, operating model, and exit strategy for every additional tenant.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-02"
+      ]
+    },
+    {
+      "id": "N-03",
+      "level": "MUST",
+      "domain": "Topology",
+      "text": "Use a separate identity boundary when compromise or unavailability of the corporate identity authority must not grant or deny control of the protected mission.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-02",
+        "MS-07"
+      ]
+    },
+    {
+      "id": "N-04",
+      "level": "MUST",
+      "domain": "M&A",
+      "text": "Onboard acquisitions through an isolation-first transition zone; raise trust only after discovery, remediation, identity proofing, and authority-path review, and preserve a tested detach path.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-03"
+      ]
+    },
+    {
+      "id": "N-05",
+      "level": "MUST",
+      "domain": "Survivability",
+      "text": "Assign every environment an S0-S4 survivability tier and specify identity, policy, keys, logging, updates, communications, and recovery behavior when upstream services are unavailable.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-19",
+        "MS-20",
+        "STD-02"
+      ]
+    },
+    {
+      "id": "N-06",
+      "level": "MUST",
+      "domain": "Privileged access",
+      "text": "Separate normal, elevated, emergency, recovery, and root authority; use least privilege, just-in-time activation, protected administration paths, and independently monitored emergency access.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-04",
+        "MS-05",
+        "MS-07"
+      ]
+    },
+    {
+      "id": "N-07",
+      "level": "MUST",
+      "domain": "Authentication",
+      "text": "Require phishing-resistant authentication for privileged and high-consequence human access unless a documented survivability or technical constraint requires a bounded alternative.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "STD-04",
+        "MS-05"
+      ]
+    },
+    {
+      "id": "N-08",
+      "level": "MUST",
+      "domain": "Emergency access",
+      "text": "Maintain at least two cloud-only emergency accounts using an authentication path distinct from normal administrators; alert on every use and validate at least every 90 days.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-05"
+      ]
+    },
+    {
+      "id": "N-09",
+      "level": "SHOULD",
+      "domain": "Hybrid identity",
+      "text": "Use password hash synchronization as the resilient fallback for AD-password hybrid identities when legally and technically acceptable.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-06"
+      ]
+    },
+    {
+      "id": "N-10",
+      "level": "MUST",
+      "domain": "Conditional Access",
+      "text": "Cover every application, exclude only documented emergency paths, test blocking policies in report-only mode where supported, and control policy changes through reviewable, reversible automation.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-04"
+      ]
+    },
+    {
+      "id": "N-11",
+      "level": "MUST",
+      "domain": "Non-human identity",
+      "text": "Inventory and govern applications, managed identities, service principals, certificates, secrets, devices, and agents as identities with owner, purpose, privilege, credential, telemetry, and expiry.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-09",
+        "MS-10",
+        "MS-22"
+      ]
+    },
+    {
+      "id": "N-12",
+      "level": "MUST",
+      "domain": "Agent identity",
+      "text": "Give each production agent a unique identity and accountable sponsor; apply blueprint-level guardrails, dedicated agent Conditional Access, least privilege, access review, and kill/revocation controls.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-09",
+        "MS-10"
+      ]
+    },
+    {
+      "id": "N-13",
+      "level": "SHOULD",
+      "domain": "Workload identity",
+      "text": "Prefer managed identity or workload identity federation over stored secrets; isolate credentials and trust relationships by environment and purpose.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-10",
+        "MS-22"
+      ]
+    },
+    {
+      "id": "N-14",
+      "level": "MUST",
+      "domain": "OT/IoT",
+      "text": "Treat incapable devices as explicit trust debt and surround them with segmentation, protocol mediation, allow-listing, monitoring, and safety-reviewed response actions.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-18",
+        "STD-02"
+      ]
+    },
+    {
+      "id": "N-15",
+      "level": "MUST",
+      "domain": "Security operations",
+      "text": "Design detection and response as a hierarchical fabric with local operating authority proportional to survivability tier; centralized visibility must not create centralized blindness or containment dependency.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-11",
+        "MS-12",
+        "MS-18"
+      ]
+    },
+    {
+      "id": "N-16",
+      "level": "MUST",
+      "domain": "Telemetry",
+      "text": "Classify and protect telemetry with provenance, integrity, access, retention, jurisdiction, and export policy; preserve local evidence when global ingestion is prohibited or unavailable.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-11",
+        "STD-03"
+      ]
+    },
+    {
+      "id": "N-17",
+      "level": "MUST",
+      "domain": "Data",
+      "text": "Apply persistent classification, encryption, rights, DLP, retention, and collaboration controls based on information sensitivity and purpose, not storage location alone.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-13",
+        "MS-14",
+        "MS-15"
+      ]
+    },
+    {
+      "id": "N-18",
+      "level": "MUST",
+      "domain": "Sovereignty",
+      "text": "Evaluate residency, processing, operator access, cryptographic authority, legal jurisdiction, metadata/telemetry, and recovery authority as separate sovereignty dimensions.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-14",
+        "MS-15",
+        "MS-11"
+      ]
+    },
+    {
+      "id": "N-19",
+      "level": "MUST",
+      "domain": "Multicloud",
+      "text": "Define controls provider-independently, retain native enforcement where it is authoritative, and use Microsoft services for common visibility, governance, identity, and response where coverage is verified.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-16",
+        "MS-17"
+      ]
+    },
+    {
+      "id": "N-20",
+      "level": "MUST",
+      "domain": "Integration",
+      "text": "Model ERP, ITSM, CI/CD, automation, collaboration, and manufacturing integrations as directed privilege paths; consequential transactions require explicit authorization and auditable provenance.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-23",
+        "STD-01"
+      ]
+    },
+    {
+      "id": "N-21",
+      "level": "MUST",
+      "domain": "Recovery",
+      "text": "Keep external versioned known-good configuration, extended logs, supported and gap-filling backups, dependency-aware runbooks, and regularly exercised clean recovery paths.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-07",
+        "MS-08",
+        "MS-26"
+      ]
+    },
+    {
+      "id": "N-22",
+      "level": "MUST",
+      "domain": "Governance",
+      "text": "Express policy and desired state as versioned code where possible; separate policy ownership from enforcement and record exceptions, expiry, evidence, drift, and remediation.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-04",
+        "MS-21",
+        "STD-03"
+      ]
+    },
+    {
+      "id": "N-23",
+      "level": "SHOULD",
+      "domain": "Azure governance",
+      "text": "Keep Azure management-group structures shallow and policy-oriented; do not mirror the organization or regions unless security, regulatory, residency, or sovereignty requirements justify it.",
+      "provenance": "Microsoft Explicit",
+      "sources": [
+        "MS-21"
+      ]
+    },
+    {
+      "id": "N-24",
+      "level": "MUST",
+      "domain": "Assurance",
+      "text": "Continuously link obligation to policy, control, enforcement point, asset, evidence, exception, remediation, and accountable authority; evidence must remain valid in sovereign and disconnected tiers.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "STD-03",
+        "MS-07"
+      ]
+    },
+    {
+      "id": "N-25",
+      "level": "MUST",
+      "domain": "Economics",
+      "text": "Price complexity as risk: no control, tenant, trust path, or product is approved without an owner, lifecycle cost, operating capability, recovery impact, and measurable risk-reduction hypothesis.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "MS-02",
+        "MS-04",
+        "STD-05"
+      ]
+    },
+    {
+      "id": "N-26",
+      "level": "MUST",
+      "domain": "Validation",
+      "text": "Apply the decision hierarchy in order: hard constraints, authority/dependency graph, scenario stress tests, risk-adjusted optimization, and maturity feasibility; a fatal constraint cannot be averaged away.",
+      "provenance": "Derived Architectural Position",
+      "sources": [
+        "STD-03",
+        "STD-05"
+      ]
+    }
+  ],
+  "survivabilityTiers": [
+    {
+      "id": "S0",
+      "name": "Cloud-dependent",
+      "mission": "Normal SaaS and cloud operation",
+      "identity": "Entra online",
+      "policy": "Online policy decision",
+      "secops": "Central SOC",
+      "recovery": "Service continuity and configuration backup"
+    },
+    {
+      "id": "S1",
+      "name": "Transient outage",
+      "mission": "Hours of safe continuity",
+      "identity": "Cached/session continuity plus emergency access",
+      "policy": "Token/session tolerance; explicit fail behavior",
+      "secops": "Queued telemetry",
+      "recovery": "Dependency runbooks and tested break-glass"
+    },
+    {
+      "id": "S2",
+      "name": "Extended degraded",
+      "mission": "Days with reduced function",
+      "identity": "Reduced-dependency methods and selected local authorization",
+      "policy": "Signed/cached policy with expiry",
+      "secops": "Local collection and triage",
+      "recovery": "Local communications, evidence, and restore media"
+    },
+    {
+      "id": "S3",
+      "name": "Independent operations",
+      "mission": "Mission operation without upstream control planes",
+      "identity": "Local authority federated when connected",
+      "policy": "Local PDP/PEP and emergency authority",
+      "secops": "Autonomous local SOC capability",
+      "recovery": "Independent keys, tooling, personnel, and clean-room path"
+    },
+    {
+      "id": "S4",
+      "name": "Disconnected / air-gapped",
+      "mission": "Intentional isolation",
+      "identity": "Local identity/PKI; controlled transfer",
+      "policy": "Offline signed distribution; deterministic fail state",
+      "secops": "On-prem detection, immutable evidence, manual TI/update import",
+      "recovery": "Offline roots, spares, escrowed media, physical procedures"
+    }
+  ],
+  "topologies": [
+    {
+      "id": "T1",
+      "name": "One global tenant with delegated boundaries",
+      "use_when": "No hard sovereignty, independent-recovery, or identity-authority constraint; common collaboration and operational maturity favor consolidation.",
+      "reject_when": "A required boundary cannot be expressed or recovered safely inside the tenant.",
+      "sources": [
+        "MS-02",
+        "MS-21"
+      ]
+    },
+    {
+      "id": "T2",
+      "name": "Federated multi-tenant enterprise",
+      "use_when": "Regulatory, legal-entity, M&A, administrative, or blast-radius requirements justify separate tenant control planes while collaboration remains necessary.",
+      "reject_when": "The organization cannot operate policy, identity lifecycle, monitoring, and recovery consistently across tenants.",
+      "sources": [
+        "MS-02",
+        "MS-03",
+        "MS-11"
+      ]
+    },
+    {
+      "id": "T3",
+      "name": "Sovereign or independently recoverable tenant",
+      "use_when": "Local authority over identity, administration, keys, data processing, or recovery is a non-negotiable constraint.",
+      "reject_when": "The objective is only organizational convenience or cost allocation.",
+      "sources": [
+        "MS-02",
+        "MS-14",
+        "MS-19"
+      ]
+    },
+    {
+      "id": "T4",
+      "name": "Disconnected enclave / cyber-physical cell",
+      "use_when": "Internet independence, physical safety, hostile communications, clandestine operations, or long-duration isolation is required.",
+      "reject_when": "Connected controls can meet the mission without the severe feature, patching, telemetry, and operations trade-offs.",
+      "sources": [
+        "MS-18",
+        "MS-19",
+        "MS-20",
+        "STD-02"
+      ]
+    },
+    {
+      "id": "T5",
+      "name": "Acquisition transition zone",
+      "use_when": "Newly acquired or joint-venture environments require isolation-first discovery with reversible cross-tenant collaboration and staged trust.",
+      "reject_when": "Trust is assumed before assessment or the transition has no exit/divestiture design.",
+      "sources": [
+        "MS-03",
+        "MS-02"
+      ]
+    }
+  ],
+  "hardConstraints": [
+    "Independent identity authority is legally or operationally required.",
+    "A jurisdiction requires local operator, data-processing, or cryptographic authority that cannot be delegated to the global control plane.",
+    "The mission must continue at S3 or S4 without upstream cloud, network, DNS, federation, MFA, or SOC dependencies.",
+    "A safety case prohibits automated isolation or response without local operational authority.",
+    "A recovery dependency cycle prevents trusted restoration of identity, keys, policy, communications, or evidence.",
+    "A transitive privilege path creates unacceptable blast radius across tenants, clouds, IT/OT, or agents."
+  ],
+  "adversarialFindings": [
+    {
+      "position": "“One tenant is always optimal.”",
+      "test": "Microsoft explicitly recommends one tenant only when needs can be met and documents cases for tenant/resource/identity isolation.",
+      "result": "Rejected as universal; retained as the default bias.",
+      "sources": [
+        "MS-02"
+      ]
+    },
+    {
+      "position": "“More tenants automatically isolate identity risk.”",
+      "test": "Microsoft states cross-tenant resource isolation with shared identities does not provide identity isolation.",
+      "result": "Rejected; identity authority and trust direction must be designed separately.",
+      "sources": [
+        "MS-02"
+      ]
+    },
+    {
+      "position": "“Centralize all telemetry in one workspace.”",
+      "test": "Sentinel ties workspaces to region/tenant and many features/connectors remain workspace-local.",
+      "result": "Rejected; use federated workspaces with central management and local authority.",
+      "sources": [
+        "MS-11"
+      ]
+    },
+    {
+      "position": "“Customer-managed keys equal sovereignty.”",
+      "test": "Microsoft 365 Customer Key includes an availability key and covers specific services; residency and operator/legal controls are separate.",
+      "result": "Rejected; treat cryptographic control as one sovereignty dimension.",
+      "sources": [
+        "MS-14",
+        "MS-15"
+      ]
+    },
+    {
+      "position": "“Air-gapped means secure and fully capable.”",
+      "test": "Microsoft documents breach risk, local monitoring needs, higher local control-plane capacity, and impaired/unavailable connected features.",
+      "result": "Rejected; isolation creates operational and update debt that must be designed explicitly.",
+      "sources": [
+        "MS-18",
+        "MS-19",
+        "MS-20"
+      ]
+    },
+    {
+      "position": "“MFA is sufficient.”",
+      "test": "NIST distinguishes assurance levels and explicitly requires phishing-resistant options/usage at higher assurance.",
+      "result": "Rejected; use authentication assurance and transaction consequence.",
+      "sources": [
+        "STD-04"
+      ]
+    },
+    {
+      "position": "“Zero Trust guidance covers OT, recovery, and agents.”",
+      "test": "CISA states its maturity model does not address detailed recovery, OT/IoT, or emerging AI.",
+      "result": "Rejected; add dedicated safety, recovery, and agent models.",
+      "sources": [
+        "STD-05",
+        "STD-02",
+        "MS-09"
+      ]
+    },
+    {
+      "position": "“Microsoft overlay replaces native multicloud controls.”",
+      "test": "Arc and Defender coverage varies by resource, region, cloud, preview status, and national-cloud availability.",
+      "result": "Rejected; standardize intent and evidence, not necessarily enforcement location.",
+      "sources": [
+        "MS-16",
+        "MS-17"
+      ]
+    },
+    {
+      "position": "“ITSM synchronization is a real-time response path.”",
+      "test": "The documented Defender for Cloud / ServiceNow integration synchronizes every 24 hours.",
+      "result": "Rejected for urgent containment; keep direct SOAR/control-plane paths.",
+      "sources": [
+        "MS-23"
+      ]
+    },
+    {
+      "position": "“Maximum sophistication is maximum security.”",
+      "test": "CISA calls for staged maturity and notes increasing effort/complexity; Microsoft documents policy and multitenant complexity limits.",
+      "result": "Rejected; cap target state at the maximum safely operable architecture.",
+      "sources": [
+        "STD-05",
+        "MS-02",
+        "MS-04"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "0-90 days",
+      "outcome": "Control the roots",
+      "actions": [
+        "Create the boundary and authority register",
+        "Inventory tenants, identity authorities, emergency access, agents, service principals, keys, Sentinel workspaces, and OT zones",
+        "Establish two or more tested cloud-only emergency accounts",
+        "Export versioned Entra and policy configuration; define RTO/RPO",
+        "Block new legacy authentication and long-lived secrets by default"
+      ]
+    },
+    {
+      "phase": "3-9 months",
+      "outcome": "Standardize the connected core",
+      "actions": [
+        "Deploy phishing-resistant privileged access and dedicated admin devices",
+        "Consolidate and test Conditional Access as code",
+        "Implement Azure landing-zone policy hierarchy",
+        "Roll out Purview classification/labeling and cross-tenant relationship governance",
+        "Federate Defender XDR, Sentinel, Defender for Cloud, and ITSM with explicit authority boundaries"
+      ]
+    },
+    {
+      "phase": "9-18 months",
+      "outcome": "Federate sovereignty and operations",
+      "actions": [
+        "Assign S0-S4 tiers and build S2-S4 local services where required",
+        "Implement hierarchical SOC, local evidence retention, and multi-workspace management",
+        "Build the M&A transition-zone factory and detachability tests",
+        "Move workloads to managed identity/workload federation",
+        "Register and govern agent identities with sponsors and blueprint policy"
+      ]
+    },
+    {
+      "phase": "18-36 months",
+      "outcome": "Prove recoverability and adaptive governance",
+      "actions": [
+        "Exercise identity/tenant/AD/OT clean-room recovery",
+        "Test simultaneous control-plane and communications failures",
+        "Continuously link policies to evidence and drift remediation",
+        "Tune complexity budgets and retire redundant controls",
+        "Re-score topologies after regulatory, product, threat, and organizational changes"
+      ]
+    }
+  ],
+  "decisionHierarchy": [
+    "Hard constraints",
+    "Trust / authority / dependency graph",
+    "Scenario stress tests",
+    "Risk-adjusted multi-objective optimization",
+    "Capability and maturity feasibility"
+  ],
+  "decisionDimensions": [
+    "Security",
+    "Resilience",
+    "Sovereignty",
+    "Operability",
+    "Agility",
+    "Compliance",
+    "Cost",
+    "Complexity",
+    "Recovery",
+    "Safety"
+  ],
+  "researchMethod": {
+    "standard": "PhD-level evidence-backed architectural research with Microsoft documentation first, standards triangulation, primary research support, adversarial validation, and explicit provenance.",
+    "mandatoryPractices": [
+      "Opened-source verification",
+      "Primary-source preference",
+      "Product capability separated from architectural inference",
+      "Counter-hypothesis testing",
+      "Fast-moving capability flags",
+      "Unresolved gaps surfaced rather than hidden"
+    ],
+    "limitations": [
+      "Product availability, licensing, preview status, cloud/region support, and service limits can change after the research cutoff.",
+      "No organization-specific legal, regulatory, safety, latency, cost, data-flow, or threat assessment was performed.",
+      "The interactive topology assessment is a derived advisory heuristic, not a substitute for a formal architecture review or safety case."
+    ]
+  }
+}
