@@ -13,6 +13,7 @@
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
+  <script src="adaptive-trust-fabric-microsite/assets/site.js"></script>
   <style>
     :root {
       color-scheme: light;
@@ -70,15 +71,34 @@
       --cp-card-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scrollbar-gutter: stable; }
     body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; }
+    body.drawer-open { overflow: hidden; }
     a { color: var(--cp-link); }
-    a:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 6px; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
     .shell { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
     .skip-link { position: absolute; top: -80px; left: 16px; padding: 12px 16px; background: var(--cp-surface); border: 1px solid var(--cp-accent); border-radius: .625rem; z-index: 1; }
     .skip-link:focus { top: 16px; }
     .site-header { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid var(--cp-border); }
     .brand { display: flex; align-items: center; gap: 12px; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; }
     .brand svg { color: var(--cp-accent); flex-shrink: 0; }
+    .icon-button { display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 8px; border: 1px solid var(--cp-border); border-radius: .625rem; background: var(--cp-surface); color: var(--cp-text); cursor: pointer; }
+    .icon-button:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    .site-drawer { position: fixed; inset: 0 auto 0 0; margin: 0; width: min(360px, calc(100vw - 24px)); max-width: none; height: 100dvh; max-height: 100dvh; padding: 0; overflow-y: auto; overscroll-behavior: contain; border: 0; border-right: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text); }
+    .site-drawer::backdrop { background: var(--cp-overlay); }
+    .drawer-header { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--cp-border); background: var(--cp-surface); }
+    .drawer-header h2 { margin: 0; font-size: 1.25rem; }
+    .drawer-body { padding: 4px 16px 24px; }
+    .drawer-section + .drawer-section { margin-top: 20px; }
+    .drawer-section h3 { margin: 20px 12px 8px; color: var(--cp-text-muted); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .drawer-links { display: grid; gap: 4px; }
+    .drawer-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 44px; padding: 10px 12px; border: 0; border-radius: .625rem; background: var(--cp-surface); color: var(--cp-text); font: inherit; font-size: .9rem; line-height: 1.5; text-align: left; text-decoration: none; cursor: pointer; }
+    .drawer-item:hover, .drawer-item[aria-current="page"] { background: var(--cp-accent-soft); color: var(--cp-accent); }
+    .drawer-item:disabled { color: var(--cp-text-muted); cursor: not-allowed; }
+    .drawer-item:disabled:hover { background: var(--cp-surface); color: var(--cp-text-muted); }
+    .theme-state { color: var(--cp-accent); font: .8rem Consolas, "Courier New", Courier, monospace; }
+    .theme-status, .theme-note { margin: 8px 12px; color: var(--cp-text-soft); font-size: .8rem; }
     .header-meta { color: var(--cp-text-muted); font-size: .8rem; }
     .hero { padding-block: 64px 40px; }
     .eyebrow { margin: 0 0 16px; color: var(--cp-accent); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
@@ -133,13 +153,69 @@
   <a class="skip-link" href="#formats">Skip to viewing options</a>
   <header class="site-header shell">
     <div class="brand">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M5 8h8v8H5zM19 16h8v8h-8zM13 12h10v4M9 16v8h10"/>
-      </svg>
-      Adaptive Trust Fabric
+      <button class="icon-button" id="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false" aria-haspopup="dialog" hidden>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <span>Adaptive Trust Fabric</span>
     </div>
     <span class="header-meta">Version 1.0 / Research cutoff 17 Nov 2026</span>
   </header>
+
+  <dialog class="site-drawer" id="site-menu" aria-labelledby="menu-title">
+    <div class="drawer-header">
+      <h2 id="menu-title">Navigation</h2>
+      <button class="icon-button" id="menu-close" type="button" aria-label="Close navigation" autofocus>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+          <path d="m6 6 12 12M18 6 6 18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <section class="drawer-section" aria-labelledby="appearance-title">
+        <h3 id="appearance-title">Appearance</h3>
+        <div class="drawer-links">
+          <button class="drawer-item" type="button" role="switch" aria-checked="false" data-theme-toggle disabled>
+            Dark theme <span class="theme-state" data-theme-state aria-hidden="true">Off</span>
+          </button>
+          <button class="drawer-item" type="button" data-theme-system disabled>Use system setting</button>
+        </div>
+        <p class="theme-status" data-theme-status role="status" aria-live="polite">Theme controls require JavaScript.</p>
+        <p class="theme-note">The theme setting applies to the landing page and presentation.</p>
+      </section>
+      <nav aria-label="Site navigation">
+        <section class="drawer-section" aria-labelledby="views-title">
+          <h3 id="views-title">Views</h3>
+          <div class="drawer-links">
+            <a class="drawer-item" href="index.html" aria-current="page">All formats</a>
+            <a class="drawer-item" href="adaptive-trust-fabric-microsite/index.html">Interactive microsite</a>
+            <a class="drawer-item" href="adaptive-trust-fabric-microsite/presentation.html">Slide presentation</a>
+            <a class="drawer-item" href="adaptive-trust-fabric-infographic.html">Architecture infographic</a>
+          </div>
+        </section>
+        <section class="drawer-section" aria-labelledby="documents-title">
+          <h3 id="documents-title">Documents</h3>
+          <div class="drawer-links">
+            <a class="drawer-item" href="position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read position paper (PDF)</a>
+            <a class="drawer-item" href="position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf" download="Adaptive-Trust-Fabric-Position-Paper.pdf">Download position paper (PDF)</a>
+            <a class="drawer-item" href="adaptive-trust-fabric-microsite/data/research.json">Research data</a>
+          </div>
+        </section>
+        <section class="drawer-section" aria-labelledby="project-title">
+          <h3 id="project-title">Project</h3>
+          <div class="drawer-links">
+            <a class="drawer-item" href="https://github.com/chadhage/adaptive-trust-fabric">GitHub repository</a>
+            <a class="drawer-item" href="LICENSE">MIT License</a>
+            <a class="drawer-item" href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>
+            <a class="drawer-item" href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/SECURITY.md">Security reporting</a>
+            <a class="drawer-item" href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/SUPPORT.md">Support</a>
+            <a class="drawer-item" href="https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks">Trademark guidelines</a>
+          </div>
+        </section>
+      </nav>
+    </div>
+  </dialog>
 
   <main class="shell">
     <section class="hero" aria-labelledby="page-title">

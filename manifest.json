@@ -5,13 +5,18 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 19013,
-      "sha256": "f420d0bb3045c7b2cbfad69d73435ceafcd128dfac3ce6558f47943eea6cbb77"
+      "bytes": 20558,
+      "sha256": "bb97598f3508653386121f2fb87247510096fc52c5d6e946ccba08ba9c827931"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
       "bytes": 10654,
       "sha256": "49af1e9a0e0b3fbb611c2f111cf277c3dce1084ecaf53befe0cbb9b03ea1c327"
+    },
+    {
+      "path": "adaptive-trust-fabric-microsite/assets/site.js",
+      "bytes": 5529,
+      "sha256": "eaa74e6a839fde7882be3812095f9176e5c750ea9fe8ed4db1552122fe328b04"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/styles.css",
@@ -45,13 +50,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 14795,
-      "sha256": "58e60e4048cc71893c21e8ef84243b3200c863f860b3eb7b4bded64426758e23"
+      "bytes": 20982,
+      "sha256": "e42c19c47e9d02b549c97f21e0be1e8dba7688dbbe4406c3551d955ace7d06d1"
     },
     {
       "path": "adaptive-trust-fabric-microsite/presentation.html",
-      "bytes": 45737,
-      "sha256": "701e01dfbfb85a3d2850856537e12404ceff92b4aa8a096569e3c8da14b3491f"
+      "bytes": 45779,
+      "sha256": "c5bf4b10e4378e57ba7de19d093f48e5cf10eb818686e444480ecd4d80859d91"
     },
     {
       "path": "adaptive-trust-fabric-infographic.html",
