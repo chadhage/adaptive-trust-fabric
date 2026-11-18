@@ -48,16 +48,16 @@ No build step, package installation, Azure subscription or web server is require
 
 Use the menu button beside the project name on the landing page to open the navigation drawer. It contains the viewing options, position-paper download, research data and project-policy links. Close it with the close button, Escape, a click outside the drawer, or a navigation link. Keyboard focus stays inside the open drawer and returns to the menu button when it closes.
 
-The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation; the original microsite and infographic retain their fixed styling. If browser storage is unavailable, the current page can still change theme and displays a storage notice.
+The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation; the original microsite retains its fixed styling. The infographic follows the system setting independently. If browser storage is unavailable, the current page can still change theme and displays a storage notice.
 
-The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs also select and save that theme. The drawer controls require JavaScript; the page's viewing cards and document links remain available without it.
+The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and save that theme on the landing page and presentation. On the infographic, the parameter selects a theme for that page without saving it. The drawer controls require JavaScript; the page's viewing cards and document links remain available without it.
 
 ## Repository walkthrough
 
 | File | Purpose and use |
 | --- | --- |
 | [index.html](./index.html) | GitHub Pages entry point with a navigation drawer, theme controls, viewing options and position paper PDF download. |
-| [adaptive-trust-fabric-infographic.html](./adaptive-trust-fabric-infographic.html) | Summary of control responsibilities, evaluation criteria, repository files and documented service limitations. Use **Print / Save PDF** to export it. |
+| [adaptive-trust-fabric-infographic.html](./adaptive-trust-fabric-infographic.html) | Visual guide to access decisions, control responsibilities, topology, survivability and recovery. Use **Print / Save PDF** to export it. |
 | [adaptive-trust-fabric-microsite/index.html](./adaptive-trust-fabric-microsite/index.html) | Reference architecture, topology assessment, survivability tiers, topology patterns, control requirements, assumption reviews, implementation sequence and source search. Includes an embedded research-data copy for offline use. |
 | [adaptive-trust-fabric-microsite/presentation.html](./adaptive-trust-fabric-microsite/presentation.html) | Browser presentation covering the architecture, evaluation criteria, topology patterns, operating tiers, identity, recovery and implementation phases. Shared theme preferences are loaded from the local site script. |
 | [adaptive-trust-fabric-microsite/assets/app.js](./adaptive-trust-fabric-microsite/assets/app.js) | Browser-side assessment rules, data rendering, control filters and source search. Read or modify this to understand how assessment inputs become recommendations. |
@@ -67,7 +67,7 @@ The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs also select
 | [position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf) | PDF edition of the position paper. |
 | [position-paper/position-paper.html](./position-paper/position-paper.html) | Readable and editable HTML source of the paper, including its executive position, reference architecture, normative standard and source catalog. |
 | [position-paper/paper.css](./position-paper/paper.css) | Print-oriented paper styling, including A4 page settings, tables and pagination rules. |
-| [manifest.json](./manifest.json) | Package version, research cutoff, byte sizes and SHA-256 checksums for the files listed in the manifest. This is integrity metadata, not an application dependency manifest. |
+| [manifest.json](./manifest.json) | Package version, research cutoff, byte sizes and SHA-256 checksums of the listed Git file contents. Checkout line-ending conversion can change local file bytes. This is integrity metadata, not an application dependency manifest. |
 | [.github/workflows/pages.yml](./.github/workflows/pages.yml) | Stages and deploys the static site to GitHub Pages on pushes to the default branch, `main`, or a manual workflow run. |
 | [LICENSE](./LICENSE) | MIT license, Microsoft Corporation copyright notice and warranty/liability disclaimer. |
 | [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Microsoft Open Source Code of Conduct adoption and conduct-reporting resources. |
@@ -169,7 +169,7 @@ Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-inf
 - **Navigation and themes:** the landing-page drawer markup is in the [format selector](./index.html). Shared preference handling and drawer interactions are in [site.js](./adaptive-trust-fabric-microsite/assets/site.js); both the landing page and presentation load it before their styles.
 - **Research changes:** keep the [JSON dataset](./adaptive-trust-fabric-microsite/data/research.json) and the `script#research-data` JSON block in the [microsite HTML](./adaptive-trust-fabric-microsite/index.html) synchronized. The browser reads the embedded copy; editing the standalone JSON alone does not update the microsite. Keep the landing-page counts, slides, paper and infographic consistent with the revised research.
 - **Paper changes:** update the [paper HTML](./position-paper/position-paper.html) and [print stylesheet](./position-paper/paper.css), then regenerate the [PDF](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf). A browser's Print / Save as PDF feature provides an export path; use A4 and background graphics, and inspect pagination and layout. Output can vary by print renderer; no automated PDF build script is included.
-- **Integrity metadata:** refresh the byte count and SHA-256 checksum in the [manifest](./manifest.json) for each listed file you change.
+- **Integrity metadata:** refresh the byte count and SHA-256 checksum in the [manifest](./manifest.json) for each listed file you change, using the staged Git content rather than working-tree bytes when line endings are converted.
 - **Static hosting:** publish the repository's content with its relative paths intact. Hosting only the microsite subdirectory will omit the sibling PDF that its links reference.
 
 ## Status and limitations

@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 20558,
-      "sha256": "bb97598f3508653386121f2fb87247510096fc52c5d6e946ccba08ba9c827931"
+      "bytes": 20850,
+      "sha256": "060d8c4cce6370745b77c8740def16169c463f52d795375a9ca03c89c901cc78"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
@@ -15,8 +15,8 @@
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/site.js",
-      "bytes": 5529,
-      "sha256": "eaa74e6a839fde7882be3812095f9176e5c750ea9fe8ed4db1552122fe328b04"
+      "bytes": 5378,
+      "sha256": "dc5b28ecf1a6c0cb2d433fdf7c322a10a1b716466f93525fd1abf3cfe976e8d4"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/styles.css",
@@ -50,38 +50,38 @@
     },
     {
       "path": "index.html",
-      "bytes": 20982,
-      "sha256": "e42c19c47e9d02b549c97f21e0be1e8dba7688dbbe4406c3551d955ace7d06d1"
+      "bytes": 20648,
+      "sha256": "8275f74299742eb1b4a1bcf5eecb3fe1b39e2a808b459bf9fd2574900bd729cd"
     },
     {
       "path": "adaptive-trust-fabric-microsite/presentation.html",
-      "bytes": 45779,
-      "sha256": "c5bf4b10e4378e57ba7de19d093f48e5cf10eb818686e444480ecd4d80859d91"
+      "bytes": 45100,
+      "sha256": "d81d8f4a00cec7f11a4e7733c70e73e6af7fc9fa5dcc15b11d20667a14b8afe8"
     },
     {
       "path": "adaptive-trust-fabric-infographic.html",
-      "bytes": 22868,
-      "sha256": "1ee4426d63bcd4397efad1856c451c3a04c1b2c02ddedc0590c50d6bf677236d"
+      "bytes": 19235,
+      "sha256": "35ff3ecc2597d7934dd307c97b91266eda7a8c6d544c1497c4efde21f7f55619"
     },
     {
       "path": "LICENSE",
-      "bytes": 1095,
-      "sha256": "02f1fa1f007abde79c6ca74520d3605929c19c35f25338310487e5e4c1de3bb6"
+      "bytes": 1074,
+      "sha256": "7df20dcdf9197e9945c14858d41c60f11b52b93e5b69e2b63416b874d598d322"
     },
     {
       "path": "CODE_OF_CONDUCT.md",
-      "bytes": 453,
-      "sha256": "539b1bfc810aa62738af95866bfe584d568b0dca71aebed0bd81db0bdaebade3"
+      "bytes": 444,
+      "sha256": "9daeae709a0bd71bcfd1c96dc5822ecec5210327eff929da64b0ae7f8faf1444"
     },
     {
       "path": "SECURITY.md",
-      "bytes": 2558,
-      "sha256": "3b794297f675e858d63eeb375121faa83493937761150c4e9bb80e9b8f9b55d1"
+      "bytes": 2519,
+      "sha256": "b99beb86dbf544f6f7c95d06892ef171bcdd2579ce83f0cdf059ee2a503a6f0c"
     },
     {
       "path": "SUPPORT.md",
-      "bytes": 1519,
-      "sha256": "05304816b2b5029ae11382047a1ccf1d028136cad836768bd542cf767b2b39b2"
+      "bytes": 1498,
+      "sha256": "a017b8613f76602eca24ae4ed55ef2fdf8fd2785527d53fbbb51e688e2a82e14"
     }
   ]
 }
