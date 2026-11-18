@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 20850,
-      "sha256": "060d8c4cce6370745b77c8740def16169c463f52d795375a9ca03c89c901cc78"
+      "bytes": 20931,
+      "sha256": "dd917e04928259f77ead16f163b9b5a5e55d84fc8998e1daad012f2bdd19e2f8"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
@@ -60,8 +60,8 @@
     },
     {
       "path": "adaptive-trust-fabric-infographic.html",
-      "bytes": 19235,
-      "sha256": "35ff3ecc2597d7934dd307c97b91266eda7a8c6d544c1497c4efde21f7f55619"
+      "bytes": 19832,
+      "sha256": "7f3917ba624ad1b8f619923ef50a3c6dea5d2737e26b5fc2f5b6ba0265a73714"
     },
     {
       "path": "LICENSE",

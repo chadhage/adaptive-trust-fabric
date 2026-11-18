@@ -48,6 +48,8 @@ No build step, package installation, Azure subscription or web server is require
 
 Use the menu button beside the project name on the landing page to open the navigation drawer. It contains the viewing options, position-paper download, research data and project-policy links. Close it with the close button, Escape, a click outside the drawer, or a navigation link. Keyboard focus stays inside the open drawer and returns to the menu button when it closes.
 
+Use **Home** in the infographic header or footer to return to the landing page.
+
 The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation; the original microsite retains its fixed styling. The infographic follows the system setting independently. If browser storage is unavailable, the current page can still change theme and displays a storage notice.
 
 The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and save that theme on the landing page and presentation. On the infographic, the parameter selects a theme for that page without saving it. The drawer controls require JavaScript; the page's viewing cards and document links remain available without it.
