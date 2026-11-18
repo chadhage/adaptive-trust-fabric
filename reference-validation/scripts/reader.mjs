@@ -133,30 +133,72 @@ function readerRuntime() {
   }
   function renderRunbook(record) {
     const target = document.getElementById(`runbook-${record.id}-body`);
+    const panel = (name, title) => {
+      const result = node("div", undefined, `runbook-${name}`);
+      result.id = `${record.id}-${name}`;
+      result.tabIndex = -1;
+      result.dataset.runbookPanel = "";
+      result.append(node("h3", title));
+      return result;
+    };
+    const navigation = node("nav");
+    navigation.setAttribute("aria-label", `${record.id} procedure`);
+    for (const [name, title] of [
+      ["gates", "Go / no-go"], ["steps", "Steps"], ["rollback", "Rollback"],
+      ["evidence", "Evidence capture"], ["acceptance", "Pass / fail"], ["validation", "Observations"]
+    ]) navigation.append(link(title, `#${record.id}-${name}`));
     target.append(node("p", record.purpose), paragraph("Delivery status", record.implementationStatus),
       paragraph("Operational validation", record.validation.status), paragraph("Critical limitation", record.scope.notAClaim),
-      paragraph("Permitted target", record.scope.permittedTarget),
-      details("Excluded operations and accountable roles", list(record.scope.excluded), pre(record.owners)),
-      details("Prerequisites — approval and operational evidence are not assumed",
-        table(["Prerequisite", "Current state", "Required evidence"], record.prerequisites.map(item => [item.requirement, item.status, item.evidence]))),
+      paragraph("Permitted target", record.scope.permittedTarget), navigation,
+      details("Excluded operations and accountable roles", list(record.scope.excluded),
+        ...Object.entries(record.owners).map(([role, owner]) => paragraph(role, owner))),
       details("Dependencies and failure behavior", table(["Dependency", "Required behavior"], record.dependencyLimits.map(item => [item.dependency, item.failureBehavior])))
     );
+    const gates = panel("gates", "Go / no-go");
+    gates.append(paragraph("Current blocker", record.validation.blocker),
+      paragraph("Required approval", record.scope.requiredApprovalRef),
+      details("Prerequisites — approval and operational evidence are not assumed",
+        table(["Prerequisite", "Current state", "Required evidence"], record.prerequisites.map(item => [
+          `${item.id} — ${item.requirement}`, item.status, item.evidence
+        ]))));
+    target.append(gates);
     if (record.coverageMatrix) target.append(details("Object, retention and relationship recovery gaps",
       table(["Object / relationship", "Planned method", "Gap / validation"], record.coverageMatrix.map(item => [item.objectOrRelation, item.plannedMethod, `${item.gap}\n${item.validationStatus}`]))));
+    const procedure = panel("steps", "Execution steps");
     const steps = node("ol", undefined, "steps");
     for (const step of record.steps) {
       const item = node("li");
+      item.id = step.id;
       item.append(node("h4", `${step.id} — ${step.actorRole}`), node("p", step.action),
-        paragraph("Expected", step.expected), paragraph("On failure", step.onFailure), paragraph("Retain", step.evidence.join("; ")));
+        paragraph("Expected", step.expected), paragraph("On failure", step.onFailure), paragraph("Evidence to retain", step.evidence.join("; ")));
       steps.append(item);
     }
-    target.append(details("Execution steps — do not execute live operations without new explicit approval", steps),
-      details("Rollback and safe end state", paragraph("Triggers", record.rollback.trigger.join("; ")), list(record.rollback.steps), node("h4", "Rollback acceptance"), list(record.rollback.acceptance)),
-      details("Pass, fail and evidence acceptance", node("h4", "Pass"), list(record.passCriteria), node("h4", "Fail"), list(record.failCriteria), node("h4", "Evidence requirements"), list(record.evidenceRequirements)),
-      details("Observed evidence and remaining blockers", pre(record.validation)),
-      details("Source/control/capability scope and review triggers", pre(record.sourceReferences), paragraph("Controls", record.relatedControls.join(", ")), pre(record.review)),
-      link("Open machine-readable runbook JSON", data.runbookPaths[record.id])
-    );
+    procedure.append(details("Steps — live operations require new explicit approval", steps));
+    const rollback = panel("rollback", "Rollback and safe end state");
+    rollback.append(node("h4", "Triggers"), list(record.rollback.trigger),
+      details("Rollback procedure and acceptance", list(record.rollback.steps), node("h4", "Rollback acceptance"), list(record.rollback.acceptance)));
+    const capture = panel("evidence", "Evidence capture");
+    capture.append(list(record.evidenceRequirements));
+    const acceptance = panel("acceptance", "Pass / fail");
+    acceptance.append(details("Acceptance criteria", node("h4", "Pass"), list(record.passCriteria), node("h4", "Fail"), list(record.failCriteria)));
+    const validation = panel("validation", "Observed evidence");
+    validation.append(paragraph("Operational execution", record.validation.executed ? "Executed" : "Not executed"),
+      paragraph("Expected operational result", record.validation.expected.join(" ")),
+      record.validation.observed.length ? list(record.validation.observed) : node("p", "No operational observations or evidence recorded."),
+      paragraph("Evidence references", record.validation.evidenceRefs.join(", ") || "None"));
+    if (record.validation.localExecution) {
+      const local = record.validation.localExecution;
+      validation.append(paragraph("Local execution", `${local.executed ? "Executed" : "Not executed"}; ${local.scopeKind}; ${local.status}; ${local.evidenceRef}`));
+    }
+    validation.append(details("Does not establish", list(record.validation.doesNotEstablish)));
+    target.append(procedure, rollback, capture, acceptance, validation,
+      details("Sources, controls and review",
+        table(["Claims / sources / capabilities", "Qualification"], record.sourceReferences.map(item => [
+          `${item.claimIds.join(", ")} / ${item.sourceIds.join(", ")} / ${item.capabilityIds.join(", ")}`, item.qualification
+        ])),
+        paragraph("Controls", record.relatedControls.join(", ")),
+        paragraph("Review interval", `${record.review.intervalDays} days`), list(record.review.triggers)),
+      link("Open machine-readable runbook JSON", data.runbookPaths[record.id]));
   }
   for (const record of data.cases) renderCase(record);
   for (const record of data.runbooks) renderRunbook(record);
@@ -198,7 +240,11 @@ function readerRuntime() {
   document.getElementById("print").addEventListener("click", () => window.print());
   const focusHash = () => {
     const target = document.getElementById(window.location.hash.slice(1));
-    if (target?.tagName === "SECTION") target.focus({ preventScroll: true });
+    if (target?.hasAttribute("data-runbook-panel")) {
+      const disclosure = target.querySelector("details");
+      if (disclosure) disclosure.open = true;
+    }
+    if (target?.matches("section, [data-runbook-panel]")) target.focus({ preventScroll: true });
   };
   window.addEventListener("hashchange", focusHash);
   focusHash();

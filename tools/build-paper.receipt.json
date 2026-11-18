@@ -8,11 +8,11 @@
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "jsVersion": "15.1.206.8"
   },
-  "generated_on": "2026-11-18T17:57:43.599Z",
+  "generated_on": "2026-11-18T19:45:24.852Z",
   "inputs": {
     "position-paper/position-paper.html": {
-      "bytes": 98514,
-      "sha256": "3fb11c019a2263b60dd051835c153e698ee23b25cdd60eecdd2a91ce71841554"
+      "bytes": 98137,
+      "sha256": "357693a14f80c96f4531d3acdcca94b960f475ea7beeeaf714c14cacfb6cb5f8"
     },
     "position-paper/paper.css": {
       "bytes": 8926,
@@ -39,12 +39,12 @@
       "sha256": "e92c27c81aacaf74fbb651a38834134eaf119069dd781ae7a7621bdb4d47778f"
     },
     "reference-validation/index.html": {
-      "bytes": 317901,
-      "sha256": "8577ec0661117800664fccaf65b93dce8f5531cf4d3a3e727c6e8961c9034e93"
+      "bytes": 320495,
+      "sha256": "ce6822e72e5384406ef743a7a50c209a195e7a9112b0525bd07f0b50433caaca"
     },
     "reference-validation/contract.json": {
-      "bytes": 3750,
-      "sha256": "b29c5df67cc438afea66a8328ccc72033232a548b9467ef5b6466851185dcedc"
+      "bytes": 4113,
+      "sha256": "54b6bc584df3c92050004bc346870d7ecf92f1d33fea0cfe4d8ed6f5ddd59dfa"
     },
     "reference-validation/cases/e1.json": {
       "bytes": 82463,
@@ -79,13 +79,13 @@
       "sha256": "bfddea89196ddacdc9045aa28edac114c5d95b938dcf1ac063686d5d967949cc"
     },
     "reference-validation/evidence/executions.json": {
-      "bytes": 32681,
-      "sha256": "bc8578a39e6bfc09a3b98042faaf14a518e5f35ec9c86243469f5f9c2aa7b456"
+      "bytes": 32682,
+      "sha256": "605c29b79d1e51ab4287055d7ba01e0302ffd5d769156b98532975cee18cf82a"
     }
   },
   "output": {
-    "bytes": 502008,
-    "sha256": "19428ca11eb8d3df6682b9968eac9016aa6459faef5c789cd865aa5947036ddc"
+    "bytes": 501268,
+    "sha256": "69f406fe8d963f52f972054fcb6ba9b9673754997fad89bfc3fff9f4a3d5ea53"
   },
   "inspection": {
     "pdf": "position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf",
@@ -106,14 +106,14 @@
       },
       {
         "page": 3,
-        "words": 413,
+        "words": 386,
         "width_pt": 594.96,
         "height_pt": 841.92,
         "first_text": "3 ADAPTIVE TRUST FABRIC 0 1 / SCO PE A N D EV A L U A T IO N CR IT ER IA Evaluate requirements, dependencies and operati"
       },
       {
         "page": 4,
-        "words": 300,
+        "words": 279,
         "width_pt": 594.96,
         "height_pt": 841.92,
         "first_text": "4 ADAPTIVE TRUST FABRIC DECISION AREA REQUIRED EVIDENCE ACCOUNTABLE RESPONSIBILITY Operating readiness Configuration che"

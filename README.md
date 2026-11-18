@@ -4,20 +4,11 @@ A reference architecture and rule-based topology assessment for enterprise ident
 
 **Version:** 1.0 | **Research cutoff:** 17 November 2026
 
-## Executive summary
-
-Adaptive Trust Fabric documents requirements for tenant isolation, administrative authority, access control, operation during outages and recovery. It covers Microsoft cloud services, other cloud providers, acquisitions, operational technology (OT) and disconnected environments.
+## Quick start
 
 Prefer **one Microsoft Entra tenant when it satisfies the applicable requirements**. For each additional tenant or isolated environment, document the requirement that a shared tenant cannot meet, the administrative authority, dependencies, operating costs and separation procedure.
 
-The architecture separates four concerns:
-
-- **Policy ownership:** define requirements, accountable owners, approved configurations and exceptions.
-- **Enforcement locations:** identify the tenant, cloud-provider, application, data and OT controls that implement each requirement.
-- **Local operating requirements:** assign an S0-S4 tier and specify which functions must continue when upstream services are unavailable.
-- **Recovery procedures:** define recovery credentials, configuration baselines, dependencies and tests that do not require access to the suspected compromised environment.
-
-Check mandatory constraints before comparing risk, cost and complexity. Reject designs that violate a mandatory requirement, and assess whether staffing, skills, monitoring and recovery procedures can support the remaining options.
+For the architecture and review sequence, read the [paper](./position-paper/position-paper.html#s3). It separates policy ownership, enforcement, local operation and recovery that does not require access to the suspected compromised environment. Reject mandatory conflicts before comparing cost or complexity.
 
 **This repository contains documentation and a browser-based assessor, not a deployed security service.** It includes a landing page, an interactive microsite, a slide presentation, an infographic, a position paper and structured research records. It does not provision infrastructure, configure tenants or inspect a live environment.
 
@@ -25,7 +16,7 @@ Check mandatory constraints before comparing risk, cost and complexity. Reject d
 
 **Published site:** [Adaptive Trust Fabric on GitHub Pages](https://chadhage.github.io/adaptive-trust-fabric/).
 
-Start at the [landing page](./index.html) and choose the interactive microsite, slide presentation or infographic. Use **Download position paper (PDF)** to save the paper. For offline use, download or clone the repository and preserve its directory structure. Open the HTML files locally in a modern browser; GitHub's file viewer displays HTML source rather than running the page.
+For offline use, download or clone the repository with its directory structure intact and open `index.html` in a modern browser. GitHub's file viewer displays HTML source rather than running it.
 
 | Your goal | Start with |
 | --- | --- |
@@ -43,52 +34,31 @@ For example, from the repository root in Windows PowerShell:
 Start-Process .\index.html
 ```
 
-No build step, package installation, Azure subscription or web server is required. Enable JavaScript for the microsite's interactive features and slide navigation. The local pages and assessment work offline; opening external source links requires internet access. Keep the microsite's assets alongside its entry page, and retain the sibling position-paper directory so its PDF links work. The original microsite entry point remains unchanged.
+No build step, package installation, Azure subscription or web server is required. Enable JavaScript for the microsite's interactive features and slide navigation. The local pages and assessment work offline; opening external source links requires internet access. Keep the microsite's assets alongside its entry page, and retain the sibling position-paper directory so its PDF links work.
 
-### Navigation and appearance
+Theme overrides: `?clawpilotTheme=light` or `?clawpilotTheme=dark`. The landing page and presentation save the choice; the infographic does not. Other pages follow the system or their explicit theme URL. **Use system setting** clears the saved preference; unavailable storage produces a notice. Navigation links work without JavaScript.
 
-Use the menu button beside the project name on the landing page to open the navigation drawer. It contains the viewing options, position-paper download, research data and project-policy links. Close it with the close button, Escape, a click outside the drawer, or a navigation link. Keyboard focus stays inside the open drawer and returns to the menu button when it closes.
-
-Use **Home** in the infographic header or footer to return to the landing page.
-
-The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation. The microsite, infographic and HTML paper follow the system setting or their explicit theme URL independently. If browser storage is unavailable, the landing page can still change theme and displays a storage notice.
-
-The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and save that theme on the landing page and presentation. On the infographic, the parameter selects a theme for that page without saving it. The drawer controls require JavaScript; the page's viewing cards and document links remain available without it.
-
-## Repository walkthrough
+## Maintainer map
 
 | File | Purpose and use |
 | --- | --- |
-| [index.html](./index.html) | GitHub Pages entry point with a navigation drawer, theme controls, viewing options and position paper PDF download. |
-| [adaptive-trust-fabric-infographic.html](./adaptive-trust-fabric-infographic.html) | Visual guide to access decisions, control responsibilities, topology, survivability and recovery. Use **Print / Save PDF** to export it. |
-| [adaptive-trust-fabric-microsite/index.html](./adaptive-trust-fabric-microsite/index.html) | Reference architecture, topology assessment, survivability tiers, topology patterns, control requirements, assumption reviews, implementation sequence and source search. Includes an embedded research-data copy for offline use. |
-| [adaptive-trust-fabric-microsite/presentation.html](./adaptive-trust-fabric-microsite/presentation.html) | Browser presentation covering the architecture, evaluation criteria, topology patterns, operating tiers, identity, recovery and implementation phases. Shared theme preferences are loaded from the local site script. |
+| [adaptive-trust-fabric-microsite/index.html](./adaptive-trust-fabric-microsite/index.html) | Microsite markup and generated embedded research. Edit source data rather than the embedded copy. |
 | [adaptive-trust-fabric-microsite/assets/app.js](./adaptive-trust-fabric-microsite/assets/app.js) | Browser rendering, control evidence/filtering, source search and form-to-engine integration. |
 | [adaptive-trust-fabric-microsite/assets/assessment.js](./adaptive-trust-fabric-microsite/assets/assessment.js) | Pure, dependency-free assessment engine; browser `ATFAssessment` and CommonJS exports use the same rules without network access. |
 | [adaptive-trust-fabric-microsite/assets/site.js](./adaptive-trust-fabric-microsite/assets/site.js) | Landing-page drawer controls and shared theme preferences for the landing page and presentation. |
 | [adaptive-trust-fabric-microsite/assets/styles.css](./adaptive-trust-fabric-microsite/assets/styles.css) | Microsite layout, responsive styling and visual presentation. |
-| [adaptive-trust-fabric-microsite/data/research.json](./adaptive-trust-fabric-microsite/data/research.json) | Source references, claims, control requirements, topology patterns, survivability tiers, evaluation criteria, assumption reviews and implementation phases. Records are linked by source identifiers. |
-| [position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf) | PDF edition of the position paper. |
-| [position-paper/position-paper.html](./position-paper/position-paper.html) | Readable and editable HTML source of the paper, including its executive position, reference architecture, normative standard and source catalog. |
+| [adaptive-trust-fabric-microsite/data/research.json](./adaptive-trust-fabric-microsite/data/research.json) | Canonical research, controls and evidence. |
+| [position-paper/position-paper.html](./position-paper/position-paper.html) | Paper source; controls, roadmap and sources are generated blocks. |
 | [position-paper/paper.css](./position-paper/paper.css) | Print-oriented paper styling, including A4 page settings, tables and pagination rules. |
 | [reference-validation/index.html](./reference-validation/index.html) | Offline reader for synthetic E1-E3 review records, R1-R4 runbooks, authority/recovery diagrams and the authorization/execution ledger. |
 | [tools/sync-research.mjs](./tools/sync-research.mjs) | Maintainer-only generation/check of the embedded JSON and complete paper control appendix, roadmap and source catalog; explicit manifest-only mode. |
 | [tools/build-paper.mjs](./tools/build-paper.mjs) and [PDF inspector](./tools/build-paper.py) | Installed-browser PDF generation, extracted-text/pagination checks and source/PDF build receipt; not required by visitors. |
 | [manifest.json](./manifest.json) | Byte sizes and SHA-256 for listed canonical files: UTF-8 text with CRLF normalized to LF, binary PDFs unchanged. No staging is required. This is integrity metadata, not a dependency manifest or operational certification. |
 | [.github/workflows/pages.yml](./.github/workflows/pages.yml) | Stages and deploys the static site to GitHub Pages on pushes to the default branch, `main`, or a manual workflow run. |
-| [LICENSE](./LICENSE) | MIT license, Microsoft Corporation copyright notice and warranty/liability disclaimer. |
-| [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Microsoft Open Source Code of Conduct adoption and conduct-reporting resources. |
-| [SECURITY.md](./SECURITY.md) | Microsoft's private security-vulnerability reporting policy and MSRC contact information. |
-| [SUPPORT.md](./SUPPORT.md) | Community-support channels and the boundary between this reference material and Microsoft product support. |
 
-## Walk through the microsite
+## Use the assessor
 
-1. **Read Position and Architecture.** Review the evaluation criteria and the separation of policy ownership, identity administration, enforcement, telemetry and recovery.
-2. **Run Assess.** Record isolation, sovereignty, survivability, recovery and OT requirements, then declare the supporting boundary, authority, dependency and operating evidence. Leave facts unknown when they have not been established.
-3. **Review the assessment.** Read each independent decision dimension, mandatory gate, typed reason, excluded alternative and next validation check. The displayed survivability tier is your requirement, not a measured capability.
-4. **Review Operation during outages and Topology patterns.** Compare identity, policy, security-operations and recovery requirements. Check both the use and rejection conditions for each topology.
-5. **Filter Control requirements.** Select a domain and a MUST / SHOULD / MAY level. Use the source identifiers to find the cited documents in the source catalog.
-6. **Review assumptions and implementation phases.** Read the documented assumption reviews, consider the proposed implementation sequence, and search Sources by title, source use or provenance class.
+Open [Assess](./adaptive-trust-fabric-microsite/index.html#assess), declare requirements and supporting facts, and leave unestablished facts unknown. Follow the result's unmet prerequisites and source links. The selected survivability tier is a requirement, not measured capability.
 
 **Default behavior:** unanswered mandatory facts produce **insufficient evidence**, not a ready T1 recommendation. A regulatory label, local-key preference, acquisition frequency or maturity label alone does not establish a need for another tenant.
 
@@ -102,44 +72,9 @@ The assessment applies **fixed rules to the selected inputs**. It does not inspe
 
 Tenant topology, identity authority, sovereignty, connectivity and recovery are separate outputs. S3 does not imply T3. T4 is a disconnected operating-pattern overlay for S4, not a number of online Entra tenants. Known circular recovery or unacceptable privileged paths cannot be compensated for by scoring other benefits.
 
-### Understand topology and survivability labels
+For topology use/rejection criteria and S0-S4 requirements, see the paper's [topology table](./position-paper/position-paper.html#s4) and [outage table](./position-paper/position-paper.html#s6). Cloud emergency accounts still require Entra; PHS requires an explicit tested cutover, not just synchronized hashes. These are not availability guarantees.
 
-Topology describes how authority and boundaries are organized:
-
-| Pattern | Intended role |
-| --- | --- |
-| T1 - One global tenant with delegated boundaries | Default when required boundaries can be met safely within one tenant. |
-| T2 - Federated multi-tenant enterprise | Separate tenant control planes with governed collaboration across them. |
-| T3 - Sovereign or independently recoverable tenant | Documented independently governed tenant identities with shared privileged dependencies removed; may describe an existing tenant and does not inherently require offline/on-premises identity. Local key custody alone is insufficient. |
-| T4 - Disconnected enclave / cyber-physical cell | Disconnected S4 operating overlay; identity and tenant-topology decisions remain separate. |
-| T5 - Acquisition transition zone | Restricted cross-tenant access during discovery and remediation, with a tested separation procedure; shown as a companion pattern in the assessment. |
-
-Survivability describes the required operating behavior during disruption:
-
-| Tier | Required operation |
-| --- | --- |
-| S0 - Cloud-dependent | Normal online SaaS and cloud operation. |
-| S1 - Transient outage | Only bounded, explicitly tested existing-session/cached behavior. Cloud-only emergency accounts still depend on Entra and reachable cloud services. |
-| S2 - Extended degraded | Days of reduced function with selected local services. |
-| S3 - Independent operations | Required functions continue without upstream control planes. |
-| S4 - Disconnected / air-gapped | Intentional isolation with local identity, policy, detection and recovery. |
-
-Use these tiers to specify required functions and outage durations, then test them in the target environment. They are not product availability guarantees.
-
-Existing sessions and cloud-only emergency accounts do not bypass a full Entra outage. PHS synchronization is not automatic switchover from federation or pass-through authentication; a documented cutover must be tested. A distinct identity is required for each separately managed **logical agent**, not automatically every process, replica or session; assign both an accountable sponsor and technical owner.
-
-## Use the slide presentation
-
-Open the [presentation](./adaptive-trust-fabric-microsite/presentation.html) from the landing page. It runs in the browser without PowerPoint or an external slide library.
-
-- Use **Previous / Next**, the arrow keys, Page Up / Page Down, or Space / Shift+Space to move through the deck.
-- Use **Go to slide** to choose a topic, or Home / End to jump to the beginning or end. Keyboard shortcuts do not override the slide selector's native controls.
-- Choose **Fullscreen** or press F when supported by the browser; Escape exits fullscreen.
-- Choose **Print / PDF** to print all slides, not just the current slide. Use landscape A4 and enable background graphics.
-- Share a topic directly with a fragment such as [the survivability slide](./adaptive-trust-fabric-microsite/presentation.html#slide-6).
-- Use **All formats** to return to the landing page. Source and action links lead into the original microsite or paper.
-
-Without JavaScript, the presentation displays all slides in reading order. It summarizes the same analysis and does not add product commitments.
+For presenting, open the [12-slide presentation](./adaptive-trust-fabric-microsite/presentation.html). Use **Print / PDF** with landscape A4 and background graphics to export all slides. Direct links such as [slide 6](./adaptive-trust-fabric-microsite/presentation.html#slide-6) work; without JavaScript all slides appear in reading order.
 
 ## Use the research data
 
@@ -171,16 +106,6 @@ The [local reader](./reference-validation/index.html) contains [E1](./reference-
 Runbooks cover [R1 emergency access](./reference-validation/index.html#runbook-R1), [R2 PHS cutover](./reference-validation/index.html#runbook-R2), [R3 tenant-configuration restore](./reference-validation/index.html#runbook-R3) and [R4 S3 outage operation](./reference-validation/index.html#runbook-R4). They define prerequisites, bounded steps, expected evidence, rollback/abort conditions and review responsibilities. Authority and recovery diagrams make indirect privileges and circular dependencies inspectable.
 
 **Authorized execution scope is local-only synthetic fixtures and browser tests.** No dedicated Entra/AD/PHS/OT lab was authorized. Live Graph/Azure/tenant writes, role changes, switchover, restores, service interruption and billable resources are out of scope. Original live acceptance for A04 and R1/R2/R3 exercises remains **blocked**, not replaced by a simulation. Local S3 fixture/process evidence proves only the exact local functions exercised, not OT safety or a platform's independent operation. Read the [authorization](./reference-validation/index.html#authorization) and [execution ledger](./reference-validation/index.html#evidence) before citing a result. Delivered tooling and review drafts are distinct from formally completed operational acceptance.
-
-## Apply it in an architecture review
-
-The proposed review sequence is:
-
-1. Record mandatory legal, sovereignty, safety, identity-isolation and continuity constraints.
-2. Map trust, privileged authority and dependencies, including the separate path needed to recover a compromised environment.
-3. Test candidate designs against outages, compromise, loss of communications and organizational change.
-4. Compare feasible topologies on risk, cost, complexity and reversibility; document the rationale and applicable controls.
-5. Assess staffing and operating capabilities, assign owners and sequence the work. Test operations and recovery procedures before adding dependencies or control planes.
 
 ## GitHub Pages publishing
 

@@ -36,6 +36,7 @@
     "node reference-validation\\scripts\\validate.mjs"
   ],
   "regenerationRule": "Generating reader data changes its hash. Rerun the bounded browser check afterward; the final validator rejects stale reader, canonical, engine or SVG observations. No browser/package is installed automatically.",
+  "readerPresentation": "Runbook-local links expose go/no-go, steps, rollback, evidence capture, pass/fail and observations. Each step keeps action, expected result, failure response and retained evidence together. Human-readable observations distinguish unexecuted operational work from scoped local checks; machine-readable records retain all normative data.",
   "pureLocalApis": {
     "validation": "scripts/validate.mjs exports validateSchema, validateCase, validateDiagram, stronglyConnectedCycles, reachable, validateAll",
     "simulation": "scripts/local-models.mjs exports LocalSiteFixture, AcquisitionFixture and runSyntheticChecks; no network/process/filesystem import",

@@ -5,7 +5,7 @@
   "scopeKind": "local-file-reader-and-svg-only",
   "countsAsLiveValidation": false,
   "authorizationRef": "AUTH-REQUEST-01",
-  "startedAt": "2026-11-18T17:50:48.758Z",
+  "startedAt": "2026-11-18T19:37:53.638Z",
   "network": "Owned headless browser; HTTP(S) blocked and CDP offline emulation. No external page or upload.",
   "results": [
     {
@@ -85,6 +85,302 @@
       "observed": {
         "hash": "#case-E2",
         "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R2-gates-navigation",
+      "expected": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R2-evidence-navigation",
+      "expected": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R2-rollback-navigation",
+      "expected": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R2-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R2-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R1-gates-navigation",
+      "expected": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R1-evidence-navigation",
+      "expected": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R1-rollback-navigation",
+      "expected": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R1-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R1-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R3-gates-navigation",
+      "expected": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R3-evidence-navigation",
+      "expected": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R3-rollback-navigation",
+      "expected": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R3-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R3-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R4-gates-navigation",
+      "expected": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R4-evidence-navigation",
+      "expected": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R4-rollback-navigation",
+      "expected": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R4-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-R4-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
       },
       "passed": true
     },
@@ -169,6 +465,302 @@
       "passed": true
     },
     {
+      "id": "reader-1440-dark-R2-gates-navigation",
+      "expected": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R2-evidence-navigation",
+      "expected": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R2-rollback-navigation",
+      "expected": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R2-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R2-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R1-gates-navigation",
+      "expected": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R1-evidence-navigation",
+      "expected": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R1-rollback-navigation",
+      "expected": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R1-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R1-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R3-gates-navigation",
+      "expected": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R3-evidence-navigation",
+      "expected": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R3-rollback-navigation",
+      "expected": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R3-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R3-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R4-gates-navigation",
+      "expected": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R4-evidence-navigation",
+      "expected": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R4-rollback-navigation",
+      "expected": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R4-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-R4-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
       "id": "reader-320-light-theme",
       "expected": "light",
       "observed": "light",
@@ -249,6 +841,302 @@
       "passed": true
     },
     {
+      "id": "reader-320-light-R2-gates-navigation",
+      "expected": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R2-evidence-navigation",
+      "expected": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R2-rollback-navigation",
+      "expected": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R2-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R2-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R1-gates-navigation",
+      "expected": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R1-evidence-navigation",
+      "expected": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R1-rollback-navigation",
+      "expected": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R1-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R1-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R3-gates-navigation",
+      "expected": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R3-evidence-navigation",
+      "expected": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R3-rollback-navigation",
+      "expected": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R3-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R3-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R4-gates-navigation",
+      "expected": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R4-evidence-navigation",
+      "expected": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R4-rollback-navigation",
+      "expected": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R4-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-R4-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
       "id": "reader-320-dark-theme",
       "expected": "dark",
       "observed": "dark",
@@ -325,6 +1213,302 @@
       "observed": {
         "hash": "#case-E2",
         "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R2-gates-navigation",
+      "expected": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-gates",
+        "focus": "R2-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R2-evidence-navigation",
+      "expected": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-evidence",
+        "focus": "R2-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R2-rollback-navigation",
+      "expected": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R2-rollback",
+        "focus": "R2-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R2-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R2-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R1-gates-navigation",
+      "expected": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-gates",
+        "focus": "R1-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R1-evidence-navigation",
+      "expected": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-evidence",
+        "focus": "R1-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R1-rollback-navigation",
+      "expected": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R1-rollback",
+        "focus": "R1-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R1-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R1-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R3-gates-navigation",
+      "expected": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-gates",
+        "focus": "R3-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R3-evidence-navigation",
+      "expected": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-evidence",
+        "focus": "R3-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R3-rollback-navigation",
+      "expected": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R3-rollback",
+        "focus": "R3-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R3-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R3-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R4-gates-navigation",
+      "expected": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-gates",
+        "focus": "R4-gates",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R4-evidence-navigation",
+      "expected": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-evidence",
+        "focus": "R4-evidence",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R4-rollback-navigation",
+      "expected": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "observed": {
+        "hash": "#R4-rollback",
+        "focus": "R4-rollback",
+        "visible": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R4-bounded-navigation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-R4-readable-procedure",
+      "expected": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
+      },
+      "observed": {
+        "noRawJson": true,
+        "gates": true,
+        "rollback": true,
+        "capture": true,
+        "steps": true,
+        "observations": true,
+        "localScope": true,
+        "acceptance": true,
+        "provenance": true
       },
       "passed": true
     },
@@ -487,6 +1671,10 @@
   ],
   "screenshots": [
     {
+      "name": "r2-reader-pilot.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    },
+    {
       "name": "reference-reader-1440-light.png",
       "retention": "Coordinator-owned session evidence directory; not an external upload."
     },
@@ -511,12 +1699,12 @@
     {
       "path": "index.html",
       "algorithm": "sha256",
-      "value": "95461b508e97e8f8a2549cc1ad2aba2039592d298f1eb5b0b2fe5f25e0c52c21"
+      "value": "b33de922bc82e5f6f62f9c9cb40c33830fe16993e6ec16f2c0e6385a9b8192da"
     },
     {
       "path": "scripts/check-browser.mjs",
       "algorithm": "sha256",
-      "value": "095c4d63ab5d7968448286f941429e2a59876d46260abbfbce6209b139ae3cf0"
+      "value": "a4a4291960c0d1502f777c19d4109217986ca7c027edefaeb695b42c7064ffd3"
     },
     {
       "path": "../tools/validate-browser-runtime.mjs",
@@ -786,14 +1974,238 @@
           "passed": false
         }
       ]
+    },
+    {
+      "startedAt": "2026-11-18T17:50:48.758Z",
+      "endedAt": "2026-11-18T17:51:02.569Z",
+      "status": "passed-local-synthetic-only",
+      "passed": 66,
+      "failed": 0,
+      "inputHashes": [
+        {
+          "path": "index.html",
+          "algorithm": "sha256",
+          "value": "95461b508e97e8f8a2549cc1ad2aba2039592d298f1eb5b0b2fe5f25e0c52c21"
+        },
+        {
+          "path": "scripts/check-browser.mjs",
+          "algorithm": "sha256",
+          "value": "095c4d63ab5d7968448286f941429e2a59876d46260abbfbce6209b139ae3cf0"
+        },
+        {
+          "path": "../tools/validate-browser-runtime.mjs",
+          "algorithm": "sha256",
+          "value": "8bfabb608092792ceafbaf37a071da1196ab544b2922a63357049195a16abc0a"
+        },
+        {
+          "path": "diagrams/e1-authority.svg",
+          "algorithm": "sha256",
+          "value": "7d9f1c8079fd088d037816960aa9cbd78deb8e56fd45b0d38b1673c9938f9169"
+        },
+        {
+          "path": "diagrams/e1-recovery.svg",
+          "algorithm": "sha256",
+          "value": "799ea19514a50b766921e24b1a6c558a4c33ce43633505daf8a7404522f02475"
+        },
+        {
+          "path": "diagrams/e2-authority.svg",
+          "algorithm": "sha256",
+          "value": "360b0c4e7a0108dea42b790db7a8b317a8f93ebee234fe093ddab6b8c53cb4a0"
+        },
+        {
+          "path": "diagrams/e2-recovery.svg",
+          "algorithm": "sha256",
+          "value": "f1ee4f1f6771561467cbd39772087000b0498fc3e16b0ee525bfef2bcce81857"
+        },
+        {
+          "path": "diagrams/e3-authority.svg",
+          "algorithm": "sha256",
+          "value": "8762a393a897531695d4e631d5fed638bc7be4639e211d0e908ca7f1e72f17da"
+        },
+        {
+          "path": "diagrams/e3-recovery.svg",
+          "algorithm": "sha256",
+          "value": "0e3e1cc212d26ea3b2c1c7576dcaf0b56af58664e2a231215ae17925ced56422"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "startedAt": "2026-11-18T19:37:11.043Z",
+      "endedAt": "2026-11-18T19:37:20.626Z",
+      "status": "passed-local-synthetic-only",
+      "passed": 146,
+      "failed": 0,
+      "inputHashes": [
+        {
+          "path": "index.html",
+          "algorithm": "sha256",
+          "value": "b958d6edd6d626604ff72b5c51ea9ecd1c8683be4e6719b3460b76548f9f212e"
+        },
+        {
+          "path": "scripts/check-browser.mjs",
+          "algorithm": "sha256",
+          "value": "322d143e1c225f3bbdfc4dcd22556fbc17ed9797c2819a75940cb5a9a3c8ad57"
+        },
+        {
+          "path": "../tools/validate-browser-runtime.mjs",
+          "algorithm": "sha256",
+          "value": "8bfabb608092792ceafbaf37a071da1196ab544b2922a63357049195a16abc0a"
+        },
+        {
+          "path": "diagrams/e1-authority.svg",
+          "algorithm": "sha256",
+          "value": "7d9f1c8079fd088d037816960aa9cbd78deb8e56fd45b0d38b1673c9938f9169"
+        },
+        {
+          "path": "diagrams/e1-recovery.svg",
+          "algorithm": "sha256",
+          "value": "799ea19514a50b766921e24b1a6c558a4c33ce43633505daf8a7404522f02475"
+        },
+        {
+          "path": "diagrams/e2-authority.svg",
+          "algorithm": "sha256",
+          "value": "360b0c4e7a0108dea42b790db7a8b317a8f93ebee234fe093ddab6b8c53cb4a0"
+        },
+        {
+          "path": "diagrams/e2-recovery.svg",
+          "algorithm": "sha256",
+          "value": "f1ee4f1f6771561467cbd39772087000b0498fc3e16b0ee525bfef2bcce81857"
+        },
+        {
+          "path": "diagrams/e3-authority.svg",
+          "algorithm": "sha256",
+          "value": "8762a393a897531695d4e631d5fed638bc7be4639e211d0e908ca7f1e72f17da"
+        },
+        {
+          "path": "diagrams/e3-recovery.svg",
+          "algorithm": "sha256",
+          "value": "0e3e1cc212d26ea3b2c1c7576dcaf0b56af58664e2a231215ae17925ced56422"
+        }
+      ],
+      "failures": []
     }
   ],
   "browser": {
     "product": "Chrome/151.0.7922.34",
     "jsVersion": "15.1.206.8"
   },
-  "endedAt": "2026-11-18T17:51:02.569Z",
-  "wallDurationMilliseconds": 13811,
+  "runbookNavigation": [
+    {
+      "id": "R2",
+      "width": 1440,
+      "theme": "light",
+      "navigationMilliseconds": 215,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R1",
+      "width": 1440,
+      "theme": "light",
+      "navigationMilliseconds": 201,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R3",
+      "width": 1440,
+      "theme": "light",
+      "navigationMilliseconds": 220,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R4",
+      "width": 1440,
+      "theme": "light",
+      "navigationMilliseconds": 224,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R2",
+      "width": 1440,
+      "theme": "dark",
+      "navigationMilliseconds": 223,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R1",
+      "width": 1440,
+      "theme": "dark",
+      "navigationMilliseconds": 209,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R3",
+      "width": 1440,
+      "theme": "dark",
+      "navigationMilliseconds": 224,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R4",
+      "width": 1440,
+      "theme": "dark",
+      "navigationMilliseconds": 203,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R2",
+      "width": 320,
+      "theme": "light",
+      "navigationMilliseconds": 219,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R1",
+      "width": 320,
+      "theme": "light",
+      "navigationMilliseconds": 215,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R3",
+      "width": 320,
+      "theme": "light",
+      "navigationMilliseconds": 218,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R4",
+      "width": 320,
+      "theme": "light",
+      "navigationMilliseconds": 214,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R2",
+      "width": 320,
+      "theme": "dark",
+      "navigationMilliseconds": 218,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R1",
+      "width": 320,
+      "theme": "dark",
+      "navigationMilliseconds": 222,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R3",
+      "width": 320,
+      "theme": "dark",
+      "navigationMilliseconds": 244,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    },
+    {
+      "id": "R4",
+      "width": 320,
+      "theme": "dark",
+      "navigationMilliseconds": 198,
+      "scope": "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+    }
+  ],
+  "endedAt": "2026-11-18T19:38:10.991Z",
+  "wallDurationMilliseconds": 17353,
   "failed": 0,
-  "passed": 66
+  "passed": 146
 }

@@ -96,6 +96,67 @@ try {
       await evaluate('document.querySelector(\'nav a[href="#case-E2"]\').focus()');
       await key();
       check(`reader-${width}-${theme}-anchor-focus`, { hash: "#case-E2", focus: "case-E2" }, await evaluate("({hash: location.hash, focus: document.activeElement.id})"));
+      for (const id of ["R2", "R1", "R3", "R4"]) {
+        const navigationStartedAt = Date.now();
+        for (const name of ["gates", "evidence", "rollback"]) {
+          await evaluate(`document.querySelector('#runbook-${id} nav a[href="#${id}-${name}"]').focus()`);
+          await key();
+          check(`reader-${width}-${theme}-${id}-${name}-navigation`,
+            { hash: `#${id}-${name}`, focus: `${id}-${name}`, visible: true },
+            await evaluate(`({ hash: location.hash, focus: document.activeElement.id,
+              visible: document.getElementById("${id}-${name}").getBoundingClientRect().top >= -2 &&
+                document.getElementById("${id}-${name}").getBoundingClientRect().top < innerHeight })`));
+        }
+        const navigationMilliseconds = Date.now() - navigationStartedAt;
+        (report.runbookNavigation ??= []).push({
+          id, width, theme, navigationMilliseconds,
+          scope: "Automated keyboard navigation to go/no-go, evidence capture and rollback; not a human reading-time study."
+        });
+        check(`reader-${width}-${theme}-${id}-bounded-navigation`, true, navigationMilliseconds < 60000);
+        check(`reader-${width}-${theme}-${id}-readable-procedure`, {
+          noRawJson: true, gates: true, rollback: true, capture: true, steps: true, observations: true, localScope: true, acceptance: true, provenance: true
+        }, await evaluate(`(() => {
+          const record = JSON.parse(document.getElementById("reference-data").textContent).runbooks.find(item => item.id === "${id}");
+          const root = document.getElementById("runbook-${id}");
+          const contains = (element, values) => values.every(value => element.textContent.includes(value));
+          const gate = document.getElementById("${id}-gates");
+          const rollback = document.getElementById("${id}-rollback");
+          const capture = document.getElementById("${id}-evidence");
+          const validation = document.getElementById("${id}-validation");
+          return {
+            noRawJson: root.querySelectorAll("pre").length === 0,
+            gates: contains(gate, [record.validation.blocker, record.scope.requiredApprovalRef,
+              ...record.prerequisites.flatMap(item => [item.id, item.requirement, item.status, item.evidence])]),
+            rollback: contains(rollback, [...record.rollback.trigger, ...record.rollback.steps, ...record.rollback.acceptance]),
+            capture: contains(capture, record.evidenceRequirements),
+            steps: record.steps.every(step => contains(document.getElementById(step.id),
+              [step.actorRole, step.action, step.expected, step.onFailure, ...step.evidence])),
+            observations: contains(validation, ["Operational execution: Not executed", ...record.validation.expected,
+              ...record.validation.observed, ...record.validation.doesNotEstablish, ...record.validation.evidenceRefs]),
+            localScope: record.validation.localExecution ? contains(validation, Object.values(record.validation.localExecution).filter(value => typeof value === "string")) :
+              validation.textContent.includes("No operational observations or evidence recorded."),
+            acceptance: contains(document.getElementById("${id}-acceptance"), [...record.passCriteria, ...record.failCriteria]),
+            provenance: contains(root, [...record.relatedControls, ...Object.values(record.owners), ...record.review.triggers,
+              ...record.sourceReferences.flatMap(item => [...item.claimIds, ...item.sourceIds, ...item.capabilityIds, item.qualification])])
+          };
+        })()`));
+        if (width === 1440 && theme === "light") {
+          const excerpts = await evaluate(`(() => {
+            const gate = document.getElementById("${id}-gates");
+            const validation = document.getElementById("${id}-validation");
+            return { id: "${id}",
+              gates: [...gate.children].slice(0, 3).map(item => item.textContent).join("\\n"),
+              validation: [...validation.children].filter(item => item.tagName !== "DETAILS").map(item => item.textContent).join("\\n") };
+          })()`);
+          fs.writeFileSync(path.join(options.output, `${id.toLowerCase()}-reader-excerpts.json`), JSON.stringify(excerpts, null, 2) + "\n", "utf8");
+          if (id === "R2") {
+            await evaluate('document.getElementById("runbook-R2").scrollIntoView()');
+            const screenshot = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+            fs.writeFileSync(path.join(options.output, "r2-reader-pilot.png"), Buffer.from(screenshot.data, "base64"));
+            report.screenshots.push({ name: "r2-reader-pilot.png", retention: "Coordinator-owned session evidence directory; not an external upload." });
+          }
+        }
+      }
       await evaluate("window.scrollTo(0, 0)");
       const screenshot = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
       const screenshotName = `reference-reader-${width}-${theme}.png`;
