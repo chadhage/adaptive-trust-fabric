@@ -107,6 +107,7 @@
     .supporting-links { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: .9rem; }
     .site-footer { padding-block: 24px 32px; border-top: 1px solid var(--cp-border); color: var(--cp-text-muted); font-size: .78rem; }
     .site-footer p { max-width: 1000px; margin: 0; }
+    .site-footer p + p { margin-top: 12px; }
     @media (max-width: 1000px) {
       .format-grid { gap: 16px; }
       .format-card { padding: 24px; }
@@ -231,6 +232,13 @@
 
   <footer class="site-footer shell">
     <p>A Microsoft-aligned architectural position, not an official Microsoft product commitment. Revalidate legal, regulatory, safety, licensing, preview, service-limit, cloud and regional requirements before implementation. All three formats work locally when the complete repository is kept together.</p>
+    <p>Copyright &copy; Microsoft Corporation. Licensed under the <a href="LICENSE">MIT License</a>. Provided "AS IS", without warranty of any kind; see the license for the complete terms.</p>
+    <p>Use of Microsoft trademarks and logos must follow the <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks">Microsoft Trademark and Brand Guidelines</a> and must not imply Microsoft sponsorship of modified versions. Third-party trademarks remain subject to their owners' policies.</p>
+    <p class="supporting-links">
+      <a href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>
+      <a href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/SECURITY.md">Security reporting</a>
+      <a href="https://github.com/chadhage/adaptive-trust-fabric/blob/main/SUPPORT.md">Support</a>
+    </p>
   </footer>
 </body>
 </html>

@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 16788,
-      "sha256": "c343060ac1bb1408d46a80ae81bf282f5e09341bc0d3410bc6214affd7b8e501"
+      "bytes": 18951,
+      "sha256": "60608388377b5a4a5705b369a4dee89172120db0698483ac56c622505ef7172e"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
@@ -45,8 +45,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 13749,
-      "sha256": "9609d6c5060b80603c168f020a65b51f9b543c54851f388effea70fe4df61362"
+      "bytes": 14680,
+      "sha256": "f52ab68e9cc6797566ea6e1822035bb6c4955cc68628d5094f8f8cd64c61ca4e"
     },
     {
       "path": "adaptive-trust-fabric-microsite/presentation.html",
@@ -57,6 +57,26 @@
       "path": "adaptive-trust-fabric-infographic.html",
       "bytes": 240270,
       "sha256": "68dfe562bd5bd45fa28dd17395870f8f08cdd46b68ae7ba90e7e24a73598e2db"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1095,
+      "sha256": "02f1fa1f007abde79c6ca74520d3605929c19c35f25338310487e5e4c1de3bb6"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "bytes": 453,
+      "sha256": "539b1bfc810aa62738af95866bfe584d568b0dca71aebed0bd81db0bdaebade3"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 2616,
+      "sha256": "40d4846a9a8c3934b9625990b807a1ac822475c18adfd3747164540a7506f976"
+    },
+    {
+      "path": "SUPPORT.md",
+      "bytes": 1465,
+      "sha256": "44b2400214d78544deffb7de1c7749d781f0fb4c842e9d5452c148b48c29045c"
     }
   ]
 }

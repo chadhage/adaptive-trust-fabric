@@ -62,6 +62,10 @@ No build step, package installation, Azure subscription or web server is require
 | [position-paper/paper.css](./position-paper/paper.css) | Print-oriented paper styling, including A4 page settings, tables and pagination rules. |
 | [manifest.json](./manifest.json) | Package version, research cutoff, byte sizes and SHA-256 checksums for the files listed in the manifest. This is integrity metadata, not an application dependency manifest. |
 | [.github/workflows/pages.yml](./.github/workflows/pages.yml) | Stages and deploys the static site to GitHub Pages on pushes to the default branch, `main`, or a manual workflow run. |
+| [LICENSE](./LICENSE) | MIT license, Microsoft Corporation copyright notice and warranty/liability disclaimer. |
+| [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Microsoft Open Source Code of Conduct adoption and conduct-reporting resources. |
+| [SECURITY.md](./SECURITY.md) | Microsoft's private security-vulnerability reporting policy and MSRC contact information. |
+| [SUPPORT.md](./SUPPORT.md) | Community-support channels and the boundary between this reference material and Microsoft product support. |
 
 ## Walk through the microsite
 
@@ -148,7 +152,7 @@ The [Pages workflow](./.github/workflows/pages.yml) deploys the site automatical
 
 In the repository's **Settings > Pages**, the publishing source must be **GitHub Actions**. The workflow uses the `github-pages` deployment environment and the standard Pages artifact/deployment actions; there is no Jekyll or application build step.
 
-Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-infographic.html), [microsite directory](./adaptive-trust-fabric-microsite/) and [position-paper directory](./position-paper/) are staged for publication. Relative links retain the repository's project-site prefix, and the paper remains available alongside the microsite. Repository metadata and workflow files are not included in the site artifact.
+Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-infographic.html), [MIT license](./LICENSE), [microsite directory](./adaptive-trust-fabric-microsite/) and [position-paper directory](./position-paper/) are staged for publication. Relative links retain the repository's project-site prefix, and the paper remains available alongside the microsite. The landing-page footer links to the repository editions of the conduct, security and support policies. Repository metadata and workflow files are not included in the site artifact.
 
 ## Update and share the package
 
@@ -164,3 +168,29 @@ Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-inf
 This is a **Microsoft-aligned architectural position, not an official Microsoft product commitment**, a compliance certification or a substitute for legal, regulatory or safety advice.
 
 The material reflects the stated research cutoff, not a live verification of product capabilities. Before implementation, revalidate licensing, preview status, service limits, supported clouds and regions, feature availability, threat models and organization-specific obligations. MUST / SHOULD / MAY express the framework's architecture-standard language; consult each control's provenance and applicability before adopting it.
+
+## Open-source notices
+
+### License
+
+Copyright (c) Microsoft Corporation. This project is licensed under the [MIT License](./LICENSE).
+
+The software and associated documentation are provided "AS IS", without warranty of any kind. See the license for the complete permission, warranty and liability terms. Links to third-party publications do not change those publications' licenses or terms.
+
+### Code of conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for the FAQ and reporting resources.
+
+### Security
+
+Please do not report security vulnerabilities through public GitHub issues. Follow [SECURITY.md](./SECURITY.md) to report them privately to the Microsoft Security Response Center.
+
+### Support
+
+For community support and content corrections, see [SUPPORT.md](./SUPPORT.md). This reference package does not provide a Microsoft product-support entitlement or service-level agreement.
+
+### Trademarks
+
+This project may contain trademarks or logos for projects, products or services. Authorized use of Microsoft trademarks or logos is subject to and must follow the [Microsoft Trademark and Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks).
+
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Use of third-party trademarks or logos is subject to those third parties' policies.

@@ -31,7 +31,7 @@ jobs:
       - name: Stage the static site
         run: |
           mkdir _site
-          cp index.html adaptive-trust-fabric-infographic.html _site/
+          cp index.html adaptive-trust-fabric-infographic.html LICENSE _site/
           cp -R adaptive-trust-fabric-microsite position-paper _site/
 
       - name: Upload the static site
