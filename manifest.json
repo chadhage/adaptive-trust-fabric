@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 16683,
-      "sha256": "b558e154b328cec3ae91a3241ede855d1534d382ee7e078fc7543fedae3d01ad"
+      "bytes": 16788,
+      "sha256": "c343060ac1bb1408d46a80ae81bf282f5e09341bc0d3410bc6214affd7b8e501"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
@@ -45,8 +45,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 12818,
-      "sha256": "7c4fa1b94e0fb0549a6d2c1efdcf7ad794e9c388ca7e4a76aea83b41aef3873d"
+      "bytes": 13749,
+      "sha256": "9609d6c5060b80603c168f020a65b51f9b543c54851f388effea70fe4df61362"
     },
     {
       "path": "adaptive-trust-fabric-microsite/presentation.html",

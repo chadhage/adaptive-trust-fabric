@@ -27,7 +27,7 @@ Hard constraints come before scoring, cost or convenience. The target is the str
 
 **Published site:** [Adaptive Trust Fabric on GitHub Pages](https://chadhage.github.io/adaptive-trust-fabric/).
 
-Start at the [landing page](./index.html) and choose the interactive microsite, slide presentation or infographic. For offline use, download or clone the complete repository and preserve its directory structure. Open the HTML files locally in a modern browser; viewing their source on GitHub will not run the experience.
+Start at the [landing page](./index.html) and choose the interactive microsite, slide presentation or infographic. Use **Download white paper (PDF)** to save the complete position paper. For offline use, download or clone the complete repository and preserve its directory structure. Open the HTML files locally in a modern browser; viewing their source on GitHub will not run the experience.
 
 | Your goal | Start with |
 | --- | --- |
@@ -50,7 +50,7 @@ No build step, package installation, Azure subscription or web server is require
 
 | File | Purpose and use |
 | --- | --- |
-| [index.html](./index.html) | GitHub Pages starting page with three viewing choices: interactive microsite, slide presentation and infographic. |
+| [index.html](./index.html) | GitHub Pages starting page with three viewing choices (interactive microsite, slide presentation and infographic) plus a white paper PDF download. |
 | [adaptive-trust-fabric-infographic.html](./adaptive-trust-fabric-infographic.html) | Standalone visual overview of the operating model, evidence, deliverables and decision system. Use **Print / Save PDF** for a briefing handout. |
 | [adaptive-trust-fabric-microsite/index.html](./adaptive-trust-fabric-microsite/index.html) | Main interactive experience: reference architecture, topology assessment, survivability tiers, topology library, control standard, adversarial findings, roadmap and evidence explorer. Includes an embedded research-data snapshot for offline use. |
 | [adaptive-trust-fabric-microsite/presentation.html](./adaptive-trust-fabric-microsite/presentation.html) | Self-contained browser slide deck covering the position, reference architecture, decision hierarchy, topologies, survivability, identity, sovereignty, recovery, evidence and roadmap. |

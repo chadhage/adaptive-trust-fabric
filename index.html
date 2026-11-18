@@ -85,6 +85,9 @@
     h1 { max-width: 1000px; margin: 0; font-size: clamp(2.5rem, 6.5vw, 5rem); font-weight: 700; line-height: 1.08; letter-spacing: -.05em; text-wrap: balance; }
     h1 span { color: var(--cp-accent); }
     .intro { max-width: 780px; margin: 24px 0 0; color: var(--cp-text-muted); font-size: clamp(1rem, 1.8vw, 1.2rem); }
+    .download-button { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 48px; margin-top: 24px; padding: 12px 20px; border: 1px solid var(--cp-accent); border-radius: .625rem; background: var(--cp-accent); color: var(--cp-accent-fg); font-size: .95rem; font-weight: 700; text-decoration: none; }
+    .download-button:hover { border-color: var(--cp-accent-hover); background: var(--cp-accent-hover); }
+    .download-button svg { flex-shrink: 0; }
     .format-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-bottom: 48px; }
     .format-card { display: flex; flex-direction: column; padding: 32px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); color: var(--cp-text); box-shadow: var(--cp-card-shadow); text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
     .format-card:hover { border-color: var(--cp-accent); transform: translateY(-4px); }
@@ -142,6 +145,12 @@
       <p class="eyebrow">One architecture. Three ways to explore.</p>
       <h1 id="page-title">Explicit trust.<br><span>Your choice of perspective.</span></h1>
       <p class="intro">A Microsoft-aligned decision framework for identity, security and compliance across tenants, clouds, acquisitions, sovereign zones and disconnected operations. Choose the format that fits your conversation.</p>
+      <a class="download-button" href="position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf" download="Adaptive-Trust-Fabric-Position-Paper.pdf">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+        </svg>
+        Download white paper (PDF)
+      </a>
     </section>
 
     <section class="format-grid" id="formats" aria-label="Choose a viewing format">
