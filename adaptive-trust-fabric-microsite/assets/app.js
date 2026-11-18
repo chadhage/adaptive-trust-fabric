@@ -10,9 +10,6 @@
   const esc = (value = '') => String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const chips = ids => `<span class="source-chips">${ids.map(id => `<span class="source-chip">${esc(id)}</span>`).join('')}</span>`;
 
-  $('#source-count').textContent = data.sources.length;
-  $('#control-count').textContent = data.normativeControls.length;
-  $('#challenge-count').textContent = data.adversarialFindings.length;
   $('#thesis').textContent = data.thesis;
   $('#decision-hierarchy').innerHTML = data.decisionHierarchy.map(item => `<li>${esc(item)}</li>`).join('');
 
@@ -113,8 +110,8 @@
         <span class="source-id">${esc(s.id)}</span>
         <span class="provenance">${esc(s.provenance)}</span>
         <div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a><p>${esc(s.evidence_use)}</p></div>
-        <span class="source-date">Recorded access ${esc(s.accessed)}${s.last_updated ? `<br>Updated ${esc(s.last_updated)}` : ''}</span>
-      </article>`).join('') : '<p class="no-results">No source records match.</p>';
+        <span class="source-date">${s.last_updated ? `Updated ${esc(s.last_updated)}` : ''}</span>
+      </article>`).join('') : '<p class="no-results">No guidance matches the selected filters.</p>';
   }
   sourceSearch.addEventListener('input', renderSources);
   sourceClass.addEventListener('change', renderSources);
@@ -171,7 +168,7 @@
       : 'Implementation review: document administrative authority and dependencies, test failure scenarios and verify recovery procedures before deployment.';
 
     result.innerHTML = `
-      <p class="result-kicker">Derived assessment</p>
+      <p class="result-kicker">Topology candidate</p>
       <h3>${esc(topology.name)}</h3>
       <p>${esc(topology.use_when)}</p>
       <div class="result-badges"><span class="result-badge">Primary ${esc(primary)}</span><span class="result-badge">Survivability S${survivability}</span>${companions.map(c => `<span class="result-badge">${esc(c)}</span>`).join('')}</div>

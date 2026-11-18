@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architecture requirements and a rule-based topology assessment for identity, security, sovereignty, acquisitions, OT and disconnected operation.">
+  <meta name="description" content="Identity, security and recovery requirements for tenant boundaries, sovereignty, acquisitions, OT and disconnected operation.">
   <title>Adaptive Trust Fabric | Architecture requirements</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -28,7 +28,7 @@
   <main id="main">
     <section class="hero shell">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Position paper and topology assessor · Research cutoff 17 Nov 2026</p>
+        <p class="eyebrow">Tenant boundaries · sovereignty · continuity · recovery</p>
         <h1>Identity and security<br><span>architecture</span></h1>
         <p class="dek">Control requirements and topology-selection criteria for tenants, cloud providers, business units, acquisitions, regulated environments, OT, agents and disconnected operation.</p>
         <div class="hero-actions">
@@ -36,13 +36,13 @@
           <a class="button secondary" href="../position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read the position paper</a>
         </div>
       </div>
-      <aside class="evidence-card reveal" aria-label="Research contents">
+      <aside class="evidence-card reveal" aria-label="Architecture priorities">
         <span class="signal"></span>
-        <p class="metric"><strong id="source-count">33</strong><span>source references</span></p>
-        <p class="metric"><strong id="control-count">26</strong><span>control requirements</span></p>
-        <p class="metric"><strong id="challenge-count">10</strong><span>assumption reviews</span></p>
+        <p class="metric"><strong>01</strong><span>Justify every boundary</span></p>
+        <p class="metric"><strong>02</strong><span>Sustain required operations</span></p>
+        <p class="metric"><strong>03</strong><span>Recover independently</span></p>
         <div class="mini-rule"></div>
-        <p>Records identify their provenance as <b>Microsoft Explicit</b>, <b>External Standard</b>, <b>Research Supported</b>, <b>Derived</b>, or <b>Open/Contested</b>.</p>
+        <p>Keep administrative authority, local capabilities and recovery dependencies aligned with the functions the business must sustain.</p>
       </aside>
     </section>
 
@@ -105,8 +105,8 @@
       <div class="shell">
         <div class="section-heading light reveal">
           <div class="section-label">03 / Interactive assessment</div>
-          <h2>Rule-based topology assessment</h2>
-          <p>The assessor applies fixed rules to your selections. It does not inspect configuration, calculate risk or cost, or test a deployment. Its output is a <em>Derived Architectural Position</em> that requires legal, safety, product and architecture review.</p>
+          <h2>Match topology to operating requirements</h2>
+          <p>Start with mandatory identity, sovereignty, continuity and recovery constraints. Treat a topology as a design candidate, not deployment approval: verify authority, dependencies, staffing, legal and safety requirements, and failure-scenario results before implementation.</p>
         </div>
         <div class="assessor reveal">
           <form id="assessment-form" class="assessment-form">
@@ -156,9 +156,9 @@
             <button class="button primary" type="submit">Evaluate architecture</button>
           </form>
           <section class="assessment-result" id="assessment-result" aria-live="polite">
-            <p class="result-kicker">Assessment output</p>
-            <h3>Select requirements and evaluate.</h3>
-            <p>The result identifies a primary topology, companion patterns, the selected survivability tier, constraints excluding alternatives and an operating-capability warning.</p>
+            <p class="result-kicker">Design decision</p>
+            <h3>Match the boundary to the requirement.</h3>
+            <p>A viable topology must meet mandatory requirements and sustain the selected outage duration with sufficient operating and recovery capability.</p>
           </section>
         </div>
       </div>
@@ -188,7 +188,7 @@
       <div class="section-heading reveal">
         <div class="section-label">06 / Control requirements</div>
         <h2>MUST / SHOULD / MAY architecture controls</h2>
-        <p>Filter by domain or normative level. MUST / SHOULD / MAY describe this framework's requirements and recommendations, not automatically Microsoft or regulatory requirements. Each record includes source provenance and identifiers.</p>
+        <p>Translate isolation, access, safety and recovery obligations into owned, testable controls. MUST denotes a required control in the proposed architecture; SHOULD recommends and MAY permits an option. Assess applicable vendor and legal requirements separately.</p>
       </div>
       <div class="filters reveal">
         <label>Domain <select id="control-domain"><option value="all">All domains</option></select></label>
@@ -202,7 +202,7 @@
         <div class="section-heading light reveal">
           <div class="section-label">07 / Assumption review</div>
           <h2>Documented limitations and their design implications</h2>
-          <p>These records compare architectural assumptions with the cited documentation. They are not results from deployment tests or attack simulations.</p>
+          <p>Challenge assumptions about identity isolation, key control, monitoring and disconnected operation. Verify actual authority paths and failure behavior rather than relying on tenant, product or network labels.</p>
         </div>
         <div class="challenge-list" id="challenge-list"></div>
       </div>
@@ -220,9 +220,9 @@
     <section class="section band" id="evidence">
       <div class="shell">
         <div class="section-heading reveal">
-          <div class="section-label">09 / Source provenance</div>
-          <h2>Source catalog</h2>
-          <p>The dataset records source URLs, access dates and their use in the analysis. Search by title, source-use description or provenance class.</p>
+          <div class="section-label">09 / Supporting guidance</div>
+          <h2>Standards and product guidance</h2>
+          <p>Validate isolation, authentication, safety and recovery requirements against applicable standards and current product capabilities. Confirm local legal obligations, service coverage and operating constraints before deployment.</p>
         </div>
         <div class="evidence-tools reveal">
           <input id="source-search" type="search" placeholder="Search sources" aria-label="Search sources">
@@ -243,8 +243,8 @@
 
   <footer>
     <div class="shell footer-grid">
-      <div><strong>Adaptive Trust Fabric</strong><p>Version 1.0 · Research cutoff 17 Nov 2026</p></div>
-      <p>This is architectural guidance based on cited sources, not an official Microsoft product commitment. Validate legal, regulatory, safety, licensing, preview and regional requirements before implementation.</p>
+      <div><strong>Adaptive Trust Fabric</strong><p>Isolation · continuity · independent recovery</p></div>
+      <p>Validate legal, regulatory, safety, licensing, preview and regional requirements before implementation. Demonstrate required outage behavior and recovery objectives through environment-specific tests.</p>
     </div>
   </footer>
 
@@ -289,7 +289,7 @@
       "retrieval_status": "Opened and inspected",
       "accessed": "2026-11-17",
       "last_updated": "11/06/2026",
-      "evidence_use": "Reference architectures used to identify Microsoft products and capabilities. The collection does not determine the tenant topology for a specific organization."
+      "evidence_use": "Microsoft security capabilities span identity, devices, applications, infrastructure and data. Topology depends on organization-specific isolation and operating requirements."
     },
     {
       "id": "MS-02",

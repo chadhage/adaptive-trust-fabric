@@ -39,7 +39,7 @@
       "retrieval_status": "Opened and inspected",
       "accessed": "2026-11-17",
       "last_updated": "11/06/2026",
-      "evidence_use": "Reference architectures used to identify Microsoft products and capabilities. The collection does not determine the tenant topology for a specific organization."
+      "evidence_use": "Microsoft security capabilities span identity, devices, applications, infrastructure and data. Topology depends on organization-specific isolation and operating requirements."
     },
     {
       "id": "MS-02",

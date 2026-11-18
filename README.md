@@ -166,6 +166,7 @@ Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-inf
 ## Update and share the package
 
 - **Writing style:** use defined engineering terms, state assumptions and failure conditions, and distinguish cited product behavior, proposed requirements and test results. Avoid slogans, unsupported superlatives and claims of verification without a stated method.
+- **Visitor-facing focus:** keep the paper (HTML and PDF), presentation, infographic and interactive microsite focused on business decisions, architecture and technical requirements. Keep repository instructions, packaging details and content-production methodology in the README rather than those four artifacts.
 - **Microsite behavior and presentation:** edit the [HTML entry page](./adaptive-trust-fabric-microsite/index.html), [JavaScript](./adaptive-trust-fabric-microsite/assets/app.js) or [stylesheet](./adaptive-trust-fabric-microsite/assets/styles.css), then reopen or refresh the local page.
 - **Landing page and slides:** edit the [format selector](./index.html) or [presentation](./adaptive-trust-fabric-microsite/presentation.html). Both include their own styling and work without external libraries.
 - **Navigation and themes:** the landing-page drawer markup is in the [format selector](./index.html). Shared preference handling and drawer interactions are in [site.js](./adaptive-trust-fabric-microsite/assets/site.js); both the landing page and presentation load it before their styles.

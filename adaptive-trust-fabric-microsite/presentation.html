@@ -273,7 +273,7 @@
   <main class="deck" id="deck" aria-label="Adaptive Trust Fabric slide presentation">
     <section class="slide" id="slide-1" data-label="Architecture scope" aria-labelledby="slide-1-title">
       <header>
-        <p class="eyebrow">01 / Scope and review method / 17 November 2026</p>
+        <p class="eyebrow">01 / Identity, security and resilience / 17 November 2026</p>
         <h1 id="slide-1-title" tabindex="-1">Adaptive<br><span>Trust Fabric</span></h1>
         <p class="lead">Reference architecture and control requirements for identity, security and compliance across tenants, cloud providers, OT and disconnected environments.</p>
       </header>
@@ -296,7 +296,7 @@
           <p>Use supported service functions alongside cloud-provider and local controls where separate administration, jurisdiction or outage requirements apply.</p>
         </div>
       </div>
-      <p class="source">Proposed architecture, not an official Microsoft product commitment. Sources: MS-01, STD-01. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Validate service coverage and operating dependencies for each environment. Sources: MS-01, STD-01. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
     <section class="slide" id="slide-2" data-label="Tenant isolation requirements" aria-labelledby="slide-2-title">
@@ -323,7 +323,7 @@
         </div>
       </div>
       <p class="callout">Shared identities and cross-tenant administration can retain common authentication or privilege dependencies even when resources are in separate tenants.</p>
-      <p class="source">Microsoft guidance and proposed additional-tenant criteria. Sources: MS-02, MS-03, MS-21. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Additional tenants need an unmet isolation requirement and an operating model. Sources: MS-02, MS-03, MS-21. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
     <section class="slide" id="slide-3" data-label="Control responsibilities and dependencies" aria-labelledby="slide-3-title">
@@ -364,7 +364,7 @@
         <li><span class="step-number">04</span><div><h3>Risk, cost and complexity comparison</h3><p>Compare feasible options, including the effort required to change or separate them.</p></div></li>
         <li><span class="step-number">05</span><div><h3>Operating-capability assessment</h3><p>Confirm the staffing, skills, monitoring and recovery procedures required.</p></div></li>
       </ol>
-      <p class="source">Proposed review method; no optimization algorithm is implemented. Sources: STD-03, STD-05. <a href="index.html#evidence">Source catalog</a></p>
+      <p class="source">Reject infeasible designs before comparing operational tradeoffs. Sources: STD-03, STD-05. <a href="index.html#evidence">Source catalog</a></p>
     </section>
 
     <section class="slide" id="slide-5" data-label="Five topology patterns" aria-labelledby="slide-5-title">
@@ -440,7 +440,7 @@
         <div class="panel"><span class="big-marker">W</span><h3>Workloads</h3><ul><li>Managed identities or workload federation</li><li>Bounded permissions and explicit trust relationships</li><li>Replace long-lived stored secrets where supported</li></ul></div>
         <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Unique identity and accountable sponsor</li><li>Policies for agent blueprints and identity lifecycle</li><li>Least privilege, monitoring and revocation controls</li></ul></div>
       </div>
-      <p class="source">Microsoft and standards guidance with proposed control requirements. Sources: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Read the control requirements</a></p>
+      <p class="source">Bind permissions to accountable identities and verified authentication assurance. Sources: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Read the control requirements</a></p>
     </section>
 
     <section class="slide" id="slide-9" data-label="Independent cyber recovery" aria-labelledby="slide-9-title">
@@ -472,27 +472,22 @@
       <p class="source">Proposed recovery requirements. Sources: MS-07, MS-08, MS-26. <a href="../position-paper/position-paper.html#s7">Read the operations and recovery analysis</a></p>
     </section>
 
-    <section class="slide" id="slide-10" data-label="Sources and assumption reviews" aria-labelledby="slide-10-title">
+    <section class="slide" id="slide-10" data-label="Boundary assurance" aria-labelledby="slide-10-title">
       <header>
-        <p class="eyebrow">10 / Source review</p>
-        <h2 id="slide-10-title" tabindex="-1">Source records and assumption reviews</h2>
-        <p class="lead">The dataset links claims and proposed requirements to cited sources. Provenance separates product statements from project analysis.</p>
+        <p class="eyebrow">10 / Assumptions to test</p>
+        <h2 id="slide-10-title" tabindex="-1">Boundaries do not prove independence</h2>
+        <p class="lead">Test what a boundary actually protects and which shared dependencies remain. A tenant, key or network label does not establish the required operating outcome.</p>
       </header>
       <div class="evidence-content content">
-        <div class="metrics">
-          <div class="metric"><strong>33</strong><span>source references</span></div>
-          <div class="metric"><strong>18</strong><span>claims with source identifiers</span></div>
-          <div class="metric"><strong>26</strong><span>proposed control requirements</span></div>
-          <div class="metric"><strong>10</strong><span>source-based assumption reviews</span></div>
+        <div class="two-up">
+          <div class="panel"><h3>Separate tenant ≠ independent identity</h3><p>Trace shared authentication, cross-tenant administration and indirect privilege paths.</p></div>
+          <div class="panel"><h3>Key control ≠ sovereignty</h3><p>Assess processing location, operator access, legal jurisdiction and recovery authority separately.</p></div>
+          <div class="panel"><h3>Air gap ≠ secure operation</h3><p>Provide local detection, controlled updates, audit records and tested recovery procedures.</p></div>
+          <div class="panel"><h3>Integration ≠ enforcement parity</h3><p>Check cloud-specific coverage, regional limits and response latency; retain native controls where required.</p></div>
         </div>
-        <div class="three-up">
-          <div class="panel"><h3>Tenant and identity isolation</h3><p>Separate tenants can retain shared authentication and administration dependencies.</p></div>
-          <div class="panel"><h3>Key control and jurisdiction</h3><p>Assess processing, operators and legal jurisdiction separately from key control.</p></div>
-          <div class="panel"><h3>Disconnected operation</h3><p>Specify local detection, update transfer, audit records and recovery procedures.</p></div>
-        </div>
-        <p class="callout">MUST / SHOULD / MAY express this framework's requirements and recommendations. Source citations do not establish compliance certification.</p>
+        <p class="callout">Approve the boundary only when authority, outage behavior and recovery tests demonstrate the required separation.</p>
       </div>
-      <p class="source">Provenance classes: Microsoft Explicit / External Standard / Research Supported / Derived Architectural Position / Open/Contested. Examples: MS-02, MS-14, MS-18. <a href="index.html#challenge">Read the assumption reviews</a></p>
+      <p class="source">Sources: MS-02, MS-14, MS-16, MS-17, MS-18. <a href="index.html#challenge">Review design assumptions</a></p>
     </section>
 
     <section class="slide" id="slide-11" data-label="Implementation sequence" aria-labelledby="slide-11-title">
@@ -507,7 +502,7 @@
         <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Implement local operations</h3><ul><li>S2-S4 local services</li><li>Regional and tenant SOC responsibilities</li><li>Acquisition separation tests</li></ul></div>
         <div class="panel emphasis"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Test recovery procedures</h3><ul><li>Isolated recovery exercises</li><li>Combined control-plane failures</li><li>Configuration monitoring and drift correction</li></ul></div>
       </div>
-      <p class="source">Proposed planning ranges, not delivery estimates. Source: STD-05 and the framework's control requirements. <a href="index.html#roadmap">Read the implementation phases</a></p>
+      <p class="source">Planning ranges depend on staffing, system criticality and readiness; they are not delivery estimates. Source: STD-05. <a href="index.html#roadmap">Read the implementation phases</a></p>
     </section>
 
     <section class="slide" id="slide-12" data-label="Deployment review inputs" aria-labelledby="slide-12-title">
@@ -529,7 +524,7 @@
           <a class="button" href="index.html#evidence">Search sources</a>
         </div>
       </div>
-      <p class="source">Architectural guidance based on cited sources, not an official product commitment. Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements. <a href="../index.html">Choose another format</a></p>
+      <p class="source">Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements before deployment. <a href="../index.html">Choose another format</a></p>
     </section>
   </main>
 
@@ -546,7 +541,7 @@
     <p>Arrow keys / Page Up &amp; Down to navigate. Home / End to jump. F for fullscreen.</p>
     <p id="deck-status" role="status" aria-live="polite" aria-atomic="true"></p>
   </div>
-  <footer class="site-footer">Research cutoff 17 Nov 2026 / Derived architectural guidance / <a href="../index.html">All formats</a></footer>
+  <footer class="site-footer">Isolation / continuity / independent recovery / <a href="../index.html">All formats</a></footer>
 
   <script>
     (() => {

@@ -5,13 +5,13 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 20931,
-      "sha256": "dd917e04928259f77ead16f163b9b5a5e55d84fc8998e1daad012f2bdd19e2f8"
+      "bytes": 21245,
+      "sha256": "91c5283061cd4051bc1f03ef93bb236087daa73e94a5e8b74a12ea3cc2dd4f37"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
-      "bytes": 10654,
-      "sha256": "49af1e9a0e0b3fbb611c2f111cf277c3dce1084ecaf53befe0cbb9b03ea1c327"
+      "bytes": 10439,
+      "sha256": "861d48047b667db4cc046c5f6deb8cbe438cf87a7c448ca6679f410f586b8612"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/site.js",
@@ -25,18 +25,18 @@
     },
     {
       "path": "adaptive-trust-fabric-microsite/data/research.json",
-      "bytes": 49846,
-      "sha256": "8a5a58f4a53d694df7652e66e80a493c6bfabbfdbf3813b33e5f7b565e1a57fd"
+      "bytes": 49860,
+      "sha256": "4abd14bae7d0adcc71109499483c998b955d1b5fd5947c9a43df6cff5358e081"
     },
     {
       "path": "adaptive-trust-fabric-microsite/index.html",
-      "bytes": 64454,
-      "sha256": "ba679971e8fcc64406178d7a50cb7f45db92a6a86d9973753dd38a9d327393b3"
+      "bytes": 64585,
+      "sha256": "0df3c68b921c979184fceee35a9429beea7d5ca0376958125b3952fd5aad24f1"
     },
     {
       "path": "position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf",
-      "bytes": 355028,
-      "sha256": "ed4829145afaeb665b01828b4c067d72bc7a0df17105a02580ea75902c1423b8"
+      "bytes": 193870,
+      "sha256": "020bc81d821355f6a97cfdfc414abe54b091dc011561de21f98442d94ba15648"
     },
     {
       "path": "position-paper/paper.css",
@@ -45,8 +45,8 @@
     },
     {
       "path": "position-paper/position-paper.html",
-      "bytes": 53550,
-      "sha256": "8ce1596093a5b39cb4df4c7c44b3df81f8b7d68bec60d67f50db4bed473a6b36"
+      "bytes": 53926,
+      "sha256": "2a663e430bb3ba4bd67c8f2d62f4eca87123cc1502891819a377c21fe9294729"
     },
     {
       "path": "index.html",
@@ -55,13 +55,13 @@
     },
     {
       "path": "adaptive-trust-fabric-microsite/presentation.html",
-      "bytes": 45100,
-      "sha256": "d81d8f4a00cec7f11a4e7733c70e73e6af7fc9fa5dcc15b11d20667a14b8afe8"
+      "bytes": 44766,
+      "sha256": "092782d2afdf9a342e3a424e046c9da7446fdd79bf3547f13a7e75820f6fdf55"
     },
     {
       "path": "adaptive-trust-fabric-infographic.html",
-      "bytes": 19832,
-      "sha256": "7f3917ba624ad1b8f619923ef50a3c6dea5d2737e26b5fc2f5b6ba0265a73714"
+      "bytes": 19804,
+      "sha256": "a6cc000971d000bbc55e37fa92cb7a959c728648205b1490baf922d2ca2bdc86"
     },
     {
       "path": "LICENSE",
