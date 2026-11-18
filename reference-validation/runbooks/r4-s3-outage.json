@@ -1,0 +1,391 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "R4",
+  "title": "Safe S3 upstream-loss exercise with explicit local safety authority",
+  "implementationStatus": "draft-delivered-local-model-only",
+  "purpose": "Specify bounded local operation when upstream services are unavailable, with local identity, authorization, evidence, communications and recovery. The supplied executable exercises only an in-memory synthetic state machine; it does not disconnect a network or operate an industrial process.",
+  "scope": {
+    "kind": "synthetic-runbook",
+    "permittedTarget": "Supplied in-memory Node fixture, logical clock, synthetic accounts, small local policy and bounded log queue. No real equipment or cloud service is contacted.",
+    "notAClaim": "The local model is not Azure Local, Azure Stack Hub, AD/AD FS, Entra, a real DNS/NTP/PKI service, a SIEM, radio, PLC or safety instrumented system. Product disconnected-operation availability/eligibility and all operational functions need separately approved representative testing.",
+    "excluded": [
+      "Shared/production network interruption",
+      "PLC/SCADA writes or simulated physical commands",
+      "Bypassing interlocks",
+      "Cloud or tenant changes",
+      "Claiming Azure Local/OT/Entra service behavior from this model",
+      "Accelerated logical time presented as a real-duration soak test"
+    ],
+    "requiredApprovalRef": "evidence/authorization-request.json#AUTH-R4"
+  },
+  "sourceReferences": [
+    {
+      "claimIds": [
+        "C-13"
+      ],
+      "sourceIds": [
+        "MS-18",
+        "MS-19",
+        "MS-20",
+        "STD-02"
+      ],
+      "capabilityIds": [
+        "K09",
+        "K10"
+      ],
+      "qualification": "Local monitoring and disconnected product architectures are specific capabilities, not proof this site's entire dependency graph is independent. Local safety authority must approve behavior."
+    },
+    {
+      "claimIds": [
+        "C-04",
+        "C-11",
+        "C-17"
+      ],
+      "sourceIds": [
+        "STD-01",
+        "MS-11",
+        "MS-23"
+      ],
+      "capabilityIds": [
+        "K02",
+        "K07"
+      ],
+      "qualification": "Local authorization and sovereign evidence cannot depend on cloud policy evaluation or a ticketing response. Data/key authority and central coordination are separate decisions."
+    }
+  ],
+  "relatedControls": [
+    "N-01",
+    "N-03",
+    "N-05",
+    "N-06",
+    "N-07",
+    "N-11",
+    "N-14",
+    "N-15",
+    "N-16",
+    "N-18",
+    "N-20",
+    "N-21",
+    "N-24",
+    "N-26"
+  ],
+  "owners": {
+    "accountable": "Local safety authority",
+    "operator": "Site operations lead",
+    "cyber": "Local OT security lead",
+    "witness": "Independent safety observer",
+    "rollback": "Local recovery custodian"
+  },
+  "prerequisites": [
+    {
+      "id": "R4-P01",
+      "requirement": "For the supplied model, local-only authorization is recorded. Any real lab/equipment/network test needs new explicit targets, safety approval, permitted actions, duration and rollback authority.",
+      "evidence": "Authorization scope; no implicit approval for real equipment.",
+      "status": "local-model-approved-operational-blocked"
+    },
+    {
+      "id": "R4-P02",
+      "requirement": "Define a maximum 24 logical-hour autonomy window, maximum credential lifetime, storage bounds and safe response for each dependency failure; the real site must set validated operational values.",
+      "evidence": "Synthetic fixture inputs plus separately required site hazard/operating analysis.",
+      "status": "declared-model-values"
+    },
+    {
+      "id": "R4-P03",
+      "requirement": "Local identity and policy have locally controlled credentials, revocation data and approved cached policy; central-only identities cannot gain local rights during isolation.",
+      "evidence": "Local identity/policy manifest, issuer/audience/expiry/revocation tests; no real keys or secrets.",
+      "status": "unverified-operationally"
+    },
+    {
+      "id": "R4-P04",
+      "requirement": "Local keys, monotonic/wall-clock handling, DNS records, PKI trust/revocation material, power and spare recovery media survive upstream loss for the declared window.",
+      "evidence": "Dependency register, expiry/holdover bounds, custody and bootstrap proof.",
+      "status": "unverified-operationally"
+    },
+    {
+      "id": "R4-P05",
+      "requirement": "Local monitoring, append-only evidence, storage capacity and approved local communications work without central ingestion/ITSM; loss of evidence capacity must change operating mode.",
+      "evidence": "Capacity/retention calculation, local alarms/acknowledgements, communication receipt and failure behavior.",
+      "status": "unverified-operationally"
+    },
+    {
+      "id": "R4-P06",
+      "requirement": "Local safety officer may stop or withhold restart independently of central cyber commands. Cyber containment does not override physical safety/interlocks.",
+      "evidence": "Safety authority matrix, hazard review, named roles and approved safe-state/restart criteria.",
+      "status": "unverified-operationally"
+    }
+  ],
+  "dependencyLimits": [
+    {
+      "dependency": "Identity",
+      "failureBehavior": "Use locally issued bounded-lifetime credentials only; deny central-only, expired, wrong-audience or revoked identities."
+    },
+    {
+      "dependency": "Authorization",
+      "failureBehavior": "Use the last locally approved policy version; deny unknown actions and all physical actuation in this model."
+    },
+    {
+      "dependency": "Telemetry and evidence capacity",
+      "failureBehavior": "Keep bounded local hash-linked records; at capacity become read-only and refuse actions that cannot be durably evidenced. The model's chain is not independent tamper-proof storage."
+    },
+    {
+      "dependency": "Local communications",
+      "failureBehavior": "Require an observed local acknowledgement; a fixture mailbox proves no radio/intercom service. If required communications fail, enter the safety-approved safe state."
+    },
+    {
+      "dependency": "Keys and revocation",
+      "failureBehavior": "No cloud vault retrieval; deny signing/privileged actions if local key availability/validity cannot be established. Reconcile revocations before reconnecting."
+    },
+    {
+      "dependency": "Time, DNS and PKI",
+      "failureBehavior": "Use local bounded time/approved names/trust state. Exceeded holdover, missing name or expired trust enters safe-stop in the model; actual services require real tests."
+    },
+    {
+      "dependency": "Safety and duration",
+      "failureBehavior": "Local safety role may always veto operational restart; at 24 logical hours or a prerequisite failure this model stops permitted state-changing work."
+    }
+  ],
+  "steps": [
+    {
+      "id": "R4-S01",
+      "actorRole": "Exercise lead",
+      "action": "Select model-only or separately approved representative lab scope. Reject any target/operation not in authorization. For this delivery use only node reference-validation\\scripts\\simulate-s3.mjs.",
+      "expected": "No sockets, credential access, OS service/network changes or equipment commands are used.",
+      "onFailure": "Stop; do not expand scope.",
+      "evidence": [
+        "Authorization reference",
+        "Command",
+        "Input/source hashes",
+        "Node/platform version"
+      ]
+    },
+    {
+      "id": "R4-S02",
+      "actorRole": "Local safety authority",
+      "action": "Review allowed functions (synthetic telemetry read/alarm acknowledgement), forbidden physical actions, maximum duration and safe/restart behavior.",
+      "expected": "Safety veto and local approval gates are explicit; no cloud operator can override them.",
+      "onFailure": "No state-changing test action.",
+      "evidence": [
+        "Safety role matrix",
+        "Allowed-action list",
+        "Duration/fail-behavior matrix"
+      ]
+    },
+    {
+      "id": "R4-S03",
+      "actorRole": "Local recovery custodian",
+      "action": "Record local identity/policy versions, key availability/expiry, logical clock bounds, name map and PKI validity state. Real services remain untested.",
+      "expected": "Every mandatory dependency has an explicit local source and failure test.",
+      "onFailure": "Record dependency failure and enter modeled safe-stop.",
+      "evidence": [
+        "Synthetic fixture manifest",
+        "Dependency snapshot",
+        "Unverified real-service list"
+      ]
+    },
+    {
+      "id": "R4-S04",
+      "actorRole": "Site operations lead",
+      "action": "Set only the in-memory upstreamAvailable flag false; do not disconnect or block a real interface.",
+      "expected": "The fixture cannot use central authentication/policy/telemetry and existing shared services are unaffected.",
+      "onFailure": "Stop the fixture; no real rollback is necessary because no external state changed.",
+      "evidence": [
+        "Model transition record",
+        "No-network import audit",
+        "Exact isolation limitation"
+      ]
+    },
+    {
+      "id": "R4-S05",
+      "actorRole": "Local test operator",
+      "action": "Demonstrate locally issued synthetic credential verification; reject unknown, central-only, expired, wrong-audience and tampered credentials, then apply local revocation.",
+      "expected": "Only the approved local identity within issuer/audience/expiry/revocation constraints is accepted.",
+      "onFailure": "Fixture fails; no claim of identity continuity.",
+      "evidence": [
+        "Expected/observed identity matrix",
+        "Revocation result",
+        "Logical time"
+      ]
+    },
+    {
+      "id": "R4-S06",
+      "actorRole": "Local test operator",
+      "action": "Read synthetic telemetry and acknowledge an alarm with an authorized local operator. Attempt an unapproved action and any physical-control action.",
+      "expected": "Only the explicit local policy permits the first functions; unknown/physical actions are denied.",
+      "onFailure": "Fail authorization acceptance and retain the failing result.",
+      "evidence": [
+        "Policy version",
+        "Allow/deny action matrix",
+        "Role identity"
+      ]
+    },
+    {
+      "id": "R4-S07",
+      "actorRole": "Local OT security lead",
+      "action": "Append bounded local events, verify the hash linkage, demonstrate detection of a changed historical fixture entry, and fill a separate queue to its configured limit.",
+      "expected": "Hash-link check detects fixture tampering and full capacity switches state-changing work to read-only. This is not a WORM, durability or SIEM test.",
+      "onFailure": "Fail evidence acceptance and stop state-changing actions.",
+      "evidence": [
+        "Event chain/digest",
+        "Tamper detection",
+        "Capacity/read-only result",
+        "Storage limitation"
+      ]
+    },
+    {
+      "id": "R4-S08",
+      "actorRole": "Local communications observer",
+      "action": "Send and acknowledge an alarm through the in-memory local mailbox; separately set communications unavailable.",
+      "expected": "Acknowledgement is observed locally; dependency loss leads to modeled safe-stop. No claim about actual radios/intercoms is made.",
+      "onFailure": "Record communications failure and stop modeled operations.",
+      "evidence": [
+        "Mailbox send/ack IDs",
+        "Dependency-loss result",
+        "Actual-service exclusion"
+      ]
+    },
+    {
+      "id": "R4-S09",
+      "actorRole": "Local recovery custodian",
+      "action": "Independently inject key-unavailable, excessive clock drift, missing local DNS and expired PKI flags into fresh isolated fixture instances.",
+      "expected": "Every missing mandatory dependency blocks work/enters safe-stop; flags are not real key/time/DNS/certificate-service validation.",
+      "onFailure": "Fail the dependency-specific check.",
+      "evidence": [
+        "One-fault-at-a-time inputs",
+        "Expected/observed fail states",
+        "Scope limitations"
+      ]
+    },
+    {
+      "id": "R4-S10",
+      "actorRole": "Site operations lead",
+      "action": "Advance only the logical clock to the credential expiry and 24-hour boundary in fresh fixtures.",
+      "expected": "Expired credentials are rejected and maximum autonomy duration transitions to safe-stop. No real 24-hour endurance has been run.",
+      "onFailure": "Fail duration acceptance.",
+      "evidence": [
+        "Logical timestamps",
+        "Boundary decisions",
+        "Actual wall duration"
+      ]
+    },
+    {
+      "id": "R4-S11",
+      "actorRole": "Local safety authority",
+      "action": "Exercise local safety stop and a denied central-only restart; restore fixture prerequisites and require both local recovery and safety roles before modeled resumption.",
+      "expected": "A safety veto is independent of central commands; missing any required local role prevents restart.",
+      "onFailure": "Keep model safe-stopped and record failure.",
+      "evidence": [
+        "Safety stop/denied restart",
+        "Two-role local acceptance",
+        "Restored dependency state"
+      ]
+    },
+    {
+      "id": "R4-S12",
+      "actorRole": "Local OT security lead",
+      "action": "Model upstream return; reconcile revocations/policy version and retain ordered local events before acknowledging transfer. Do not silently restore expired access or discard unexported evidence.",
+      "expected": "The synthetic queue is preserved and stale authority is not resurrected; no actual ingestion service has been exercised.",
+      "onFailure": "Keep local evidence and restricted mode.",
+      "evidence": [
+        "Queue before/after digest",
+        "Revocation reconciliation",
+        "Export/ack fixture results"
+      ]
+    },
+    {
+      "id": "R4-S13",
+      "actorRole": "Independent observer",
+      "action": "Persist generated expected-versus-observed local results and limits. Leave all real platform, safety, hardware, duration and communications acceptance blocked.",
+      "expected": "Only actually executed local model functions are marked passed-local-synthetic-only.",
+      "onFailure": "Do not publish a passing aggregate.",
+      "evidence": [
+        "Execution record",
+        "Test output",
+        "Input hashes",
+        "Explicit operational blockers"
+      ]
+    }
+  ],
+  "rollback": {
+    "trigger": [
+      "Any model assertion fails",
+      "Any attempt to reach an external target",
+      "Local model prerequisite/duration/safety gate fails",
+      "Evidence capacity exhausted"
+    ],
+    "steps": [
+      "Stop permitted modeled actions and preserve the local result/evidence object.",
+      "For the supplied fixture, discard only in-memory test instances; no service, policy, account or network was changed.",
+      "For a future approved real lab, use its separately safety-approved restoration plan; no generic network reconnect/restart is authorized here.",
+      "Reconcile local revocations, policy versions, keys and retained evidence before any modeled resumption; require local safety plus recovery approval."
+    ],
+    "acceptance": [
+      "No external state changed",
+      "All local check outcomes and limitations retained",
+      "Safety gate cannot be bypassed by central-only authority",
+      "Operational acceptance remains blocked without a representative authorized test"
+    ]
+  },
+  "passCriteria": [
+    "Exact local-model identity, local policy, revocation, tamper detection and bounded queue functions pass",
+    "Synthetic communications acknowledgement and dependency failure gates pass",
+    "Logical credential/duration bounds pass",
+    "Local safety veto and two-role modeled restart pass",
+    "No network/tenant/equipment behavior is inferred"
+  ],
+  "failCriteria": [
+    "Any forbidden action or revoked/expired credential accepted",
+    "Evidence lost silently at capacity",
+    "Missing key/time/DNS/PKI/communications prerequisite permits modeled work",
+    "Central-only actor bypasses local safety restart",
+    "Model results described as real OT, platform or 24-hour operational evidence"
+  ],
+  "evidenceRequirements": [
+    "Local-only authorization",
+    "Exact source/input hashes and runtime",
+    "Per-function expected/observed outputs",
+    "Wall time versus accelerated logical time",
+    "No-network/no-equipment boundary",
+    "Failed conditions and recovery gates",
+    "Complete untested real-service/physical-safety list"
+  ],
+  "review": {
+    "intervalDays": 90,
+    "triggers": [
+      "Site hazard or process change",
+      "Identity/policy/key/time/DNS/PKI dependency change",
+      "Product disconnected deployment eligibility change",
+      "Storage/communications capacity change",
+      "Failed simulation or approved real exercise"
+    ]
+  },
+  "validation": {
+    "status": "partial-local-synthetic-only",
+    "expected": [
+      "Supplied local state-machine tests produce per-function observations; real operational exercise remains separately blocked."
+    ],
+    "observed": [
+      "26 exact in-memory S3 model checks executed; inspect per-check observed values in LOCAL-SYNTHETIC-01.",
+      "No real identity/policy/logging/communications/key/time/DNS/PKI service, physical safety action, network loss or 24-hour endurance was executed."
+    ],
+    "executed": false,
+    "evidenceRefs": [
+      "LOCAL-SYNTHETIC-01"
+    ],
+    "blocker": "No representative Entra/AD/Azure Local/OT lab, equipment operation or network interruption is authorized. The local model cannot meet operational R4-V acceptance.",
+    "doesNotEstablish": [
+      "Actual local identity/authorization services",
+      "Real DNS/time/PKI/key availability",
+      "Actual SIEM or communications",
+      "Durability, power or hardware recovery",
+      "Physical process safety",
+      "24-hour endurance",
+      "Azure Local/Stack Hub/Entra behavior"
+    ],
+    "localExecution": {
+      "executed": true,
+      "scopeKind": "local-synthetic-only",
+      "status": "passed-local-synthetic-only",
+      "evidenceRef": "LOCAL-SYNTHETIC-01"
+    }
+  }
+}

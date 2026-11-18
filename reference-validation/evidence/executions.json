@@ -1,0 +1,744 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-11-18T17:50:48.561Z",
+  "authorizationRef": "AUTH-REQUEST-01",
+  "releaseAcceptance": "blocked-no-authorized-lab",
+  "records": [
+    {
+      "id": "LOCAL-SYNTHETIC-01",
+      "status": "passed-local-synthetic-only",
+      "scopeKind": "local-synthetic-only",
+      "scope": "26 S3 local state-machine checks and 6 acquisition lifecycle/separation model checks. No external service or equipment.",
+      "countsAsLiveValidation": false,
+      "executed": true,
+      "command": "node reference-validation\\scripts\\simulate-s3.mjs",
+      "operatorRole": "Automated local synthetic-fixture runner",
+      "environment": {
+        "runtime": "v22.23.5",
+        "platform": "win32",
+        "architecture": "x64",
+        "networkAccessUsed": false,
+        "credentialsRead": false,
+        "externalChanges": false
+      },
+      "expected": [
+        "All emitted bounded local checks match their expected values; every operational claim remains unverified."
+      ],
+      "startedAt": "2026-11-18T17:50:48.558Z",
+      "endedAt": "2026-11-18T17:50:48.561Z",
+      "wallDurationMilliseconds": 3,
+      "logicalDurationSeconds": 86400,
+      "inputHashes": [
+        {
+          "path": "scripts/local-models.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "1298ac7b4bf6234c9b2aa750760f9b57e0ad631b411f72f2e1271b116c6c1d3f"
+        },
+        {
+          "path": "scripts/simulate-s3.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "ae987e7fced02bba77a78647081d24c57d1d14aa4d4e75d52d889315d24105b8"
+        },
+        {
+          "path": "scripts/validate.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "8044fab0cf2cb6498160992fde2db4f26a65f2cd78a00de11739b26fbc01302a"
+        },
+        {
+          "path": "scripts/build.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "322223a213b6a5ca8e1cf773aa168577f9fc31bceeb18d4a939c746247e5c7e4"
+        },
+        {
+          "path": "scripts/reader.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "06fb89dc5db8fe8d96f02fa422597e31527cdd5b9d8fc5823a48936b4cb002cb"
+        },
+        {
+          "path": "scripts/record-local-validation.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "1561b0e2d42ba47f4c88afac2e1a602c1e24778a250f85218977e51cd32a9f2c"
+        },
+        {
+          "path": "tests/reference-validation.test.mjs",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "21ac69352b48d15a43ecd365f6762a4e53b35751b6cab2533bfee525acc54acd"
+        },
+        {
+          "path": "schema/review-record.schema.json",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "a349441e273e6f7346a4f16ba504715c465c18052a7fa0826ee2f2c1b7f7c62e"
+        },
+        {
+          "path": "schema/requirement-state-examples.json",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "9ca7fe7911225635af503352b1971d35a2b00b5b67e5d654b59b5112026c351c"
+        },
+        {
+          "path": "contract.json",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "0da49b06560c6f6d4b45e5bd55ee0c9eb8a4f7da7026bf28b846f9de7b30fc24"
+        },
+        {
+          "path": "evidence/authorization-request.json",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "60daba7ae85341f10fe29bb0d45c6ab7a136a34ea3cdb8360650017581b59fe9"
+        },
+        {
+          "path": "../adaptive-trust-fabric-microsite/data/research.json",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "2351d7631e159a366e76e42997710a66b5695974262b7b68c26c1005c2ff1d2e"
+        },
+        {
+          "path": "../adaptive-trust-fabric-microsite/assets/assessment.js",
+          "algorithm": "sha256",
+          "normalization": "exact UTF-8 file bytes",
+          "value": "736fd111cb0d5186f9687d32d8b19b3a370bf0e8e83037e4f07c5fc3dadc1938"
+        },
+        {
+          "path": "cases/e1.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the named input projection; excludes generated source/output/validation fields",
+          "projectionKeys": [
+            "requirements",
+            "boundaries",
+            "authorityGraph",
+            "recoveryGraph",
+            "controlApplicability",
+            "assessmentInput"
+          ],
+          "value": "81ff741b806393bb28b70d818c1a2c36918dd065747b5f2a033bf05301dc3ab7"
+        },
+        {
+          "path": "cases/e2.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the named input projection; excludes generated source/output/validation fields",
+          "projectionKeys": [
+            "requirements",
+            "boundaries",
+            "authorityGraph",
+            "recoveryGraph",
+            "controlApplicability",
+            "assessmentInput"
+          ],
+          "value": "c48e0ab8a31c49d5f00357bc1344734b2d7b0a1451333d921f65077dd99ed511"
+        },
+        {
+          "path": "cases/e3.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the named input projection; excludes generated source/output/validation fields",
+          "projectionKeys": [
+            "requirements",
+            "boundaries",
+            "authorityGraph",
+            "recoveryGraph",
+            "controlApplicability",
+            "assessmentInput"
+          ],
+          "value": "863c0f06781edd8f2ad47542c6ee9fdde6b2d700c1e355eb3af963b6c2f557ec"
+        },
+        {
+          "path": "runbooks/r1-emergency.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the runbook excluding generated validation observations; does not establish that operational steps executed",
+          "projectionKeys": [
+            "schemaVersion",
+            "id",
+            "title",
+            "implementationStatus",
+            "purpose",
+            "scope",
+            "sourceReferences",
+            "relatedControls",
+            "owners",
+            "prerequisites",
+            "dependencyLimits",
+            "steps",
+            "rollback",
+            "passCriteria",
+            "failCriteria",
+            "evidenceRequirements",
+            "review"
+          ],
+          "value": "b061d8f65ee15c2b3793a983fd73a42179fd49ddadf59f9ebf5a34ae81cbf70d"
+        },
+        {
+          "path": "runbooks/r2-phs.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the runbook excluding generated validation observations; does not establish that operational steps executed",
+          "projectionKeys": [
+            "schemaVersion",
+            "id",
+            "title",
+            "implementationStatus",
+            "purpose",
+            "scope",
+            "sourceReferences",
+            "relatedControls",
+            "owners",
+            "prerequisites",
+            "dependencyLimits",
+            "steps",
+            "rollback",
+            "passCriteria",
+            "failCriteria",
+            "evidenceRequirements",
+            "review"
+          ],
+          "value": "47024e7455a55a6119a3d9d44537104120dfe78287dff94e6238220e7d7f77fa"
+        },
+        {
+          "path": "runbooks/r3-tenant-restore.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the runbook excluding generated validation observations; does not establish that operational steps executed",
+          "projectionKeys": [
+            "schemaVersion",
+            "id",
+            "title",
+            "implementationStatus",
+            "purpose",
+            "scope",
+            "sourceReferences",
+            "relatedControls",
+            "owners",
+            "prerequisites",
+            "coverageMatrix",
+            "dependencyLimits",
+            "steps",
+            "rollback",
+            "passCriteria",
+            "failCriteria",
+            "evidenceRequirements",
+            "review"
+          ],
+          "value": "fb437c195d2649de81c6a5d58d4759a9942c1272fcc3cff47d5abec37ff0d92b"
+        },
+        {
+          "path": "runbooks/r4-s3-outage.json",
+          "algorithm": "sha256",
+          "normalization": "JSON.stringify of the runbook excluding generated validation observations; does not establish that operational steps executed",
+          "projectionKeys": [
+            "schemaVersion",
+            "id",
+            "title",
+            "implementationStatus",
+            "purpose",
+            "scope",
+            "sourceReferences",
+            "relatedControls",
+            "owners",
+            "prerequisites",
+            "dependencyLimits",
+            "steps",
+            "rollback",
+            "passCriteria",
+            "failCriteria",
+            "evidenceRequirements",
+            "review"
+          ],
+          "value": "967ad15499626688cb3c4c489fbc8d493e5c9b04c38c150e9f50fc6d2800ce98"
+        }
+      ],
+      "passed": 32,
+      "failed": 0,
+      "checks": [
+        {
+          "id": "S3-01",
+          "scope": "Ephemeral local HMAC credential and local policy only",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-02",
+          "scope": "Central-only identity is not enrolled in the local fixture",
+          "expected": null,
+          "observed": null,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-03",
+          "scope": "Local allow-list denies a physical-control action",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-04",
+          "scope": "Local allow-list permits only the declared synthetic alarm acknowledgement",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-05",
+          "scope": "Issuer check after a valid fixture signature; not PKI/Entra testing",
+          "expected": "wrong-issuer",
+          "observed": "wrong-issuer",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-06",
+          "scope": "Audience check after a valid fixture signature",
+          "expected": "wrong-audience",
+          "observed": "wrong-audience",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-07",
+          "scope": "Tampered fixture credential is rejected",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-08",
+          "scope": "Local in-memory revocation denies the next modeled action",
+          "expected": "locally-revoked",
+          "observed": "locally-revoked",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-09",
+          "scope": "Accelerated logical credential expiry at exactly 15 minutes",
+          "expected": "expired-or-invalid-time",
+          "observed": "expired-or-invalid-time",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-10",
+          "scope": "Local hash linkage over recorded fixture events",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-11",
+          "scope": "Detection of one changed historical in-memory record; no independent integrity anchor",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-12",
+          "scope": "Bounded queue becomes read-only at capacity with no silent discard",
+          "expected": {
+            "mode": "read-only",
+            "allowed": false,
+            "retained": 2
+          },
+          "observed": {
+            "mode": "read-only",
+            "allowed": false,
+            "retained": 2
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-13",
+          "scope": "In-memory local mailbox send/recipient acknowledgement; not radio/intercom",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-14",
+          "scope": "One-fault gate: local key availability flag; not an actual service test",
+          "expected": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "observed": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-15",
+          "scope": "One-fault gate: logical clock error above the declared 60-second bound; not an actual service test",
+          "expected": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "observed": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-16",
+          "scope": "One-fault gate: local name availability flag; not an actual service test",
+          "expected": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "observed": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-17",
+          "scope": "One-fault gate: local PKI-expiry flag; not an actual service test",
+          "expected": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "observed": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-18",
+          "scope": "One-fault gate: required local communications flag; not an actual service test",
+          "expected": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "observed": {
+            "allowed": false,
+            "mode": "safe-stopped"
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-19",
+          "scope": "Accelerated logical 24-hour boundary; not a wall-clock endurance test",
+          "expected": "safe-stopped",
+          "observed": "safe-stopped",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-20",
+          "scope": "Local safety-role flag can stop the model",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-21",
+          "scope": "Central-only actor cannot bypass local safety/recovery restart gate",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-22",
+          "scope": "One local role alone cannot satisfy joint restart",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-23",
+          "scope": "Both local roles restore only the healthy software model",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-24",
+          "scope": "Reconnection alone does not resume operations",
+          "expected": "safe-stopped",
+          "observed": "safe-stopped",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-25",
+          "scope": "Reconciliation retains local revocation; no actual ingestion service",
+          "expected": "locally-revoked",
+          "observed": "locally-revoked",
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "S3-26",
+          "scope": "Local export records remain until and after matching receipt, without claiming external durability",
+          "expected": {
+            "sameDigest": true,
+            "receiptAccepted": true,
+            "retained": 2
+          },
+          "observed": {
+            "sameDigest": true,
+            "receiptAccepted": true,
+            "retained": 2
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-01",
+          "scope": "Named source/cohort/app can read the synthetic document",
+          "expected": true,
+          "observed": true,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-02",
+          "scope": "Unlisted user, issuer, app and admin action are denied by the local model",
+          "expected": [
+            null,
+            null,
+            null,
+            false
+          ],
+          "observed": [
+            null,
+            null,
+            null,
+            false
+          ],
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-03",
+          "scope": "Source disablement blocks new model sign-in but does not magically revoke a resource session",
+          "expected": {
+            "fresh": null,
+            "oldSession": true
+          },
+          "observed": {
+            "fresh": null,
+            "oldSession": true
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-04",
+          "scope": "Explicit resource-side denial removes the existing model session",
+          "expected": false,
+          "observed": false,
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-05",
+          "scope": "Modeled separation denies fresh and old sessions and removes deployment binding",
+          "expected": {
+            "fresh": null,
+            "oldSession": false,
+            "deploy": false,
+            "memberships": 0,
+            "trust": false
+          },
+          "observed": {
+            "fresh": null,
+            "oldSession": false,
+            "deploy": false,
+            "memberships": 0,
+            "trust": false
+          },
+          "status": "passed-local-synthetic-only"
+        },
+        {
+          "id": "E2-06",
+          "scope": "Expired sponsorship denies new model access at exactly 30 logical days",
+          "expected": null,
+          "observed": null,
+          "status": "passed-local-synthetic-only"
+        }
+      ],
+      "limitations": [
+        "No network API, credential store, tenant, subscription, AD service or equipment is accessed.",
+        "HMAC key is ephemeral or an explicitly insecure fixture key; this is not production identity/cryptographic assurance.",
+        "Key/DNS/time/PKI/communications failures are input flags or logical values, not real services.",
+        "Logs are bounded in-memory hash-linked fixtures, not independently anchored, durable or tamper-proof storage.",
+        "Logical time is accelerated; no 24-hour endurance or real revocation latency was measured.",
+        "No physical actuation, hazard assessment, interlock or actual safe-state/restart was exercised.",
+        "Acquisition separation demonstrates only this local app/session model, not Entra or a deployed application."
+      ]
+    },
+    {
+      "id": "LOCAL-NODE-TESTS-01",
+      "status": "passed-local-synthetic-only",
+      "scopeKind": "offline-code-and-record-tests",
+      "scope": "Owned Node tests: schema state distinction, graph/control/source/engine integration, diagram geometry, reader escaping and exact local-model failure cases.",
+      "countsAsLiveValidation": false,
+      "executed": true,
+      "command": "node --test --test-reporter=tap reference-validation\\tests\\reference-validation.test.mjs",
+      "startedAt": "2026-11-18T17:50:48.235Z",
+      "endedAt": "2026-11-18T17:50:48.558Z",
+      "wallDurationMilliseconds": 323,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "expected": [
+        "Node test process exits zero and reports no failed tests."
+      ],
+      "observed": "TAP version 13\n# Subtest: A02 accepts distinct declared, exact-local verified, unknown and failed fragments\nok 1 - A02 accepts distinct declared, exact-local verified, unknown and failed fragments\n  ---\n  duration_ms: 3.1974\n  type: 'test'\n  ...\n# Subtest: A02 rejects verified assertions without observed scope/evidence or with unresolved unknowns\nok 2 - A02 rejects verified assertions without observed scope/evidence or with unresolved unknowns\n  ---\n  duration_ms: 1.7165\n  type: 'test'\n  ...\n# Subtest: E1 consumes final canonical IDs/evidence and exact shared-engine result\nok 3 - E1 consumes final canonical IDs/evidence and exact shared-engine result\n  ---\n  duration_ms: 7.9053\n  type: 'test'\n  ...\n# Subtest: E2 consumes final canonical IDs/evidence and exact shared-engine result\nok 4 - E2 consumes final canonical IDs/evidence and exact shared-engine result\n  ---\n  duration_ms: 2.8531\n  type: 'test'\n  ...\n# Subtest: E3 consumes final canonical IDs/evidence and exact shared-engine result\nok 5 - E3 consumes final canonical IDs/evidence and exact shared-engine result\n  ---\n  duration_ms: 3.3163\n  type: 'test'\n  ...\n# Subtest: authority edges cannot omit credential or effective revocation information\nok 6 - authority edges cannot omit credential or effective revocation information\n  ---\n  duration_ms: 4.0385\n  type: 'test'\n  ...\n# Subtest: indirect privilege paths must be continuous and directed\nok 7 - indirect privilege paths must be continuous and directed\n  ---\n  duration_ms: 4.1011\n  type: 'test'\n  ...\n# Subtest: control mapping rejects duplicated applicability and generic repeated rationale\nok 8 - control mapping rejects duplicated applicability and generic repeated rationale\n  ---\n  duration_ms: 4.4904\n  type: 'test'\n  ...\n# Subtest: rejected bootstrap cycles are real graph cycles, not hidden selected dependencies\nok 9 - rejected bootstrap cycles are real graph cycles, not hidden selected dependencies\n  ---\n  duration_ms: 3.2793\n  type: 'test'\n  ...\n# Subtest: synthetic examples cannot acquire operational proof or observations from a blocked scenario\nok 10 - synthetic examples cannot acquire operational proof or observations from a blocked scenario\n  ---\n  duration_ms: 3.7761\n  type: 'test'\n  ...\n# Subtest: local credential enforces signature, issuer, audience, bounded time and revocation\nok 11 - local credential enforces signature, issuer, audience, bounded time and revocation\n  ---\n  duration_ms: 1.6303\n  type: 'test'\n  ...\n# Subtest: local action policy denies unknown/physical actions and non-operator roles\nok 12 - local action policy denies unknown/physical actions and non-operator roles\n  ---\n  duration_ms: 0.2526\n  type: 'test'\n  ...\n# Subtest: local evidence limit refuses new state changes without discarding history\nok 13 - local evidence limit refuses new state changes without discarding history\n  ---\n  duration_ms: 0.3881\n  type: 'test'\n  ...\n# Subtest: hash linkage catches changed records, removed middle records and reordered history\nok 14 - hash linkage catches changed records, removed middle records and reordered history\n  ---\n  duration_ms: 0.3041\n  type: 'test'\n  ...\n# Subtest: one local prerequisite failure at a time prevents work; missing infrastructure cannot fail open\nok 15 - one local prerequisite failure at a time prevents work; missing infrastructure cannot fail open\n  ---\n  duration_ms: 0.3121\n  type: 'test'\n  ...\n# Subtest: local communications requires the intended local recipient and stays bounded\nok 16 - local communications requires the intended local recipient and stays bounded\n  ---\n  duration_ms: 0.1794\n  type: 'test'\n  ...\n# Subtest: local safety veto needs two local roles and healthy dependencies before modeled restart\nok 17 - local safety veto needs two local roles and healthy dependencies before modeled restart\n  ---\n  duration_ms: 0.1612\n  type: 'test'\n  ...\n# Subtest: reconnection requires reconciliation and preserves revocations/evidence across export receipts\nok 18 - reconnection requires reconciliation and preserves revocations/evidence across export receipts\n  ---\n  duration_ms: 0.3485\n  type: 'test'\n  ...\n# Subtest: acquisition separation distinguishes new issuer access from existing resource sessions\nok 19 - acquisition separation distinguishes new issuer access from existing resource sessions\n  ---\n  duration_ms: 0.2411\n  type: 'test'\n  ...\n# Subtest: restricted acquisition model denies wrong scope and removes human/session/workload access at exit\nok 20 - restricted acquisition model denies wrong scope and removes human/session/workload access at exit\n  ---\n  duration_ms: 0.1435\n  type: 'test'\n  ...\n# Subtest: expired sponsorship prevents new acquisition-model access at its exact boundary\nok 21 - expired sponsorship prevents new acquisition-model access at its exact boundary\n  ---\n  duration_ms: 0.083\n  type: 'test'\n  ...\n# Subtest: the bounded local execution emits observed, scope-limited passing results\nok 22 - the bounded local execution emits observed, scope-limited passing results\n  ---\n  duration_ms: 1.213\n  type: 'test'\n  ...\n# Subtest: editable diagrams preserve directed edges and reject invisible text geometry\nok 23 - editable diagrams preserve directed edges and reject invisible text geometry\n  ---\n  duration_ms: 8.737\n  type: 'test'\n  ...\n# Subtest: offline reader embeds hostile text as data rather than executable markup\nok 24 - offline reader embeds hostile text as data rather than executable markup\n  ---\n  duration_ms: 3.0102\n  type: 'test'\n  ...\n# Subtest: local models have no network, process, filesystem or credential-store import\nok 25 - local models have no network, process, filesystem or credential-store import\n  ---\n  duration_ms: 0.6761\n  type: 'test'\n  ...\n1..25\n# tests 25\n# suites 0\n# pass 25\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 202.3112\n",
+      "summary": {
+        "tests": 25,
+        "pass": 25,
+        "fail": 0,
+        "skipped": 0
+      },
+      "limitations": [
+        "Static/code/model tests are not tenant sign-ins, PHS recovery, configuration restoration or OT/platform safety evidence."
+      ]
+    },
+    {
+      "id": "LIVE-R1",
+      "runbookId": "R1",
+      "caseIds": [
+        "E1",
+        "E2"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Two real independent emergency sign-ins, permitted action and observed monitoring."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "LIVE-R2",
+      "runbookId": "R2",
+      "caseIds": [
+        "E1"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Actual PHS activation, fresh positive/negative sign-ins and measured rollback."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "LIVE-R3",
+      "runbookId": "R3",
+      "caseIds": [
+        "E1",
+        "E2"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Actual trusted scoped object and relationship restoration with acceptance."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "OPERATIONAL-R4",
+      "runbookId": "R4",
+      "caseIds": [
+        "E3"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Representative actual local services, communications, safe-state/restart and duration exercise."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "LIVE-E1",
+      "runbookId": null,
+      "caseIds": [
+        "E1"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Regional/key/service fit and real emergency/recovery operating evidence."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "LIVE-E2",
+      "runbookId": null,
+      "caseIds": [
+        "E2"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Actual restricted trust, lifecycle and effective human/session/workload separation."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    },
+    {
+      "id": "OPERATIONAL-E3",
+      "runbookId": null,
+      "caseIds": [
+        "E3"
+      ],
+      "status": "blocked-no-authorized-lab",
+      "scopeKind": "operational-not-authorized",
+      "scope": "No dedicated Entra/AD/PHS/OT lab, live targets, writes, service interruption or physical operation is authorized.",
+      "authorizationRef": "AUTH-REQUEST-01",
+      "countsAsLiveValidation": false,
+      "expected": [
+        "Actual independent local identity/policy/evidence/recovery and local safety acceptance."
+      ],
+      "observed": [],
+      "startedAt": null,
+      "endedAt": null,
+      "executed": false,
+      "blocker": "Explicit authorization is LOCAL-ONLY synthetic fixtures and browser tests. Original operational acceptance was not weakened or replaced.",
+      "evidenceRefs": []
+    }
+  ]
+}

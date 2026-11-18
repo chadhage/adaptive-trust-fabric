@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "scopeKind": "synthetic-only",
+  "canonicalData": {
+    "path": "adaptive-trust-fabric-microsite/data/research.json",
+    "sha256": "2351d7631e159a366e76e42997710a66b5695974262b7b68c26c1005c2ff1d2e",
+    "claims": 18,
+    "controls": 26,
+    "capabilities": 10
+  },
+  "assessment": {
+    "contractVersion": "1.0",
+    "path": "adaptive-trust-fabric-microsite/assets/assessment.js",
+    "sha256": "736fd111cb0d5186f9687d32d8b19b3a370bf0e8e83037e4f07c5fc3dadc1938",
+    "states": {
+      "E1": "insufficient-evidence",
+      "E2": "insufficient-evidence",
+      "E3": "insufficient-evidence"
+    }
+  },
+  "cases": [
+    {
+      "id": "E1",
+      "title": "Single-tenant enterprise with regional data and operating requirements",
+      "path": "cases/e1.json",
+      "anchor": "index.html#case-E1",
+      "status": "blocked-no-authorized-lab"
+    },
+    {
+      "id": "E2",
+      "title": "Acquisition transition with restricted trust and reversible separation",
+      "path": "cases/e2.json",
+      "anchor": "index.html#case-E2",
+      "status": "partial-local-synthetic-only"
+    },
+    {
+      "id": "E3",
+      "title": "S3 industrial site with local authority and bounded upstream independence",
+      "path": "cases/e3.json",
+      "anchor": "index.html#case-E3",
+      "status": "partial-local-synthetic-only"
+    }
+  ],
+  "runbooks": [
+    {
+      "id": "R1",
+      "title": "Emergency administrative access when the normal hybrid path fails",
+      "path": "runbooks/r1-emergency.json",
+      "anchor": "index.html#runbook-R1",
+      "implementationStatus": "draft-delivered-not-live-validated",
+      "validationStatus": "blocked-no-authorized-lab"
+    },
+    {
+      "id": "R2",
+      "title": "Controlled activation of PHS cloud authentication for hybrid test users",
+      "path": "runbooks/r2-phs.json",
+      "anchor": "index.html#runbook-R2",
+      "implementationStatus": "draft-delivered-not-live-validated",
+      "validationStatus": "blocked-no-authorized-lab"
+    },
+    {
+      "id": "R3",
+      "title": "Scoped tenant configuration recovery after a simulated malicious change",
+      "path": "runbooks/r3-tenant-restore.json",
+      "anchor": "index.html#runbook-R3",
+      "implementationStatus": "draft-delivered-not-live-validated",
+      "validationStatus": "blocked-no-authorized-lab"
+    },
+    {
+      "id": "R4",
+      "title": "Safe S3 upstream-loss exercise with explicit local safety authority",
+      "path": "runbooks/r4-s3-outage.json",
+      "anchor": "index.html#runbook-R4",
+      "implementationStatus": "draft-delivered-local-model-only",
+      "validationStatus": "partial-local-synthetic-only"
+    }
+  ],
+  "operationalAcceptance": "blocked-no-authorized-lab",
+  "regeneratedBy": "node reference-validation\\scripts\\build.mjs"
+}

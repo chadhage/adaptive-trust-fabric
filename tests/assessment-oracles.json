@@ -1,0 +1,216 @@
+{
+  "contractVersion": "1.0",
+  "basis": {
+    "kind": "Requirement-derived local decision oracles, not operational validation",
+    "sourceReview": "Accepted 2026-11-18 against the source-checked canonical claims, controls and capabilities. This accepts the documentary basis for derived framework decisions, not a deployment or live configuration.",
+    "reviewedOn": "2026-11-18",
+    "canonicalSha256": "2351D7631E159A366E76E42997710A66B5695974262B7B68C26C1005C2FF1D2E",
+    "qualifications": [
+      "C-01/C-03/C-11/C-13/C-16 and the normative controls are derived framework positions, not universal Microsoft or legal mandates.",
+      "C-02/N-03 require actual authority-path independence; another tenant does not eliminate shared credentials, privilege, recovery or Entra-service dependencies.",
+      "K07 does not equate residency, tenant count or key custody with sovereignty; K08 does not establish full or service-independent recovery.",
+      "N-05/K10 distinguish required local functions and duration from tested capability, platform labels and online tenant count.",
+      "N-14 requires local safety authority; N-26 excludes known mandatory conflicts while unknown mandatory facts prevent a positive default.",
+      "All tests are local synthetic evaluations. No operational configuration, recovery exercise or physical process was verified."
+    ],
+    "claims": ["C-01", "C-02", "C-03", "C-07", "C-11", "C-13", "C-16"],
+    "capabilities": ["K07", "K08", "K10"],
+    "controls": ["N-03", "N-05", "N-14", "N-26"]
+  },
+  "baseline": {
+    "boundary": "delegated",
+    "sovereignty": "residency",
+    "survivability": "0",
+    "ot": "no",
+    "boundaryFit": "met",
+    "recoveryRequirement": "shared-acceptable",
+    "recoveryDependency": "independent",
+    "privilegePath": "contained",
+    "staffing": "evidenced",
+    "monitoring": "evidenced",
+    "response": "evidenced",
+    "recoveryTest": "evidenced"
+  },
+  "cases": [
+    {
+      "name": "One tenant is a review candidate only when all required declarations are present",
+      "requirement": "C-01 and N-26: select among configurations meeting mandatory requirements; no deployment approval.",
+      "input": {},
+      "expected": { "state": "candidate", "topology": "T1", "connectivity": "S0", "reasonCodes": ["single-tenant-fit-declared"] }
+    },
+    {
+      "name": "Acquisition frequency alone does not require more tenants",
+      "requirement": "C-01/C-03: transition context is not an unmet isolation requirement.",
+      "input": { "ma": "high" },
+      "expected": { "state": "candidate", "topology": "T1", "reasonCodes": ["acquisition-context-only"] }
+    },
+    {
+      "name": "Acquisition plus an actual unmet requirement supports a boundary review",
+      "requirement": "C-01/C-03: a documented unmet requirement, not the frequency, justifies T2.",
+      "input": { "ma": "high", "boundaryFit": "unmet" },
+      "expected": { "state": "candidate", "topology": "T2", "rejected": ["T1"], "reasonCodes": ["single-tenant-unmet-requirement"] }
+    },
+    {
+      "name": "Local keys with sufficient controls can remain in one tenant",
+      "requirement": "C-11/K07: local cryptographic authority is not equivalent to tenant separation.",
+      "input": { "sovereignty": "keys", "sovereigntyEvidence": "met" },
+      "expected": { "state": "candidate", "topology": "T1", "reasonCodes": ["sovereignty-needs-control-evidence"] }
+    },
+    {
+      "name": "An unverified key-control assertion is not a conclusive result",
+      "requirement": "C-11/K07: evaluate actual operator, processing and key controls.",
+      "input": { "sovereignty": "keys" },
+      "expected": { "state": "insufficient-evidence", "topology": "T1", "reasonCodes": ["sovereignty-evidence-unknown"] }
+    },
+    {
+      "name": "An extra tenant cannot cure known unmet sovereignty controls",
+      "requirement": "C-11/K07/N-26: reject the failed control configuration regardless of tenant count.",
+      "input": { "sovereignty": "control", "sovereigntyEvidence": "unmet", "boundaryFit": "unmet" },
+      "expected": { "state": "excluded", "topology": "T2", "reasonCodes": ["sovereignty-controls-unmet"] }
+    },
+    {
+      "name": "Regulatory labels with satisfiable controls do not require more tenants",
+      "requirement": "C-01/C-11: a legal-entity or regulatory category is not proof of incompatible controls.",
+      "input": { "boundary": "regulatory" },
+      "expected": { "state": "candidate", "topology": "T1", "reasonCodes": ["regulatory-label-not-boundary"] }
+    },
+    {
+      "name": "Genuinely incompatible mandatory controls reject the single-tenant option",
+      "requirement": "C-01/N-26: an actual unmet requirement excludes that alternative.",
+      "input": { "boundary": "regulatory", "boundaryFit": "unmet" },
+      "expected": { "state": "candidate", "topology": "T2", "rejected": ["T1"], "reasonCodes": ["single-tenant-unmet-requirement"] }
+    },
+    {
+      "name": "Organizational autonomy alone does not require a separate identity authority",
+      "requirement": "C-01/C-02: business preference and authentication independence are different facts.",
+      "input": { "autonomy": "high" },
+      "expected": { "state": "candidate", "topology": "T1", "reasonCodes": ["autonomy-context-only"] }
+    },
+    {
+      "name": "Independent identity requirement with shared authority is excluded",
+      "requirement": "C-02/N-03: shared authentication or privilege paths defeat the independence requirement.",
+      "input": { "boundary": "identity", "boundaryFit": "unmet", "identityDependency": "shared" },
+      "expected": { "state": "excluded", "topology": "T3", "rejected": ["T1", "T3"], "reasonCodes": ["identity-shared-dependency"] }
+    },
+    {
+      "name": "Independent identity with unknown paths needs evidence",
+      "requirement": "C-02/N-03: a tenant label cannot stand in for examined authority paths.",
+      "input": { "boundary": "identity", "boundaryFit": "unmet" },
+      "expected": { "state": "insufficient-evidence", "topology": "T3", "reasonCodes": ["identity-dependency-unknown"] }
+    },
+    {
+      "name": "Declared independent identity paths permit a T3 review candidate",
+      "requirement": "C-02/N-03: independence requires explicit authority-path declarations, still subject to validation.",
+      "input": { "boundary": "identity", "boundaryFit": "unmet", "identityDependency": "independent" },
+      "expected": { "state": "candidate", "topology": "T3", "rejected": ["T1"], "reasonCodes": ["independent-identity-required"] }
+    },
+    {
+      "name": "S3 local capability does not automatically change the tenant pattern",
+      "requirement": "N-05/K10: local independent functions and tenant count are orthogonal.",
+      "input": { "survivability": "3", "localServices": "tested", "upstreamDependency": "removed" },
+      "expected": { "state": "candidate", "topology": "T1", "connectivity": "S3", "pattern": null, "reasonCodes": ["survivability-not-tenant-count"] }
+    },
+    {
+      "name": "S4 is a disconnected overlay and not another online tenant",
+      "requirement": "N-05/K10: disconnected local control planes are not an Entra availability guarantee.",
+      "input": { "survivability": "4", "localServices": "tested", "upstreamDependency": "removed" },
+      "expected": { "state": "candidate", "topology": "T1", "connectivity": "S4", "pattern": "T4", "reasonCodes": ["survivability-not-tenant-count"] }
+    },
+    {
+      "name": "S3 with unknown upstream dependencies cannot be called independent",
+      "requirement": "N-05/K10: DNS, cloud, federation, MFA and SOC dependencies must be examined.",
+      "input": { "survivability": "3", "localServices": "tested" },
+      "expected": { "state": "insufficient-evidence", "topology": "T1", "reasonCodes": ["upstream-dependency-unknown"] }
+    },
+    {
+      "name": "S4 with declared upstream dependencies is excluded",
+      "requirement": "N-05/K10: a required independent function cannot retain an unavailable upstream dependency.",
+      "input": { "survivability": "4", "localServices": "tested", "upstreamDependency": "present" },
+      "expected": { "state": "excluded", "topology": "T1", "rejected": ["T4"], "reasonCodes": ["upstream-dependency-conflict"] }
+    },
+    {
+      "name": "Known missing outage tests are not continuity readiness",
+      "requirement": "N-05/N-26: selecting a tier does not implement its functions.",
+      "input": { "survivability": "2", "localServices": "missing" },
+      "expected": { "state": "excluded", "topology": "T1", "reasonCodes": ["outage-functions-missing"] }
+    },
+    {
+      "name": "Independent recovery with shared authority is excluded",
+      "requirement": "C-07/K08: continuity and restoration authority are separate requirements.",
+      "input": { "recoveryRequirement": "independent", "recoveryDependency": "shared" },
+      "expected": { "state": "excluded", "topology": "T1", "rejected": ["T1", "T2", "T3"], "reasonCodes": ["recovery-shared-dependency"] }
+    },
+    {
+      "name": "A known recovery cycle cannot be described as ready",
+      "requirement": "C-07/K08/N-26: reject a circular trusted-restoration dependency even where shared authority is acceptable.",
+      "input": { "recoveryDependency": "circular" },
+      "expected": { "state": "excluded", "topology": "T1", "reasonCodes": ["recovery-cycle"] }
+    },
+    {
+      "name": "Unknown recovery paths require evidence even with a managed label",
+      "requirement": "C-07/C-16: a label does not establish a trusted restoration path.",
+      "input": { "maturity": "managed", "recoveryDependency": "unknown" },
+      "expected": { "state": "insufficient-evidence", "reasonCodes": ["recovery-dependency-unknown", "maturity-label-not-evidence"] }
+    },
+    {
+      "name": "Safety-critical OT at S0 still requires local safety declarations",
+      "requirement": "C-13/N-14: local safe-state operation must not be a warning-only cloud dependency.",
+      "input": { "ot": "yes" },
+      "expected": { "state": "insufficient-evidence", "topology": "T1", "reasonCodes": ["local-authority-unknown", "safety-review-unknown", "ot-fallback-unknown"] }
+    },
+    {
+      "name": "Missing local OT authority is a mandatory failure",
+      "requirement": "C-13/N-14: cloud administration is not local operational authority.",
+      "input": { "ot": "yes", "localAuthority": "missing", "safetyReview": "reviewed", "otFallback": "tested" },
+      "expected": { "state": "excluded", "reasonCodes": ["ot-authority-missing"] }
+    },
+    {
+      "name": "An unsafe automated response is excluded despite local authority",
+      "requirement": "C-13/N-14: cyber response must respect the local safety case.",
+      "input": { "ot": "yes", "localAuthority": "established", "safetyReview": "unsafe", "otFallback": "tested" },
+      "expected": { "state": "excluded", "reasonCodes": ["ot-response-unsafe"] }
+    },
+    {
+      "name": "No local OT fallback excludes the configuration at S0",
+      "requirement": "C-13/N-14: safe operation or shutdown cannot depend only on cloud response.",
+      "input": { "ot": "yes", "localAuthority": "established", "safetyReview": "reviewed", "otFallback": "absent" },
+      "expected": { "state": "excluded", "reasonCodes": ["ot-fallback-absent"] }
+    },
+    {
+      "name": "Reviewed local safety overlay can coexist with enterprise S0",
+      "requirement": "C-13/N-14: distinguish local safety functions from enterprise tenant and continuity dimensions.",
+      "input": { "ot": "yes", "localAuthority": "established", "safetyReview": "reviewed", "otFallback": "tested" },
+      "expected": { "state": "candidate", "topology": "T1", "connectivity": "S0", "reasonCodes": ["ot-local-safety-required"] }
+    },
+    {
+      "name": "A developing label does not erase concrete operating evidence",
+      "requirement": "C-16/N-26: assess prerequisites rather than equating a maturity category with implementation.",
+      "input": { "maturity": "developing" },
+      "expected": { "state": "candidate", "reasonCodes": ["maturity-label-not-evidence"] }
+    },
+    {
+      "name": "An automated label cannot compensate for missing response capability",
+      "requirement": "C-16/N-26: staffing, monitoring, response and recovery must be evidenced separately.",
+      "input": { "maturity": "adaptive", "response": "missing" },
+      "expected": { "state": "excluded", "reasonCodes": ["response-missing", "maturity-label-not-evidence"] }
+    },
+    {
+      "name": "A managed label alone cannot establish operating readiness",
+      "requirement": "C-16/N-26: unknown operating facts remain unknown despite a favorable self-description.",
+      "input": { "maturity": "managed", "staffing": "unknown", "monitoring": "unknown", "response": "unknown", "recoveryTest": "unknown" },
+      "expected": { "state": "insufficient-evidence", "reasonCodes": ["staffing-unknown", "monitoring-unknown", "response-unknown", "recovery-test-unknown"] }
+    },
+    {
+      "name": "Context labels cannot override a contradictory recovery path",
+      "requirement": "C-01/C-07/C-11/N-26: mandatory conflicts precede any topology preference.",
+      "input": { "ma": "high", "boundary": "regulatory", "sovereignty": "keys", "sovereigntyEvidence": "met", "recoveryRequirement": "independent", "recoveryDependency": "shared" },
+      "expected": { "state": "excluded", "topology": "T1", "reasonCodes": ["recovery-shared-dependency", "acquisition-context-only", "regulatory-label-not-boundary"] }
+    },
+    {
+      "name": "Known recovery conflict remains excluded alongside unknown continuity facts",
+      "requirement": "N-26: unknowns do not soften an already-known mandatory conflict.",
+      "input": { "survivability": "3", "recoveryDependency": "circular" },
+      "expected": { "state": "excluded", "reasonCodes": ["recovery-cycle", "local-services-unknown", "upstream-dependency-unknown"] }
+    }
+  ]
+}

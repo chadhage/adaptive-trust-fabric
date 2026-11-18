@@ -253,6 +253,7 @@
       .tier:last-child { grid-column: auto; }
       .topology { grid-template-columns: 48px minmax(0, 1.1fr) minmax(0, 1fr); }
       .topology p { grid-column: auto; }
+      :focus, :focus-visible { outline: none !important; }
       * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     }
   </style>
@@ -310,7 +311,7 @@
           <span class="big-marker">01</span>
           <h3>Single-tenant administration</h3>
           <p>Use shared collaboration and delegated administration where they meet the requirements.</p>
-          <p>An organization-chart difference or cost-allocation preference does not establish an isolation requirement.</p>
+          <p>Regulatory labels, local keys, acquisition frequency or an organization-chart difference alone do not establish an unmet isolation requirement.</p>
         </div>
         <div class="panel">
           <h3>Separate administration requirements</h3>
@@ -355,7 +356,7 @@
       <header>
         <p class="eyebrow">04 / Evaluation sequence</p>
         <h2 id="slide-4-title" tabindex="-1">Check mandatory constraints before comparing alternatives.</h2>
-        <p class="lead">Eliminate designs that violate applicable legal, safety, isolation or continuity requirements. Review the remaining options using the following sequence.</p>
+        <p class="lead">Candidate is a review option, not approval. Unknown mandatory facts mean insufficient evidence; known mandatory conflicts exclude the assessed configuration.</p>
       </header>
       <ol class="decision-list content">
         <li class="emphasis"><span class="step-number">01</span><div><h3>Mandatory constraints</h3><p>Record the required legal, safety, administrative and continuity conditions.</p></div></li>
@@ -371,13 +372,13 @@
       <header>
         <p class="eyebrow">05 / Topology patterns</p>
         <h2 id="slide-5-title" tabindex="-1">Topology patterns and selection criteria</h2>
-        <p class="lead">Select a primary topology and any companion patterns required for local operation or acquisition integration.</p>
+        <p class="lead">Decide tenant topology, identity, sovereignty, connectivity and recovery separately. S3 does not imply T3; T4 is a disconnected operating overlay.</p>
       </header>
       <div class="topologies content">
         <div class="topology"><span class="step-number">T1</span><h3>One global tenant with delegated boundaries</h3><p>One tenant meets the requirements, and shared administration is appropriate.</p></div>
         <div class="topology"><span class="step-number">T2</span><h3>Federated multi-tenant enterprise</h3><p>Separate control planes with governed cross-boundary collaboration.</p></div>
-        <div class="topology"><span class="step-number">T3</span><h3>Sovereign or independently recoverable tenant</h3><p>Local identity, administration or recovery authority is required.</p></div>
-        <div class="topology"><span class="step-number">T4</span><h3>Disconnected enclave / cyber-physical cell</h3><p>Required functions must operate without upstream services.</p></div>
+        <div class="topology"><span class="step-number">T3</span><h3>Sovereign or independently recoverable tenant</h3><p>Independent identity authority is required; shared privilege paths must be removed.</p></div>
+        <div class="topology"><span class="step-number">T4</span><h3>Disconnected enclave / cyber-physical cell</h3><p>S4 local operating pattern; select identity and tenant topology separately.</p></div>
         <div class="topology"><span class="step-number">T5</span><h3>Acquisition transition zone</h3><p>Restricted access during assessment, followed by reviewed access expansion and tested separation.</p></div>
       </div>
       <p class="source">Proposed topology patterns. Sources: MS-02, MS-03, MS-11, MS-18, MS-19, MS-20, STD-02. <a href="index.html#topologies">Read use and rejection criteria</a></p>
@@ -391,12 +392,12 @@
       </header>
       <div class="tiers content">
         <div class="tier"><span class="big-marker">S0</span><h3>Cloud-dependent</h3><p>Online SaaS and cloud operations.</p><p>Central identity, policy and SOC.</p></div>
-        <div class="tier"><span class="big-marker">S1</span><h3>Transient outage</h3><p>Required functions during outages measured in hours.</p><p>Sessions, cached behavior and tested emergency access.</p></div>
+        <div class="tier"><span class="big-marker">S1</span><h3>Transient outage</h3><p>Bounded, explicitly tested functions only.</p><p>Existing sessions may continue; emergency accounts still depend on Entra.</p></div>
         <div class="tier"><span class="big-marker">S2</span><h3>Extended degraded</h3><p>Days of reduced function.</p><p>Selected local authorization, collection and restore capability.</p></div>
         <div class="tier"><span class="big-marker">S3</span><h3>Independent operations</h3><p>Required functions without upstream control planes.</p><p>Local administration, detection, keys and recovery.</p></div>
         <div class="tier"><span class="big-marker">S4</span><h3>Disconnected / air-gapped</h3><p>Intentional isolation.</p><p>Local identity/PKI, signed updates and offline recovery credentials.</p></div>
       </div>
-      <p class="callout">The tiers define requirements for testing. They are not product SLAs or statements of connected/disconnected feature equivalence.</p>
+      <p class="callout">No tier proves availability. Sessions or emergency accounts do not bypass a full Entra outage; PHS backup is not automatic authentication switchover.</p>
       <p class="source">Proposed operating tiers. Sources: MS-18, MS-19, MS-20, STD-02. <a href="index.html#survivability">Read tier requirements</a></p>
     </section>
 
@@ -438,9 +439,9 @@
       <div class="three-up content">
         <div class="panel"><span class="big-marker">H</span><h3>Humans</h3><ul><li>Phishing-resistant authentication for privileged access</li><li>Least privilege and just-in-time elevation</li><li>Emergency access monitored separately</li></ul></div>
         <div class="panel"><span class="big-marker">W</span><h3>Workloads</h3><ul><li>Managed identities or workload federation</li><li>Bounded permissions and explicit trust relationships</li><li>Replace long-lived stored secrets where supported</li></ul></div>
-        <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Unique identity and accountable sponsor</li><li>Policies for agent blueprints and identity lifecycle</li><li>Least privilege, monitoring and revocation controls</li></ul></div>
+        <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Distinct logical-agent identity, sponsor and technical owner</li><li>Separate OBO, app-only and agent-user policy targets</li><li>Least privilege and revocation; API keys bypass Entra CA</li></ul></div>
       </div>
-      <p class="source">Bind permissions to accountable identities and verified authentication assurance. Sources: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Read the control requirements</a></p>
+      <p class="source">Replicas and sessions do not automatically require distinct agent identities. Revalidate licensing and cloud support. Sources: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">All 26 controls</a></p>
     </section>
 
     <section class="slide" id="slide-9" data-label="Independent cyber recovery" aria-labelledby="slide-9-title">
@@ -469,7 +470,7 @@
           <p>Test the sequence against documented recovery-time and data-loss objectives.</p>
         </div>
       </div>
-      <p class="source">Proposed recovery requirements. Sources: MS-07, MS-08, MS-26. <a href="../position-paper/position-paper.html#s7">Read the operations and recovery analysis</a></p>
+      <p class="source">Sources: MS-07, MS-08, MS-26. <a href="../reference-validation/index.html#runbook-R3">Bounded recovery runbooks</a> are local review drafts; live lab exercises were not performed and remain blocked.</p>
     </section>
 
     <section class="slide" id="slide-10" data-label="Boundary assurance" aria-labelledby="slide-10-title">
@@ -494,13 +495,13 @@
       <header>
         <p class="eyebrow">11 / Implementation sequence</p>
         <h2 id="slide-11-title" tabindex="-1">Check prerequisites before adding control planes.</h2>
-        <p class="lead">The phases are a proposed ordering. Confirm ownership, staffing, monitoring, response and recovery requirements before extending the deployment.</p>
+        <p class="lead">Protect privileged access and prove initial recovery before expanding scope. Later phases broaden coverage; they do not postpone the first recovery test.</p>
       </header>
       <div class="four-up roadmap content">
-        <div class="panel"><span class="big-marker">01</span><span class="phase-time">0-90 days</span><h3>Inventory administrative access</h3><ul><li>Boundary and authority register</li><li>Test emergency access</li><li>Export configuration baselines</li></ul></div>
-        <div class="panel"><span class="big-marker">02</span><span class="phase-time">3-9 months</span><h3>Standardize cloud configuration</h3><ul><li>Phishing-resistant privileged access</li><li>Policy as code</li><li>Information and collaboration controls</li></ul></div>
-        <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Implement local operations</h3><ul><li>S2-S4 local services</li><li>Regional and tenant SOC responsibilities</li><li>Acquisition separation tests</li></ul></div>
-        <div class="panel emphasis"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Test recovery procedures</h3><ul><li>Isolated recovery exercises</li><li>Combined control-plane failures</li><li>Configuration monitoring and drift correction</li></ul></div>
+        <div class="panel emphasis"><span class="big-marker">01</span><span class="phase-time">0-90 days</span><h3>Protect and prove the baseline</h3><ul><li>Phishing-resistant privileged access</li><li>Test emergency credentials</li><li>Initial recovery proof and RTO/RPO</li></ul></div>
+        <div class="panel"><span class="big-marker">02</span><span class="phase-time">3-9 months</span><h3>Expand only after the gate</h3><ul><li>Owner and baseline proof accepted</li><li>Policy as code and data controls</li><li>Review new privilege paths</li></ul></div>
+        <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Broaden local coverage</h3><ul><li>Prove required S2-S4 functions</li><li>Local SOC and safety authority</li><li>Acquisition separation tests</li></ul></div>
+        <div class="panel"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Exercise combined failures</h3><ul><li>Broader isolated recovery</li><li>Control-plane plus communications loss</li><li>Drift and complexity reduction</li></ul></div>
       </div>
       <p class="source">Planning ranges depend on staffing, system criticality and readiness; they are not delivery estimates. Source: STD-05. <a href="index.html#roadmap">Read the implementation phases</a></p>
     </section>
@@ -521,10 +522,10 @@
         <div class="actions">
           <a class="button primary" href="index.html#assess">Run the topology assessment</a>
           <a class="button" href="../position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read the position paper</a>
-          <a class="button" href="index.html#evidence">Search sources</a>
+          <a class="button" href="../reference-validation/index.html">Examples and runbooks</a>
         </div>
       </div>
-      <p class="source">Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements before deployment. <a href="../index.html">Choose another format</a></p>
+      <p class="source">Examples and local fixture tests are not live Entra/AD/PHS/OT validation. Revalidate product, legal and safety requirements. <a href="index.html#evidence">33 sources</a> · <a href="../index.html">All formats</a></p>
     </section>
   </main>
 

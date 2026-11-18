@@ -1,0 +1,31 @@
+name: Validate reference package
+
+on:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the proposed revision
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Exercise validation failures and decision regressions
+        run: node --test
+
+      - name: Validate canonical research and publication integrity
+        run: node tools/validate-project.mjs

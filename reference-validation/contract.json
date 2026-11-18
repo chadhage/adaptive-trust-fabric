@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordSchema": "schema/review-record.schema.json",
+  "reader": "index.html",
+  "readerAnchors": ["#case-E1", "#case-E2", "#case-E3", "#runbook-R1", "#runbook-R2", "#runbook-R3", "#runbook-R4", "#authorization", "#evidence"],
+  "casePaths": ["cases/e1.json", "cases/e2.json", "cases/e3.json"],
+  "runbookPaths": ["runbooks/r1-emergency.json", "runbooks/r2-phs.json", "runbooks/r3-tenant-restore.json", "runbooks/r4-s3-outage.json"],
+  "evidencePaths": ["evidence/authorization-request.json", "evidence/execution-template.json", "evidence/executions.json", "evidence/browser-checks.json"],
+  "recordSections": ["requirements", "boundaries", "authorityGraph", "recoveryGraph", "controlApplicability", "decision", "validation"],
+  "requirementStates": ["declared", "verified", "unknown", "failed"],
+  "evidenceRule": "Only executed evidence can verify the exact function and environment it observed. Local synthetic fixtures never verify Entra, PHS, Azure Local, OT, or organizational recovery.",
+  "authorityDirection": "edge.from exercises edge.permission over edge.to using edge.credential; edge.revocation names the actor and mechanism that can remove that authority",
+  "recoveryDirection": "edge.from depends on edge.to for recovery; recoveryGraph.rejectedEdgeIds excludes illustrated rejected/bootstrap-cycle edges from the selected graph; independent anchors and remaining dependencies are explicit",
+  "controlIds": "N-01 through N-26; all appear exactly once per case with distinct rationale and requiredEvidence",
+  "statusFields": {
+    "record": "validation.overallStatus",
+    "runbook": "validation.status",
+    "authorization": "status",
+    "evidence": "records[].status"
+  },
+  "assessmentIntegration": {
+    "status": "integrated-shared-engine-1.0",
+    "input": "decision.assessmentInput",
+    "output": "decision.assessmentOutput",
+    "rule": "build.mjs calls the final peer assess(input) directly. Output is an exact engine object, not a bucket-local topology score. All three examples remain insufficient-evidence."
+  },
+  "localCommands": [
+    "node --test reference-validation\\tests\\reference-validation.test.mjs",
+    "node reference-validation\\scripts\\record-local-validation.mjs",
+    "node reference-validation\\scripts\\validate.mjs",
+    "node reference-validation\\scripts\\build.mjs"
+  ],
+  "validationSequence": [
+    "node reference-validation\\scripts\\record-local-validation.mjs",
+    "node reference-validation\\scripts\\check-browser.mjs --browser <installed-browser-executable> --profile <new-owned-session-directory> --output <authorized-session-evidence-directory>",
+    "node reference-validation\\scripts\\validate.mjs"
+  ],
+  "regenerationRule": "Generating reader data changes its hash. Rerun the bounded browser check afterward; the final validator rejects stale reader, canonical, engine or SVG observations. No browser/package is installed automatically.",
+  "pureLocalApis": {
+    "validation": "scripts/validate.mjs exports validateSchema, validateCase, validateDiagram, stronglyConnectedCycles, reachable, validateAll",
+    "simulation": "scripts/local-models.mjs exports LocalSiteFixture, AcquisitionFixture and runSyntheticChecks; no network/process/filesystem import",
+    "execution": "scripts/record-local-validation.mjs runs owned tests/model checks and writes exact expected/observed local evidence only",
+    "generation": "scripts/build.mjs enriches source/assessment snapshots and generates embedded-data reader plus six Excalidraw/SVG pairs"
+  },
+  "authorization": "Explicit local-only fixtures/browser tests approved; all operational Entra/AD/PHS/OT scope remains blocked. Never infer live approval from this contract or an available credential."
+}

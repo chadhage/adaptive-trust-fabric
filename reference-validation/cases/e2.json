@@ -1,0 +1,2325 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "E2",
+  "title": "Acquisition transition with restricted trust and reversible separation",
+  "synthetic": true,
+  "scope": {
+    "kind": "synthetic-design",
+    "description": "Fictional Cedar acquires Orbit. Orbit's existing tenant remains the home identity authority during a 180-day transition. A separately administered transition resource tenant hosts one sanitized deal-room app for ten sponsored synthetic Orbit identities. This is not a claim that acquisitions always require extra tenants.",
+    "survivabilityTier": "S1",
+    "outOfScope": [
+      "Production tenant access or migration",
+      "Automatic trust of acquired-device compliance/MFA claims",
+      "Broad directory synchronization or tenant-wide admin delegation",
+      "Actual service-side session revocation or live separation"
+    ],
+    "assumptions": [
+      "The fictional transaction owner explicitly requires the unassessed Orbit estate not to share Cedar production administration.",
+      "Orbit home authentication remains a declared dependency for guest collaboration; this is not T3 identity independence.",
+      "The sanitized app can enforce resource-side session denial in addition to tenant trust/assignment removal.",
+      "The transition has a named exit owner and expires after 180 days without renewed approval."
+    ]
+  },
+  "owners": {
+    "architecture": "Acquisition identity architect",
+    "transition": "Transition tenant owner",
+    "source": "Orbit identity owner",
+    "sponsor": "Cedar deal-room sponsor",
+    "separation": "Divestiture/separation lead",
+    "acceptance": "Transaction risk authority"
+  },
+  "sourceFacts": [
+    {
+      "id": "E2-F01",
+      "claimIds": [
+        "C-02",
+        "C-03"
+      ],
+      "sourceIds": [
+        "MS-02",
+        "MS-03"
+      ],
+      "fact": "Cross-tenant patterns can support acquisition coexistence, but a guest/resource tenant still depends on the configured home authentication and trust paths.",
+      "scopeLimit": "A separate resource tenant is not proof of independent identity, and transaction frequency is not an isolation requirement.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant resource/configuration/administrative boundaries do not isolate identities when corporate accounts remain trusted."
+          },
+          {
+            "source_id": "MS-03",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-topology",
+            "section": "Hub and spoke; Mesh; Just-in-time",
+            "revision": "updated_at=2026-03-27T17:14:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Documents M&A application hubs, user hubs, partial/full mesh and joint-venture access packages."
+          },
+          {
+            "source_id": "MS-03",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview",
+            "section": "Properties; Frequently asked questions: Synchronization frequency and Attributes",
+            "revision": "updated_at=2026-11-04T18:39:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Provisioning is source-push and periodic, with no reversal of credential/source authority."
+          },
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Resource isolation with multiple tenants; Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant configuration/resource administration is not identity isolation when corporate credentials or cross-tenant administration remain trusted."
+          },
+          {
+            "source_id": "MS-03",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-topology",
+            "section": "Hub and spoke; Mesh; Just-in-time; Supported scenarios",
+            "revision": "updated_at=2026-03-27T17:14:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Hub/spoke and mesh synchronize selected users; just-in-time collaboration uses connected organizations and entitlement management."
+          },
+          {
+            "source_id": "MS-03",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview",
+            "section": "Properties; License requirements; Frequently asked questions: Clouds, Synchronization frequency, Object types, Attributes",
+            "revision": "updated_at=2026-11-04T18:39:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Source-push lifecycle provisioning, cloud-pair support, source licenses and authority/deprovisioning limits."
+          },
+          {
+            "source_id": "MS-03",
+            "url": "https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview",
+            "section": "Manage external access with inbound and outbound settings; Default settings; Organizational settings; Microsoft cloud settings; Important considerations",
+            "revision": "updated_at=2026-10-13T17:41:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Inbound/outbound access and optional trust in external MFA and device claims are distinct from provisioning."
+          }
+        ],
+        "applicability": [
+          "Restricted acquisition coexistence"
+        ],
+        "limitations": [
+          "No actual cross-tenant settings or guest lifecycle inspected"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E2-F02",
+      "claimIds": [
+        "C-04",
+        "C-14",
+        "C-18"
+      ],
+      "sourceIds": [
+        "MS-04",
+        "STD-01",
+        "STD-04",
+        "MS-22"
+      ],
+      "fact": "Application authorization, workload credential trust and human authentication assurance are separate enforcement paths with separate revocation behavior.",
+      "scopeLimit": "Removing a home account or cross-tenant trust does not prove all resource sessions, app grants and workload credentials were revoked.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-04",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity",
+            "section": "Overview; Implementation",
+            "revision": "updated_at=2026-05-18T22:35:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Service-principal CA is directly scoped, block-oriented and excludes managed identities and multitenant SaaS principals."
+          },
+          {
+            "source_id": "STD-01",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+            "section": "3 Logical Components of Zero Trust Architecture (PDF pp.18-19)",
+            "revision": "NIST SP 800-207",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "A policy enforcement point controls the connection to each protected resource."
+          },
+          {
+            "source_id": "STD-04",
+            "url": "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+            "section": "Authentication Assurance Level 2: Authenticator and Verifier Requirements; Authentication Assurance Level 3",
+            "revision": "NIST SP 800-63B-4",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "AAL2 option/federal-use requirements and AAL3 phishing-resistant non-exportable-key requirements are distinct."
+          },
+          {
+            "source_id": "MS-22",
+            "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+            "section": "Why use workload identity federation?; Supported scenarios; How it works",
+            "revision": "updated_at=2026-08-13T12:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Managed identity and supported federation remove the need for workload code to maintain secrets/certificates."
+          },
+          {
+            "source_id": "MS-04",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access",
+            "section": "Prerequisites; User exclusions; Apply Conditional Access policies to every app; Minimize the number of Conditional Access policies; Govern and manage policies at scale; Configure report-only mode",
+            "revision": "updated_at=2026-06-01T22:39:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Plan coverage and documented exclusions, test impact, manage reviewable changes and count all states toward the 240-policy tenant limit."
+          },
+          {
+            "source_id": "MS-04",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity",
+            "section": "Overview; Implementation; Sign-in logs; Finding the objectID",
+            "revision": "updated_at=2026-05-18T22:35:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Workload CA directly targets owned single-tenant service principals, requires Workload Identities Premium for creation/modification, and offers block controls rather than interactive MFA."
+          },
+          {
+            "source_id": "MS-22",
+            "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+            "section": "Why use workload identity federation?; Supported scenarios; How it works",
+            "revision": "updated_at=2026-08-13T12:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Trusted external workload tokens can be exchanged for Entra tokens; issuer/subject/audience matching and resource grants are required."
+          },
+          {
+            "source_id": "MS-22",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview",
+            "section": "Managed identity types; Differences between system-assigned and user-assigned managed identities; Use managed identity as a Federated Identity Credential (FIC) on an Entra ID app",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "System-assigned identities follow resource lifecycle; user-assigned identities can be shared and managed independently; supported MI-as-FIC is a distinct federation pattern."
+          },
+          {
+            "source_id": "STD-01",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+            "section": "Abstract (PDF p.4); 2.1 Tenets of Zero Trust (PDF p.15); 3 Logical Components (PDF pp.18-19); 7 Migrating to a Zero Trust Architecture (PDF p.45)",
+            "revision": "NIST SP 800-207",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Trust is not implied by location; policy enforcement and enterprise asset/dependency knowledge are prerequisites to incremental ZTA adoption."
+          },
+          {
+            "source_id": "STD-04",
+            "url": "https://pages.nist.gov/800-63-4/sp800-63b/aal/",
+            "section": "Authentication Assurance Level 2: Authenticator and Verifier Requirements; Authentication Assurance Level 3",
+            "revision": "SP 800-63B-4; publisher date not exposed in inspected section",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "AAL2 phishing-resistant option and federal-use requirements differ from AAL3's phishing-resistant non-exportable-key requirement."
+          }
+        ],
+        "applicability": [
+          "Guest app access and transition deployment identities"
+        ],
+        "limitations": [
+          "Propagation and application session behavior unmeasured"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E2-F03",
+      "claimIds": [
+        "C-05",
+        "C-07",
+        "C-16"
+      ],
+      "sourceIds": [
+        "MS-05",
+        "MS-07",
+        "MS-08",
+        "STD-05"
+      ],
+      "fact": "Transition trust needs independently controlled administration, known-good state, recovery and funded operating capacity; separation is a tested lifecycle action, not merely a diagram.",
+      "scopeLimit": "Local model tests can check only their own lifecycle logic, not real tenant separation.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-05",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+            "section": "Create emergency access accounts; Configuration requirements; Conditional Access considerations; Security guardrails summary; Validate accounts regularly",
+            "revision": "updated_at=2026-06-05T07:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "At least two cloud-only accounts, distinct phishing-resistant methods, blocking-policy exclusions, permanent active role, alerts and 90-day checks."
+          },
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Prepare external known-good state, retained logs, lifecycle-specific recovery and RTO/RPO drills; avoid recovery-repository authentication cycles."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/overview",
+            "section": "Standard and Premium plans; Hybrid identity and broader recoverability",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Standard retains up to seven days; Premium preview up to 30; hard-deleted object recovery/recreation is unsupported."
+          },
+          {
+            "source_id": "STD-05",
+            "url": "https://www.cisa.gov/sites/default/files/2023-04/CISA_Zero_Trust_Maturity_Model_Version_2_508c.pdf",
+            "section": "Zero Trust Maturity Journey (PDF p.8)",
+            "revision": "Version 2.0, April 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Required effort and complexity increase as maturity advances; mission needs shape the journey."
+          },
+          {
+            "source_id": "MS-05",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+            "section": "Create emergency access accounts; Configuration requirements; Federation guidance; Conditional Access considerations; Security guardrails summary; Validate accounts regularly",
+            "revision": "updated_at=2026-06-05T07:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Emergency accounts bypass selected normal-admin dependencies, not the Entra service; cloud and on-premises emergency paths should remain distinct."
+          },
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Determine object lifecycle state; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Continuity does not undo tenant integrity failures; recoverability needs known-good state, independent access to recovery material, lifecycle-specific restore paths and practiced runbooks."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/overview",
+            "section": "How backups work; Standard and Premium plans; Prerequisites; Hybrid identity and broader recoverability",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Plan-specific seven/30-day retention, workforce-tenant prerequisites, role requirements and hard-deletion gaps."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/scope-supported-objects-limitations",
+            "section": "Recovery scope levels; User; Group; Application; Service principal; Limitations",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Recovery covers selected object properties/links, not full object rollback; hybrid authority and job-time limitations apply."
+          },
+          {
+            "source_id": "STD-05",
+            "url": "https://www.cisa.gov/sites/default/files/2023-04/CISA_Zero_Trust_Maturity_Model_Version_2_508c.pdf",
+            "section": "Zero Trust Maturity Journey (PDF p.8); scope and limitations discussion (PDF p.11)",
+            "revision": "Zero Trust Maturity Model Version 2.0, April 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Maturity stages require increasing effort/complexity and do not provide detailed recovery, OT/IoT or emerging-AI guidance."
+          },
+          {
+            "source_id": "STD-05",
+            "url": "https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model",
+            "section": "CISA's Zero Trust Maturity Model Version 2.0; Resource Materials",
+            "revision": "Revision Date April 11, 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "The primary publication page identifies version 2.0 and the current downloadable PDF."
+          }
+        ],
+        "applicability": [
+          "Transition recovery and exit governance"
+        ],
+        "limitations": [
+          "No live administration, recovery or separation exercise"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "E2-Q01",
+      "text": "Keep the unassessed Orbit environment outside Cedar production identity administration while discovery/remediation occurs; the existing Cedar production tenant cannot meet the explicitly required transition administration boundary.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transaction risk authority",
+      "status": "declared",
+      "acceptance": [
+        "No Orbit identity or transition workload receives a Cedar tenant/admin role.",
+        "Separate transition administration and allow-listed application trust are documented."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F01"
+      ],
+      "unknowns": [
+        "Actual discovery and privilege-path review not performed."
+      ]
+    },
+    {
+      "id": "E2-Q02",
+      "text": "Allow exactly ten approved synthetic Orbit users into the deal-room reader role only; do not enable broad synchronization, blanket inbound trust, cross-tenant administration or automatic trust of source device/MFA claims.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transition tenant owner",
+      "status": "declared",
+      "acceptance": [
+        "Named home issuer, target app, user cohort and reader action only.",
+        "Unlisted user, wrong issuer, another app and admin action all denied."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F01",
+        "E2-F02"
+      ],
+      "unknowns": [
+        "Tenant/app enforcement and source-assurance claims remain unverified."
+      ]
+    },
+    {
+      "id": "E2-Q03",
+      "text": "Each guest has a Cedar sponsor, a 30-day renewable assignment expiry and a verified home identifier; removal or sponsor expiry must cause effective target denial within 30 minutes, including resource sessions.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Deal-room sponsor",
+      "status": "declared",
+      "acceptance": [
+        "Joiner/mover/leaver inventory and expiry are observable.",
+        "Disablement, assignment removal and app-session denial measured separately.",
+        "Residual already exported data is explicitly outside revocation."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F02"
+      ],
+      "unknowns": [
+        "Real propagation/session termination timing unknown."
+      ]
+    },
+    {
+      "id": "E2-Q04",
+      "text": "At transaction exit, complete the approved separation within four hours: deny new and existing guest access, remove memberships/trust/grants/workload bindings, and verify no indirect privileged path remains.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Separation lead",
+      "status": "declared",
+      "acceptance": [
+        "Before/after directed authority graph covers human, workload, consent, app session and data export paths.",
+        "Fresh and previously issued-session negative tests both deny.",
+        "A rollback or retained quarantine decision is independently approved."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F02",
+        "E2-F03"
+      ],
+      "unknowns": [
+        "Only a local separation model is eligible to execute; live test remains blocked."
+      ]
+    },
+    {
+      "id": "E2-Q05",
+      "text": "Share only sanitized deal documents; retain raw Orbit/Cedar identity telemetry in its approved source jurisdiction and exchange approved incident summaries.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transaction data owner",
+      "status": "declared",
+      "acceptance": [
+        "Document labels/rights/export policy tested.",
+        "Cross-tenant SOC views do not grant unrestricted raw data export."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F01",
+        "E2-F02"
+      ],
+      "unknowns": [
+        "Product-specific data, log connector and regional coverage unverified."
+      ]
+    },
+    {
+      "id": "E2-Q06",
+      "text": "Transition recovery and separation authority must not depend on Orbit guest authentication; maintain separately controlled cloud-only emergency methods and external trusted configuration/relationship state.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transition recovery owner",
+      "status": "declared",
+      "acceptance": [
+        "Target emergency administration and baseline retrieval work without source home IdP.",
+        "Entra/target service dependencies remain explicit.",
+        "Restore required transition object/edge state and deny removed privileges."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F03"
+      ],
+      "unknowns": [
+        "No authorized R1/R3 or real independent custody retrieval."
+      ]
+    },
+    {
+      "id": "E2-Q07",
+      "text": "Deployment automation is environment-bound and cannot recreate guest assignments/trust, grant consent, rewrite the baseline or create tenant administrators after separation.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transition release owner",
+      "status": "declared",
+      "acceptance": [
+        "Workload issuer/subject/audience and scoped app permission inventory.",
+        "Separation removes bindings and resource permission; forbidden recreation denies."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F02"
+      ],
+      "unknowns": [
+        "Actual credential/trust and deployed-code privileges untested."
+      ]
+    },
+    {
+      "id": "E2-Q08",
+      "text": "At day 180, close or explicitly reapprove the transition with funded identity/SOC/recovery owners; acquisition frequency and a maturity label alone cannot authorize permanent tenant sprawl.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Transaction service owner",
+      "status": "declared",
+      "acceptance": [
+        "Dated exit decision, license/operations/retention/recovery cost assumptions and staffed rota.",
+        "No automatic renewal without separation and privilege-path evidence."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E2-F01",
+        "E2-F03"
+      ],
+      "unknowns": [
+        "Staffing, lifecycle cost and exit acceptance not evidenced."
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "E2-B01",
+      "type": "tenant",
+      "contains": [
+        "Existing Cedar production tenant",
+        "Existing Orbit home tenant",
+        "Proposed isolated transition resource tenant"
+      ],
+      "owner": "Transaction risk authority",
+      "crossingRule": "Only the allow-listed deal-room collaboration path crosses; no general tenant-to-tenant administrator relationship.",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q02"
+      ]
+    },
+    {
+      "id": "E2-B02",
+      "type": "trust",
+      "contains": [
+        "Orbit home issuer",
+        "Ten sponsored transition guest identities"
+      ],
+      "owner": "Transition identity owner",
+      "crossingRule": "Home authentication is a known dependency; device/MFA trust and broad sync remain disabled until separately verified.",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q03"
+      ]
+    },
+    {
+      "id": "E2-B03",
+      "type": "administrative",
+      "contains": [
+        "Cedar admins",
+        "Orbit admins",
+        "Separate transition admins and baseline custodians"
+      ],
+      "owner": "Transition tenant owner",
+      "crossingRule": "Guest sponsor does not grant tenant roles; source admin cannot administer transition recovery.",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q06"
+      ]
+    },
+    {
+      "id": "E2-B04",
+      "type": "regulatory",
+      "contains": [
+        "Transaction retention obligations",
+        "Separate source log jurisdictions"
+      ],
+      "owner": "Transaction legal owner",
+      "crossingRule": "Verify source/target legal and processing requirements independently of tenant topology.",
+      "requirementRefs": [
+        "E2-Q05",
+        "E2-Q08"
+      ]
+    },
+    {
+      "id": "E2-B05",
+      "type": "data",
+      "contains": [
+        "Sanitized deal-room documents",
+        "Source raw logs",
+        "Approved incident summaries"
+      ],
+      "owner": "Transaction data owner",
+      "crossingRule": "No raw acquired customer/identity dataset is copied into the deal room by default.",
+      "requirementRefs": [
+        "E2-Q05"
+      ]
+    },
+    {
+      "id": "E2-B06",
+      "type": "network",
+      "contains": [
+        "Acquired network",
+        "Protected transition admin path",
+        "Deal-room endpoint"
+      ],
+      "owner": "Network security owner",
+      "crossingRule": "No network peering or flat-network trust is authorized by B2B collaboration.",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q02"
+      ]
+    },
+    {
+      "id": "E2-B07",
+      "type": "workload",
+      "contains": [
+        "Deal-room app",
+        "Transition deployment workload",
+        "Resource-side session store"
+      ],
+      "owner": "Application owner",
+      "crossingRule": "App-level reader policy and session denial remain necessary after issuer/tenant trust removal.",
+      "requirementRefs": [
+        "E2-Q03",
+        "E2-Q04",
+        "E2-Q07"
+      ]
+    },
+    {
+      "id": "E2-B08",
+      "type": "physical-safety",
+      "contains": [
+        "No manufacturing or operational equipment in the collaboration scope"
+      ],
+      "owner": "Transaction risk authority",
+      "crossingRule": "Acquired OT must receive a separate safety/identity review; it is not connected by this transition.",
+      "requirementRefs": [
+        "E2-Q01"
+      ]
+    }
+  ],
+  "authorityGraph": {
+    "direction": "from-exercises-authority-over-to",
+    "nodes": [
+      {
+        "id": "E2-A-HOME",
+        "label": "Orbit home identity authority",
+        "boundary": "E2-B02",
+        "kind": "external-identity-authority"
+      },
+      {
+        "id": "E2-A-GUEST",
+        "label": "Ten sponsored guest identities",
+        "boundary": "E2-B02",
+        "kind": "external-human"
+      },
+      {
+        "id": "E2-A-SPONSOR",
+        "label": "Cedar deal-room sponsor",
+        "boundary": "E2-B03",
+        "kind": "lifecycle-owner"
+      },
+      {
+        "id": "E2-A-ADMIN",
+        "label": "Separate transition administrator",
+        "boundary": "E2-B03",
+        "kind": "privileged-human"
+      },
+      {
+        "id": "E2-A-TRUST",
+        "label": "Allow-listed transition trust",
+        "boundary": "E2-B01",
+        "kind": "trust-configuration"
+      },
+      {
+        "id": "E2-A-APP",
+        "label": "Deal-room app/session policy",
+        "boundary": "E2-B07",
+        "kind": "enforcement-point"
+      },
+      {
+        "id": "E2-A-DATA",
+        "label": "Sanitized deal documents",
+        "boundary": "E2-B05",
+        "kind": "data-resource"
+      },
+      {
+        "id": "E2-A-CI",
+        "label": "Transition deployment workload",
+        "boundary": "E2-B07",
+        "kind": "workload-identity"
+      },
+      {
+        "id": "E2-A-EMERG",
+        "label": "Target cloud-only emergency custodians",
+        "boundary": "E2-B03",
+        "kind": "emergency-authority"
+      },
+      {
+        "id": "E2-A-CEDAR",
+        "label": "Cedar production administration",
+        "boundary": "E2-B01",
+        "kind": "protected-control-plane"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E2-AE01",
+        "from": "E2-A-HOME",
+        "to": "E2-A-GUEST",
+        "permission": "Authenticate the verified home identity; no target administrator entitlement.",
+        "credential": "Home-tenant user method and signed issuer assertion.",
+        "delegation": "Transition accepts only the named home issuer/user cohort; device/MFA claims not automatically trusted.",
+        "revocation": {
+          "actor": "Orbit identity owner and transition app owner",
+          "mechanism": "Disable source user, then remove target assignment and deny resource sessions independently.",
+          "latencyLimit": "30-minute effective-denial objective, unmeasured.",
+          "residualAccess": "Home disablement alone may leave target sessions/tokens valid."
+        },
+        "boundaryCrossings": [
+          "E2-B02",
+          "E2-B01"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE02",
+        "from": "E2-A-SPONSOR",
+        "to": "E2-A-GUEST",
+        "permission": "Approve/renew only deal-room reader assignment for at most 30 days.",
+        "credential": "Protected sponsor identity with scoped lifecycle approval.",
+        "delegation": "Transaction data owner defines ten-person cohort and purpose.",
+        "revocation": {
+          "actor": "Deal-room access owner",
+          "mechanism": "Expire/remove assignment, disable orphaned guest and request app-side session denial.",
+          "latencyLimit": "30-minute proposed objective after removal/expiry.",
+          "residualAccess": "Exported documents and independent workload access require separate handling."
+        },
+        "boundaryCrossings": [
+          "E2-B03",
+          "E2-B02"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE03",
+        "from": "E2-A-ADMIN",
+        "to": "E2-A-TRUST",
+        "permission": "Configure only approved inbound issuer/app/user allow-lists; no Cedar production role.",
+        "credential": "Separate cloud admin identity with supported phishing-resistant method.",
+        "delegation": "Transition tenant owner approves reversible scoped trust changes.",
+        "revocation": {
+          "actor": "Transition tenant incident owner",
+          "mechanism": "Remove role/trust administration, revoke applicable sessions and compare baseline.",
+          "latencyLimit": "15-minute containment objective; actual behavior untested.",
+          "residualAccess": "Previously created grants/guest assignments need graph reconciliation."
+        },
+        "boundaryCrossings": [
+          "E2-B03",
+          "E2-B01"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE04",
+        "from": "E2-A-TRUST",
+        "to": "E2-A-APP",
+        "permission": "Admit only named-issuer, named-user identity assertions for the deal-room audience.",
+        "credential": "Configured exact issuer/audience trust, not a shared client secret.",
+        "delegation": "Target application/tenant owner allow-lists the cohort.",
+        "revocation": {
+          "actor": "Transition identity and app owners",
+          "mechanism": "Remove inbound trust/assignment and enforce app denial for existing sessions.",
+          "latencyLimit": "30-minute effective-denial objective; not measured.",
+          "residualAccess": "Valid target tokens/application cookies may outlive trust removal."
+        },
+        "boundaryCrossings": [
+          "E2-B01",
+          "E2-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE05",
+        "from": "E2-A-GUEST",
+        "to": "E2-A-APP",
+        "permission": "Read only approved deal-room documents while sponsored and unexpired.",
+        "credential": "Audience-bound target token plus app session subject to resource-side denial.",
+        "delegation": "Sponsor membership plus local app reader policy; no admin action mapping.",
+        "revocation": {
+          "actor": "Application owner",
+          "mechanism": "Remove reader mapping, deny subject/session and test fresh plus previously issued sessions.",
+          "latencyLimit": "30-minute proposed objective; no real timer evidence.",
+          "residualAccess": "Previously downloaded content is not recalled by session revocation."
+        },
+        "boundaryCrossings": [
+          "E2-B02",
+          "E2-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE06",
+        "from": "E2-A-APP",
+        "to": "E2-A-DATA",
+        "permission": "Serve only sanitized documents under label/rights/export policy.",
+        "credential": "App-managed resource identity scoped to sanitized store.",
+        "delegation": "Transaction data owner grants store access.",
+        "revocation": {
+          "actor": "Transaction data owner",
+          "mechanism": "Remove resource role, block app/store sessions and rotate if compromise warrants under separate approval.",
+          "latencyLimit": "15-minute proposed objective.",
+          "residualAccess": "Data already copied outside the store needs independent response."
+        },
+        "boundaryCrossings": [
+          "E2-B07",
+          "E2-B05"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE07",
+        "from": "E2-A-CI",
+        "to": "E2-A-APP",
+        "permission": "Deploy reviewed deal-room code only; no role/consent/trust assignment capability.",
+        "credential": "Transition-specific workload federation binding with exact issuer/subject/audience.",
+        "delegation": "Transition release owner grants scoped deployment permission.",
+        "revocation": {
+          "actor": "Transition release owner",
+          "mechanism": "Remove federation binding and resource permission, cancel deployments and inspect previously deployed code.",
+          "latencyLimit": "15-minute proposed objective.",
+          "residualAccess": "Disabling credential does not undo previously deployed privileged code."
+        },
+        "boundaryCrossings": [
+          "E2-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E2-AE08",
+        "from": "E2-A-EMERG",
+        "to": "E2-A-TRUST",
+        "permission": "Emergency removal/recovery of approved transition trust during home-IdP unavailability.",
+        "credential": "Two separately controlled .onmicrosoft.com cloud-only target identities with permanent-active Global Administrator assignments and supported phishing-resistant methods; no Orbit guest authentication.",
+        "delegation": "Target tenant owner pre-approves emergency custody/monitoring.",
+        "revocation": {
+          "actor": "Independent transition incident owner",
+          "mechanism": "Contain compromised method/account only after preserving another verified emergency path.",
+          "latencyLimit": "Incident-specific; untested.",
+          "residualAccess": "Target Entra and management APIs still required."
+        },
+        "boundaryCrossings": [
+          "E2-B03",
+          "E2-B01"
+        ],
+        "status": "declared"
+      }
+    ],
+    "indirectPaths": [
+      {
+        "id": "E2-AP01",
+        "nodeIds": [
+          "E2-A-HOME",
+          "E2-A-GUEST",
+          "E2-A-APP",
+          "E2-A-DATA"
+        ],
+        "edgeIds": [
+          "E2-AE01",
+          "E2-AE05",
+          "E2-AE06"
+        ],
+        "meaning": "Home compromise can affect sanitized app access; it must not become Cedar or transition tenant administration."
+      },
+      {
+        "id": "E2-AP02",
+        "nodeIds": [
+          "E2-A-CI",
+          "E2-A-APP",
+          "E2-A-DATA"
+        ],
+        "edgeIds": [
+          "E2-AE07",
+          "E2-AE06"
+        ],
+        "meaning": "Deployed code is an indirect data path; separation also removes workload bindings and reviews app code."
+      }
+    ],
+    "forbiddenPaths": [
+      "Orbit home/guest → Cedar production administration",
+      "Orbit guest → transition tenant role, consent or trust administration",
+      "Sponsor → unrestricted user provisioning or tenant role grants",
+      "Transition workload → recreate removed trust/guest assignments",
+      "Emergency separation → source-home-IdP approval dependency"
+    ]
+  },
+  "recoveryGraph": {
+    "direction": "from-depends-on-to",
+    "nodes": [
+      {
+        "id": "E2-R-EXIT",
+        "label": "Verified transition separation",
+        "boundary": "E2-B01",
+        "kind": "recovery-goal"
+      },
+      {
+        "id": "E2-R-ADMIN",
+        "label": "Independent target emergency admin",
+        "boundary": "E2-B03",
+        "kind": "bootstrap-authority"
+      },
+      {
+        "id": "E2-R-CUSTODY",
+        "label": "Target offline method custody",
+        "boundary": "E2-B03",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E2-R-CLOUD",
+        "label": "Target Entra and app APIs",
+        "boundary": "E2-B01",
+        "kind": "service-dependency"
+      },
+      {
+        "id": "E2-R-BASE",
+        "label": "External approved object/edge baseline",
+        "boundary": "E2-B03",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E2-R-SESSION",
+        "label": "App session and workload deny controls",
+        "boundary": "E2-B07",
+        "kind": "recovery-component"
+      },
+      {
+        "id": "E2-R-HOME",
+        "label": "Rejected source guest sign-in bootstrap",
+        "boundary": "E2-B02",
+        "kind": "rejected-bootstrap"
+      },
+      {
+        "id": "E2-R-TRUST",
+        "label": "Cross-tenant trust configuration",
+        "boundary": "E2-B01",
+        "kind": "recovery-component"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E2-RE01",
+        "from": "E2-R-EXIT",
+        "to": "E2-R-ADMIN",
+        "dependency": "Independent target authority removes/reconstructs scoped trust.",
+        "failureEffect": "Source compromise can obstruct separation if target control is unavailable.",
+        "alternative": "Second separately controlled target emergency account."
+      },
+      {
+        "id": "E2-RE02",
+        "from": "E2-R-ADMIN",
+        "to": "E2-R-CUSTODY",
+        "dependency": "Offline method retrieval independent of Orbit.",
+        "failureEffect": "Target admin is unusable despite existing account.",
+        "alternative": "Separate verified custody route."
+      },
+      {
+        "id": "E2-RE03",
+        "from": "E2-R-ADMIN",
+        "to": "E2-R-CLOUD",
+        "dependency": "Entra/target APIs and protected client path work.",
+        "failureEffect": "No cloud trust changes; this is not full cloud-outage recovery.",
+        "alternative": "Pre-approved app-side deny where independently reachable; mark cloud cleanup pending."
+      },
+      {
+        "id": "E2-RE04",
+        "from": "E2-R-EXIT",
+        "to": "E2-R-BASE",
+        "dependency": "Trusted complete guest/grant/workload graph and target inventory.",
+        "failureEffect": "Residual access may be missed.",
+        "alternative": "Quarantine all transition app access until inventory reconciled."
+      },
+      {
+        "id": "E2-RE05",
+        "from": "E2-R-EXIT",
+        "to": "E2-R-SESSION",
+        "dependency": "Resource-side sessions, permissions and workload bindings actually deny.",
+        "failureEffect": "Trust removal looks complete while old sessions or app credentials still work.",
+        "alternative": "Keep application access blocked and retain logs."
+      },
+      {
+        "id": "E2-RE06",
+        "from": "E2-R-EXIT",
+        "to": "E2-R-TRUST",
+        "dependency": "Remove/reconcile named inbound trust, assignments and guest lifecycle links.",
+        "failureEffect": "New access can be issued again.",
+        "alternative": "Explicit deny at app and issuer scope pending target cleanup."
+      },
+      {
+        "id": "E2-RE07",
+        "from": "E2-R-HOME",
+        "to": "E2-R-TRUST",
+        "dependency": "Rejected design: source guest sign-in needs working cross-tenant trust.",
+        "failureEffect": "Removing trust prevents cleanup authentication.",
+        "alternative": "Target cloud-only admin is not a guest."
+      },
+      {
+        "id": "E2-RE08",
+        "from": "E2-R-TRUST",
+        "to": "E2-R-HOME",
+        "dependency": "Rejected design: only source guest admin can repair/remove trust.",
+        "failureEffect": "Source failure/compromise makes recovery circular.",
+        "alternative": "Independent target admin/custody breaks this proposed edge."
+      }
+    ],
+    "rejectedEdgeIds": [
+      "E2-RE07",
+      "E2-RE08"
+    ],
+    "independentAnchors": [
+      {
+        "nodeId": "E2-R-CUSTODY",
+        "independentOf": [
+          "Orbit home IdP and administrators",
+          "Cross-tenant guest sign-in",
+          "Normal ticketing/password vault"
+        ],
+        "remainingDependencies": [
+          "Target Entra cloud authentication",
+          "Custodian and supported method/device"
+        ],
+        "proofRequired": "Authorized R1 test in target tenant with source path not required; not executed."
+      },
+      {
+        "nodeId": "E2-R-BASE",
+        "independentOf": [
+          "Transition tenant write access",
+          "Acquired admin credentials"
+        ],
+        "remainingDependencies": [
+          "Independent integrity/custody and current app grant inventory",
+          "Target/cloud APIs for cleanup"
+        ],
+        "proofRequired": "Retrieve trusted graph and reconcile all relationships during approved separation; not executed."
+      }
+    ],
+    "cycles": [
+      {
+        "id": "E2-RC01",
+        "nodeIds": [
+          "E2-R-HOME",
+          "E2-R-TRUST"
+        ],
+        "status": "broken-by-design-not-tested",
+        "mitigation": "RE07/RE08 expose the rejected guest-admin bootstrap. Recovery must use target cloud-only authority and offline custody, then prove separation with fresh and existing-session tests."
+      }
+    ],
+    "restorationOrder": [
+      "Verify target-only emergency administration/custody",
+      "Retrieve trusted guest/grant/workload/session inventory",
+      "Activate app/resource denial before removing trust",
+      "Remove/reconcile assignments, trust, consent and workload bindings",
+      "Test fresh and previously issued access plus forbidden admin paths",
+      "Retain data/export gaps, evidence and approved rollback/closure decision"
+    ]
+  },
+  "controlApplicability": [
+    {
+      "controlId": "N-01",
+      "applicability": "applicable",
+      "rationale": "Three tenant contexts are distinct from source trust, target app, data and administration boundaries; the acquired network is not implicitly connected.",
+      "owner": "Acquisition architect",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q02"
+      ],
+      "requiredEvidence": [
+        "Approved source/target eight-type boundary and directed data/trust inventory"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-02",
+      "applicability": "applicable",
+      "rationale": "The transition boundary is justified by an explicit unmet administration requirement, not acquisition frequency; keep Cedar production unchanged and time-box the additional scope.",
+      "owner": "Transaction risk authority",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "Existing-tenant fit failure, transition owner/cost and dated exit decision"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-03",
+      "applicability": "applicable",
+      "rationale": "Recovery/separation administration must be independent of acquired home authentication, while guest collaboration deliberately retains its source dependency; those scopes are not conflated.",
+      "owner": "Transition recovery owner",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Target-only emergency authority/custody proof and forbidden source-admin path tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-04",
+      "applicability": "applicable",
+      "rationale": "Discovery/remediation precede expanded trust; the ten-user pilot and 180-day exit include both human and workload separation, not only guest removal.",
+      "owner": "Acquisition security lead",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q02",
+        "E2-Q04"
+      ],
+      "requiredEvidence": [
+        "Discovery record, restricted settings, privilege review and authorized live separation matrix"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-05",
+      "applicability": "applicable",
+      "rationale": "The S1 deal-room may stop new guest sign-ins on source/cloud loss; target emergency control, retained evidence and separation contacts must remain defined.",
+      "owner": "Transition service owner",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "S1 source/target dependency matrix and independent contact/evidence retrieval"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-06",
+      "applicability": "applicable",
+      "rationale": "Guest sponsor, app administrator, tenant administrator, emergency custodian and baseline owner have different powers; none inherits Cedar production administration.",
+      "owner": "Transition identity owner",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q06",
+        "E2-Q07"
+      ],
+      "requiredEvidence": [
+        "Role/grant inventory and denied guest/sponsor/CI escalation paths"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-07",
+      "applicability": "applicable",
+      "rationale": "Transition and emergency administrators require supported phishing-resistant methods; acquired MFA assertions are not accepted as equivalent without verification.",
+      "owner": "Authentication lead",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Actual method/claim evaluation, fresh admin sign-ins and trust-setting review"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-08",
+      "applicability": "applicable",
+      "rationale": "The target needs two monitored cloud-only emergency paths that do not authenticate as source guests or depend on the trust being removed.",
+      "owner": "Target emergency custodian",
+      "requirementRefs": [
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Authorized target R1 two-account independent-method and alert evidence"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-09",
+      "applicability": "unknown",
+      "rationale": "Orbit's hybrid/PHS eligibility and synchronization state are not supplied; target guest collaboration does not prove or require a particular source password method.",
+      "owner": "Orbit identity owner",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Source identity discovery, legal acceptance and separate R2 evidence if hybrid fallback is relied on"
+      ],
+      "implementationStatus": "unknown"
+    },
+    {
+      "controlId": "N-10",
+      "applicability": "applicable",
+      "rationale": "The named guest cohort/app requires resource-tenant access-policy review, narrow exclusions and no blanket trust of source device/MFA assertions.",
+      "owner": "Target Conditional Access owner",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q03"
+      ],
+      "requiredEvidence": [
+        "Inbound/outbound policy scope, report-only results and wrong-issuer/app/user deny events"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-11",
+      "applicability": "applicable",
+      "rationale": "Transition app identities, service principals, federation bindings and consent are separation assets alongside human guests.",
+      "owner": "Transition workload owner",
+      "requirementRefs": [
+        "E2-Q04",
+        "E2-Q07"
+      ],
+      "requiredEvidence": [
+        "Owned non-human/credential/grant inventory and binding-disable tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-12",
+      "applicability": "not-applicable",
+      "rationale": "The ten-human deal-room pilot has no logical AI agent; adding a separately managed agent would require sponsor and technical owner plus identity-specific policy review.",
+      "owner": "Deal-room product owner",
+      "requirementRefs": [
+        "E2-Q02"
+      ],
+      "requiredEvidence": [
+        "Agent-free pilot scope and new-agent review trigger"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-13",
+      "applicability": "applicable",
+      "rationale": "Use a transition-bound issuer/subject/audience deployment binding instead of a reusable shared secret, then remove both the binding and resource permission at exit.",
+      "owner": "Transition release owner",
+      "requirementRefs": [
+        "E2-Q04",
+        "E2-Q07"
+      ],
+      "requiredEvidence": [
+        "Binding/resource-role before/after diff and post-separation deployment denial"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-14",
+      "applicability": "not-applicable",
+      "rationale": "Acquired industrial devices are explicitly excluded from the deal-room scope and receive no network or identity connection through this design.",
+      "owner": "Acquisition security lead",
+      "requirementRefs": [
+        "E2-Q01"
+      ],
+      "requiredEvidence": [
+        "Asset/network exclusion confirmation and separate OT review trigger"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-15",
+      "applicability": "applicable",
+      "rationale": "Transition responders need target-side denial/separation authority without waiting for source helpdesk or central ticket synchronization.",
+      "owner": "Transition SOC lead",
+      "requirementRefs": [
+        "E2-Q04",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Incident authority matrix, independent contacts and app-side deny procedure"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-16",
+      "applicability": "applicable",
+      "rationale": "Home and target event provenance/retention stay explicit; global incident summaries must not silently export raw cross-jurisdiction identity records.",
+      "owner": "Transaction telemetry owner",
+      "requirementRefs": [
+        "E2-Q05"
+      ],
+      "requiredEvidence": [
+        "Per-tenant connector/workspace map, summary schema and export-denial/retention tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-17",
+      "applicability": "applicable",
+      "rationale": "Only sanitized documents with service-supported item protection are shared; a container label is insufficient and source trust removal cannot recall downloads, so usage rights and export restrictions are separate controls.",
+      "owner": "Transaction data owner",
+      "requirementRefs": [
+        "E2-Q03",
+        "E2-Q05"
+      ],
+      "requiredEvidence": [
+        "Sanitization/label/rights coverage and download/export acceptance matrix"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-18",
+      "applicability": "applicable",
+      "rationale": "The transaction crosses legal/data jurisdictions, requiring separate operator, processing, key, telemetry and recovery analysis rather than assuming a third tenant creates sovereignty.",
+      "owner": "Transaction legal owner",
+      "requirementRefs": [
+        "E2-Q05"
+      ],
+      "requiredEvidence": [
+        "Signed dimensional cross-border assessment and actual service/key coverage"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-19",
+      "applicability": "unknown",
+      "rationale": "Acquired provider inventory is intentionally undiscovered; a deal-room-only pilot does not establish multicloud enforcement coverage for the acquired estate.",
+      "owner": "Acquisition discovery owner",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "Provider inventory and separate provider-specific control map before expanded integration"
+      ],
+      "implementationStatus": "unknown"
+    },
+    {
+      "controlId": "N-20",
+      "applicability": "applicable",
+      "rationale": "Sponsor lifecycle, guest app sessions and CI-deployed code are directed privilege paths; separation must remove every effective path, not just a tenant trust checkbox.",
+      "owner": "Integration security owner",
+      "requirementRefs": [
+        "E2-Q03",
+        "E2-Q04",
+        "E2-Q07"
+      ],
+      "requiredEvidence": [
+        "Full human/workload/consent/session graph and negative tests per remaining path"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-21",
+      "applicability": "applicable",
+      "rationale": "The transition baseline includes relationships and ID mappings so rollback does not resurrect malicious grants; custody must be outside acquired and target admin compromise.",
+      "owner": "Transition recovery owner",
+      "requirementRefs": [
+        "E2-Q04",
+        "E2-Q06"
+      ],
+      "requiredEvidence": [
+        "Independent baseline provenance and authorized R3 plus separation rollback results"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-22",
+      "applicability": "applicable",
+      "rationale": "Time-boxed trust, sponsorship and federation bindings need versioned desired state and drift alarms to prevent unreviewed expansion or post-exit recreation.",
+      "owner": "Transition policy owner",
+      "requirementRefs": [
+        "E2-Q02",
+        "E2-Q07",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "Reviewed policy versions, expiry/drift records and denied unauthorized recreation"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-23",
+      "applicability": "not-applicable",
+      "rationale": "No Azure subscription/management-group hierarchy is designed by this collaboration-only pilot; Entra tenant contexts are not Azure management-group branches.",
+      "owner": "Transition platform owner",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q02"
+      ],
+      "requiredEvidence": [
+        "Scope confirmation; review Azure hierarchy only if workloads/subscriptions are later onboarded"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-24",
+      "applicability": "applicable",
+      "rationale": "Each sponsored user, trust, grant and exit test traces to an owner/expiry/requirement; local lifecycle evidence cannot be promoted to live separation assurance.",
+      "owner": "Transaction assurance lead",
+      "requirementRefs": [
+        "E2-Q03",
+        "E2-Q04",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "Traceability ledger, actual per-path evidence and explicit synthetic-versus-live labels"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-25",
+      "applicability": "applicable",
+      "rationale": "A temporary extra tenant creates duplicate licensing, administration, telemetry retention and recovery workload; the exit owner must fund those costs and removal.",
+      "owner": "Transaction service owner",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "180-day lifecycle cost/staffing assumptions, budget owner and closure costs"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-26",
+      "applicability": "applicable",
+      "rationale": "Unknown source discovery, privilege containment and untested effective separation prevent deployment readiness regardless of acquisition or maturity labels.",
+      "owner": "Transaction review board",
+      "requirementRefs": [
+        "E2-Q01",
+        "E2-Q04",
+        "E2-Q08"
+      ],
+      "requiredEvidence": [
+        "Final shared-engine output and independently accepted mandatory path/exit evidence"
+      ],
+      "implementationStatus": "declared-only"
+    }
+  ],
+  "decision": {
+    "status": "provisional-not-authorized",
+    "selectedAlternativeId": "E2-ALT1",
+    "dimensions": {
+      "topology": "T2 restricted transition resource boundary justified by E2-Q01, not by M&A frequency",
+      "identity": "Orbit home auth remains a collaboration dependency; target administration is separately controlled",
+      "sovereignty": "Sanitized data and per-source telemetry constraints, not automatic sovereignty",
+      "connectivity": "S1 collaboration with controlled stop/deny on cloud/home failure",
+      "recovery": "Target-only emergency custody and external relationship baseline proposed",
+      "economics": "180-day duplicated operation/retention/recovery costs require explicit owner estimates; no pricing claim."
+    },
+    "alternatives": [
+      {
+        "id": "E2-ALT1",
+        "name": "Time-boxed transition resource tenant with ten-user app allow-list",
+        "disposition": "selected-provisionally",
+        "reason": "Meets the fictional explicit administration boundary without granting acquired identities Cedar production control; lifecycle and exit remain unverified.",
+        "tradeoffs": [
+          "Home authentication remains a collaboration dependency.",
+          "Extra tenant/app/telemetry/recovery administration needs funding.",
+          "Effective separation requires app-session and workload cleanup, not only trust removal."
+        ]
+      },
+      {
+        "id": "E2-ALT2",
+        "name": "Immediate broad source synchronization and Cedar production roles",
+        "disposition": "rejected",
+        "reason": "Violates E2-Q01/Q02 restricted transition and unassessed-source privilege requirements.",
+        "tradeoffs": [
+          "Simpler initial collaboration would expand the compromised-source blast radius.",
+          "Source identity proof, device/MFA trust and app grants would be assumed before discovery."
+        ]
+      },
+      {
+        "id": "E2-ALT3",
+        "name": "Permanent fully meshed multitenant trust",
+        "disposition": "rejected",
+        "reason": "Violates time-boxed purpose/exit and creates unbounded privilege paths without an approved mandatory need.",
+        "tradeoffs": [
+          "More lifecycle/revocation paths and duplicated monitoring/recovery.",
+          "Cross-tenant topology does not provide independent authentication by itself."
+        ]
+      },
+      {
+        "id": "E2-ALT4",
+        "name": "No shared app until acquisition discovery completes",
+        "disposition": "deferred",
+        "reason": "Safest fallback if restricted trust or effective app-session denial cannot be demonstrated; transaction owner must accept delayed collaboration.",
+        "tradeoffs": [
+          "Delays collaboration.",
+          "Avoids introducing an unverified trust path."
+        ]
+      }
+    ],
+    "unmetPrerequisites": [
+      "Acquired identity/provider discovery and source proofing",
+      "Actual tenant/app policy and session revocation tests",
+      "Bounded authorized target recovery proof before any transition topology expansion, then R1/R3 and separation execution",
+      "Independent baseline/custody and operating evidence",
+      "Budgeted 180-day lifecycle and exit acceptance"
+    ],
+    "assessmentInput": {
+      "boundary": "regulatory",
+      "sovereignty": "residency",
+      "survivability": "1",
+      "ot": "no",
+      "boundaryFit": "unmet",
+      "identityDependency": "shared",
+      "sovereigntyEvidence": "unknown",
+      "localServices": "unknown",
+      "upstreamDependency": "present",
+      "recoveryRequirement": "independent",
+      "recoveryDependency": "unknown",
+      "privilegePath": "unknown",
+      "localAuthority": "unknown",
+      "safetyReview": "unknown",
+      "otFallback": "unknown",
+      "staffing": "unknown",
+      "monitoring": "unknown",
+      "response": "unknown",
+      "recoveryTest": "unknown",
+      "ma": "high",
+      "autonomy": "high",
+      "maturity": "developing"
+    },
+    "assessmentOutput": {
+      "contractVersion": "1.0",
+      "state": "insufficient-evidence",
+      "advisoryOnly": true,
+      "evidenceBasis": "self-reported",
+      "inputs": {
+        "boundary": "regulatory",
+        "sovereignty": "residency",
+        "survivability": "1",
+        "ot": "no",
+        "boundaryFit": "unmet",
+        "identityDependency": "shared",
+        "sovereigntyEvidence": "unknown",
+        "localServices": "unknown",
+        "upstreamDependency": "present",
+        "recoveryRequirement": "independent",
+        "recoveryDependency": "unknown",
+        "privilegePath": "unknown",
+        "localAuthority": "unknown",
+        "safetyReview": "unknown",
+        "otFallback": "unknown",
+        "staffing": "unknown",
+        "monitoring": "unknown",
+        "response": "unknown",
+        "recoveryTest": "unknown",
+        "ma": "high",
+        "autonomy": "high",
+        "maturity": "developing"
+      },
+      "dimensions": {
+        "topology": {
+          "state": "insufficient-evidence",
+          "value": "T2",
+          "summary": "Separate tenant boundary for a declared requirement that one tenant cannot meet."
+        },
+        "identity": {
+          "state": "insufficient-evidence",
+          "value": "regulatory",
+          "summary": "Shared authority may be acceptable only within the declared containment requirements."
+        },
+        "sovereignty": {
+          "state": "candidate",
+          "value": "residency",
+          "summary": "Evaluate data processing, operators, keys, telemetry and legal scope independently of tenant count."
+        },
+        "connectivity": {
+          "state": "insufficient-evidence",
+          "value": "S1",
+          "pattern": null,
+          "summary": "S1 describes required function and duration, not proven uptime or tenant count."
+        },
+        "recovery": {
+          "state": "insufficient-evidence",
+          "value": "independent",
+          "summary": "Recovery authority and dependency declarations require independent review and a scoped restore exercise; no graph was inspected."
+        }
+      },
+      "readiness": {
+        "state": "insufficient-evidence",
+        "summary": "All applicable prerequisites must be satisfied. Declarations are self-reported, not inspected or operationally verified. A candidate is not deployment approval; maturity labels are not readiness evidence."
+      },
+      "gates": [
+        {
+          "id": "identity-authority",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "sovereignty-authority",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "disconnected-dependencies",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "ot-safety",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "recovery-independence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "recovery-dependency-unknown"
+          ]
+        },
+        {
+          "id": "privilege-containment",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "privilege-path-unknown"
+          ]
+        },
+        {
+          "id": "operating-evidence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "staffing-unknown",
+            "monitoring-unknown",
+            "response-unknown",
+            "recovery-test-unknown"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Inputs describe the proposed configuration and are self-reported; no tenant, configuration, authority graph, evidence file or live service has been inspected.",
+        "The one-tenant fit declaration concerns actual mandatory requirements, not acquisition frequency, legal labels, key ownership or organizational preference alone.",
+        "S0-S4 are continuity requirements; T1-T3 are tenant/authority patterns, T4 is a disconnected operating overlay, and T5 is a time-bounded transition pattern.",
+        "No security risk, cost, availability guarantee, legal approval or safety certification is calculated."
+      ],
+      "reasons": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "single-tenant-unmet-requirement",
+          "message": "A declared mandatory requirement cannot be met within one tenant. Review a separate boundary and its actual controls, not just its tenant count.",
+          "dimension": "topology",
+          "fields": [
+            "boundaryFit"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "acquisition-context-only",
+          "message": "Frequent acquisitions suggest a time-bounded T5 transition review, not an automatic additional tenant or permanent topology.",
+          "dimension": "topology",
+          "fields": [
+            "ma"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "autonomy-context-only",
+          "message": "Business autonomy is context; identify the specific unmet authority or isolation requirement before adding tenants.",
+          "dimension": "topology",
+          "fields": [
+            "autonomy"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "regulatory-label-not-boundary",
+          "message": "A regulatory or legal-entity label does not establish incompatible tenant requirements. Document the obligation and whether scoped controls satisfy it.",
+          "dimension": "topology",
+          "fields": [
+            "boundary",
+            "boundaryFit"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "maturity-label-not-evidence",
+          "message": "A developing, managed or automated maturity label neither establishes nor disproves operating readiness; staffing, monitoring, response and recovery evidence are evaluated separately.",
+          "dimension": "readiness",
+          "fields": [
+            "maturity"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "unmetPrerequisites": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "rejectedAlternatives": [
+        {
+          "id": "T1",
+          "dimension": "topology",
+          "state": "excluded",
+          "reasonCodes": [
+            "single-tenant-unmet-requirement"
+          ],
+          "message": "The declared mandatory requirement is not satisfied inside one tenant."
+        }
+      ],
+      "nextValidationChecks": [
+        {
+          "code": "validate-recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "validate-local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "validate-staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "review-authority-paths",
+          "message": "Review the boundary register and authentication, administration, federation and transitive privilege paths with accountable owners.",
+          "dimension": "identity",
+          "fields": [
+            "boundaryFit",
+            "identityDependency",
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "review-sovereignty-scope",
+          "message": "Validate applicable legal obligations, product/cloud availability, processing locations, operator scope and key controls; do not infer sovereign-cloud parity.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereignty",
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "exercise-outage-functions",
+          "message": "Define the exact required functions and duration, then exercise identity, policy, keys, DNS, communications, telemetry and updates under an authorized upstream-outage scenario.",
+          "dimension": "connectivity",
+          "fields": [
+            "survivability",
+            "localServices",
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "exercise-independent-recovery",
+          "message": "Have owners review recovery dependencies and exercise an authorized restore with known-good identities, keys, configuration, communications and retained evidence.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryRequirement",
+            "recoveryDependency",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "verify-operating-artifacts",
+          "message": "Inspect staffing assignments, monitoring coverage, response runbooks and dated recovery exercise artifacts. A self-description is not inspected configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing",
+            "monitoring",
+            "response",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "validationErrors": []
+    },
+    "reconsiderWhen": [
+      "Discovery proves the current tenant can safely meet the transition requirement",
+      "App cannot deny existing sessions/workload access within the objective",
+      "New source/provider/OT integration expands scope",
+      "Day 180 arrives or the transaction ends",
+      "Any acquired-to-production privilege path is discovered"
+    ]
+  },
+  "validation": {
+    "overallStatus": "partial-local-synthetic-only",
+    "authorizationRef": "AUTH-REQUEST-01",
+    "executedEvidenceRefs": [
+      "LOCAL-NODE-TESTS-01",
+      "LOCAL-SYNTHETIC-01"
+    ],
+    "scenarios": [
+      {
+        "id": "E2-V01",
+        "requirementRefs": [
+          "E2-Q02",
+          "E2-Q03",
+          "E2-Q04",
+          "E2-Q07"
+        ],
+        "runbookRef": "R3",
+        "expected": [
+          "Local model permits only the named issuer/cohort/app/action, demonstrates existing-session residual access, then denies fresh/session/workload paths after modeled separation."
+        ],
+        "observed": [
+          "E2-01: true — Named source/cohort/app can read the synthetic document",
+          "E2-02: [null,null,null,false] — Unlisted user, issuer, app and admin action are denied by the local model",
+          "E2-03: {\"fresh\":null,\"oldSession\":true} — Source disablement blocks new model sign-in but does not magically revoke a resource session",
+          "E2-04: false — Explicit resource-side denial removes the existing model session",
+          "E2-05: {\"fresh\":null,\"oldSession\":false,\"deploy\":false,\"memberships\":0,\"trust\":false} — Modeled separation denies fresh and old sessions and removes deployment binding",
+          "E2-06: null — Expired sponsorship denies new model access at exactly 30 logical days"
+        ],
+        "status": "passed-local-synthetic-only",
+        "evidenceRefs": [
+          "LOCAL-SYNTHETIC-01#E2-01",
+          "LOCAL-SYNTHETIC-01#E2-02",
+          "LOCAL-SYNTHETIC-01#E2-03",
+          "LOCAL-SYNTHETIC-01#E2-04",
+          "LOCAL-SYNTHETIC-01#E2-05",
+          "LOCAL-SYNTHETIC-01#E2-06"
+        ],
+        "scope": "Eligible only for local synthetic policy-model execution; not Entra or application-service separation."
+      },
+      {
+        "id": "E2-V02",
+        "requirementRefs": [
+          "E2-Q03",
+          "E2-Q04"
+        ],
+        "runbookRef": "R3",
+        "expected": [
+          "Authorized real scoped trust/assignment/session/consent/workload separation with measured effective denial within four hours and user removal within 30 minutes."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "Operational tenant and resource-session execution remains unapproved."
+      },
+      {
+        "id": "E2-V03",
+        "requirementRefs": [
+          "E2-Q06"
+        ],
+        "runbookRef": "R1",
+        "expected": [
+          "Target-only emergency sign-in and trusted baseline access do not require Orbit guest authentication."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "No target tenant or emergency account use authorized."
+      }
+    ],
+    "limitations": [
+      "A local state machine can demonstrate only its own modeled separation semantics.",
+      "No live trust, guest, session, role, consent, workload binding or data export was tested.",
+      "Fictional targets/retention/timing/costs are design inputs, not measured organization results."
+    ]
+  }
+}

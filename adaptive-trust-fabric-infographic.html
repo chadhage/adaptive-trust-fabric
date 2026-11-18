@@ -152,6 +152,7 @@
       .topbar { display: none; }
       .hero { padding-block: 12px 24px; }
       section.content { padding-block: 20px; }
+      .section-head { break-inside: avoid; break-after: avoid-page; }
       .card, .boundary-callout, .scenario, .review { break-inside: avoid; }
       .flow .card::after { display: none; }
       footer { padding-block: 16px; }
@@ -193,7 +194,7 @@
         <article class="card"><span class="step-number">3</span><h3>Enforce</h3><p>Apply the decision at the relevant identity, application, API, cloud, data or local control.</p></article>
         <article class="card"><span class="step-number">4</span><h3>Observe &amp; review</h3><p>Record actions, monitor for drift and revoke or change access when conditions or authority change.</p></article>
       </div>
-      <p class="note">The same principle applies to non-human identities: give agents accountable sponsors, least privilege and a way to revoke their access.</p>
+      <p class="note">Give each separately managed logical agent an identity, sponsor and technical owner—not automatically each replica or session. Distinguish OBO, app-only and agent-user policy targets; API-key access bypasses Entra Conditional Access.</p>
     </section>
 
     <section class="content" aria-labelledby="architecture-title">
@@ -216,16 +217,17 @@
       </div>
       <div class="boundary-callout">
         <strong>Start with one tenant—if it meets the requirements.</strong>
-        <p>Add separation when a documented identity, legal, sovereignty, safety, operational or recovery requirement cannot be met within it. Record ownership, dependencies and the cost of operating the boundary.</p>
+        <p>Add separation only for a documented mandatory requirement that cannot be met within it. Regulatory labels, local key custody and acquisition frequency alone are not that proof. Record ownership, dependencies and operating cost.</p>
       </div>
       <div class="patterns">
         <article class="card"><span class="code">T1</span><h3>Delegated</h3><p>One tenant where shared administration and required boundaries are sufficient.</p></article>
         <article class="card"><span class="code">T2</span><h3>Federated</h3><p>Separate tenants collaborate while maintaining distinct control planes.</p></article>
-        <article class="card"><span class="code">T3</span><h3>Independent</h3><p>Local authority is required for identity, keys, administration or recovery.</p></article>
-        <article class="card"><span class="code">T4</span><h3>Disconnected</h3><p>An enclave or operational technology (OT) site must operate without upstream services.</p></article>
+        <article class="card"><span class="code">T3</span><h3>Independent</h3><p>Independently governed identities and removal of shared privileged paths—not necessarily offline or on-premises identity.</p></article>
+        <article class="card"><span class="code">T4</span><h3>Disconnected</h3><p>S4 local operating overlay; decide identity and tenant topology separately.</p></article>
         <article class="card"><span class="code">T5</span><h3>Transition</h3><p>Restricted access supports acquisition discovery and remediation before expansion.</p></article>
       </div>
       <p class="tradeoff"><strong>Tradeoff:</strong> more control planes can reduce shared exposure, but add policy, monitoring, staffing and recovery complexity. Shared identities and privileged integrations can also cross an intended boundary.</p>
+      <p class="note"><strong>Assessment states:</strong> candidate = all required facts declared with no known mandatory conflict; insufficient evidence = required facts unknown or invalid; excluded = known mandatory conflict. None is deployment approval. Identity, control-plane, connectivity and recovery decisions remain independent.</p>
     </section>
 
     <section class="content" aria-labelledby="survival-title">
@@ -235,11 +237,12 @@
       </div>
       <div class="tiers">
         <article class="card tier"><span class="code">S0</span><h3>Cloud-dependent</h3><p>Normal online operation; central identity, policy and security operations.</p></article>
-        <article class="card tier"><span class="code">S1</span><h3>Transient outage</h3><p>Required functions continue for hours using supported session continuity and emergency access.</p></article>
+        <article class="card tier"><span class="code">S1</span><h3>Transient outage</h3><p>Only bounded, tested session or cached behavior; cloud emergency accounts still require Entra.</p></article>
         <article class="card tier"><span class="code">S2</span><h3>Extended degraded</h3><p>Days of reduced operation with selected local authorization, telemetry and recovery resources.</p></article>
         <article class="card tier"><span class="code">S3</span><h3>Independent operation</h3><p>Required functions continue without upstream control planes, including local detection and response.</p></article>
         <article class="card tier"><span class="code">S4</span><h3>Disconnected</h3><p>Intentional isolation with local identity, offline policy distribution, monitoring and recovery.</p></article>
       </div>
+      <p class="note">Existing sessions and emergency accounts do not bypass a full Entra outage. PHS backup is not automatic switchover from federation or pass-through authentication; a documented cutover must be tested.</p>
       <div class="scenario">
         <div><span class="label">Example / S3 site</span><h3>What if the connection to central services fails?</h3><p class="note">For a site that must continue independently, design and test the required local capabilities—not just a redundant network link.</p></div>
         <ul>
@@ -263,6 +266,20 @@
       </div>
       <div class="review"><strong>Review in order:</strong> mandatory constraints → authority and dependencies → failure scenarios → risk, cost and complexity → operating capability. Reject designs that violate a mandatory requirement before comparing tradeoffs.</div>
       <p class="note">Confirm legal, safety and product requirements for each environment. Approve deployment only when scenario tests demonstrate required continuity and recovery behavior.</p>
+    </section>
+
+    <section class="content" aria-labelledby="gate-title">
+      <div class="section-head">
+        <div><span class="section-number">06 / Readiness gates</span><h2 id="gate-title">Prove the baseline before expanding</h2></div>
+        <p>Planning ranges are not permission to postpone protected access or the first recovery proof.</p>
+      </div>
+      <div class="flow">
+        <article class="card"><span class="step-number">1</span><h3>0-90 days</h3><p>Protect privileged paths, test emergency credentials and prove bounded initial recovery against RTO/RPO.</p></article>
+        <article class="card"><span class="step-number">2</span><h3>3-9 months</h3><p>Expand controls only after baseline evidence and accountable ownership are accepted.</p></article>
+        <article class="card"><span class="step-number">3</span><h3>9-18 months</h3><p>Broaden local functions, safety-approved response and acquisition separation tests.</p></article>
+        <article class="card"><span class="step-number">4</span><h3>18-36 months</h3><p>Broaden isolated recovery and combined-failure exercises; reduce drift and unnecessary complexity.</p></article>
+      </div>
+      <p class="note"><a href="reference-validation/index.html">Worked examples and runbooks</a> are synthetic review artifacts. Live Entra, AD, PHS and OT validation was not performed and remains blocked pending authorized lab access. Read the execution ledger before relying on any test claim.</p>
     </section>
   </main>
 

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "R2",
+  "title": "Controlled activation of PHS cloud authentication for hybrid test users",
+  "implementationStatus": "draft-delivered-not-live-validated",
+  "purpose": "Activate a previously prepared cloud authentication path when an approved hybrid authentication design needs switchover, then prove fresh sign-ins and rollback for synthetic users only.",
+  "scope": {
+    "kind": "synthetic-runbook",
+    "permittedTarget": "An explicitly allow-listed isolated test tenant, test domain, synchronization instance and disposable synthetic hybrid users.",
+    "notAClaim": "Pre-synchronizing password hashes does not automatically switch a federated/PTA domain or user to cloud authentication. Activation, routing/propagation, fresh sign-in testing and rollback are separate operations. Existing sessions do not prove switchover.",
+    "excluded": ["Production-domain conversion", "Actual federation/PTA outage or service stop", "Claimed automatic failover", "Password capture/hash export", "Assuming unsynchronized recent password changes work", "Assuming emergency cloud access works without R1 evidence"],
+    "requiredApprovalRef": "evidence/authorization-request.json#AUTH-R2"
+  },
+  "sourceReferences": [
+    {"claimIds": ["C-06"], "sourceIds": ["MS-06"], "capabilityIds": ["K01"], "qualification": "PHS reduces runtime reliance on on-premises authentication when cloud authentication is actually activated and synchronized hashes are current. Confirm exact supported conversion/staged-rollout path for the approved authentication mode."},
+    {"claimIds": ["C-05", "C-15"], "sourceIds": ["MS-05", "MS-04", "MS-07"], "capabilityIds": ["K02", "K08"], "qualification": "Independent administration, reversible changes and evidence are prerequisites, not proof this exercise ran."}
+  ],
+  "relatedControls": ["N-06", "N-08", "N-09", "N-10", "N-21", "N-22", "N-24"],
+  "owners": {"accountable": "Hybrid identity owner", "operator": "Approved hybrid authentication administrator", "witness": "Tenant security observer", "rollback": "Domain authentication owner"},
+  "prerequisites": [
+    {"id": "R2-P01", "requirement": "Approval names tenant, domain, user cohort, sync instance, exact supported activation mechanism, operation window and rollback owner.", "evidence": "Scope/allow-list and reviewed current vendor procedure.", "status": "blocked"},
+    {"id": "R2-P02", "requirement": "Independent cloud-only administration has been successfully verified within the approved scope and is available without the hybrid path.", "evidence": "Authorized R1 evidence and current custody/health record.", "status": "unverified"},
+    {"id": "R2-P03", "requirement": "PHS is legally acceptable, enabled for the relevant scope, healthy, and has synchronized all synthetic users within the approved password RPO.", "evidence": "Sync settings, current successful per-scope cycle, timestamps and non-secret synthetic-user inventory; never password/hash contents.", "status": "unverified"},
+    {"id": "R2-P04", "requirement": "Record current federation/PTA/cloud configuration, applicable Conditional Access and app-specific authentication dependencies; confirm staged rollout versus full domain conversion is appropriate.", "evidence": "Trusted redacted pre-change export and exact rollback plan tied to the selected supported mechanism.", "status": "unverified"},
+    {"id": "R2-P05", "requirement": "Synthetic test matrix includes ordinary user, recently synchronized password change, deliberately unsynchronized change, disabled user, excluded user and protected administrator policies.", "evidence": "Synthetic cohort manifest with expected outcomes and no credentials.", "status": "unverified"},
+    {"id": "R2-P06", "requirement": "Fresh private sign-in sessions, correlation IDs, sign-in diagnostics, sync logs, independent monitoring and approved timing thresholds are available.", "evidence": "Observer readiness and app-specific acceptance objectives.", "status": "unverified"}
+  ],
+  "dependencyLimits": [
+    {"dependency": "Entra authentication, cloud routing, network, DNS, time and applicable policies", "failureBehavior": "PHS does not remove these cloud/service dependencies; stop or invoke a separately scoped incident process."},
+    {"dependency": "Recent password and disablement synchronization", "failureBehavior": "Last synchronized credential/state may differ from on-premises state; treat stale state as a known residual risk and test the approved deny path."},
+    {"dependency": "Applications using on-premises Kerberos/LDAP/federated sessions", "failureBehavior": "Cloud sign-in success is not proof those applications continue; validate each in-scope app or mark untested."},
+    {"dependency": "Activation and propagation", "failureBehavior": "Do not interpret enabled PHS, an existing token or the first successful user as universal cutover."}
+  ],
+  "steps": [
+    {"id": "R2-S01", "actorRole": "Exercise lead", "action": "Check authorization, exact targets, current platform instructions and rollback window; establish UTC start and approved RTO/RPO/propagation bounds.", "expected": "No ambiguity over scope or supported activation path.", "onFailure": "Stop; do not infer authorization from available credentials.", "evidence": ["Approval", "Target hash", "Procedure revision", "Objectives"]},
+    {"id": "R2-S02", "actorRole": "Hybrid authentication administrator", "action": "Read and retain redacted baseline mode/routing, synchronization health and applicable test-user policy before any change.", "expected": "Reversible baseline and current hash/state synchronization are known.", "onFailure": "Stop; stale or unknown PHS cannot be a resilient fallback claim.", "evidence": ["Baseline export hash", "Sync timestamps/outcomes", "Mode/routing record"]},
+    {"id": "R2-S03", "actorRole": "Tenant security observer", "action": "Verify approved independent emergency access and monitoring are available; record a fresh baseline test-user sign-in path.", "expected": "Recovery administration and pre-cutover auth path are observed, not assumed.", "onFailure": "Stop before activation.", "evidence": ["R1 authorized evidence reference", "Baseline sign-in correlation ID", "Observer receipt"]},
+    {"id": "R2-S04", "actorRole": "Hybrid authentication administrator", "action": "Activate cloud authentication for only the approved synthetic cohort/domain using the pre-reviewed supported mechanism. Record configuration change and propagation start; do not stop federation/PTA or alter networks.", "expected": "The explicit activation/routing change, not hash pre-sync alone, selects cloud authentication for the approved scope.", "onFailure": "Stop new changes and invoke the recorded mechanism-specific rollback.", "evidence": ["Approved change identifier", "Before/after redacted configuration", "Audit event", "Activation timestamp"]},
+    {"id": "R2-S05", "actorRole": "Test operator", "action": "After the approved propagation checks, create fresh private sessions for each permitted synthetic user and access the exact test application.", "expected": "Ordinary and synchronized-password users perform fresh successful cloud password sign-ins; event method/routing confirms PHS instead of federation/PTA or cached sessions.", "onFailure": "Record per-user actual result and elapsed time; do not weaken policies to make the test pass.", "evidence": ["Per-user fresh sign-in IDs", "Authentication details", "App result", "Routing/propagation timing"]},
+    {"id": "R2-S06", "actorRole": "Test operator and observer", "action": "Execute the approved negative matrix: excluded user, disabled user, unsynchronized password change, and policy-protected access. Use only declared test credentials through normal entry; never record them.", "expected": "Outcomes match documented sync-state and policy expectations. A stale credential or unpropagated disablement is recorded as a residual exposure, not hidden.", "onFailure": "Treat unintended access as failure and rollback/contain only the approved scope.", "evidence": ["Expected/actual matrix", "Deny event IDs", "State timestamps", "Residual-access assessment"]},
+    {"id": "R2-S07", "actorRole": "Tenant security observer", "action": "Correlate sign-in, audit and sync events; measure activation-to-fresh-sign-in time and password/state age. List apps not actually exercised.", "expected": "A bounded measured result exists per user/app; no evidence claims automatic failover or complete on-premises outage survival.", "onFailure": "Mark unmet criteria and preserve failed observations.", "evidence": ["Timing worksheet", "Matched event IDs", "App coverage/gaps", "RTO/RPO comparison"]},
+    {"id": "R2-S08", "actorRole": "Domain authentication owner", "action": "Restore the pre-approved baseline routing/mode using the recorded supported rollback path, or retain the new mode only if that explicit decision was in the approval. Wait for documented propagation.", "expected": "Final authentication mode and intended scope equal the approved end state.", "onFailure": "Use independent administration and stop escalation; do not attempt a tenant-wide repair.", "evidence": ["Rollback audit event", "Post-rollback configuration diff", "Propagation timestamps"]},
+    {"id": "R2-S09", "actorRole": "Test operator and observer", "action": "Repeat fresh sign-in and negative controls after rollback, reconcile all synthetic objects and obtain scoped acceptance.", "expected": "Rollback works for the exact cohort and no unrelated identities/configuration changed.", "onFailure": "Keep validation failed and record remaining remediation.", "evidence": ["Post-rollback sign-in IDs", "Negative controls", "Final diff", "Acceptance and limitations"]}
+  ],
+  "rollback": {
+    "trigger": ["Fresh sign-in routing/method cannot be proven", "Any unexpected allow/deny or scope expansion", "Sync freshness/propagation objective breached", "Independent administration or monitoring unavailable"],
+    "steps": ["Freeze changes and retain current mode, event IDs and time.", "Use independent approved administration and the mechanism-specific baseline to reverse the allow-listed rollout/conversion only.", "Wait for propagation and perform fresh ordinary plus negative test sign-ins.", "Confirm the original test-domain mode, cohort membership, policies and app paths; escalate if rollback is not observed."],
+    "acceptance": ["Baseline mode/routing and cohort restored", "Fresh rollback sign-ins and expected denies observed", "No unapproved domain/user changed", "Residual stale credential/state risk recorded"]
+  },
+  "passCriteria": ["Hash/state pre-sync freshness proven without exposing credential material", "Explicit supported activation and propagation observed", "Fresh successful sign-ins demonstrate intended cloud method for every required positive case", "Negative and recently changed state cases match documented expectations", "Measured RTO/RPO within approved objectives", "Rollback proven with fresh sign-ins"],
+  "failCriteria": ["Enabled PHS or synchronized hashes presented as automatic failover", "Only a cached token or one user tested", "Unknown cloud routing/method", "Unintended access, stale state outside accepted scope or unapproved production impact", "Rollback not observed"],
+  "evidenceRequirements": ["Approval and exact cohort/domain manifest", "Redacted baseline and final mode/configuration with hashes", "Synchronization freshness and error evidence", "Activation/audit/propagation times", "Per-user/app fresh positive and negative sign-in events", "RTO/RPO calculations", "Rollback evidence and explicit app/identity coverage gaps"],
+  "review": {"intervalDays": 90, "triggers": ["Authentication-mode or sync-topology change", "Password/disablement sync health incident", "Platform procedure change", "Application authentication change", "Failed drill"]},
+  "validation": {
+    "status": "blocked-no-authorized-lab",
+    "expected": ["Observed PHS activation, fresh sign-ins, negative controls and rollback within a separately authorized synthetic hybrid lab."],
+    "observed": [],
+    "executed": false,
+    "evidenceRefs": [],
+    "blocker": "Local-only fixtures/browser tests are authorized; no Entra/AD/PHS test domain, switchover or service interruption is authorized.",
+    "doesNotEstablish": ["Actual synchronized hashes", "Automatic failover", "Successful fresh cloud sign-in", "Switchover/rollback time", "Production application continuity"]
+  }
+}

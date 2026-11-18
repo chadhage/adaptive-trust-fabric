@@ -1,0 +1,799 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "LOCAL-BROWSER-01",
+  "status": "passed-local-synthetic-only",
+  "scopeKind": "local-file-reader-and-svg-only",
+  "countsAsLiveValidation": false,
+  "authorizationRef": "AUTH-REQUEST-01",
+  "startedAt": "2026-11-18T17:50:48.758Z",
+  "network": "Owned headless browser; HTTP(S) blocked and CDP offline emulation. No external page or upload.",
+  "results": [
+    {
+      "id": "reader-1440-light-theme",
+      "expected": "light",
+      "observed": "light",
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-rendered-records",
+      "expected": [
+        26,
+        26,
+        26
+      ],
+      "observed": [
+        26,
+        26,
+        26
+      ],
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-blocked-operations-visible",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-keyboard-expand",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-expanded-root-and-scroller-bounds",
+      "expected": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "observed": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-keyboard-collapse",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-native-disclosure-enter",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-native-disclosure-space",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-keyboard-theme-toggle",
+      "expected": "dark",
+      "observed": "dark",
+      "passed": true
+    },
+    {
+      "id": "reader-1440-light-anchor-focus",
+      "expected": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "observed": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-theme",
+      "expected": "dark",
+      "observed": "dark",
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-rendered-records",
+      "expected": [
+        26,
+        26,
+        26
+      ],
+      "observed": [
+        26,
+        26,
+        26
+      ],
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-blocked-operations-visible",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-keyboard-expand",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-expanded-root-and-scroller-bounds",
+      "expected": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "observed": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-keyboard-collapse",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-native-disclosure-enter",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-native-disclosure-space",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-keyboard-theme-toggle",
+      "expected": "light",
+      "observed": "light",
+      "passed": true
+    },
+    {
+      "id": "reader-1440-dark-anchor-focus",
+      "expected": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "observed": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-theme",
+      "expected": "light",
+      "observed": "light",
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-rendered-records",
+      "expected": [
+        26,
+        26,
+        26
+      ],
+      "observed": [
+        26,
+        26,
+        26
+      ],
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-blocked-operations-visible",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-keyboard-expand",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-expanded-root-and-scroller-bounds",
+      "expected": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "observed": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-keyboard-collapse",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-native-disclosure-enter",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-native-disclosure-space",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-keyboard-theme-toggle",
+      "expected": "dark",
+      "observed": "dark",
+      "passed": true
+    },
+    {
+      "id": "reader-320-light-anchor-focus",
+      "expected": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "observed": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-theme",
+      "expected": "dark",
+      "observed": "dark",
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-rendered-records",
+      "expected": [
+        26,
+        26,
+        26
+      ],
+      "observed": [
+        26,
+        26,
+        26
+      ],
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-blocked-operations-visible",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-keyboard-expand",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-expanded-root-and-scroller-bounds",
+      "expected": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "observed": {
+        "rootFits": true,
+        "wrappersFit": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-keyboard-collapse",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-native-disclosure-enter",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-native-disclosure-space",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-keyboard-theme-toggle",
+      "expected": "light",
+      "observed": "light",
+      "passed": true
+    },
+    {
+      "id": "reader-320-dark-anchor-focus",
+      "expected": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "observed": {
+        "hash": "#case-E2",
+        "focus": "case-E2"
+      },
+      "passed": true
+    },
+    {
+      "id": "e1-authority-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e1-authority-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e1-authority-native-svg-all-directed-edges",
+      "expected": 9,
+      "observed": 9,
+      "passed": true
+    },
+    {
+      "id": "e1-authority-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e1-recovery-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e1-recovery-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e1-recovery-native-svg-all-directed-edges",
+      "expected": 9,
+      "observed": 9,
+      "passed": true
+    },
+    {
+      "id": "e1-recovery-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-authority-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-authority-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-authority-native-svg-all-directed-edges",
+      "expected": 8,
+      "observed": 8,
+      "passed": true
+    },
+    {
+      "id": "e2-authority-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-recovery-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-recovery-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e2-recovery-native-svg-all-directed-edges",
+      "expected": 8,
+      "observed": 8,
+      "passed": true
+    },
+    {
+      "id": "e2-recovery-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-authority-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-authority-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-authority-native-svg-all-directed-edges",
+      "expected": 7,
+      "observed": 7,
+      "passed": true
+    },
+    {
+      "id": "e3-authority-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-recovery-native-svg-text-inside-canvas",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-recovery-native-svg-black-text",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "e3-recovery-native-svg-all-directed-edges",
+      "expected": 9,
+      "observed": 9,
+      "passed": true
+    },
+    {
+      "id": "e3-recovery-native-font-fits-editable-text-bounds",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "no-http-subrequests",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    {
+      "id": "no-browser-runtime-exceptions",
+      "expected": [],
+      "observed": [],
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "reference-reader-1440-light.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    },
+    {
+      "name": "reference-reader-1440-dark.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    },
+    {
+      "name": "reference-reader-320-light.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    },
+    {
+      "name": "reference-reader-320-dark.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    },
+    {
+      "name": "e3-recovery-full.png",
+      "retention": "Coordinator-owned session evidence directory; not an external upload."
+    }
+  ],
+  "inputHashes": [
+    {
+      "path": "index.html",
+      "algorithm": "sha256",
+      "value": "95461b508e97e8f8a2549cc1ad2aba2039592d298f1eb5b0b2fe5f25e0c52c21"
+    },
+    {
+      "path": "scripts/check-browser.mjs",
+      "algorithm": "sha256",
+      "value": "095c4d63ab5d7968448286f941429e2a59876d46260abbfbce6209b139ae3cf0"
+    },
+    {
+      "path": "../tools/validate-browser-runtime.mjs",
+      "algorithm": "sha256",
+      "value": "8bfabb608092792ceafbaf37a071da1196ab544b2922a63357049195a16abc0a"
+    },
+    {
+      "path": "diagrams/e1-authority.svg",
+      "algorithm": "sha256",
+      "value": "7d9f1c8079fd088d037816960aa9cbd78deb8e56fd45b0d38b1673c9938f9169"
+    },
+    {
+      "path": "diagrams/e1-recovery.svg",
+      "algorithm": "sha256",
+      "value": "799ea19514a50b766921e24b1a6c558a4c33ce43633505daf8a7404522f02475"
+    },
+    {
+      "path": "diagrams/e2-authority.svg",
+      "algorithm": "sha256",
+      "value": "360b0c4e7a0108dea42b790db7a8b317a8f93ebee234fe093ddab6b8c53cb4a0"
+    },
+    {
+      "path": "diagrams/e2-recovery.svg",
+      "algorithm": "sha256",
+      "value": "f1ee4f1f6771561467cbd39772087000b0498fc3e16b0ee525bfef2bcce81857"
+    },
+    {
+      "path": "diagrams/e3-authority.svg",
+      "algorithm": "sha256",
+      "value": "8762a393a897531695d4e631d5fed638bc7be4639e211d0e908ca7f1e72f17da"
+    },
+    {
+      "path": "diagrams/e3-recovery.svg",
+      "algorithm": "sha256",
+      "value": "0e3e1cc212d26ea3b2c1c7576dcaf0b56af58664e2a231215ae17925ced56422"
+    }
+  ],
+  "limitations": [
+    "Reader rendering, native keyboard behavior and SVG geometry only.",
+    "No cloud, identity, network interruption, OT service, physical safety or recovery exercise.",
+    "Navigator online status alone is not proof of network behavior; actual HTTP attempts are inspected."
+  ],
+  "previousAttempts": [
+    {
+      "startedAt": "2026-11-18T17:41:55.669Z",
+      "endedAt": "2026-11-18T17:42:01.545Z",
+      "status": "failed",
+      "passed": 58,
+      "failed": 8,
+      "inputHashes": [
+        {
+          "path": "index.html",
+          "algorithm": "sha256",
+          "value": "a7be5a2f9a8abf6ef5a0a2d3d6910e270e53160ea2356e6be80de2f649beabde"
+        },
+        {
+          "path": "diagrams/e1-authority.svg",
+          "algorithm": "sha256",
+          "value": "6b012a785a0f86455e4ee5325a0f84445c13ef9caff5fa5b71d93240651e8065"
+        },
+        {
+          "path": "diagrams/e1-recovery.svg",
+          "algorithm": "sha256",
+          "value": "e83bf6876ee9a5a4045310fad060e4c6a0ef312efe5809634782ea84363b65cf"
+        },
+        {
+          "path": "diagrams/e2-authority.svg",
+          "algorithm": "sha256",
+          "value": "04695e45403e44809bf5927f612f82617a7d97d2c704ba3ec8f780b24a521c5a"
+        },
+        {
+          "path": "diagrams/e2-recovery.svg",
+          "algorithm": "sha256",
+          "value": "1c308922d3115fa5aeb855792db5baecd9105002c7ec57c7046a23cc418551df"
+        },
+        {
+          "path": "diagrams/e3-authority.svg",
+          "algorithm": "sha256",
+          "value": "fd6e07c4f96a8968a4f74b327875817a018609786ca6b390df0d6d8d70936c55"
+        },
+        {
+          "path": "diagrams/e3-recovery.svg",
+          "algorithm": "sha256",
+          "value": "961db3f2bef187b3cefc64a0767d2ccbbe0a84f798eea4e5b6e0b900cda0dc6f"
+        }
+      ],
+      "failures": [
+        {
+          "id": "reader-320-light-expanded-root-and-scroller-bounds",
+          "expected": {
+            "rootFits": true,
+            "wrappersFit": true
+          },
+          "observed": {
+            "rootFits": false,
+            "wrappersFit": true
+          },
+          "passed": false
+        },
+        {
+          "id": "reader-320-dark-expanded-root-and-scroller-bounds",
+          "expected": {
+            "rootFits": true,
+            "wrappersFit": true
+          },
+          "observed": {
+            "rootFits": false,
+            "wrappersFit": true
+          },
+          "passed": false
+        },
+        {
+          "id": "e1-authority-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e1-authority-title"
+          ],
+          "passed": false
+        },
+        {
+          "id": "e1-recovery-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e1-recovery-title"
+          ],
+          "passed": false
+        },
+        {
+          "id": "e2-authority-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e2-authority-title"
+          ],
+          "passed": false
+        },
+        {
+          "id": "e2-recovery-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e2-recovery-title"
+          ],
+          "passed": false
+        },
+        {
+          "id": "e3-authority-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e3-authority-title"
+          ],
+          "passed": false
+        },
+        {
+          "id": "e3-recovery-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e3-recovery-title"
+          ],
+          "passed": false
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-11-18T17:43:47.126Z",
+      "endedAt": "2026-11-18T17:44:01.362Z",
+      "status": "passed-local-synthetic-only",
+      "passed": 66,
+      "failed": 0,
+      "inputHashes": [
+        {
+          "path": "index.html",
+          "algorithm": "sha256",
+          "value": "b1d96744d15ee5f22ff41e6b9075772eb41ff89f9ac67c0841534de22e0c1509"
+        },
+        {
+          "path": "diagrams/e1-authority.svg",
+          "algorithm": "sha256",
+          "value": "17909d0d48dc77251a75b2ecd1de405593c52973a1c717ac471bc8b8fe2b0475"
+        },
+        {
+          "path": "diagrams/e1-recovery.svg",
+          "algorithm": "sha256",
+          "value": "dcd584e2f205681659b8f27662e1f0876b19a4d0bdb772346915430a401a75f5"
+        },
+        {
+          "path": "diagrams/e2-authority.svg",
+          "algorithm": "sha256",
+          "value": "5a66103e3fb8b6180f9c76b59b3f5b2357e8269c513f5908afbaca5e3ded9fae"
+        },
+        {
+          "path": "diagrams/e2-recovery.svg",
+          "algorithm": "sha256",
+          "value": "29ebb1c62db78672259caa6371c4d8455c2484afcb7fbdd6361e7eabe5d9d56f"
+        },
+        {
+          "path": "diagrams/e3-authority.svg",
+          "algorithm": "sha256",
+          "value": "5a8dabf7c850a0e51af3be91919d377182d6b585dcd6c0697c028040dd2079ae"
+        },
+        {
+          "path": "diagrams/e3-recovery.svg",
+          "algorithm": "sha256",
+          "value": "4c2d0e71b1cd1b79c9b8c985e286279ffb2c0e5e8dcf6b8b050a809ba2d4f36a"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "startedAt": "2026-11-18T17:49:02.627Z",
+      "endedAt": "2026-11-18T17:49:17.429Z",
+      "status": "failed",
+      "passed": 65,
+      "failed": 1,
+      "inputHashes": [
+        {
+          "path": "index.html",
+          "algorithm": "sha256",
+          "value": "5f7692d0e7f4eef9818fd50e897aab9f95f77b8f9ddcc014a1205260872a2cd4"
+        },
+        {
+          "path": "scripts/check-browser.mjs",
+          "algorithm": "sha256",
+          "value": "095c4d63ab5d7968448286f941429e2a59876d46260abbfbce6209b139ae3cf0"
+        },
+        {
+          "path": "../tools/validate-browser-runtime.mjs",
+          "algorithm": "sha256",
+          "value": "8bfabb608092792ceafbaf37a071da1196ab544b2922a63357049195a16abc0a"
+        },
+        {
+          "path": "diagrams/e1-authority.svg",
+          "algorithm": "sha256",
+          "value": "dd9a1ba42827f7fcf4053ab8985f2e0eeb419c3c5c86f457eaf92fd01b7420fa"
+        },
+        {
+          "path": "diagrams/e1-recovery.svg",
+          "algorithm": "sha256",
+          "value": "dcd584e2f205681659b8f27662e1f0876b19a4d0bdb772346915430a401a75f5"
+        },
+        {
+          "path": "diagrams/e2-authority.svg",
+          "algorithm": "sha256",
+          "value": "2570e74308a680f1e70883ad2aa7f6ad73e9fe0bdb77990d44d9b573e00aac83"
+        },
+        {
+          "path": "diagrams/e2-recovery.svg",
+          "algorithm": "sha256",
+          "value": "29ebb1c62db78672259caa6371c4d8455c2484afcb7fbdd6361e7eabe5d9d56f"
+        },
+        {
+          "path": "diagrams/e3-authority.svg",
+          "algorithm": "sha256",
+          "value": "5a8dabf7c850a0e51af3be91919d377182d6b585dcd6c0697c028040dd2079ae"
+        },
+        {
+          "path": "diagrams/e3-recovery.svg",
+          "algorithm": "sha256",
+          "value": "4c2d0e71b1cd1b79c9b8c985e286279ffb2c0e5e8dcf6b8b050a809ba2d4f36a"
+        }
+      ],
+      "failures": [
+        {
+          "id": "e1-authority-native-font-fits-editable-text-bounds",
+          "expected": [],
+          "observed": [
+            "e1-authority-E1-AE04-meaning"
+          ],
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "product": "Chrome/151.0.7922.34",
+    "jsVersion": "15.1.206.8"
+  },
+  "endedAt": "2026-11-18T17:51:02.569Z",
+  "wallDurationMilliseconds": 13811,
+  "failed": 0,
+  "passed": 66
+}

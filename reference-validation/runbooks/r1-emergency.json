@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "R1",
+  "title": "Emergency administrative access when the normal hybrid path fails",
+  "implementationStatus": "draft-delivered-not-live-validated",
+  "purpose": "Recover a narrowly scoped administration path when federation/PTA, normal administrator MFA or a normal access policy blocks access, while Microsoft Entra cloud authentication and the target management service remain reachable.",
+  "scope": {
+    "kind": "synthetic-runbook",
+    "permittedTarget": "Only two pre-created synthetic cloud-only emergency accounts and one disposable test group explicitly named in an approval.",
+    "notAClaim": "Cloud-only is independent of on-premises federation/PTA, not independent of Microsoft Entra, internet access, the account's registered authentication method, applicable authentication requirements, or the target service.",
+    "excluded": ["Production account/policy changes", "Tenant-wide or Microsoft Entra outage recovery", "Bypassing authentication-method requirements", "Deletion of accounts, methods or logs", "Using ITSM, PIM approval, the normal IdP or a cloud password vault as a bootstrap requirement"],
+    "requiredApprovalRef": "evidence/authorization-request.json#AUTH-R1"
+  },
+  "sourceReferences": [
+    {"claimIds": ["C-05", "C-14"], "sourceIds": ["MS-05", "MS-04", "STD-04"], "capabilityIds": ["K01", "K02"], "qualification": "Independent emergency methods still depend on the cloud authentication service. Confirm current method support and enforced authentication requirements in the approved tenant."},
+    {"claimIds": ["C-17"], "sourceIds": ["MS-23"], "capabilityIds": ["K08"], "qualification": "Ticket synchronization is workflow evidence, not the authorization or bootstrap mechanism for recovery."}
+  ],
+  "relatedControls": ["N-06", "N-07", "N-08", "N-10", "N-16", "N-21", "N-24"],
+  "owners": {"accountable": "Tenant owner", "operator": "Emergency access custodian", "witness": "Independent security observer", "rollback": "Tenant owner"},
+  "prerequisites": [
+    {"id": "R1-P01", "requirement": "Written lab approval names both accounts, test group, permitted operations, window, observer and rollback owner.", "evidence": "Approval reference and target allow-list; no credentials.", "status": "blocked"},
+    {"id": "R1-P02", "requirement": "Two cloud-only accounts use the tenant's .onmicrosoft.com domain, have no synchronized/federated dependency, have permanent-active Global Administrator assignments, and have separately controlled authentication methods from normal administrators. This documented emergency exception is not normal just-in-time elevation.", "evidence": "Redacted identity-source, permanent-active role, method inventory and custody attestation.", "status": "unverified"},
+    {"id": "R1-P03", "requirement": "A supported phishing-resistant method is enrolled and accessible from a protected clean workstation. Exclude these accounts from blocking/restricting Conditional Access, retain report-only observation as appropriate, and verify compatibility with current platform-enforced authentication requirements; do not lower authentication assurance to create an emergency path.", "evidence": "Method-support record, exclusion/policy evaluation, workstation attestation and recovery instructions.", "status": "unverified"},
+    {"id": "R1-P04", "requirement": "Independent custodian can retrieve the emergency method without Entra/AD sign-in to the normal password vault, PIM approval or ITSM availability.", "evidence": "Sealed offline custody/dual-control procedure and observed retrieval time; never export the secret.", "status": "unverified"},
+    {"id": "R1-P05", "requirement": "Monitoring covers success/failure and audit activity for both accounts, with a second route if the primary SIEM is unavailable.", "evidence": "Rule definition, independent observer route, tested alert delivery and retention policy.", "status": "unverified"},
+    {"id": "R1-P06", "requirement": "Baseline permissions and exact reversible test action exist before the drill; normal administrator path is not actually disrupted.", "evidence": "Allow-listed disposable group description value before/after and approval.", "status": "unverified"}
+  ],
+  "dependencyLimits": [
+    {"dependency": "Microsoft Entra cloud authentication and target control plane", "failureBehavior": "Stop and escalate vendor incident; this runbook cannot authenticate through a full Entra/control-plane outage."},
+    {"dependency": "Registered emergency method, clean workstation, DNS, time and internet path", "failureBehavior": "Try only the separately custodied approved second method/account; do not lower tenant controls ad hoc."},
+    {"dependency": "Normal on-premises federation/PTA, normal administrator method, PIM and ITSM", "failureBehavior": "They must not be required for emergency bootstrap; observe rather than disrupt them."},
+    {"dependency": "Central monitoring", "failureBehavior": "Use pre-approved independent observer/evidence capture; absence of all required monitoring is a failed drill, not success."}
+  ],
+  "steps": [
+    {"id": "R1-S01", "actorRole": "Exercise lead", "action": "Check signed scope, UTC window and exact synthetic targets. Record stop contacts and current service status without changing a service.", "expected": "All targets and operations are allow-listed; normal production paths are unaffected.", "onFailure": "Stop before sign-in or mutation.", "evidence": ["Approval reference", "Target list hash", "Start timestamp", "Service-status observation"]},
+    {"id": "R1-S02", "actorRole": "Independent security observer", "action": "Arm the approved alert observation path and an independent time-stamped evidence log; do not suppress security alerts for the exercise.", "expected": "Observer can receive/retain a test notification without depending on the emergency account.", "onFailure": "Stop; monitoring prerequisites are not met.", "evidence": ["Rule identifiers", "Observer readiness receipt", "Evidence location/access policy"]},
+    {"id": "R1-S03", "actorRole": "Emergency access custodian", "action": "Retrieve the first separately controlled method on the approved clean workstation using the offline custody procedure.", "expected": "No normal IdP/PIM/ticket/vault sign-in is required to retrieve it.", "onFailure": "Record circular dependency and stop; do not improvise credentials.", "evidence": ["Custody receipt with no secret", "Elapsed retrieval time", "Witness attestation"]},
+    {"id": "R1-S04", "actorRole": "Emergency access custodian", "action": "Start a fresh private session, sign in with synthetic emergency account one using its approved independent method, and capture the resulting account/tenant identifiers.", "expected": "Fresh interactive sign-in succeeds through the cloud path, not a cached session or normal federation/PTA path.", "onFailure": "Record error and service/method dependency; stop or use the separately approved second-account check.", "evidence": ["UTC sign-in correlation ID", "Redacted fresh sign-in event", "Observed authentication method and policy result"]},
+    {"id": "R1-S05", "actorRole": "Emergency access custodian", "action": "Read the approved group's baseline and perform only the reversible approved description update; do not change roles, policies, methods or unrelated objects.", "expected": "The intended emergency permission works for exactly the permitted action.", "onFailure": "Stop without broadening privilege; record a failed permission test.", "evidence": ["Object identifier", "Before/after values", "Audit correlation ID", "Operation approval"]},
+    {"id": "R1-S06", "actorRole": "Independent security observer", "action": "Match every sign-in and mutation with alert/audit records and measure receipt latency against the approved objective.", "expected": "Every use is visible with actor, target, time and outcome; a missed/late alert fails monitoring acceptance.", "onFailure": "Preserve evidence, end the drill and remediate monitoring before reliance.", "evidence": ["Matched event IDs", "Alert timestamps", "Latency calculation", "Missing-event list"]},
+    {"id": "R1-S07", "actorRole": "Emergency access custodian", "action": "Restore the test group's baseline value, sign out, then repeat the fresh-session method and monitoring checks for separately controlled emergency account two within its approval.", "expected": "Both accounts work independently; the second is not merely another account bound to the same inaccessible normal method/custodian.", "onFailure": "Record partial failure; one successful account does not satisfy two-account acceptance.", "evidence": ["Rollback audit ID", "Second sign-in/method evidence", "Second alert match", "Dependency comparison"]},
+    {"id": "R1-S08", "actorRole": "Tenant owner and observer", "action": "Compare configuration/permissions to baseline, reconcile all evidence, restore custody, apply credential/method handling required by policy, and schedule the next review.", "expected": "No unintended changes persist and the next validation date is recorded; replacement enrollment, if necessary, needs its own approved scope.", "onFailure": "Escalate incident/change process and retain the failed outcome.", "evidence": ["Final diff", "Custody receipt", "Acceptance record", "Next review date"]}
+  ],
+  "rollback": {
+    "trigger": ["Any unintended permission/policy impact", "Test action or alert fails", "Approval window ends"],
+    "steps": ["Cease mutations and preserve correlation IDs.", "Using only approved authority, restore the disposable group's baseline value.", "Sign out sessions and follow the approved account/method custody handling; do not disable the only remaining emergency path.", "Verify no role/policy/method drift and retain the failed drill record."],
+    "acceptance": ["Disposable object equals its trusted baseline", "Both emergency paths remain available or their loss is escalated", "No unapproved changes remain", "Evidence is retained outside the exercised account"]
+  },
+  "passCriteria": ["Two distinct fresh cloud-only sign-ins using separately controlled approved methods", "No normal hybrid/PIM/ITSM bootstrap dependency", "Only the allow-listed reversible test operation succeeds", "Every use and action is matched to monitoring within the approved threshold", "Rollback and custody verified"],
+  "failCriteria": ["Cached session used as fresh authentication evidence", "Either account or required independent method fails", "No observed alert, missing audit record or unknown target change", "Recovery depends on the failed normal chain", "Claiming independence from a full Entra outage"],
+  "evidenceRequirements": ["Approval and target allow-list", "Redacted method/dependency inventory", "Two fresh sign-in records with correlation IDs", "Permitted operation before/after and audit IDs", "Alert timing and independent witness", "Rollback/final diff and limitations"],
+  "review": {"intervalDays": 90, "triggers": ["Authentication-method or platform enforcement change", "Conditional Access change", "Custodian departure", "Emergency use", "Failed monitoring or drill"]},
+  "validation": {
+    "status": "blocked-no-authorized-lab",
+    "expected": ["All pass criteria observed in an approved isolated tenant."],
+    "observed": [],
+    "executed": false,
+    "evidenceRefs": [],
+    "blocker": "Only local synthetic fixtures/browser tests are authorized. No Entra lab or emergency account use is approved.",
+    "doesNotEstablish": ["Emergency sign-in success", "Actual authentication-method independence", "Actual alert delivery", "Recovery time", "Any production readiness"]
+  }
+}

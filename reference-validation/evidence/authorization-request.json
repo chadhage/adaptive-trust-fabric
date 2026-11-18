@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "AUTH-REQUEST-01",
+  "status": "local-only-approved-operational-blocked",
+  "requestedByRole": "Architecture validation coordinator",
+  "requestedAt": "2026-11-18",
+  "authorizationEvidence": [
+    {"scope": "local-synthetic-fixtures-and-browser-tests-only", "receivedOn": "2026-11-18", "basis": "Explicit user authorization relayed by the swarm coordinator.", "recordRef": "Coordinator session files/swarm-scope.json", "liveLabApproved": false}
+  ],
+  "authorizedTargets": [],
+  "approvals": [],
+  "localSyntheticPermission": {
+    "basis": "The coordinator relayed explicit user authorization on 2026-11-18: LOCAL-ONLY synthetic fixtures and browser tests. No dedicated Entra/AD/PHS/OT lab is authorized. Authoritative scope is retained by the coordinator in session files/swarm-scope.json.",
+    "allowed": ["Read project documentation and synthetic JSON", "Run dependency-free Node tests using memory and owned reference-validation files", "Generate local editable diagrams, SVG and offline HTML", "Model loss of upstream availability as an in-memory boolean"],
+    "prohibited": ["Authenticate to any tenant or subscription", "Query actual users, sign-ins, policies or secrets", "Change an account, trust, Conditional Access policy, domain authentication method or resource", "Provision services or incur charges", "Stop services, modify a firewall, disconnect networks or touch OT equipment", "Upload source, credentials, diagrams or evidence to any external service"],
+    "countsAsLiveValidation": false
+  },
+  "requestedExercises": [
+    {
+      "id": "AUTH-R1",
+      "runbookId": "R1",
+      "purpose": "Prove emergency administrative sign-in and independent-method monitoring in an isolated Entra test tenant.",
+      "targetIdentifiers": [],
+      "requiredApprovalRoles": ["Tenant owner", "Identity security lead", "Change approver"],
+      "requestedPrivileges": ["Use two pre-created synthetic emergency accounts", "Read matching synthetic sign-in/audit events", "Perform one pre-approved reversible action on a disposable test group"],
+      "permittedChanges": [],
+      "forbiddenChanges": ["Production policies or identities", "Deleting or disabling emergency accounts", "Simulating a real tenant outage"],
+      "window": {"start": null, "end": null, "timeZone": null},
+      "maximumCost": {"amount": 0, "currency": "USD", "approvalRequiredAbove": 0},
+      "rollbackOwner": null,
+      "stopConditions": ["Any target is not on the approved allow-list", "Unexpected real-user data", "Emergency method is unavailable", "Unexpected lockout or security alert outside exercise scope"],
+      "status": "blocked-awaiting-explicit-approval"
+    },
+    {
+      "id": "AUTH-R2",
+      "runbookId": "R2",
+      "purpose": "Observe approved PHS activation and fresh sign-ins for disposable hybrid test users, then rollback.",
+      "targetIdentifiers": [],
+      "requiredApprovalRoles": ["Tenant owner", "Hybrid identity owner", "Test AD/domain owner", "Change approver"],
+      "requestedPrivileges": ["Inspect synthetic sync freshness and authentication configuration", "Activate PHS cloud authentication only for the explicitly approved lab scope", "Read sign-in and synchronization evidence", "Restore the recorded lab authentication configuration"],
+      "permittedChanges": [],
+      "forbiddenChanges": ["Production domains or users", "Password capture or credential export", "Network disruption or stopping federation/PTA services without separate approval"],
+      "window": {"start": null, "end": null, "timeZone": null},
+      "maximumCost": {"amount": 0, "currency": "USD", "approvalRequiredAbove": 0},
+      "rollbackOwner": null,
+      "stopConditions": ["Sync lag exceeds approved RPO", "Cutover scope cannot be proven", "Any production identity is affected", "Independent cloud emergency administration fails"],
+      "status": "blocked-awaiting-explicit-approval"
+    },
+    {
+      "id": "AUTH-R3",
+      "runbookId": "R3",
+      "purpose": "Recover explicitly named disposable configuration objects and relationships from a trusted baseline.",
+      "targetIdentifiers": [],
+      "requiredApprovalRoles": ["Tenant owner", "Incident commander", "Backup custodian", "Change approver"],
+      "requestedPrivileges": ["Read scoped baseline and actual supported restore coverage", "Modify only disposable policies/groups/apps named in the approval", "Recreate approved relationships with a recorded ID mapping", "Capture acceptance and rollback evidence"],
+      "permittedChanges": [],
+      "forbiddenChanges": ["Actual malicious change", "Tenant-wide restore", "Restoring attacker credentials", "Unapproved role or application-consent grants"],
+      "window": {"start": null, "end": null, "timeZone": null},
+      "maximumCost": {"amount": 0, "currency": "USD", "approvalRequiredAbove": 0},
+      "rollbackOwner": null,
+      "stopConditions": ["Baseline provenance cannot be established", "Restore overwrites unrelated changes", "Unsupported object or retention assumption", "Elevated relationship appears outside approved graph"],
+      "status": "blocked-awaiting-explicit-approval"
+    },
+    {
+      "id": "AUTH-R4",
+      "runbookId": "R4",
+      "purpose": "Verify real disconnected site functions only in an isolated non-production representative environment approved by local safety authority.",
+      "targetIdentifiers": [],
+      "requiredApprovalRoles": ["Local safety authority", "Site operations owner", "OT security owner", "Lab/network owner"],
+      "requestedPrivileges": ["Use synthetic local identities and approved fixture equipment", "Model upstream unavailability without disrupting shared infrastructure", "Observe local authorization, telemetry, communications and recovery"],
+      "permittedChanges": [],
+      "forbiddenChanges": ["Production PLC/SCADA actions", "Disconnecting shared or operational networks", "Bypassing interlocks", "Promoting the local model into product certification"],
+      "window": {"start": null, "end": null, "timeZone": null},
+      "maximumCost": {"amount": 0, "currency": "USD", "approvalRequiredAbove": 0},
+      "rollbackOwner": null,
+      "stopConditions": ["Any physical-process effect", "Safety observer unavailable", "Loss of local evidence integrity", "Key/time/DNS/PKI prerequisites or maximum duration exceeded"],
+      "status": "blocked-awaiting-explicit-approval"
+    }
+  ],
+  "approvalResponseTemplate": {
+    "exerciseIds": [],
+    "decision": "not-approved",
+    "approvalReference": null,
+    "approverRoles": [],
+    "approvedAt": null,
+    "validUntil": null,
+    "allowedTargetIdentifiers": [],
+    "permittedOperations": [],
+    "prohibitedOperations": [],
+    "syntheticDataOnly": true,
+    "maximumCost": {"amount": 0, "currency": "USD"},
+    "startWindow": null,
+    "endWindow": null,
+    "rollbackOwnerRole": null,
+    "safetyAuthorityRole": null,
+    "evidenceRetentionLocation": null,
+    "notes": "No credentials, tokens, private keys or real user data. An unfilled template grants no permission."
+  },
+  "completionRule": "A04 remains blocked until the coordinator records explicit approval, target allow-lists, privileges, window, rollback and safety limits. Local fixture permission is not that approval."
+}

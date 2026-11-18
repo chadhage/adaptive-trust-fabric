@@ -34,6 +34,7 @@ Start at the [landing page](./index.html) and choose the interactive microsite, 
 | Review the architecture summary | [Architecture infographic](./adaptive-trust-fabric-infographic.html) |
 | Compare requirements with the assessment rules | [Interactive microsite](./adaptive-trust-fabric-microsite/index.html) |
 | Review the analysis, control requirements and references | [Position paper PDF](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf) or [HTML edition](./position-paper/position-paper.html) |
+| Follow worked reviews and bounded operating procedures | [Offline examples, runbooks and execution ledger](./reference-validation/index.html) |
 | Use the source and requirement records in other tools | [Research JSON](./adaptive-trust-fabric-microsite/data/research.json) |
 
 For example, from the repository root in Windows PowerShell:
@@ -50,7 +51,7 @@ Use the menu button beside the project name on the landing page to open the navi
 
 Use **Home** in the infographic header or footer to return to the landing page.
 
-The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation; the original microsite retains its fixed styling. The infographic follows the system setting independently. If browser storage is unavailable, the current page can still change theme and displays a storage notice.
+The **Dark theme** switch changes between light and dark. **Use system setting** clears the saved choice. On the published site, the choice is stored in this browser and applies to the landing page and slide presentation. The microsite, infographic and HTML paper follow the system setting or their explicit theme URL independently. If browser storage is unavailable, the landing page can still change theme and displays a storage notice.
 
 The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and save that theme on the landing page and presentation. On the infographic, the parameter selects a theme for that page without saving it. The drawer controls require JavaScript; the page's viewing cards and document links remain available without it.
 
@@ -62,14 +63,18 @@ The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and 
 | [adaptive-trust-fabric-infographic.html](./adaptive-trust-fabric-infographic.html) | Visual guide to access decisions, control responsibilities, topology, survivability and recovery. Use **Print / Save PDF** to export it. |
 | [adaptive-trust-fabric-microsite/index.html](./adaptive-trust-fabric-microsite/index.html) | Reference architecture, topology assessment, survivability tiers, topology patterns, control requirements, assumption reviews, implementation sequence and source search. Includes an embedded research-data copy for offline use. |
 | [adaptive-trust-fabric-microsite/presentation.html](./adaptive-trust-fabric-microsite/presentation.html) | Browser presentation covering the architecture, evaluation criteria, topology patterns, operating tiers, identity, recovery and implementation phases. Shared theme preferences are loaded from the local site script. |
-| [adaptive-trust-fabric-microsite/assets/app.js](./adaptive-trust-fabric-microsite/assets/app.js) | Browser-side assessment rules, data rendering, control filters and source search. Read or modify this to understand how assessment inputs become recommendations. |
+| [adaptive-trust-fabric-microsite/assets/app.js](./adaptive-trust-fabric-microsite/assets/app.js) | Browser rendering, control evidence/filtering, source search and form-to-engine integration. |
+| [adaptive-trust-fabric-microsite/assets/assessment.js](./adaptive-trust-fabric-microsite/assets/assessment.js) | Pure, dependency-free assessment engine; browser `ATFAssessment` and CommonJS exports use the same rules without network access. |
 | [adaptive-trust-fabric-microsite/assets/site.js](./adaptive-trust-fabric-microsite/assets/site.js) | Landing-page drawer controls and shared theme preferences for the landing page and presentation. |
 | [adaptive-trust-fabric-microsite/assets/styles.css](./adaptive-trust-fabric-microsite/assets/styles.css) | Microsite layout, responsive styling and visual presentation. |
 | [adaptive-trust-fabric-microsite/data/research.json](./adaptive-trust-fabric-microsite/data/research.json) | Source references, claims, control requirements, topology patterns, survivability tiers, evaluation criteria, assumption reviews and implementation phases. Records are linked by source identifiers. |
 | [position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf) | PDF edition of the position paper. |
 | [position-paper/position-paper.html](./position-paper/position-paper.html) | Readable and editable HTML source of the paper, including its executive position, reference architecture, normative standard and source catalog. |
 | [position-paper/paper.css](./position-paper/paper.css) | Print-oriented paper styling, including A4 page settings, tables and pagination rules. |
-| [manifest.json](./manifest.json) | Package version, research cutoff, byte sizes and SHA-256 checksums of the listed Git file contents. Checkout line-ending conversion can change local file bytes. This is integrity metadata, not an application dependency manifest. |
+| [reference-validation/index.html](./reference-validation/index.html) | Offline reader for synthetic E1-E3 review records, R1-R4 runbooks, authority/recovery diagrams and the authorization/execution ledger. |
+| [tools/sync-research.mjs](./tools/sync-research.mjs) | Maintainer-only generation/check of the embedded JSON and complete paper control appendix, roadmap and source catalog; explicit manifest-only mode. |
+| [tools/build-paper.mjs](./tools/build-paper.mjs) and [PDF inspector](./tools/build-paper.py) | Installed-browser PDF generation, extracted-text/pagination checks and source/PDF build receipt; not required by visitors. |
+| [manifest.json](./manifest.json) | Byte sizes and SHA-256 for listed canonical files: UTF-8 text with CRLF normalized to LF, binary PDFs unchanged. No staging is required. This is integrity metadata, not a dependency manifest or operational certification. |
 | [.github/workflows/pages.yml](./.github/workflows/pages.yml) | Stages and deploys the static site to GitHub Pages on pushes to the default branch, `main`, or a manual workflow run. |
 | [LICENSE](./LICENSE) | MIT license, Microsoft Corporation copyright notice and warranty/liability disclaimer. |
 | [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Microsoft Open Source Code of Conduct adoption and conduct-reporting resources. |
@@ -79,15 +84,23 @@ The existing `?clawpilotTheme=light` and `?clawpilotTheme=dark` URLs select and 
 ## Walk through the microsite
 
 1. **Read Position and Architecture.** Review the evaluation criteria and the separation of policy ownership, identity administration, enforcement, telemetry and recovery.
-2. **Run Assess.** Select the isolation level, sovereignty requirement, required survivability, acquisition or divestiture frequency, business-unit autonomy and operating maturity. Select safety-critical OT where applicable, then choose **Evaluate architecture**.
-3. **Review the assessment.** Read the rationale, companion patterns, requirements that exclude alternative designs and operating-capability warning. The displayed survivability tier is your input, not a measured capability.
+2. **Run Assess.** Record isolation, sovereignty, survivability, recovery and OT requirements, then declare the supporting boundary, authority, dependency and operating evidence. Leave facts unknown when they have not been established.
+3. **Review the assessment.** Read each independent decision dimension, mandatory gate, typed reason, excluded alternative and next validation check. The displayed survivability tier is your requirement, not a measured capability.
 4. **Review Operation during outages and Topology patterns.** Compare identity, policy, security-operations and recovery requirements. Check both the use and rejection conditions for each topology.
 5. **Filter Control requirements.** Select a domain and a MUST / SHOULD / MAY level. Use the source identifiers to find the cited documents in the source catalog.
 6. **Review assumptions and implementation phases.** Read the documented assumption reviews, consider the proposed implementation sequence, and search Sources by title, source use or provenance class.
 
-**Example:** the default selections produce T1 with S0 survivability. Change **Required survivability** to S4 and evaluate again to get T4 and its operating-capability warning.
+**Default behavior:** unanswered mandatory facts produce **insufficient evidence**, not a ready T1 recommendation. A regulatory label, local-key preference, acquisition frequency or maturity label alone does not establish a need for another tenant.
 
 The assessment applies **fixed rules to the selected inputs**. It does not inspect tenant configuration, calculate risk or cost, run failure scenarios or verify that requirements are met. Review its output using organization-specific dependency analysis, testing and product documentation. The assumption reviews compare statements with source limitations; they are not results from an executable security test suite.
+
+| Result | Meaning |
+| --- | --- |
+| **Candidate** | All applicable mandatory facts are declared and no known mandatory conflict is present. A design-review candidate only; self-reported evidence is not inspected readiness. |
+| **Insufficient evidence** | At least one required fact is unknown or invalid and no known common mandatory conflict takes precedence. The next checks identify what must be established. |
+| **Excluded** | A known mandatory conflict excludes the assessed configuration. Other decision dimensions can remain candidates or unknown. |
+
+Tenant topology, identity authority, sovereignty, connectivity and recovery are separate outputs. S3 does not imply T3. T4 is a disconnected operating-pattern overlay for S4, not a number of online Entra tenants. Known circular recovery or unacceptable privileged paths cannot be compensated for by scoring other benefits.
 
 ### Understand topology and survivability labels
 
@@ -97,8 +110,8 @@ Topology describes how authority and boundaries are organized:
 | --- | --- |
 | T1 - One global tenant with delegated boundaries | Default when required boundaries can be met safely within one tenant. |
 | T2 - Federated multi-tenant enterprise | Separate tenant control planes with governed collaboration across them. |
-| T3 - Sovereign or independently recoverable tenant | Independent local authority over identity, administration, keys or recovery. |
-| T4 - Disconnected enclave / cyber-physical cell | Operations requiring intentional isolation or independence from upstream services. |
+| T3 - Sovereign or independently recoverable tenant | Documented independently governed tenant identities with shared privileged dependencies removed; may describe an existing tenant and does not inherently require offline/on-premises identity. Local key custody alone is insufficient. |
+| T4 - Disconnected enclave / cyber-physical cell | Disconnected S4 operating overlay; identity and tenant-topology decisions remain separate. |
 | T5 - Acquisition transition zone | Restricted cross-tenant access during discovery and remediation, with a tested separation procedure; shown as a companion pattern in the assessment. |
 
 Survivability describes the required operating behavior during disruption:
@@ -106,12 +119,14 @@ Survivability describes the required operating behavior during disruption:
 | Tier | Required operation |
 | --- | --- |
 | S0 - Cloud-dependent | Normal online SaaS and cloud operation. |
-| S1 - Transient outage | Required functions continue through outages measured in hours, using session continuity and emergency access where supported. |
+| S1 - Transient outage | Only bounded, explicitly tested existing-session/cached behavior. Cloud-only emergency accounts still depend on Entra and reachable cloud services. |
 | S2 - Extended degraded | Days of reduced function with selected local services. |
 | S3 - Independent operations | Required functions continue without upstream control planes. |
 | S4 - Disconnected / air-gapped | Intentional isolation with local identity, policy, detection and recovery. |
 
 Use these tiers to specify required functions and outage durations, then test them in the target environment. They are not product availability guarantees.
+
+Existing sessions and cloud-only emergency accounts do not bypass a full Entra outage. PHS synchronization is not automatic switchover from federation or pass-through authentication; a documented cutover must be tested. A distinct identity is required for each separately managed **logical agent**, not automatically every process, replica or session; assign both an accountable sponsor and technical owner.
 
 ## Use the slide presentation
 
@@ -130,7 +145,11 @@ Without JavaScript, the presentation displays all slides in reading order. It su
 
 The [research dataset](./adaptive-trust-fabric-microsite/data/research.json) contains **33 source references, 18 claims, 26 control requirements and 10 assumption reviews**, alongside five topology patterns, five survivability tiers, mandatory constraints, evaluation criteria and four implementation phases.
 
-The top-level collections include `sources`, `claims`, `normativeControls`, `survivabilityTiers`, `topologies`, `hardConstraints`, `adversarialFindings` and `roadmap`. Source identifiers link claims and controls to URLs, provenance, recorded access dates and source-use descriptions. The existing `adversarialFindings` key contains the assumption-review records. Claim confidence labels are qualitative author assessments, not calibrated probabilities.
+The top-level collections include `sources`, `claims`, `normativeControls`, `survivabilityTiers`, `topologies`, `hardConstraints`, `adversarialFindings` and `roadmap`, with an `evidenceContract`, ten capability records in `capabilityMatrix` and a `sourceMaintenance` policy. Source identifiers link claims and controls to URLs, provenance, recorded access dates and source-use descriptions. The existing `adversarialFindings` key contains the assumption-review records. Claim confidence labels are qualitative author assessments, not calibrated probabilities.
+
+The additive `evidence` envelope records status, verification date, source references (URL, section, revision, verification method and supported statement), applicability, limitations, confidence rationale and operational-validation status. A checked source does not prove a deployed control. Each control also records requirement origin, accountable role, exclusions, dependencies, failure behavior, a verification method with expected evidence and pass/fail criteria, and exception approval/review conditions. The paper includes **all 26 core requirements**; each links to detailed guidance in the microsite.
+
+`sources[]` preserves a record's broader/context bibliography. Its nonempty `evidence.source_refs[]` selects the exact reviewed passages supporting the narrow proposition and may be a subset, not a copied one-to-one list. Selected IDs must resolve inside that bibliography, with valid URLs, sections, revisions and review dates; a bibliography alone is not selected supporting evidence.
 
 For example, list the framework's mandatory controls in PowerShell:
 
@@ -144,6 +163,14 @@ $research.normativeControls |
 ```
 
 Source provenance is classified as **Microsoft Explicit**, **External Standard**, **Research Supported**, **Derived Architectural Position** or **Open/Contested**. MUST / SHOULD / MAY express this framework's requirements and recommendations. Source provenance does not make those normative levels Microsoft or regulatory requirements.
+
+### Worked examples, runbooks and evidence status
+
+The [local reader](./reference-validation/index.html) contains [E1](./reference-validation/index.html#case-E1), [E2](./reference-validation/index.html#case-E2) and [E3](./reference-validation/index.html#case-E3) synthetic design-review records. Each preserves requirements, boundaries, authority and recovery graphs, control applicability, an engine-backed decision and validation status. The records distinguish declared, verified, unknown and failed requirement evidence; do not treat fixture declarations as observations of a real environment.
+
+Runbooks cover [R1 emergency access](./reference-validation/index.html#runbook-R1), [R2 PHS cutover](./reference-validation/index.html#runbook-R2), [R3 tenant-configuration restore](./reference-validation/index.html#runbook-R3) and [R4 S3 outage operation](./reference-validation/index.html#runbook-R4). They define prerequisites, bounded steps, expected evidence, rollback/abort conditions and review responsibilities. Authority and recovery diagrams make indirect privileges and circular dependencies inspectable.
+
+**Authorized execution scope is local-only synthetic fixtures and browser tests.** No dedicated Entra/AD/PHS/OT lab was authorized. Live Graph/Azure/tenant writes, role changes, switchover, restores, service interruption and billable resources are out of scope. Original live acceptance for A04 and R1/R2/R3 exercises remains **blocked**, not replaced by a simulation. Local S3 fixture/process evidence proves only the exact local functions exercised, not OT safety or a platform's independent operation. Read the [authorization](./reference-validation/index.html#authorization) and [execution ledger](./reference-validation/index.html#evidence) before citing a result. Delivered tooling and review drafts are distinct from formally completed operational acceptance.
 
 ## Apply it in an architecture review
 
@@ -161,19 +188,66 @@ The [Pages workflow](./.github/workflows/pages.yml) deploys the site automatical
 
 In the repository's **Settings > Pages**, the publishing source must be **GitHub Actions**. The workflow uses the `github-pages` deployment environment and the standard Pages artifact/deployment actions; there is no Jekyll or application build step.
 
-Only the [landing page](./index.html), [infographic](./adaptive-trust-fabric-infographic.html), [MIT license](./LICENSE), [microsite directory](./adaptive-trust-fabric-microsite/) and [position-paper directory](./position-paper/) are staged for publication. Relative links retain the repository's project-site prefix, and the paper remains available alongside the microsite. The landing-page footer links to the repository editions of the conduct, security and support policies. Repository metadata and workflow files are not included in the site artifact.
+The static publication retains the [landing page](./index.html), [infographic](./adaptive-trust-fabric-infographic.html), [MIT license](./LICENSE), [microsite directory](./adaptive-trust-fabric-microsite/), [position-paper directory](./position-paper/) and [reference-validation reader and records](./reference-validation/). Relative links retain the repository's project-site prefix. Maintainer tools, tests, browser profiles and workflow internals are not visitor dependencies. The landing-page footer links to the repository editions of the conduct, security and support policies.
 
 ## Update and share the package
 
 - **Writing style:** use defined engineering terms, state assumptions and failure conditions, and distinguish cited product behavior, proposed requirements and test results. Avoid slogans, unsupported superlatives and claims of verification without a stated method.
 - **Visitor-facing focus:** keep the paper (HTML and PDF), presentation, infographic and interactive microsite focused on business decisions, architecture and technical requirements. Keep repository instructions, packaging details and content-production methodology in the README rather than those four artifacts.
-- **Microsite behavior and presentation:** edit the [HTML entry page](./adaptive-trust-fabric-microsite/index.html), [JavaScript](./adaptive-trust-fabric-microsite/assets/app.js) or [stylesheet](./adaptive-trust-fabric-microsite/assets/styles.css), then reopen or refresh the local page.
+- **Microsite behavior and presentation:** edit the [HTML entry page](./adaptive-trust-fabric-microsite/index.html), pure [assessment engine](./adaptive-trust-fabric-microsite/assets/assessment.js), rendering [JavaScript](./adaptive-trust-fabric-microsite/assets/app.js) or [stylesheet](./adaptive-trust-fabric-microsite/assets/styles.css), then reopen or refresh the local page.
 - **Landing page and slides:** edit the [format selector](./index.html) or [presentation](./adaptive-trust-fabric-microsite/presentation.html). Both include their own styling and work without external libraries.
 - **Navigation and themes:** the landing-page drawer markup is in the [format selector](./index.html). Shared preference handling and drawer interactions are in [site.js](./adaptive-trust-fabric-microsite/assets/site.js); both the landing page and presentation load it before their styles.
-- **Research changes:** keep the [JSON dataset](./adaptive-trust-fabric-microsite/data/research.json) and the `script#research-data` JSON block in the [microsite HTML](./adaptive-trust-fabric-microsite/index.html) synchronized. The browser reads the embedded copy; editing the standalone JSON alone does not update the microsite. Keep the landing-page counts, slides, paper and infographic consistent with the revised research.
-- **Paper changes:** update the [paper HTML](./position-paper/position-paper.html) and [print stylesheet](./position-paper/paper.css), then regenerate the [PDF](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf). A browser's Print / Save as PDF feature provides an export path; use A4 and background graphics, and inspect pagination and layout. Output can vary by print renderer; no automated PDF build script is included.
-- **Integrity metadata:** refresh the byte count and SHA-256 checksum in the [manifest](./manifest.json) for each listed file you change, using the staged Git content rather than working-tree bytes when line endings are converted.
+- **Research changes:** edit the canonical [JSON dataset](./adaptive-trust-fabric-microsite/data/research.json), then use the generator below. Do not hand-edit `script#research-data` or the paper's `BEGIN GENERATED:controls`, `roadmap` and `sources` blocks. The browser reads the embedded copy; standalone JSON edits alone do not update it. Keep narrative summaries and counts consistent with accepted records.
+- **Example and runbook changes:** edit the source JSON under `reference-validation\cases` or `runbooks`, preserving the [record schema](./reference-validation/schema/review-record.schema.json) and canonical IDs. These records have a separate offline embedded reader: rebuild with `node .\reference-validation\scripts\build.mjs`, then follow the [contract's declared local validation sequence](./reference-validation/contract.json), including a fresh bounded browser check and the read-only validator. Regeneration changes fingerprints and invalidates previous browser/PDF evidence. Record only checks actually executed; never use local recording to complete blocked live exercises. Do not regenerate immutable reference artifacts during a publication freeze.
+- **Paper changes:** update the [paper HTML](./position-paper/position-paper.html) outside generated blocks and [print stylesheet](./position-paper/paper.css), synchronize research and regenerate the [PDF](./position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf). The helper prints actual final HTML and validates extracted core wording and A4 pages; it never reuses an old PDF as evidence of a new export.
+- **Integrity metadata:** refresh listed byte counts and SHA-256 only after content, evidence records, QA repairs and PDF/receipt are stable. Text uses UTF-8 with **CRLF replaced by LF only** (no trimming, Unicode or trailing-newline normalization); PDFs use exact binary bytes. This matches the repository's canonical LF Git blobs without staging user changes. The manifest excludes itself and is not a signature or proof of operational validation.
 - **Static hosting:** publish the repository's content with its relative paths intact. Hosting only the microsite subdirectory will omit the sibling PDF that its links reference.
+
+### Repeatable publication and local checks
+
+Visitors need none of these commands. Maintainers use Node.js 22+ for dependency-free generators/tests and an installed Edge/Chrome plus Python with **PyMuPDF** for PDF inspection. No framework, cloud subscription, service provisioning or package installation is required in the prepared environment.
+
+After canonical records and HTML structure are stable:
+
+```powershell
+node .\tools\sync-research.mjs
+node .\tools\sync-research.mjs --check
+node --test .\tools\build-paper.test.mjs
+node --test .\tests\validation.test.mjs
+node --test .\tests\assessment*.test.cjs
+node .\tools\validate-research.mjs
+node .\tools\validate-content.mjs
+node .\tools\validate-local-references.mjs
+node .\reference-validation\scripts\validate.mjs
+```
+
+`--paper-only` and `--microsite-only` restrict generation/checks to one target. The helper replaces bounded generated blocks only, preserves target line endings, escapes HTML-sensitive JSON, and rejects duplicate/missing markers or unresolved control source IDs. `--check` is read-only and exits nonzero on stale output. In concurrent maintenance, obtain the HTML owner's explicit release before modifying the microsite and the data owner's stable handoff before final generation.
+
+Build the paper only after the edition's exact evidence status and content are declared final. For an isolated browser profile, supply a **new, unused** directory in the publishing session's files area, never your personal profile:
+
+```powershell
+$publishScratch = 'C:\path\to\your\publishing-session\files'
+$env:ATF_BROWSER_PROFILE = Join-Path $publishScratch ('paper-' + [guid]::NewGuid())
+node .\tools\build-paper.mjs
+node .\tools\build-paper.mjs --check
+node .\tools\validate-project.mjs --skip-manifest
+```
+
+`ATF_BROWSER` can select an existing Edge/Chrome/Chromium executable and `ATF_PYTHON` an existing Python interpreter. The helper reuses the bounded native-CDP browser launcher, blocks HTTP(S), makes the page offline and prints actual local HTML using A4 portrait CSS, light theme, background graphics, no browser headers/footers and local fonts/assets. It removes its isolated profile after completion. If a browser exits before its debugging endpoint is ready, select a working existing Chromium executable explicitly; the helper does not download one or reuse an old PDF.
+
+The PDF inspector rebases checkout-specific file links to the public project URLs so downloaded PDFs do not point to the maintainer's machine. Those PDF links require internet and the corresponding published static edition; this work does not deploy it. The HTML edition's relative links remain usable offline. `tools\build-paper.receipt.json` records canonical input hashes (including the linked examples, runbooks, authorization and execution ledger), actual PDF hash, browser version/settings and real extracted-text/page observations. `--check` does not print or write: it rejects stale sources/PDF and reinspects the existing PDF. Browser versions, fonts and timestamps can change binary bytes; this is a repeatable export procedure, not a byte-identical PDF guarantee. Manually inspect the cover, appendix, source catalog and page breaks as well.
+
+After final local QA and all dependent validation artifacts are stable, refresh and check integrity:
+
+```powershell
+node .\tools\sync-research.mjs --manifest-only
+node .\tools\sync-research.mjs --manifest-only --check
+node .\tools\validate-project.mjs
+```
+
+Manifest-only mode touches no publication content and never stages or commits. Add newly published files to `manifest.json` deliberately before refreshing; it is an explicit inventory, not an automatic claim to cover every repository file. For an existing committed file, read-only `git show HEAD:path/to/file` or `git hash-object --path=path/to/file path/to/file` can inspect canonical Git content/filters without changing the index; Git object IDs are **not** SHA-256 manifest values.
+
+Review time-sensitive evidence separately with `node .\tools\source-maintenance.mjs --as-of 2026-11-18 --json`, choosing the review date deliberately. An offline freshness audit is not a live link recheck. Refresh a source when its age, preview, licensing, regional or failure-behavior triggers require it; retain what was inspected, by whom/method, what changed and affected claim/control IDs. Re-run generation, affected tests and the PDF workflow after source-driven content changes.
 
 ## Status and limitations
 

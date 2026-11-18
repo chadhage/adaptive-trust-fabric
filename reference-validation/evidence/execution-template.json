@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "UNEXECUTED-TEMPLATE",
+  "runbookId": null,
+  "caseIds": [],
+  "status": "not-executed",
+  "scopeKind": "unapproved",
+  "authorization": {"approvalReference": null, "approverRoles": [], "targetAllowList": [], "validFrom": null, "validUntil": null, "operations": []},
+  "operatorRole": null,
+  "witnessRole": null,
+  "environment": {"description": null, "productVersions": [], "targetIdentifiersRedacted": [], "syntheticData": true, "isolationVerified": false},
+  "startedAt": null,
+  "endedAt": null,
+  "inputHashes": [],
+  "steps": [
+    {"stepId": "REPLACE-ME", "expected": null, "observed": null, "status": "not-executed", "evidenceRefs": [], "startedAt": null, "endedAt": null}
+  ],
+  "measurements": {"rtoSeconds": null, "rpoSeconds": null, "revocationSeconds": null, "alertLatencySeconds": null, "disconnectedDurationSeconds": null},
+  "artifacts": [],
+  "relationshipIdMappings": [],
+  "rollback": {"required": false, "performed": false, "observed": null, "evidenceRefs": []},
+  "limitations": ["A template is not evidence of execution.", "Record actual scope and observed failures. Do not equate synchronized hashes with a successful fresh sign-in.", "Redact credentials and personal information before evidence publication."],
+  "acceptance": {"acceptedByRole": null, "acceptedAt": null, "scopeAccepted": null, "unmetCriteria": []}
+}

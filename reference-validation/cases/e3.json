@@ -1,0 +1,2811 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "E3",
+  "title": "S3 industrial site with local authority and bounded upstream independence",
+  "synthetic": true,
+  "scope": {
+    "kind": "synthetic-design",
+    "description": "Fictional Quarry site requires up to 24 hours of bounded local identity, authorization, security evidence, communications and recovery during upstream loss. Safety decisions remain with a local safety authority. The delivery contains only a small local software model; no industrial platform or physical process is deployed or exercised.",
+    "survivabilityTier": "S3",
+    "outOfScope": [
+      "Physical actuation, PLC/SCADA writes or safety-interlock changes",
+      "Actual AD/AD FS, Entra, Azure Local or Azure Stack Hub behavior",
+      "Real DNS/NTP/PKI/radio/telemetry infrastructure",
+      "Network interruption, billable resources or 24-hour endurance tests"
+    ],
+    "assumptions": [
+      "The local safety owner must approve actual maximum duration, safe state and restart criteria before any real test.",
+      "Corporate compromise or unavailability must not grant or deny required local operating authority.",
+      "Local hardware/power, identity, policy, keys, time, DNS, PKI, evidence and communications must each have an independently operable implementation.",
+      "S3 is a connectivity/continuity requirement, not a command to add an Entra tenant or a proof of product eligibility."
+    ]
+  },
+  "owners": {
+    "safety": "Local safety authority",
+    "operations": "Site operations lead",
+    "identity": "Local identity custodian",
+    "cyber": "Local OT security lead",
+    "recovery": "Local recovery custodian",
+    "acceptance": "Site safety and security review board"
+  },
+  "sourceFacts": [
+    {
+      "id": "E3-F01",
+      "claimIds": [
+        "C-04",
+        "C-13"
+      ],
+      "sourceIds": [
+        "MS-18",
+        "STD-01",
+        "STD-02"
+      ],
+      "fact": "OT monitoring, access and response must account for local enforcement and physical safety; cloud Conditional Access is not a substitute for local process authorization.",
+      "scopeLimit": "No particular physical safe state or cyber containment action is safe merely because this document says so.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "STD-01",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+            "section": "3 Logical Components of Zero Trust Architecture (PDF pp.18-19)",
+            "revision": "NIST SP 800-207",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "A policy enforcement point controls the connection to each protected resource."
+          },
+          {
+            "source_id": "STD-02",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+            "section": "3.3.9 (PDF p.59); 5.3.1/5.3.2 (PDF p.96); 6.2.1.3 (PDF p.119)",
+            "revision": "NIST SP 800-82r3, September 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "OT safety, availability, segmented communications and recovery require tailored engineering."
+          },
+          {
+            "source_id": "MS-18",
+            "url": "https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/ot-deploy/air-gapped-deploy",
+            "section": "Architecture recommendations; Deployment steps",
+            "revision": "updated_at=2026-04-28T17:57:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Local sensor integrations, health monitoring and backups are documented for air-gapped OT."
+          },
+          {
+            "source_id": "MS-18",
+            "url": "https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/ot-deploy/air-gapped-deploy",
+            "section": "Deploy hybrid or air-gapped OT sensor management; Architecture recommendations; Deployment steps",
+            "revision": "updated_at=2026-04-28T17:57:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Air-gapped/hybrid OT needs maintained sensors, local integrations, health monitoring and external sensor backups rather than reliance on cloud connectivity."
+          },
+          {
+            "source_id": "STD-01",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+            "section": "Abstract (PDF p.4); 2.1 Tenets of Zero Trust (PDF p.15); 3 Logical Components (PDF pp.18-19); 7 Migrating to a Zero Trust Architecture (PDF p.45)",
+            "revision": "NIST SP 800-207",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Trust is not implied by location; policy enforcement and enterprise asset/dependency knowledge are prerequisites to incremental ZTA adoption."
+          },
+          {
+            "source_id": "STD-02",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+            "section": "Comparing OT and IT System Security (PDF p.45); 3.3.9 Recovery and Restoration (PDF p.59); 5.3.1 Safety and 5.3.2 Availability (PDF p.96); 6.2.1.3 Network Segmentation and Isolation (PDF p.119)",
+            "revision": "NIST SP 800-82r3, September 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "OT security must preserve safety/integrity and continuity, tailor controls and design tested backup/restoration and constrained communication paths."
+          }
+        ],
+        "applicability": [
+          "OT local enforcement and safety-aware response"
+        ],
+        "limitations": [
+          "Site hazard analysis and real services not tested"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E3-F02",
+      "claimIds": [
+        "C-02",
+        "C-11",
+        "C-13"
+      ],
+      "sourceIds": [
+        "MS-02",
+        "MS-19",
+        "MS-20",
+        "MS-14",
+        "MS-15"
+      ],
+      "fact": "Local disconnected operating products have specific identity/control-plane, eligibility and feature dependencies. Tenant separation, local key labels and cloud inventory alone do not prove disconnected independence.",
+      "scopeLimit": "Azure Local disconnected and Azure Stack Hub disconnected are different deployment models; neither is implemented by this state machine.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant resource/configuration/administrative boundaries do not isolate identities when corporate accounts remain trusted."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-availability-key-understand",
+            "section": "Availability key uses; Availability key triggers",
+            "revision": "updated_at=2026-05-27T17:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Customer Key retains a Microsoft service-controlled availability-key path with workload-specific recovery behavior."
+          },
+          {
+            "source_id": "MS-14",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/microsoft-365-sovereign-controls",
+            "section": "Customer-managed encryption keys (CMKs); Advanced Data Residency; Rights Management",
+            "revision": "updated_at=2026-09-21T22:13:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Microsoft describes encryption, residency and rights as distinct controls."
+          },
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Resource isolation with multiple tenants; Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant configuration/resource administration is not identity isolation when corporate credentials or cross-tenant administration remain trusted."
+          },
+          {
+            "source_id": "MS-14",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/microsoft-365-sovereign-controls",
+            "section": "Customer-managed encryption keys (CMKs); External key management; Advanced Data Residency; Rights Management",
+            "revision": "updated_at=2026-09-21T22:13:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Microsoft 365 exposes several separate sovereignty-related controls and retains a service availability-key mechanism for Customer Key."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/microsoft-365-service-encryption",
+            "section": "What are Microsoft-managed keys?; What is Customer Key?",
+            "revision": "updated_at=2026-05-14T22:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Customer Key is an additional service-encryption option for specified workloads, not a replacement for every processing/access control."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-overview",
+            "section": "Customer Key with hybrid deployments; Learn about data encryption policies",
+            "revision": "updated_at=2026-06-01T22:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Data encryption policies have different workload coverage; Customer Key protects cloud data at rest, not on-premises data."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-availability-key-understand",
+            "section": "Availability key uses; Availability key triggers; How the availability key is used",
+            "revision": "updated_at=2026-05-27T17:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Exchange/multi-workload availability fallback differs from SharePoint/OneDrive explicit Support recovery; Microsoft service code controls the availability key."
+          },
+          {
+            "source_id": "MS-19",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-overview?view=azloc-2610",
+            "section": "Overview; Supported services; Eligibility criteria; Get started",
+            "revision": "updated_at=2026-10-28T22:05:00Z; view=azloc-2610",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Disconnected Azure Local uses a local control plane and selected services with extra capacity, eligible agreement, support and access approval."
+          },
+          {
+            "source_id": "MS-19",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-identity?view=azloc-2610",
+            "section": "Understand and plan identity; Understand how identity integration works; Limitations",
+            "revision": "updated_at=2026-06-16T17:03:00Z; view=azloc-2610",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Validated identity integration uses local AD groups/AD FS, scoped operator/subscription roles and local OIDC/LDAP dependencies."
+          },
+          {
+            "source_id": "MS-20",
+            "url": "https://learn.microsoft.com/en-us/azure-stack/operator/azure-stack-disconnected-deployment?view=azs-2604",
+            "section": "Azure disconnected deployment planning decisions; Features that are impaired or unavailable in disconnected deployments",
+            "revision": "updated_at=2026-01-07T23:02:00Z; view=azs-2604",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Disconnected integrated systems require AD FS and capacity billing, lack multitenancy and have listed identity, PKI, marketplace, telemetry and extension limits."
+          }
+        ],
+        "applicability": [
+          "Product selection and independent local authority"
+        ],
+        "limitations": [
+          "No product entitlement, capacity, version or service availability inspected"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E3-F03",
+      "claimIds": [
+        "C-07",
+        "C-09",
+        "C-17"
+      ],
+      "sourceIds": [
+        "MS-07",
+        "MS-11",
+        "MS-12",
+        "MS-23",
+        "STD-02"
+      ],
+      "fact": "Local retained evidence, response authority and recoverable trusted state must survive central ingestion/ticketing loss; recovery dependencies can form cycles even when workloads are on site.",
+      "scopeLimit": "A hash-linked in-memory queue is not durable, independently tamper-proof, sovereign storage or a working SOC.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Prepare external known-good state, retained logs, lifecycle-specific recovery and RTO/RPO drills; avoid recovery-repository authentication cycles."
+          },
+          {
+            "source_id": "MS-11",
+            "url": "https://learn.microsoft.com/en-us/azure/sentinel/prepare-multiple-workspaces",
+            "section": "The need to use multiple workspaces; Managed Security Service Provider (MSSP); Microsoft Sentinel multiple workspace architecture",
+            "revision": "updated_at=2026-08-07T22:44:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Most Sentinel features are workspace-local; native tenant-bound SaaS collection needs per-tenant workspaces while central management can span workspaces."
+          },
+          {
+            "source_id": "MS-23",
+            "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/integration-servicenow",
+            "section": "IT Service Management (ITSM): Bidirectional synchronization",
+            "revision": "updated_at=2026-06-16T18:23:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "This specific ticket integration synchronizes every 24 hours and requires routing to a ServiceNow user/assignment group."
+          },
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Determine object lifecycle state; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Continuity does not undo tenant integrity failures; recoverability needs known-good state, independent access to recovery material, lifecycle-specific restore paths and practiced runbooks."
+          },
+          {
+            "source_id": "MS-11",
+            "url": "https://learn.microsoft.com/en-us/azure/sentinel/prepare-multiple-workspaces",
+            "section": "The need to use multiple workspaces; Managed Security Service Provider (MSSP); Microsoft Sentinel multiple workspace architecture",
+            "revision": "updated_at=2026-08-07T22:44:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Most features are workspace-local; region, tenant-bound connectors, data access and ownership affect placement; central operations can span workspaces."
+          },
+          {
+            "source_id": "MS-12",
+            "url": "https://learn.microsoft.com/en-us/security/zero-trust/siem-xdr-overview",
+            "section": "Microsoft Sentinel and XDR architecture; Key capabilities; What's in this solution",
+            "revision": "updated_at=2026-11-15T08:35:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "XDR/SIEM integration combines telemetry, investigation and response through configured products, connectors and permissions."
+          },
+          {
+            "source_id": "MS-23",
+            "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/integration-servicenow",
+            "section": "IT Service Management (ITSM): Bidirectional synchronization; Configuration Compliance module",
+            "revision": "updated_at=2026-06-16T18:23:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "The specified ticket synchronization runs every 24 hours and requires valid ServiceNow user/assignment-group routing."
+          },
+          {
+            "source_id": "STD-02",
+            "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+            "section": "Comparing OT and IT System Security (PDF p.45); 3.3.9 Recovery and Restoration (PDF p.59); 5.3.1 Safety and 5.3.2 Availability (PDF p.96); 6.2.1.3 Network Segmentation and Isolation (PDF p.119)",
+            "revision": "NIST SP 800-82r3, September 2023",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "OT security must preserve safety/integrity and continuity, tailor controls and design tested backup/restoration and constrained communication paths."
+          }
+        ],
+        "applicability": [
+          "Local detection, evidence and recovery bootstrap"
+        ],
+        "limitations": [
+          "No storage durability, service recovery or incident response observed"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "E3-Q01",
+      "text": "Authenticate approved local operators and enforce local roles for up to 24 hours of upstream loss without Entra/corporate runtime authorization; deny central-only identities and unknown/expired/revoked local credentials.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local identity custodian",
+      "status": "declared",
+      "acceptance": [
+        "Local issuer/audience/expiry/revocation enforcement demonstrated on the actual selected identity stack.",
+        "Local session lifetime no more than 15 minutes; local reauthentication only while all autonomy prerequisites remain valid.",
+        "Corporate credentials cannot become local administrative credentials."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F01",
+        "E3-F02"
+      ],
+      "unknowns": [
+        "Actual local identity system, custody, revocation and runtime independence untested."
+      ]
+    },
+    {
+      "id": "E3-Q02",
+      "text": "Local approved policy permits only declared operational functions; the supplied model permits synthetic telemetry read and alarm acknowledgement and denies all physical actuation.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local operations and safety authority",
+      "status": "declared",
+      "acceptance": [
+        "Locally approved version is used when upstream policy is unavailable.",
+        "Unlisted actions, central-only roles and physical commands deny.",
+        "Policy/deployment identity cannot grant itself safety authority."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F01"
+      ],
+      "unknowns": [
+        "Actual enforcement points and legacy-device compensating controls require a hazard-approved test."
+      ]
+    },
+    {
+      "id": "E3-Q03",
+      "text": "A local safety authority can stop operation and veto restart independently of central cybersecurity commands; restart requires local safety and recovery approval after prerequisites and revocations are reconciled.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local safety authority",
+      "status": "unknown",
+      "acceptance": [
+        "Signed site hazard/safe-state/restart analysis and authority matrix.",
+        "No cyber operator or central-only identity bypasses safety veto.",
+        "Actual interlocks remain independent and are never bypassed by this exercise."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F01"
+      ],
+      "unknowns": [
+        "No real safety authority approval, hazard review or physical safe-state observation exists."
+      ]
+    },
+    {
+      "id": "E3-Q04",
+      "text": "Retain local security evidence for the 24-hour window at a synthetic peak of ten 1-KiB events/minute with 2x reserve; allocate at least 64 MiB plus independently justified overhead and protect provenance/access/export.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local OT security lead",
+      "status": "declared",
+      "acceptance": [
+        "14,400 events/day × 1 KiB × 2 = 28.125 MiB before overhead, within the proposed 64-MiB reserve.",
+        "Loss of central ingestion does not disable local detection.",
+        "Evidence capacity/integrity failure leads to approved restricted/safe state without silent discard."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F03"
+      ],
+      "unknowns": [
+        "Real event rate, durable storage, integrity anchor, detection and retention not tested; the model uses only a 32-event queue."
+      ]
+    },
+    {
+      "id": "E3-Q05",
+      "text": "Local keys, approved name records, time and PKI/revocation material remain usable through the window; local session/signing trust is limited and cloud key retrieval is not required.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local platform/key custodian",
+      "status": "declared",
+      "acceptance": [
+        "Declared clock error bound 60 seconds; exceeding it blocks operations.",
+        "Name/trust/key failures individually trigger the approved restricted/safe state.",
+        "Proposed signing/PKI validity is 48 hours and revocation material at least 24 hours; actual root/renewal/holdover and expiry tests required."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F02",
+        "E3-F03"
+      ],
+      "unknowns": [
+        "DNS, time, PKI, key protection, revocation delivery, power and renewal are model flags, not actual services."
+      ]
+    },
+    {
+      "id": "E3-Q06",
+      "text": "Local operators and safety staff retain an approved two-way local alarm/coordination channel; central SIEM/ITSM unavailability cannot gate time-critical response.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Site communications owner",
+      "status": "declared",
+      "acceptance": [
+        "Send and acknowledgement observed on actual local communications.",
+        "Required communications loss leads to approved safe behavior.",
+        "Incident evidence is reconciled later without a ticketing dependency."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F01",
+        "E3-F03"
+      ],
+      "unknowns": [
+        "In-memory mailbox tests do not validate actual radio, intercom, delivery or staffing."
+      ]
+    },
+    {
+      "id": "E3-Q07",
+      "text": "At 24 hours, credential expiry or loss of a mandatory local dependency, stop new privileged/state-changing work and enter the site-approved safe state; no silent extension or fail-open.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local safety authority",
+      "status": "declared",
+      "acceptance": [
+        "Boundary tests at/after expiry and autonomy maximum.",
+        "One-fault-at-a-time key, time, DNS, PKI, communications and evidence-capacity behavior.",
+        "Actual real-duration endurance and hazard-approved safe-state execution before operation."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F01",
+        "E3-F02"
+      ],
+      "unknowns": [
+        "Accelerated logical clock is not real 24-hour endurance or physical shutdown proof."
+      ]
+    },
+    {
+      "id": "E3-Q08",
+      "text": "Recover local identity/policy/evidence from independently custodied offline state within two hours with a 24-hour baseline RPO, without an Entra-only vault, online certificate renewal or cloud recovery authorization.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local recovery custodian",
+      "status": "declared",
+      "acceptance": [
+        "Independent media, local keys, time/DNS/PKI and protected recovery console are reachable.",
+        "Known-good object/role/policy relationships and revocations are reconciled.",
+        "Restore measured on the selected actual platform with safety authority present."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F02",
+        "E3-F03"
+      ],
+      "unknowns": [
+        "No hardware, power, actual backup restore, RTO/RPO or platform eligibility validation."
+      ]
+    },
+    {
+      "id": "E3-Q09",
+      "text": "On upstream return, retain and reconcile local logs, revocations and policy versions before approved resumption; do not overwrite local safety decisions or re-enable stale identities.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Local OT security lead",
+      "status": "declared",
+      "acceptance": [
+        "Local ordered evidence survives modeled export until receipt acknowledged.",
+        "Revoked local identity remains denied after reconnect.",
+        "Actual upstream ingestion and conflict resolution separately tested."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E3-F03"
+      ],
+      "unknowns": [
+        "No live ingestion, policy reconciliation or cross-system authority conflict tested."
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "E3-B01",
+      "type": "tenant",
+      "contains": [
+        "Optional upstream corporate Entra tenant",
+        "No requirement for an additional online Entra tenant"
+      ],
+      "owner": "Enterprise/site architect",
+      "crossingRule": "Corporate tenant is not the local runtime identity or safety authority; product-specific deployment choice is unresolved.",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q08"
+      ]
+    },
+    {
+      "id": "E3-B02",
+      "type": "trust",
+      "contains": [
+        "Locally issued bounded credentials",
+        "Local revocation and PKI trust"
+      ],
+      "owner": "Local identity custodian",
+      "crossingRule": "No corporate issuer is implicitly accepted for local privileged operations; any transfer is reviewed and purpose-bound.",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q05"
+      ]
+    },
+    {
+      "id": "E3-B03",
+      "type": "administrative",
+      "contains": [
+        "Local identity/policy/key custodians",
+        "Local recovery console",
+        "Central observers"
+      ],
+      "owner": "Site operations lead",
+      "crossingRule": "Central observations cannot grant local operating/recovery or safety rights.",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q03",
+        "E3-Q08"
+      ]
+    },
+    {
+      "id": "E3-B04",
+      "type": "regulatory",
+      "contains": [
+        "Fictional local industrial safety obligations",
+        "Local evidence/export rules"
+      ],
+      "owner": "Local legal/safety owner",
+      "crossingRule": "Site-specific law/hazard analysis and cryptographic/operator authority need explicit sign-off.",
+      "requirementRefs": [
+        "E3-Q03",
+        "E3-Q04",
+        "E3-Q05"
+      ]
+    },
+    {
+      "id": "E3-B05",
+      "type": "data",
+      "contains": [
+        "Raw local events",
+        "Local hash/integrity anchor",
+        "Approved incident summary/export queue"
+      ],
+      "owner": "Local OT security lead",
+      "crossingRule": "Retain raw evidence locally; export only approved fields with receipt and integrity reconciliation.",
+      "requirementRefs": [
+        "E3-Q04",
+        "E3-Q09"
+      ]
+    },
+    {
+      "id": "E3-B06",
+      "type": "network",
+      "contains": [
+        "Local OT segments",
+        "Mediated local admin path",
+        "Unavailable upstream link"
+      ],
+      "owner": "OT network owner",
+      "crossingRule": "The fixture changes an in-memory flag only; any real disconnection or segmentation test needs a separate safety-approved lab.",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q07"
+      ]
+    },
+    {
+      "id": "E3-B07",
+      "type": "workload",
+      "contains": [
+        "Local identity/policy/telemetry services",
+        "Legacy-device mediator",
+        "Local communications"
+      ],
+      "owner": "Local platform owner",
+      "crossingRule": "Local services enforce purpose-specific rights and fail behavior; cloud inventory/management is not runtime control.",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q05",
+        "E3-Q06"
+      ]
+    },
+    {
+      "id": "E3-B08",
+      "type": "physical-safety",
+      "contains": [
+        "Local safety authority",
+        "Independent process interlocks",
+        "Approved safe-state/restart rules"
+      ],
+      "owner": "Local safety authority",
+      "crossingRule": "Cybersecurity actions never override local safety veto or interlocks; no physical operation is authorized here.",
+      "requirementRefs": [
+        "E3-Q03",
+        "E3-Q07"
+      ]
+    }
+  ],
+  "authorityGraph": {
+    "direction": "from-exercises-authority-over-to",
+    "nodes": [
+      {
+        "id": "E3-A-ID",
+        "label": "Local identity authority",
+        "boundary": "E3-B02",
+        "kind": "local-identity-authority"
+      },
+      {
+        "id": "E3-A-OP",
+        "label": "Local operator",
+        "boundary": "E3-B03",
+        "kind": "local-human"
+      },
+      {
+        "id": "E3-A-POLICY",
+        "label": "Locally approved policy",
+        "boundary": "E3-B07",
+        "kind": "enforcement-point"
+      },
+      {
+        "id": "E3-A-MED",
+        "label": "Legacy-device mediation boundary",
+        "boundary": "E3-B07",
+        "kind": "protocol-enforcement"
+      },
+      {
+        "id": "E3-A-LOG",
+        "label": "Local telemetry/evidence store",
+        "boundary": "E3-B05",
+        "kind": "evidence-resource"
+      },
+      {
+        "id": "E3-A-KEY",
+        "label": "Local key custodian",
+        "boundary": "E3-B03",
+        "kind": "key-authority"
+      },
+      {
+        "id": "E3-A-SAFETY",
+        "label": "Independent local safety authority",
+        "boundary": "E3-B08",
+        "kind": "safety-authority"
+      },
+      {
+        "id": "E3-A-REC",
+        "label": "Local recovery custodian",
+        "boundary": "E3-B03",
+        "kind": "recovery-authority"
+      },
+      {
+        "id": "E3-A-RESTART",
+        "label": "Local restart approval gate",
+        "boundary": "E3-B08",
+        "kind": "joint-authorization"
+      },
+      {
+        "id": "E3-A-CENTRAL",
+        "label": "Central observer (no local runtime grant)",
+        "boundary": "E3-B01",
+        "kind": "external-observer"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E3-AE01",
+        "from": "E3-A-ID",
+        "to": "E3-A-OP",
+        "permission": "Issue only locally approved role assertions with issuer/audience/15-minute expiry and local revocation checks.",
+        "credential": "Protected local signing credential and separately enrolled operator method; fixture uses an ephemeral in-memory HMAC key only.",
+        "delegation": "Local identity custodian enrolls/approves operators; no corporate automatic entitlement.",
+        "revocation": {
+          "actor": "Local identity custodian",
+          "mechanism": "Disable local identity and record local revocation; deny sessions at local enforcement.",
+          "latencyLimit": "Proposed immediate local deny on next action; actual system timing untested.",
+          "residualAccess": "Fixture revocation is not real AD/PKI/token-service revocation."
+        },
+        "boundaryCrossings": [
+          "E3-B02",
+          "E3-B03"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E3-AE02",
+        "from": "E3-A-OP",
+        "to": "E3-A-POLICY",
+        "permission": "Request synthetic telemetry.read and alarm.ack only while all local prerequisites remain valid.",
+        "credential": "Local audience-bound unexpired credential plus local role and approved policy version.",
+        "delegation": "Local operations/safety owners define permitted functions.",
+        "revocation": {
+          "actor": "Local policy/identity owners",
+          "mechanism": "Remove role/action mapping, revoke identity/session and verify deny.",
+          "latencyLimit": "Next modeled action; real enforcement untested.",
+          "residualAccess": "Previously observed information is not recalled; no physical action is granted."
+        },
+        "boundaryCrossings": [
+          "E3-B03",
+          "E3-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E3-AE03",
+        "from": "E3-A-POLICY",
+        "to": "E3-A-MED",
+        "permission": "Authorize only hazard-approved mediated operations in a future real implementation; all physical actuation is denied by this model.",
+        "credential": "Local service identity with segment/protocol/action allow-list, not a cloud token dependency.",
+        "delegation": "Site safety and OT owners approve exact mediated commands.",
+        "revocation": {
+          "actor": "Local OT security and safety owners",
+          "mechanism": "Disable mediation route/action under hazard-approved response, retaining safety interlocks.",
+          "latencyLimit": "Must be established by actual hazard-reviewed test.",
+          "residualAccess": "Legacy devices may have independent local access paths needing physical/segment controls."
+        },
+        "boundaryCrossings": [
+          "E3-B07",
+          "E3-B08"
+        ],
+        "status": "unknown"
+      },
+      {
+        "id": "E3-AE04",
+        "from": "E3-A-POLICY",
+        "to": "E3-A-LOG",
+        "permission": "Append local authorization/security events; cannot silently overwrite retained history.",
+        "credential": "Local append-only service identity; fixture stores a hash-linked in-memory array.",
+        "delegation": "Local evidence owner defines retention, capacity and export policy.",
+        "revocation": {
+          "actor": "Local OT security lead",
+          "mechanism": "Remove producer permission and preserve existing evidence/integrity anchor.",
+          "latencyLimit": "Local enforcement target; actual service untested.",
+          "residualAccess": "A hash chain without independent anchoring is not tamper-proof or durable."
+        },
+        "boundaryCrossings": [
+          "E3-B07",
+          "E3-B05"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E3-AE05",
+        "from": "E3-A-KEY",
+        "to": "E3-A-ID",
+        "permission": "Manage local signing-key lifecycle under independent custody; no operator role approval or safety override.",
+        "credential": "Local protected key-admin method; no online vault retrieval dependency.",
+        "delegation": "Local key authority approves rotation/recovery with validity bounds.",
+        "revocation": {
+          "actor": "Independent local key authority",
+          "mechanism": "Remove key-admin access and rotate/reissue within approved safe recovery plan.",
+          "latencyLimit": "Site-specific; untested.",
+          "residualAccess": "Offline trust/revocation distribution and old signatures require reconciliation."
+        },
+        "boundaryCrossings": [
+          "E3-B03",
+          "E3-B02"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E3-AE06",
+        "from": "E3-A-SAFETY",
+        "to": "E3-A-RESTART",
+        "permission": "Stop/veto operation and approve only the safety half of restart; never overridden by central cyber authority.",
+        "credential": "Locally controlled safety-role approval and independent physical interlock authority; fixture is only a role flag.",
+        "delegation": "Actual site safety governance/hazard analysis, absent from this synthetic example.",
+        "revocation": {
+          "actor": "Local safety governance authority",
+          "mechanism": "Replace/withdraw safety authorization through approved local process; default is no restart.",
+          "latencyLimit": "No unsafe automatic timeout override.",
+          "residualAccess": "The model does not exercise a physical stop or safety-rated system."
+        },
+        "boundaryCrossings": [
+          "E3-B08"
+        ],
+        "status": "unknown"
+      },
+      {
+        "id": "E3-AE07",
+        "from": "E3-A-REC",
+        "to": "E3-A-RESTART",
+        "permission": "Approve recovery-readiness half only after local identity/policy/key/time/DNS/PKI/evidence reconciliation.",
+        "credential": "Independent local recovery method and known-good offline baseline.",
+        "delegation": "Local recovery owner; requires separate safety approval.",
+        "revocation": {
+          "actor": "Local recovery governance authority",
+          "mechanism": "Remove recovery role/approval; safe-stop persists until both local roles are valid.",
+          "latencyLimit": "Next modeled restart attempt; actual untested.",
+          "residualAccess": "A recovered service is not safe to run merely because cyber checks pass."
+        },
+        "boundaryCrossings": [
+          "E3-B03",
+          "E3-B08"
+        ],
+        "status": "declared"
+      }
+    ],
+    "indirectPaths": [
+      {
+        "id": "E3-AP01",
+        "nodeIds": [
+          "E3-A-ID",
+          "E3-A-OP",
+          "E3-A-POLICY",
+          "E3-A-LOG"
+        ],
+        "edgeIds": [
+          "E3-AE01",
+          "E3-AE02",
+          "E3-AE04"
+        ],
+        "meaning": "Local identity enables only purpose-bound operations and evidence; upstream corporate authority is not on this runtime path."
+      },
+      {
+        "id": "E3-AP02",
+        "nodeIds": [
+          "E3-A-KEY",
+          "E3-A-ID",
+          "E3-A-OP"
+        ],
+        "edgeIds": [
+          "E3-AE05",
+          "E3-AE01"
+        ],
+        "meaning": "Key administration is an indirect identity privilege and must not also own safety approval or erase evidence."
+      }
+    ],
+    "forbiddenPaths": [
+      "Central observer/corporate IdP → local runtime or safety privilege",
+      "Local policy/deployment identity → safety restart approval",
+      "Local operator → physical actuation in the supplied model",
+      "Cloud vault/online CRL/central ITSM → mandatory local bootstrap",
+      "One custodian → key issuance, evidence erasure and unilateral safety restart"
+    ]
+  },
+  "recoveryGraph": {
+    "direction": "from-depends-on-to",
+    "nodes": [
+      {
+        "id": "E3-R-SITE",
+        "label": "Bounded safe local resumption",
+        "boundary": "E3-B08",
+        "kind": "recovery-goal"
+      },
+      {
+        "id": "E3-R-BOOT",
+        "label": "Local protected recovery console",
+        "boundary": "E3-B03",
+        "kind": "bootstrap-authority"
+      },
+      {
+        "id": "E3-R-MEDIA",
+        "label": "Offline approved baseline/media",
+        "boundary": "E3-B03",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E3-R-KEY",
+        "label": "Independent local recovery keys",
+        "boundary": "E3-B02",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E3-R-SVC",
+        "label": "Local identity/policy services",
+        "boundary": "E3-B07",
+        "kind": "recovery-component"
+      },
+      {
+        "id": "E3-R-INFRA",
+        "label": "Local time/DNS/PKI/power",
+        "boundary": "E3-B07",
+        "kind": "infrastructure-dependency"
+      },
+      {
+        "id": "E3-R-EVID",
+        "label": "Local evidence/communications",
+        "boundary": "E3-B05",
+        "kind": "recovery-component"
+      },
+      {
+        "id": "E3-R-SAFETY",
+        "label": "Local safety and recovery approval",
+        "boundary": "E3-B08",
+        "kind": "independent-authority"
+      },
+      {
+        "id": "E3-R-CLOUD",
+        "label": "Rejected online vault/renewal path",
+        "boundary": "E3-B01",
+        "kind": "rejected-bootstrap"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E3-RE01",
+        "from": "E3-R-SITE",
+        "to": "E3-R-SVC",
+        "dependency": "Local identity/policy role and revocation state verified.",
+        "failureEffect": "No new privileged/state-changing operation.",
+        "alternative": "Remain in approved safe-stop; do not accept corporate-only authority."
+      },
+      {
+        "id": "E3-RE02",
+        "from": "E3-R-SVC",
+        "to": "E3-R-BOOT",
+        "dependency": "Protected local console restores services without those same failed services.",
+        "failureEffect": "If console login requires the failed local IdP, recovery cycles.",
+        "alternative": "Independent recovery method/console demonstrated before reliance."
+      },
+      {
+        "id": "E3-RE03",
+        "from": "E3-R-BOOT",
+        "to": "E3-R-MEDIA",
+        "dependency": "Trusted pre-change local baseline and tools.",
+        "failureEffect": "Unknown or compromised policy/identity state.",
+        "alternative": "Earlier independently approved offline copy; otherwise remain stopped."
+      },
+      {
+        "id": "E3-RE04",
+        "from": "E3-R-BOOT",
+        "to": "E3-R-KEY",
+        "dependency": "Local decrypt/sign/recovery custody independent of online vault.",
+        "failureEffect": "Backups exist but cannot be used.",
+        "alternative": "Separate protected recovery key/custodian with tested offline retrieval."
+      },
+      {
+        "id": "E3-RE05",
+        "from": "E3-R-SVC",
+        "to": "E3-R-INFRA",
+        "dependency": "Bounded time, approved names, trust/revocation validity and power.",
+        "failureEffect": "Authentication/trust cannot be safely evaluated.",
+        "alternative": "Local bootstrap configuration and holdover capacity; no fake clock bypass."
+      },
+      {
+        "id": "E3-RE06",
+        "from": "E3-R-SITE",
+        "to": "E3-R-EVID",
+        "dependency": "Local logging capacity/integrity and required communications work.",
+        "failureEffect": "No defensible monitored operation/coordination.",
+        "alternative": "Approved restricted/safe state; preserve evidence."
+      },
+      {
+        "id": "E3-RE07",
+        "from": "E3-R-SITE",
+        "to": "E3-R-SAFETY",
+        "dependency": "Local safety veto released and separate recovery approval present.",
+        "failureEffect": "No restart even if central cyber reports healthy.",
+        "alternative": "Remain stopped under local safety authority."
+      },
+      {
+        "id": "E3-RE08",
+        "from": "E3-R-BOOT",
+        "to": "E3-R-SVC",
+        "dependency": "Rejected design: console requires the failed local directory for all login.",
+        "failureEffect": "BOOT↔SVC cycle prevents recovery.",
+        "alternative": "Independent console method, not yet operationally proven."
+      },
+      {
+        "id": "E3-RE09",
+        "from": "E3-R-KEY",
+        "to": "E3-R-CLOUD",
+        "dependency": "Rejected design: only cloud vault supplies recovery key/online renewal.",
+        "failureEffect": "Upstream loss blocks local recovery and invalidates S3 independence.",
+        "alternative": "Independently custodied local material with validated expiry/renewal."
+      }
+    ],
+    "rejectedEdgeIds": [
+      "E3-RE08",
+      "E3-RE09"
+    ],
+    "independentAnchors": [
+      {
+        "nodeId": "E3-R-MEDIA",
+        "independentOf": [
+          "Corporate/Entra sign-in",
+          "Live local IdP administration",
+          "Online repository/update service"
+        ],
+        "remainingDependencies": [
+          "Physical custodian, compatible tools and approved version",
+          "Local power/hardware and integrity anchor"
+        ],
+        "proofRequired": "Recover selected real platform from offline media under safety approval; not executed."
+      },
+      {
+        "nodeId": "E3-R-KEY",
+        "independentOf": [
+          "Cloud vault",
+          "Corporate MFA/online certificate renewal",
+          "Failed local directory"
+        ],
+        "remainingDependencies": [
+          "Local protected custody/quorum",
+          "Validity/revocation and usable hardware"
+        ],
+        "proofRequired": "Observe safe local key retrieval/recovery and expiry handling on actual implementation; fixture flags are insufficient."
+      },
+      {
+        "nodeId": "E3-R-SAFETY",
+        "independentOf": [
+          "Central cyber restart command",
+          "Central ITSM approval",
+          "Cloud telemetry health"
+        ],
+        "remainingDependencies": [
+          "Qualified available local safety and recovery roles",
+          "Actual hazard-approved process state"
+        ],
+        "proofRequired": "Local safety authority signs and witnesses representative safe-state/restart exercise; not authorized."
+      }
+    ],
+    "cycles": [
+      {
+        "id": "E3-RC01",
+        "nodeIds": [
+          "E3-R-BOOT",
+          "E3-R-SVC"
+        ],
+        "status": "broken-by-design-not-tested",
+        "mitigation": "RE02/RE08 expose the rejected console/failed-IdP cycle. Require separately controlled local bootstrap authority and test actual restoration."
+      }
+    ],
+    "restorationOrder": [
+      "Local safety determines approved state and retains veto",
+      "Verify power, protected console, independent keys and offline media",
+      "Establish bounded local time/DNS/PKI and revocation state",
+      "Restore/verify local identity and approved policy relationships",
+      "Verify local evidence capacity/integrity and communications",
+      "Reconcile upstream changes without restoring revoked authority",
+      "Require separate local safety plus recovery approvals; measure actual RTO/RPO"
+    ]
+  },
+  "controlApplicability": [
+    {
+      "controlId": "N-01",
+      "applicability": "applicable",
+      "rationale": "Local identity, process safety, network segmentation, raw evidence and corporate observation are separate boundaries; an Entra tenant outline cannot represent them alone.",
+      "owner": "Site architect",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q03"
+      ],
+      "requiredEvidence": [
+        "Approved eight-type site boundary, dependency and data-flow register"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-02",
+      "applicability": "applicable",
+      "rationale": "S3 does not require another online Entra tenant; choose local identity/product boundaries from the actual authority/continuity need and verify any extra tenant's purpose.",
+      "owner": "Enterprise/site architect",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Product/identity alternatives with explicit no-unjustified-tenant rationale"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-03",
+      "applicability": "applicable",
+      "rationale": "Corporate compromise/unavailability must not grant or deny required local operations; local credentials, keys, policy, recovery and safety authority all need independent paths.",
+      "owner": "Local identity/safety owners",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q03",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Actual upstream-independent runtime/recovery path tests and corporate-identity denial"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-04",
+      "applicability": "not-applicable",
+      "rationale": "Quarry is a standalone fictional site review, not an acquisition or divestiture; no cross-tenant M&A lifecycle is introduced.",
+      "owner": "Site architect",
+      "requirementRefs": [
+        "E3-Q01"
+      ],
+      "requiredEvidence": [
+        "Site scope confirmation; reassess on acquisition/trust transition"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-05",
+      "applicability": "applicable",
+      "rationale": "S3 requires a bounded 24-hour local operating contract for identity, policy, keys, evidence, updates, communications and recovery with explicit expiry/fail behavior.",
+      "owner": "Site continuity owner",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q05",
+        "E3-Q07"
+      ],
+      "requiredEvidence": [
+        "Actual dependency-loss/endurance matrix and maximum-duration/safe-state acceptance"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-06",
+      "applicability": "applicable",
+      "rationale": "Local operator, policy issuer, key custodian, evidence owner, recovery custodian and safety authority must not become one unchecked administrator.",
+      "owner": "Site security lead",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q03",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Role/custody/quorum matrix and denied unilateral restart/evidence-erasure paths"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-07",
+      "applicability": "applicable",
+      "rationale": "Privileged local humans need suitable phishing-resistant methods where supported; legacy-device limits require explicit scoped compensations approved by safety, not a blanket exemption.",
+      "owner": "Local authentication owner",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q02"
+      ],
+      "requiredEvidence": [
+        "Actual method coverage, device limitations and expiring safety-approved exceptions"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-08",
+      "applicability": "not-applicable",
+      "rationale": "The local runtime/recovery has no Entra tenant dependency, so cloud-only emergency accounts cannot satisfy local bootstrap. Any optional upstream tenant must implement its own separate N-08 review.",
+      "owner": "Local recovery custodian",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Local independent console/method test and explicit upstream-tenant scope exclusion"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-09",
+      "applicability": "not-applicable",
+      "rationale": "PHS cloud authentication is not the local disconnected runtime fallback and would reintroduce Entra availability; no AD-password hybrid cloud cohort is assumed here.",
+      "owner": "Local identity custodian",
+      "requirementRefs": [
+        "E3-Q01"
+      ],
+      "requiredEvidence": [
+        "Local identity architecture and no cloud-authentication runtime dependency"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-10",
+      "applicability": "not-applicable",
+      "rationale": "Entra Conditional Access does not enforce this local disconnected model; purpose-bound local policy is required instead. Optional upstream app policies are outside this site runtime scope.",
+      "owner": "Local policy owner",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q02"
+      ],
+      "requiredEvidence": [
+        "Actual local enforcement points and separately scoped upstream-app review"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-11",
+      "applicability": "applicable",
+      "rationale": "Local services, mediators, device identities, signing credentials and update packages need owner/purpose/privilege/expiry inventory even with no cloud identity service.",
+      "owner": "Local platform owner",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q05"
+      ],
+      "requiredEvidence": [
+        "Local non-human/device/key inventory, revocation and expiry behavior"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-12",
+      "applicability": "not-applicable",
+      "rationale": "No separately managed logical AI agent is deployed at the site; a telemetry daemon is not assumed to be an Agent ID feature.",
+      "owner": "Site application owner",
+      "requirementRefs": [
+        "E3-Q02"
+      ],
+      "requiredEvidence": [
+        "Agent-free scope attestation and new-agent sponsor/owner review trigger"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-13",
+      "applicability": "applicable",
+      "rationale": "Prefer local short-lived workload credentials/federation where the chosen stack supports them; unsupported cloud managed identity cannot be assumed offline and exceptions need bounded local custody.",
+      "owner": "Local workload identity owner",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q05"
+      ],
+      "requiredEvidence": [
+        "Actual local issuer/subject/audience/custody and renewal/expiry tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-14",
+      "applicability": "applicable",
+      "rationale": "Legacy OT may lack modern authentication; segmentation, protocol mediation and action allow-lists require safety-reviewed response instead of direct cloud MFA assumptions.",
+      "owner": "OT network and safety owners",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q03"
+      ],
+      "requiredEvidence": [
+        "Device limitations, mediation/segmentation proof and hazard-approved denied-command tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-15",
+      "applicability": "applicable",
+      "rationale": "Central ingestion/ITSM loss cannot remove local detection/response or safety coordination; local authority and communications need actual witnessed tests.",
+      "owner": "Local OT security lead",
+      "requirementRefs": [
+        "E3-Q03",
+        "E3-Q04",
+        "E3-Q06"
+      ],
+      "requiredEvidence": [
+        "Local alerts, acknowledgement, authority/veto and required-channel failure behavior"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-16",
+      "applicability": "applicable",
+      "rationale": "The 64-MiB proposed evidence reserve needs durable integrity/access/retention/export controls; the 32-event in-memory hash chain only demonstrates bounded queue logic.",
+      "owner": "Local evidence owner",
+      "requirementRefs": [
+        "E3-Q04",
+        "E3-Q09"
+      ],
+      "requiredEvidence": [
+        "Measured event size/rate, durable capacity/integrity anchor and receipt-preserving export"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-17",
+      "applicability": "applicable",
+      "rationale": "Local production data, credentials and logs need classification/encryption/retention and controlled update/export media; physical location alone provides no usage restriction.",
+      "owner": "Site data owner",
+      "requirementRefs": [
+        "E3-Q04",
+        "E3-Q05",
+        "E3-Q09"
+      ],
+      "requiredEvidence": [
+        "Local data/media classification, encryption/custody and approved export tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-18",
+      "applicability": "applicable",
+      "rationale": "Local operator, key, telemetry and recovery authority must be evaluated separately; saying 'on premises' or 'local key' does not establish legal/cryptographic sovereignty.",
+      "owner": "Local legal/key authority",
+      "requirementRefs": [
+        "E3-Q03",
+        "E3-Q05",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Signed dimensional authority analysis, key/recovery custody and residual vendor access"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-19",
+      "applicability": "not-applicable",
+      "rationale": "The fictional operating scope contains one local site and optional central reporting, not enforcement across multiple cloud providers.",
+      "owner": "Site platform owner",
+      "requirementRefs": [
+        "E3-Q01"
+      ],
+      "requiredEvidence": [
+        "Provider inventory and reassessment trigger before a new cloud dependency"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-20",
+      "applicability": "applicable",
+      "rationale": "Local policy→mediator→process and key→issuer→operator paths can affect production safety; central tickets never become mandatory emergency approvals.",
+      "owner": "Site integration owner",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q03",
+        "E3-Q06"
+      ],
+      "requiredEvidence": [
+        "Directed grant/credential/revocation graph and separately approved transaction/safety tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-21",
+      "applicability": "applicable",
+      "rationale": "Offline backups are useless if console authentication, decryption keys or PKI renewal depend on the failed directory/cloud; the rejected bootstrap cycle must be removed and tested.",
+      "owner": "Local recovery custodian",
+      "requirementRefs": [
+        "E3-Q05",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Actual offline platform restore, independent custody and measured two-hour/24-hour RTO/RPO"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-22",
+      "applicability": "applicable",
+      "rationale": "Locally approved policy/update versions, expiry and drift must be reviewable and reversible without pulling an untrusted upstream update during isolation.",
+      "owner": "Local policy/update owner",
+      "requirementRefs": [
+        "E3-Q02",
+        "E3-Q07",
+        "E3-Q09"
+      ],
+      "requiredEvidence": [
+        "Signed offline release/baseline history, drift evidence and safe rollback/reconciliation"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-23",
+      "applicability": "not-applicable",
+      "rationale": "No Azure management-group design is selected; an actual Azure Local choice would need its separate product/management-capacity review rather than invented offline Azure hierarchy behavior.",
+      "owner": "Site platform architect",
+      "requirementRefs": [
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Product-selection scope and re-review if Azure management subscriptions are introduced"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-24",
+      "applicability": "applicable",
+      "rationale": "Every local safety/identity/evidence requirement needs an owner and actual scoped proof retained on site; accelerated model outputs are explicitly not physical safety evidence.",
+      "owner": "Site assurance lead",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q03",
+        "E3-Q04",
+        "E3-Q07"
+      ],
+      "requiredEvidence": [
+        "Requirement/control/asset/evidence ledger, local retention and untested-service register"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-25",
+      "applicability": "applicable",
+      "rationale": "S3 adds local identity/key/PKI/time/DNS/power/spares, qualified staff and product eligibility costs; no maturity label or central dashboard funds those dependencies.",
+      "owner": "Site service owner and finance",
+      "requirementRefs": [
+        "E3-Q05",
+        "E3-Q06",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Lifecycle/capacity/license/staffing estimates, funded owners and recovery capability acceptance"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-26",
+      "applicability": "applicable",
+      "rationale": "Unknown safety approval, real local dependency independence and actual recovery tests prevent S3 operating approval even if all supplied software-model checks pass.",
+      "owner": "Site review board",
+      "requirementRefs": [
+        "E3-Q01",
+        "E3-Q03",
+        "E3-Q07",
+        "E3-Q08"
+      ],
+      "requiredEvidence": [
+        "Final shared-engine output plus authorized representative dependency-loss/safety/recovery evidence"
+      ],
+      "implementationStatus": "declared-only"
+    }
+  ],
+  "decision": {
+    "status": "provisional-not-authorized",
+    "selectedAlternativeId": "E3-ALT1",
+    "dimensions": {
+      "topology": "Independent local identity-authority pattern (T3 conceptual boundary); no assertion that a new Entra tenant is required",
+      "identity": "Locally controlled issuer, revocation, key custody and recovery proposed; actual independence unknown",
+      "sovereignty": "Local operating/key/evidence/recovery authority required, legal/product fit unverified",
+      "connectivity": "S3 bounded local operation; not an S4/T4 permanent-disconnection claim",
+      "recovery": "Independent offline console/media/keys plus local safety veto; two-hour target untested",
+      "economics": "No pricing claim; local capacity/power/spares/license/entitlement/staffing assumptions require funded review."
+    },
+    "alternatives": [
+      {
+        "id": "E3-ALT1",
+        "name": "Locally independent identity/policy/evidence/recovery with safety-controlled S3 window",
+        "disposition": "selected-provisionally",
+        "reason": "Matches the declared independent local authority need; actual product selection, hazard review, dependency loss and recovery remain unverified.",
+        "tradeoffs": [
+          "Substantial local key/PKI/time/DNS/power/staffing lifecycle burden.",
+          "24-hour duration and safe/restart behavior need real representative tests.",
+          "Model is not a deployment blueprint for a specific industrial product."
+        ]
+      },
+      {
+        "id": "E3-ALT2",
+        "name": "Connected cloud-only Entra sign-in and central policy/SIEM",
+        "disposition": "rejected",
+        "reason": "Mandatory runtime identity, authorization and evidence would fail when upstream is lost, violating E3-Q01/Q04.",
+        "tradeoffs": [
+          "Simpler central operation cannot supply required local autonomy.",
+          "Cached sessions alone do not cover expiry, new sign-in, revocation or safety authority."
+        ]
+      },
+      {
+        "id": "E3-ALT3",
+        "name": "Additional Entra tenant with the same corporate identities and cloud vault",
+        "disposition": "rejected",
+        "reason": "Retains corporate/cloud authority, key retrieval and bootstrap dependencies; tenant separation does not meet the declared local runtime/recovery requirement.",
+        "tradeoffs": [
+          "Adds administration while preserving the forbidden dependency.",
+          "Does not solve local time/DNS/PKI/evidence/communications."
+        ]
+      },
+      {
+        "id": "E3-ALT4",
+        "name": "Azure Local disconnected or Azure Stack Hub disconnected deployment",
+        "disposition": "deferred",
+        "reason": "Potential product-specific implementations require separate current eligibility, identity/control-plane, feature/capacity and actual service tests; neither product is selected by a topology label.",
+        "tradeoffs": [
+          "Deployment/identity models and commercial prerequisites differ.",
+          "Selected services do not automatically satisfy the complete industrial dependency graph."
+        ]
+      }
+    ],
+    "unmetPrerequisites": [
+      "Actual local safety/hazard/restart approval",
+      "Authorized representative platform/identity/dependency-loss tests",
+      "Actual key/time/DNS/PKI/power/storage/communications independence",
+      "Offline recovery exercise and measured RTO/RPO",
+      "Product eligibility/capacity/license and funded staffing",
+      "Real-duration 24-hour endurance and revocation/reconnection behavior"
+    ],
+    "assessmentInput": {
+      "boundary": "identity",
+      "sovereignty": "control",
+      "survivability": "3",
+      "ot": "yes",
+      "boundaryFit": "unmet",
+      "identityDependency": "unknown",
+      "sovereigntyEvidence": "unknown",
+      "localServices": "unknown",
+      "upstreamDependency": "unknown",
+      "recoveryRequirement": "independent",
+      "recoveryDependency": "unknown",
+      "privilegePath": "unknown",
+      "localAuthority": "unknown",
+      "safetyReview": "unknown",
+      "otFallback": "unknown",
+      "staffing": "unknown",
+      "monitoring": "unknown",
+      "response": "unknown",
+      "recoveryTest": "unknown",
+      "ma": "low",
+      "autonomy": "high",
+      "maturity": "managed"
+    },
+    "assessmentOutput": {
+      "contractVersion": "1.0",
+      "state": "insufficient-evidence",
+      "advisoryOnly": true,
+      "evidenceBasis": "self-reported",
+      "inputs": {
+        "boundary": "identity",
+        "sovereignty": "control",
+        "survivability": "3",
+        "ot": "yes",
+        "boundaryFit": "unmet",
+        "identityDependency": "unknown",
+        "sovereigntyEvidence": "unknown",
+        "localServices": "unknown",
+        "upstreamDependency": "unknown",
+        "recoveryRequirement": "independent",
+        "recoveryDependency": "unknown",
+        "privilegePath": "unknown",
+        "localAuthority": "unknown",
+        "safetyReview": "unknown",
+        "otFallback": "unknown",
+        "staffing": "unknown",
+        "monitoring": "unknown",
+        "response": "unknown",
+        "recoveryTest": "unknown",
+        "ma": "low",
+        "autonomy": "high",
+        "maturity": "managed"
+      },
+      "dimensions": {
+        "topology": {
+          "state": "insufficient-evidence",
+          "value": "T3",
+          "summary": "Independent identity-authority pattern; tenant expansion is not established by this label."
+        },
+        "identity": {
+          "state": "insufficient-evidence",
+          "value": "identity",
+          "summary": "Independent authentication and administrative authority is required. Proposed authority paths: unknown (self-reported)."
+        },
+        "sovereignty": {
+          "state": "insufficient-evidence",
+          "value": "control",
+          "summary": "Evaluate data processing, operators, keys, telemetry and legal scope independently of tenant count."
+        },
+        "connectivity": {
+          "state": "insufficient-evidence",
+          "value": "S3",
+          "pattern": null,
+          "summary": "S3 describes required function and duration, not proven uptime or tenant count. Local safety authority and fallback remain mandatory."
+        },
+        "recovery": {
+          "state": "insufficient-evidence",
+          "value": "independent",
+          "summary": "Recovery authority and dependency declarations require independent review and a scoped restore exercise; no graph was inspected."
+        }
+      },
+      "readiness": {
+        "state": "insufficient-evidence",
+        "summary": "All applicable prerequisites must be satisfied. Declarations are self-reported, not inspected or operationally verified. A candidate is not deployment approval; maturity labels are not readiness evidence."
+      },
+      "gates": [
+        {
+          "id": "identity-authority",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "identity-dependency-unknown"
+          ]
+        },
+        {
+          "id": "sovereignty-authority",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "sovereignty-evidence-unknown"
+          ]
+        },
+        {
+          "id": "disconnected-dependencies",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "local-services-unknown",
+            "upstream-dependency-unknown"
+          ]
+        },
+        {
+          "id": "ot-safety",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "local-authority-unknown",
+            "safety-review-unknown",
+            "ot-fallback-unknown"
+          ]
+        },
+        {
+          "id": "recovery-independence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "recovery-dependency-unknown"
+          ]
+        },
+        {
+          "id": "privilege-containment",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "privilege-path-unknown"
+          ]
+        },
+        {
+          "id": "operating-evidence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "staffing-unknown",
+            "monitoring-unknown",
+            "response-unknown",
+            "recovery-test-unknown"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Inputs describe the proposed configuration and are self-reported; no tenant, configuration, authority graph, evidence file or live service has been inspected.",
+        "The one-tenant fit declaration concerns actual mandatory requirements, not acquisition frequency, legal labels, key ownership or organizational preference alone.",
+        "S0-S4 are continuity requirements; T1-T3 are tenant/authority patterns, T4 is a disconnected operating overlay, and T5 is a time-bounded transition pattern.",
+        "No security risk, cost, availability guarantee, legal approval or safety certification is calculated."
+      ],
+      "reasons": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "independent-identity-required",
+          "message": "The declared independent identity requirement calls for the T3 authority pattern; it may already exist and does not by itself prescribe an additional tenant.",
+          "dimension": "identity",
+          "fields": [
+            "boundary"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "identity-dependency-unknown",
+          "message": "Proposed identity and administration authority paths is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "identityDependency"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "single-tenant-unmet-requirement",
+          "message": "A declared mandatory requirement cannot be met within one tenant. Review a separate boundary and its actual controls, not just its tenant count.",
+          "dimension": "topology",
+          "fields": [
+            "boundaryFit"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "autonomy-context-only",
+          "message": "Business autonomy is context; identify the specific unmet authority or isolation requirement before adding tenants.",
+          "dimension": "topology",
+          "fields": [
+            "autonomy"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "sovereignty-evidence-unknown",
+          "message": "Proposed operator, processing and key controls is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "sovereignty-needs-control-evidence",
+          "message": "Local key or control-plane authority is a control requirement, not proof that another tenant is required. Check operators, processing, telemetry, keys and recovery in the actual deployment.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereignty",
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "upstream-dependency-unknown",
+          "message": "Upstream dependencies of required independent functions is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "survivability-not-tenant-count",
+          "message": "Independent or disconnected operation requires local capabilities and removal of relevant upstream dependencies. It does not automatically require another online Entra tenant.",
+          "dimension": "connectivity",
+          "fields": [
+            "survivability"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "local-authority-unknown",
+          "message": "Local OT operating authority is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "localAuthority"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "safety-review-unknown",
+          "message": "Safety review of response and failure behavior is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "safetyReview"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "ot-fallback-unknown",
+          "message": "Local OT safe-operation or safe-shutdown fallback is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "otFallback"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "ot-local-safety-required",
+          "message": "OT safety is a separate local gate at every S tier; a tenant topology, online SOC or cloud-only response is not a safety case.",
+          "dimension": "safety",
+          "fields": [
+            "ot"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "maturity-label-not-evidence",
+          "message": "A developing, managed or automated maturity label neither establishes nor disproves operating readiness; staffing, monitoring, response and recovery evidence are evaluated separately.",
+          "dimension": "readiness",
+          "fields": [
+            "maturity"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "unmetPrerequisites": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "identity-dependency-unknown",
+          "message": "Proposed identity and administration authority paths is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "identityDependency"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "sovereignty-evidence-unknown",
+          "message": "Proposed operator, processing and key controls is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "upstream-dependency-unknown",
+          "message": "Upstream dependencies of required independent functions is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "local-authority-unknown",
+          "message": "Local OT operating authority is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "localAuthority"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "safety-review-unknown",
+          "message": "Safety review of response and failure behavior is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "safetyReview"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "ot-fallback-unknown",
+          "message": "Local OT safe-operation or safe-shutdown fallback is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "otFallback"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "rejectedAlternatives": [
+        {
+          "id": "T1",
+          "dimension": "identity",
+          "state": "excluded",
+          "reasonCodes": [
+            "independent-identity-required"
+          ],
+          "message": "A shared global identity authority cannot satisfy the declared independent identity requirement."
+        },
+        {
+          "id": "T1",
+          "dimension": "topology",
+          "state": "excluded",
+          "reasonCodes": [
+            "single-tenant-unmet-requirement"
+          ],
+          "message": "The declared mandatory requirement is not satisfied inside one tenant."
+        }
+      ],
+      "nextValidationChecks": [
+        {
+          "code": "validate-recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-privilege-path-unknown",
+          "message": "Transitive privilege containment is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "validate-identity-dependency-unknown",
+          "message": "Proposed identity and administration authority paths is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "identity",
+          "fields": [
+            "identityDependency"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "validate-sovereignty-evidence-unknown",
+          "message": "Proposed operator, processing and key controls is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "validate-upstream-dependency-unknown",
+          "message": "Upstream dependencies of required independent functions is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "validate-local-authority-unknown",
+          "message": "Local OT operating authority is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "localAuthority"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "validate-safety-review-unknown",
+          "message": "Safety review of response and failure behavior is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "safetyReview"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "validate-ot-fallback-unknown",
+          "message": "Local OT safe-operation or safe-shutdown fallback is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "safety",
+          "fields": [
+            "otFallback"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        },
+        {
+          "code": "validate-staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "review-authority-paths",
+          "message": "Review the boundary register and authentication, administration, federation and transitive privilege paths with accountable owners.",
+          "dimension": "identity",
+          "fields": [
+            "boundaryFit",
+            "identityDependency",
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "review-sovereignty-scope",
+          "message": "Validate applicable legal obligations, product/cloud availability, processing locations, operator scope and key controls; do not infer sovereign-cloud parity.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereignty",
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "exercise-outage-functions",
+          "message": "Define the exact required functions and duration, then exercise identity, policy, keys, DNS, communications, telemetry and updates under an authorized upstream-outage scenario.",
+          "dimension": "connectivity",
+          "fields": [
+            "survivability",
+            "localServices",
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "exercise-independent-recovery",
+          "message": "Have owners review recovery dependencies and exercise an authorized restore with known-good identities, keys, configuration, communications and retained evidence.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryRequirement",
+            "recoveryDependency",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "verify-operating-artifacts",
+          "message": "Inspect staffing assignments, monitoring coverage, response runbooks and dated recovery exercise artifacts. A self-description is not inspected configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing",
+            "monitoring",
+            "response",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-local-safety",
+          "message": "Obtain local operational and safety-owner review of safe-state behavior, response authorization and tested fallback before any live OT action.",
+          "dimension": "safety",
+          "fields": [
+            "localAuthority",
+            "safetyReview",
+            "otFallback"
+          ],
+          "sourceIds": [
+            "MS-18",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-14"
+          ]
+        }
+      ],
+      "validationErrors": []
+    },
+    "reconsiderWhen": [
+      "Site hazard review changes maximum autonomy or safe-state behavior",
+      "Any local dependency needs corporate/cloud runtime authorization",
+      "Actual product selection/eligibility or renewal model changes",
+      "Storage/communications/power holdover is insufficient",
+      "Recovery cycles, local revocations or safety veto cannot be demonstrated"
+    ]
+  },
+  "validation": {
+    "overallStatus": "partial-local-synthetic-only",
+    "authorizationRef": "AUTH-REQUEST-01",
+    "executedEvidenceRefs": [
+      "LOCAL-NODE-TESTS-01",
+      "LOCAL-SYNTHETIC-01"
+    ],
+    "scenarios": [
+      {
+        "id": "E3-V01",
+        "requirementRefs": [
+          "E3-Q01",
+          "E3-Q02",
+          "E3-Q04",
+          "E3-Q05",
+          "E3-Q06",
+          "E3-Q07",
+          "E3-Q09"
+        ],
+        "runbookRef": "R4",
+        "expected": [
+          "Local state-machine issuer/audience/expiry/revocation, policy deny, hash linkage, queue limit, mailbox, dependency flags and logical duration checks pass."
+        ],
+        "observed": [
+          "S3-01: true — Ephemeral local HMAC credential and local policy only",
+          "S3-02: null — Central-only identity is not enrolled in the local fixture",
+          "S3-03: false — Local allow-list denies a physical-control action",
+          "S3-04: true — Local allow-list permits only the declared synthetic alarm acknowledgement",
+          "S3-05: \"wrong-issuer\" — Issuer check after a valid fixture signature; not PKI/Entra testing",
+          "S3-06: \"wrong-audience\" — Audience check after a valid fixture signature",
+          "S3-07: false — Tampered fixture credential is rejected",
+          "S3-08: \"locally-revoked\" — Local in-memory revocation denies the next modeled action",
+          "S3-09: \"expired-or-invalid-time\" — Accelerated logical credential expiry at exactly 15 minutes",
+          "S3-10: true — Local hash linkage over recorded fixture events",
+          "S3-11: false — Detection of one changed historical in-memory record; no independent integrity anchor",
+          "S3-12: {\"mode\":\"read-only\",\"allowed\":false,\"retained\":2} — Bounded queue becomes read-only at capacity with no silent discard",
+          "S3-13: true — In-memory local mailbox send/recipient acknowledgement; not radio/intercom",
+          "S3-14: {\"allowed\":false,\"mode\":\"safe-stopped\"} — One-fault gate: local key availability flag; not an actual service test",
+          "S3-15: {\"allowed\":false,\"mode\":\"safe-stopped\"} — One-fault gate: logical clock error above the declared 60-second bound; not an actual service test",
+          "S3-16: {\"allowed\":false,\"mode\":\"safe-stopped\"} — One-fault gate: local name availability flag; not an actual service test",
+          "S3-17: {\"allowed\":false,\"mode\":\"safe-stopped\"} — One-fault gate: local PKI-expiry flag; not an actual service test",
+          "S3-18: {\"allowed\":false,\"mode\":\"safe-stopped\"} — One-fault gate: required local communications flag; not an actual service test",
+          "S3-19: \"safe-stopped\" — Accelerated logical 24-hour boundary; not a wall-clock endurance test",
+          "S3-20: true — Local safety-role flag can stop the model",
+          "S3-21: false — Central-only actor cannot bypass local safety/recovery restart gate",
+          "S3-22: false — One local role alone cannot satisfy joint restart",
+          "S3-23: true — Both local roles restore only the healthy software model",
+          "S3-24: \"safe-stopped\" — Reconnection alone does not resume operations",
+          "S3-25: \"locally-revoked\" — Reconciliation retains local revocation; no actual ingestion service",
+          "S3-26: {\"sameDigest\":true,\"receiptAccepted\":true,\"retained\":2} — Local export records remain until and after matching receipt, without claiming external durability"
+        ],
+        "status": "passed-local-synthetic-only",
+        "evidenceRefs": [
+          "LOCAL-SYNTHETIC-01#S3-01",
+          "LOCAL-SYNTHETIC-01#S3-02",
+          "LOCAL-SYNTHETIC-01#S3-03",
+          "LOCAL-SYNTHETIC-01#S3-04",
+          "LOCAL-SYNTHETIC-01#S3-05",
+          "LOCAL-SYNTHETIC-01#S3-06",
+          "LOCAL-SYNTHETIC-01#S3-07",
+          "LOCAL-SYNTHETIC-01#S3-08",
+          "LOCAL-SYNTHETIC-01#S3-09",
+          "LOCAL-SYNTHETIC-01#S3-10",
+          "LOCAL-SYNTHETIC-01#S3-11",
+          "LOCAL-SYNTHETIC-01#S3-12",
+          "LOCAL-SYNTHETIC-01#S3-13",
+          "LOCAL-SYNTHETIC-01#S3-14",
+          "LOCAL-SYNTHETIC-01#S3-15",
+          "LOCAL-SYNTHETIC-01#S3-16",
+          "LOCAL-SYNTHETIC-01#S3-17",
+          "LOCAL-SYNTHETIC-01#S3-18",
+          "LOCAL-SYNTHETIC-01#S3-19",
+          "LOCAL-SYNTHETIC-01#S3-20",
+          "LOCAL-SYNTHETIC-01#S3-21",
+          "LOCAL-SYNTHETIC-01#S3-22",
+          "LOCAL-SYNTHETIC-01#S3-23",
+          "LOCAL-SYNTHETIC-01#S3-24",
+          "LOCAL-SYNTHETIC-01#S3-25",
+          "LOCAL-SYNTHETIC-01#S3-26"
+        ],
+        "scope": "Eligible local model only; no actual service, safe-state, durability or 24-hour endurance evidence."
+      },
+      {
+        "id": "E3-V02",
+        "requirementRefs": [
+          "E3-Q01",
+          "E3-Q03",
+          "E3-Q05",
+          "E3-Q06",
+          "E3-Q07"
+        ],
+        "runbookRef": "R4",
+        "expected": [
+          "Representative actual local identity/policy/key/time/DNS/PKI/communications and safety authority work through an authorized 24-hour loss exercise with required fail behavior."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "No actual OT/platform/network/safety exercise is authorized."
+      },
+      {
+        "id": "E3-V03",
+        "requirementRefs": [
+          "E3-Q03",
+          "E3-Q08",
+          "E3-Q09"
+        ],
+        "runbookRef": "R4",
+        "expected": [
+          "Independent offline platform restore meets two-hour/24-hour targets; revocations/evidence reconcile and local safety plus recovery approvals gate restart."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "No hardware, backup restore, real service recovery or physical restart is authorized."
+      }
+    ],
+    "limitations": [
+      "The 32-event model queue is not the proposed 64-MiB durable implementation.",
+      "Logical time acceleration is not a real-duration soak.",
+      "Hash linkage is not independently anchored tamper-proof storage.",
+      "Local role/PKI/DNS/time/key/communications flags are not actual services.",
+      "No Azure Local/Stack Hub/Entra/AD/OT capability or physical safety was operationally validated."
+    ]
+  }
+}

@@ -1,0 +1,2154 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "E1",
+  "title": "Single-tenant enterprise with regional data and operating requirements",
+  "synthetic": true,
+  "scope": {
+    "kind": "synthetic-design",
+    "description": "Fictional Alder enterprise: 4,800 workforce identities, one Entra tenant, EU and US applications, one hybrid AD source and regionally delegated operations. No actual organization, tenant, user or deployment was inspected.",
+    "survivabilityTier": "S1",
+    "outOfScope": [
+      "A legally mandated independent identity authority",
+      "OT or autonomous industrial operation",
+      "Acquisitions and multicloud workloads",
+      "Production sign-in, emergency access or recovery execution"
+    ],
+    "assumptions": [
+      "The fictional legal owner accepts a common corporate identity/control-plane failure domain.",
+      "Regional requirements concern specified data/telemetry and delegated operations, not a requirement for separate tenants.",
+      "The proposed emergency and recovery paths still need Entra and reachable management APIs.",
+      "No real legal, licensing, availability, cost or recovery determination is made.",
+      "One synthetic legacy cohort temporarily retains primary federation while its app dependency is reviewed; active PHS is the preferred end state where acceptable. Backup-only hashes require the separate R2 activation/sign-in/return exercise."
+    ]
+  },
+  "owners": {
+    "architecture": "Enterprise identity architect",
+    "regionalData": "EU/US data owners",
+    "identity": "Workforce identity owner",
+    "recovery": "Independent baseline custodian",
+    "acceptance": "Enterprise risk authority"
+  },
+  "sourceFacts": [
+    {
+      "id": "E1-F01",
+      "claimIds": [
+        "C-01",
+        "C-02"
+      ],
+      "sourceIds": [
+        "MS-02"
+      ],
+      "fact": "A tenant is an administrative/configuration boundary; additional tenants need a specific unmet requirement. Regional labels alone do not prove one is needed.",
+      "scopeLimit": "This fictional enterprise's common-identity acceptance is a scenario assumption, not a legal finding.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Resource isolation with multiple tenants; Outcomes",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Microsoft recommends one tenant if it meets needs and warns that multiple tenants increase management complexity."
+          },
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant resource/configuration/administrative boundaries do not isolate identities when corporate accounts remain trusted."
+          },
+          {
+            "source_id": "MS-02",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-multiple-tenants",
+            "section": "Resource isolation with multiple tenants; Outcomes; Multi-tenant resource isolation; Resource and identity isolation with multiple tenants",
+            "revision": "updated_at=2026-06-15T17:40:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Separate tenant configuration/resource administration is not identity isolation when corporate credentials or cross-tenant administration remain trusted."
+          }
+        ],
+        "applicability": [
+          "Single-tenant versus multitenant design review"
+        ],
+        "limitations": [
+          "No tenant inspected"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E1-F02",
+      "claimIds": [
+        "C-05",
+        "C-06"
+      ],
+      "sourceIds": [
+        "MS-05",
+        "MS-06"
+      ],
+      "fact": "Cloud-only emergency access and activated PHS can reduce on-premises authentication dependencies, but neither makes Entra cloud authentication independent of Entra.",
+      "scopeLimit": "Pre-synchronized hashes do not activate switchover and no fresh sign-ins were tested.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-05",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+            "section": "Create emergency access accounts; Configuration requirements; Conditional Access considerations; Security guardrails summary; Validate accounts regularly",
+            "revision": "updated_at=2026-06-05T07:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "At least two cloud-only accounts, distinct phishing-resistant methods, blocking-policy exclusions, permanent active role, alerts and 90-day checks."
+          },
+          {
+            "source_id": "MS-06",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/resilience-in-hybrid",
+            "section": "Password hash synchronization; Pass-through Authentication; Federation",
+            "revision": "updated_at=2026-04-17T17:20:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "PHS removes on-premises authentication-time dependencies after hashes are synchronized; PTA/federation have different runtime paths."
+          },
+          {
+            "source_id": "MS-06",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/tutorial-phs-backup",
+            "section": "Enable password hash sync in Microsoft Entra Connect; Switch to password hash sync",
+            "revision": "updated_at=2026-02-26T18:16:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "For AD FS, backup hash synchronization and explicit sign-in-method switching are separate tested steps."
+          },
+          {
+            "source_id": "MS-05",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+            "section": "Create emergency access accounts; Configuration requirements; Federation guidance; Conditional Access considerations; Security guardrails summary; Validate accounts regularly",
+            "revision": "updated_at=2026-06-05T07:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Emergency accounts bypass selected normal-admin dependencies, not the Entra service; cloud and on-premises emergency paths should remain distinct."
+          },
+          {
+            "source_id": "MS-06",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/resilience-in-hybrid",
+            "section": "Password hash synchronization; Pass-through Authentication; Federation",
+            "revision": "updated_at=2026-04-17T17:20:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "PHS authentication does not contact on-premises AD; PTA and federation retain runtime on-premises dependencies."
+          },
+          {
+            "source_id": "MS-06",
+            "url": "https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/tutorial-phs-backup",
+            "section": "Enable password hash sync in Microsoft Entra Connect; Switch to password hash sync; Sign in with a user account to test sync; Switch back to federation",
+            "revision": "updated_at=2026-02-26T18:16:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Synchronizing backup hashes and switching the sign-in method are different steps that must be rehearsed before an outage."
+          }
+        ],
+        "applicability": [
+          "Hybrid workforce and emergency authentication"
+        ],
+        "limitations": [
+          "No sign-in, alert or cutover execution"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    },
+    {
+      "id": "E1-F03",
+      "claimIds": [
+        "C-07",
+        "C-11"
+      ],
+      "sourceIds": [
+        "MS-07",
+        "MS-08",
+        "MS-14",
+        "MS-15",
+        "MS-11"
+      ],
+      "fact": "Residency, processing, administrative access, key authority, telemetry and recovery require separate review. Configuration recovery needs known-good external state and coverage/gap checks.",
+      "scopeLimit": "Neither Customer Key nor a regional label proves exclusive key authority or a restorable tenant.",
+      "evidence": {
+        "status": "derived",
+        "verified_on": "2026-11-18",
+        "source_refs": [
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Prepare external known-good state, retained logs, lifecycle-specific recovery and RTO/RPO drills; avoid recovery-repository authentication cycles."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/overview",
+            "section": "Standard and Premium plans; Hybrid identity and broader recoverability",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Standard retains up to seven days; Premium preview up to 30; hard-deleted object recovery/recreation is unsupported."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-availability-key-understand",
+            "section": "Availability key uses; Availability key triggers",
+            "revision": "updated_at=2026-05-27T17:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Customer Key retains a Microsoft service-controlled availability-key path with workload-specific recovery behavior."
+          },
+          {
+            "source_id": "MS-11",
+            "url": "https://learn.microsoft.com/en-us/azure/sentinel/prepare-multiple-workspaces",
+            "section": "The need to use multiple workspaces: Sovereignty and regulatory compliance",
+            "revision": "updated_at=2026-08-07T22:44:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "A regional workspace does not prevent every cross-geography processing exception."
+          },
+          {
+            "source_id": "MS-14",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/microsoft-365-sovereign-controls",
+            "section": "Customer-managed encryption keys (CMKs); Advanced Data Residency; Rights Management",
+            "revision": "updated_at=2026-09-21T22:13:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Microsoft describes encryption, residency and rights as distinct controls."
+          },
+          {
+            "source_id": "MS-07",
+            "url": "https://learn.microsoft.com/en-us/entra/architecture/recoverability-tenant",
+            "section": "Compare resilience and recoverability; Prepare for tenant-scoped recovery; Determine object lifecycle state; Recreate following hard deletion",
+            "revision": "updated_at=2026-06-26T22:37:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Continuity does not undo tenant integrity failures; recoverability needs known-good state, independent access to recovery material, lifecycle-specific restore paths and practiced runbooks."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/overview",
+            "section": "How backups work; Standard and Premium plans; Prerequisites; Hybrid identity and broader recoverability",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Plan-specific seven/30-day retention, workforce-tenant prerequisites, role requirements and hard-deletion gaps."
+          },
+          {
+            "source_id": "MS-08",
+            "url": "https://learn.microsoft.com/en-us/entra/backup/scope-supported-objects-limitations",
+            "section": "Recovery scope levels; User; Group; Application; Service principal; Limitations",
+            "revision": "updated_at=2026-11-17T08:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Recovery covers selected object properties/links, not full object rollback; hybrid authority and job-time limitations apply."
+          },
+          {
+            "source_id": "MS-11",
+            "url": "https://learn.microsoft.com/en-us/azure/sentinel/prepare-multiple-workspaces",
+            "section": "The need to use multiple workspaces; Managed Security Service Provider (MSSP); Microsoft Sentinel multiple workspace architecture",
+            "revision": "updated_at=2026-08-07T22:44:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Most features are workspace-local; region, tenant-bound connectors, data access and ownership affect placement; central operations can span workspaces."
+          },
+          {
+            "source_id": "MS-14",
+            "url": "https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/microsoft-365-sovereign-controls",
+            "section": "Customer-managed encryption keys (CMKs); External key management; Advanced Data Residency; Rights Management",
+            "revision": "updated_at=2026-09-21T22:13:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Microsoft 365 exposes several separate sovereignty-related controls and retains a service availability-key mechanism for Customer Key."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/microsoft-365-service-encryption",
+            "section": "What are Microsoft-managed keys?; What is Customer Key?",
+            "revision": "updated_at=2026-05-14T22:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Customer Key is an additional service-encryption option for specified workloads, not a replacement for every processing/access control."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-overview",
+            "section": "Customer Key with hybrid deployments; Learn about data encryption policies",
+            "revision": "updated_at=2026-06-01T22:33:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Data encryption policies have different workload coverage; Customer Key protects cloud data at rest, not on-premises data."
+          },
+          {
+            "source_id": "MS-15",
+            "url": "https://learn.microsoft.com/en-us/purview/customer-key-availability-key-understand",
+            "section": "Availability key uses; Availability key triggers; How the availability key is used",
+            "revision": "updated_at=2026-05-27T17:34:00Z",
+            "verified_on": "2026-11-18",
+            "verification": "full-page",
+            "supports": "Exchange/multi-workload availability fallback differs from SharePoint/OneDrive explicit Support recovery; Microsoft service code controls the availability key."
+          }
+        ],
+        "applicability": [
+          "Regional data protection and tenant recovery"
+        ],
+        "limitations": [
+          "Exact service geography, key coverage and restore coverage unverified"
+        ],
+        "confidence_rationale": "Derived restatement of the final canonical documentary source records below; the synthetic requirements and all operational applicability remain declared or unknown.",
+        "operational_validation": "not-performed"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "E1-Q01",
+      "text": "Use the existing single tenant if the remaining mandatory requirements can be met; regional teams receive scoped application/data administration, not independent identity authority.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Enterprise risk authority",
+      "status": "declared",
+      "acceptance": [
+        "Document why each requirement can fit within one tenant.",
+        "No additional tenant is justified by region count alone."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F01"
+      ],
+      "unknowns": [
+        "Actual scoped delegation and service fit are not inspected."
+      ]
+    },
+    {
+      "id": "E1-Q02",
+      "text": "Keep fictional EU customer payloads and raw security telemetry in approved EU storage/processing locations for 365 days; central analysts may receive a redacted incident summary only.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "EU data owner",
+      "status": "declared",
+      "acceptance": [
+        "Per-service storage, processing, backup and telemetry flows mapped.",
+        "Cross-region raw export denied; summary fields approved by the data owner."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F03"
+      ],
+      "unknowns": [
+        "Service-specific geography, retention and export behavior require legal/product verification."
+      ]
+    },
+    {
+      "id": "E1-Q03",
+      "text": "Regain approved emergency administration within 30 minutes if the normal hybrid path fails while Entra and target management services remain available.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Workforce identity owner",
+      "status": "declared",
+      "acceptance": [
+        "Two fresh independently controlled cloud-only emergency sign-ins.",
+        "Every use/action observed by monitoring and the allowed operation reversed."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F02"
+      ],
+      "unknowns": [
+        "No emergency account, independent method or alert has been exercised."
+      ]
+    },
+    {
+      "id": "E1-Q04",
+      "text": "Prefer active PHS where acceptable. For the temporarily federated approved synthetic legacy cohort, activate the prepared PHS cloud authentication path within 60 minutes and keep last synchronized password/state age within 24 hours.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Hybrid identity owner",
+      "status": "declared",
+      "acceptance": [
+        "Explicit activation/routing and fresh positive/negative sign-ins observed.",
+        "Measured propagation, password/state age and rollback meet the fictional objectives."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F02"
+      ],
+      "unknowns": [
+        "PHS legality, configuration, sync health, activation and rollback are untested."
+      ]
+    },
+    {
+      "id": "E1-Q05",
+      "text": "Restore approved scoped tenant configuration within four hours from a trusted external baseline no older than 24 hours, including dependent relationships and explicit native-restore gaps.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Recovery owner",
+      "status": "declared",
+      "acceptance": [
+        "Trusted baseline retained outside the exercised tenant's administration.",
+        "Object and directed relationship diffs plus fresh allow/deny tests pass.",
+        "Unrecoverable object/credential/data gaps remain explicit."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F03"
+      ],
+      "unknowns": [
+        "Coverage, retention, actual baseline custody and RTO/RPO not observed."
+      ]
+    },
+    {
+      "id": "E1-Q06",
+      "text": "Determine whether the fictional EU workload needs exclusive local cryptographic authority beyond ordinary service encryption/customer-managed-key options before any sovereignty claim.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "EU legal and key authority",
+      "status": "unknown",
+      "acceptance": [
+        "Legal owner signs a separate key/processing/operator/recovery authority determination.",
+        "Selected service coverage and residual vendor/recovery-key access documented."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F03"
+      ],
+      "unknowns": [
+        "The key authority requirement is intentionally unresolved; residency is not substituted for it."
+      ]
+    },
+    {
+      "id": "E1-Q07",
+      "text": "Privileged humans use phishing-resistant protected administration; CI workload identities cannot grant themselves tenant-wide roles or alter the recovery baseline.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Identity security lead",
+      "status": "declared",
+      "acceptance": [
+        "Normal, elevated, emergency, workload and baseline-custody paths are distinct.",
+        "Directed CI→app permissions stop at the application scope; forbidden escalation tests deny."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F01",
+        "E1-F02"
+      ],
+      "unknowns": [
+        "Credential, permission and revocation enforcement is design-only."
+      ]
+    },
+    {
+      "id": "E1-Q08",
+      "text": "Office services tolerate cloud sign-in unavailability without autonomous local production; local incident contacts and retained evidence remain usable for the declared S1 boundary.",
+      "mandatory": true,
+      "origin": "synthetic-scenario",
+      "owner": "Business continuity owner",
+      "status": "declared",
+      "acceptance": [
+        "Loss of cloud identity stops new affected cloud sessions; no S3 claim.",
+        "Offline contact list and independent baseline/evidence retrieval are exercised before reliance."
+      ],
+      "evidenceRefs": [],
+      "sourceFactRefs": [
+        "E1-F02",
+        "E1-F03"
+      ],
+      "unknowns": [
+        "No continuity or retrieval timing observed."
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "E1-B01",
+      "type": "tenant",
+      "contains": [
+        "One fictional corporate Entra tenant"
+      ],
+      "owner": "Tenant owner",
+      "crossingRule": "No second tenant unless a documented mandatory requirement cannot fit.",
+      "requirementRefs": [
+        "E1-Q01"
+      ]
+    },
+    {
+      "id": "E1-B02",
+      "type": "trust",
+      "contains": [
+        "Hybrid AD source and cloud workforce identities"
+      ],
+      "owner": "Workforce identity owner",
+      "crossingRule": "Sync supplies identity/password state; runtime cloud fallback requires activation and verified freshness.",
+      "requirementRefs": [
+        "E1-Q04"
+      ]
+    },
+    {
+      "id": "E1-B03",
+      "type": "administrative",
+      "contains": [
+        "Protected tenant admins",
+        "Scoped regional app admins",
+        "Independent baseline custodian"
+      ],
+      "owner": "Identity security lead",
+      "crossingRule": "App/data delegation does not confer tenant/key/baseline administration.",
+      "requirementRefs": [
+        "E1-Q03",
+        "E1-Q05",
+        "E1-Q07"
+      ]
+    },
+    {
+      "id": "E1-B04",
+      "type": "regulatory",
+      "contains": [
+        "Fictional EU and US obligations"
+      ],
+      "owner": "Regional legal owners",
+      "crossingRule": "Separate storage, processing, operator, key, telemetry and recovery determinations; no legal inference from geography.",
+      "requirementRefs": [
+        "E1-Q02",
+        "E1-Q06"
+      ]
+    },
+    {
+      "id": "E1-B05",
+      "type": "data",
+      "contains": [
+        "EU payload/log store",
+        "US payload/log store",
+        "Redacted global summaries"
+      ],
+      "owner": "Regional data owners",
+      "crossingRule": "Raw EU records do not cross; approved summaries exclude identifiers and raw payload.",
+      "requirementRefs": [
+        "E1-Q02"
+      ]
+    },
+    {
+      "id": "E1-B06",
+      "type": "network",
+      "contains": [
+        "Protected admin path",
+        "Regional app endpoints"
+      ],
+      "owner": "Network owner",
+      "crossingRule": "Network location grants no implicit privilege; cloud reachability remains required.",
+      "requirementRefs": [
+        "E1-Q07",
+        "E1-Q08"
+      ]
+    },
+    {
+      "id": "E1-B07",
+      "type": "workload",
+      "contains": [
+        "Regional applications",
+        "App deployment identity"
+      ],
+      "owner": "Application owners",
+      "crossingRule": "Application authorization is enforced separately from workforce Conditional Access.",
+      "requirementRefs": [
+        "E1-Q02",
+        "E1-Q07"
+      ]
+    },
+    {
+      "id": "E1-B08",
+      "type": "physical-safety",
+      "contains": [
+        "Office-only environment; no industrial controls"
+      ],
+      "owner": "Business continuity owner",
+      "crossingRule": "No industrial safety or autonomous site requirement is asserted.",
+      "requirementRefs": [
+        "E1-Q08"
+      ]
+    }
+  ],
+  "authorityGraph": {
+    "direction": "from-exercises-authority-over-to",
+    "nodes": [
+      {
+        "id": "E1-A-AD",
+        "label": "Hybrid AD authority",
+        "boundary": "E1-B02",
+        "kind": "identity-authority"
+      },
+      {
+        "id": "E1-A-SYNC",
+        "label": "Scoped sync connector",
+        "boundary": "E1-B02",
+        "kind": "workload-identity"
+      },
+      {
+        "id": "E1-A-ENTRA",
+        "label": "Corporate Entra tenant",
+        "boundary": "E1-B01",
+        "kind": "control-plane"
+      },
+      {
+        "id": "E1-A-ADMIN",
+        "label": "Protected cloud admin",
+        "boundary": "E1-B03",
+        "kind": "privileged-human"
+      },
+      {
+        "id": "E1-A-EMERG",
+        "label": "Two cloud-only emergency identities",
+        "boundary": "E1-B03",
+        "kind": "emergency-human"
+      },
+      {
+        "id": "E1-A-REGION",
+        "label": "Regional app/data owner",
+        "boundary": "E1-B03",
+        "kind": "delegated-human"
+      },
+      {
+        "id": "E1-A-APP",
+        "label": "Regional application",
+        "boundary": "E1-B07",
+        "kind": "enforcement-point"
+      },
+      {
+        "id": "E1-A-CI",
+        "label": "App deployment workload",
+        "boundary": "E1-B07",
+        "kind": "workload-identity"
+      },
+      {
+        "id": "E1-A-DATA",
+        "label": "EU payload and raw logs",
+        "boundary": "E1-B05",
+        "kind": "data-resource"
+      },
+      {
+        "id": "E1-A-KEY",
+        "label": "Regional key custodian",
+        "boundary": "E1-B04",
+        "kind": "key-authority"
+      },
+      {
+        "id": "E1-A-BASE",
+        "label": "Independent baseline custodian",
+        "boundary": "E1-B03",
+        "kind": "recovery-authority"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E1-AE01",
+        "from": "E1-A-AD",
+        "to": "E1-A-SYNC",
+        "permission": "Read only approved source identity/password synchronization scope.",
+        "credential": "Dedicated connector identity with protected locally held connector material.",
+        "delegation": "Hybrid identity owner grants connector scope, not tenant administration.",
+        "revocation": {
+          "actor": "Hybrid identity owner",
+          "mechanism": "Disable connector identity and remove source scope; reconcile already synchronized identities separately.",
+          "latencyLimit": "Fictional 30-minute containment objective; unmeasured.",
+          "residualAccess": "Previously synchronized cloud credentials/objects are not removed by stopping sync."
+        },
+        "boundaryCrossings": [
+          "E1-B02"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE02",
+        "from": "E1-A-SYNC",
+        "to": "E1-A-ENTRA",
+        "permission": "Update only designated synchronized workforce attributes/password state.",
+        "credential": "Approved synchronization connector credential; no export in this record.",
+        "delegation": "Tenant owner authorizes exact sync capability.",
+        "revocation": {
+          "actor": "Tenant identity owner",
+          "mechanism": "Disable connector authorization, isolate affected objects and reconcile cloud sign-ins.",
+          "latencyLimit": "30-minute proposed objective; propagation untested.",
+          "residualAccess": "Cloud hashes, sessions and already granted access can persist."
+        },
+        "boundaryCrossings": [
+          "E1-B02",
+          "E1-B01"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE03",
+        "from": "E1-A-ADMIN",
+        "to": "E1-A-ENTRA",
+        "permission": "Time-bounded approved identity/policy administration under least-privilege roles.",
+        "credential": "Cloud admin identity with phishing-resistant method on protected workstation.",
+        "delegation": "Normal elevated role activation; not the emergency bootstrap.",
+        "revocation": {
+          "actor": "Tenant security lead",
+          "mechanism": "Remove role, disable affected identity, revoke applicable sessions and verify resource denial.",
+          "latencyLimit": "15-minute proposed incident objective; measured per service before reliance.",
+          "residualAccess": "Existing tokens/service state require separate verification."
+        },
+        "boundaryCrossings": [
+          "E1-B03",
+          "E1-B01"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE04",
+        "from": "E1-A-EMERG",
+        "to": "E1-A-ENTRA",
+        "permission": "Permanent-active Global Administrator emergency authority; execute only incident-approved operations, with exceptional use monitored. This is not normal just-in-time elevation.",
+        "credential": "Two cloud-only .onmicrosoft.com identities with separately controlled supported phishing-resistant emergency methods and reviewed blocking-policy exclusions.",
+        "delegation": "Tenant owner pre-establishes emergency authority and offline custody.",
+        "revocation": {
+          "actor": "Independent tenant incident authority",
+          "mechanism": "Contain a compromised emergency identity/method only after verifying another usable emergency path; reconcile sessions.",
+          "latencyLimit": "Incident-specific; no blanket instant revocation claim.",
+          "residualAccess": "Entra, method support and target control plane remain common dependencies."
+        },
+        "boundaryCrossings": [
+          "E1-B03",
+          "E1-B01"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE05",
+        "from": "E1-A-ENTRA",
+        "to": "E1-A-APP",
+        "permission": "Issue application-scoped identity assertions; app still decides permitted operations.",
+        "credential": "Service-issued audience-bound tokens accepted by the application's configured trust.",
+        "delegation": "Application owner configures exact issuer/audience and group/app-role mapping.",
+        "revocation": {
+          "actor": "Application and identity owners",
+          "mechanism": "Remove app assignment/trust and block at app policy; reconcile valid token/session lifetimes.",
+          "latencyLimit": "30-minute proposed effective-denial target; not measured.",
+          "residualAccess": "Token expiry and app session revocation may differ."
+        },
+        "boundaryCrossings": [
+          "E1-B01",
+          "E1-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE06",
+        "from": "E1-A-REGION",
+        "to": "E1-A-APP",
+        "permission": "Manage regional application role assignments and data handling only.",
+        "credential": "Phishing-resistant delegated human identity, app-scoped role.",
+        "delegation": "App owner approves regional scope; no tenant role grant.",
+        "revocation": {
+          "actor": "Application owner",
+          "mechanism": "Remove app role, invalidate app session and test region-scoped denial.",
+          "latencyLimit": "30-minute proposed objective.",
+          "residualAccess": "No effect on previously exported data; export controls separate."
+        },
+        "boundaryCrossings": [
+          "E1-B03",
+          "E1-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE07",
+        "from": "E1-A-CI",
+        "to": "E1-A-APP",
+        "permission": "Deploy reviewed application package to one regional environment; no tenant role or data-reader grant.",
+        "credential": "Environment-bound managed identity or narrow issuer/subject/audience workload federation.",
+        "delegation": "Application owner approves deployment subject and environment.",
+        "revocation": {
+          "actor": "Application release owner",
+          "mechanism": "Disable deployment binding, remove resource permission and block pending deployment.",
+          "latencyLimit": "15-minute proposed objective.",
+          "residualAccess": "Previously deployed code must also be assessed/rolled back."
+        },
+        "boundaryCrossings": [
+          "E1-B07"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE08",
+        "from": "E1-A-APP",
+        "to": "E1-A-DATA",
+        "permission": "Read/write only purpose-bound EU payload and append regional logs under data policy.",
+        "credential": "Application-managed identity scoped to EU stores.",
+        "delegation": "EU data owner grants scoped resource access and retention/export policy.",
+        "revocation": {
+          "actor": "EU data owner",
+          "mechanism": "Remove store role and app permission, block access and verify existing sessions.",
+          "latencyLimit": "15-minute proposed objective; service-specific.",
+          "residualAccess": "Cached/exported records need separate incident handling."
+        },
+        "boundaryCrossings": [
+          "E1-B07",
+          "E1-B05"
+        ],
+        "status": "declared"
+      },
+      {
+        "id": "E1-AE09",
+        "from": "E1-A-KEY",
+        "to": "E1-A-DATA",
+        "permission": "Approve regional key lifecycle separately from payload-reader permission.",
+        "credential": "Separately controlled key-administration identity and approved key custody.",
+        "delegation": "Regional key authority approves rotation/recovery; exclusivity unresolved.",
+        "revocation": {
+          "actor": "Regional key authority",
+          "mechanism": "Revoke key-administrator access and rotate/recover only through safety-reviewed service procedure.",
+          "latencyLimit": "Not set until E1-Q06 determination.",
+          "residualAccess": "Service availability/recovery keys and already decrypted data are not eliminated by tenant topology."
+        },
+        "boundaryCrossings": [
+          "E1-B04",
+          "E1-B05"
+        ],
+        "status": "unknown"
+      }
+    ],
+    "indirectPaths": [
+      {
+        "id": "E1-AP01",
+        "nodeIds": [
+          "E1-A-AD",
+          "E1-A-SYNC",
+          "E1-A-ENTRA",
+          "E1-A-APP",
+          "E1-A-DATA"
+        ],
+        "edgeIds": [
+          "E1-AE01",
+          "E1-AE02",
+          "E1-AE05",
+          "E1-AE08"
+        ],
+        "meaning": "Hybrid source compromise may affect workforce app access through synchronized state; a second app region is not identity independence."
+      },
+      {
+        "id": "E1-AP02",
+        "nodeIds": [
+          "E1-A-CI",
+          "E1-A-APP",
+          "E1-A-DATA"
+        ],
+        "edgeIds": [
+          "E1-AE07",
+          "E1-AE08"
+        ],
+        "meaning": "A deployment identity can indirectly affect data through deployed code, despite lacking direct data-reader rights; release review is a privilege-path control."
+      }
+    ],
+    "forbiddenPaths": [
+      "Regional app admin → tenant-wide identity/key/baseline administration",
+      "CI workload → tenant role grants or external trusted-baseline writes",
+      "Normal on-premises IdP or cloud-only password vault → exclusive custody of emergency methods",
+      "EU raw telemetry → unrestricted global analyst workspace"
+    ]
+  },
+  "recoveryGraph": {
+    "direction": "from-depends-on-to",
+    "nodes": [
+      {
+        "id": "E1-R-CONFIG",
+        "label": "Scoped tenant configuration restore",
+        "boundary": "E1-B01",
+        "kind": "recovery-goal"
+      },
+      {
+        "id": "E1-R-EMERG",
+        "label": "Cloud-only recovery administration",
+        "boundary": "E1-B03",
+        "kind": "bootstrap-authority"
+      },
+      {
+        "id": "E1-R-CLOUD",
+        "label": "Reachable Entra and target APIs",
+        "boundary": "E1-B01",
+        "kind": "service-dependency"
+      },
+      {
+        "id": "E1-R-CUSTODY",
+        "label": "Offline method custody",
+        "boundary": "E1-B03",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E1-R-BASE",
+        "label": "External approved baseline",
+        "boundary": "E1-B03",
+        "kind": "independent-anchor"
+      },
+      {
+        "id": "E1-R-VAULT",
+        "label": "Normal cloud password vault",
+        "boundary": "E1-B01",
+        "kind": "rejected-bootstrap"
+      },
+      {
+        "id": "E1-R-EDGES",
+        "label": "Object-ID and relationship reconstruction",
+        "boundary": "E1-B07",
+        "kind": "recovery-component"
+      },
+      {
+        "id": "E1-R-LOGS",
+        "label": "Independent retained evidence",
+        "boundary": "E1-B05",
+        "kind": "independent-anchor"
+      }
+    ],
+    "edges": [
+      {
+        "id": "E1-RE01",
+        "from": "E1-R-CONFIG",
+        "to": "E1-R-EMERG",
+        "dependency": "Approved recovery authority can perform scoped changes.",
+        "failureEffect": "Baseline cannot be applied.",
+        "alternative": "Second separately controlled emergency account, still cloud dependent."
+      },
+      {
+        "id": "E1-RE02",
+        "from": "E1-R-EMERG",
+        "to": "E1-R-CLOUD",
+        "dependency": "Cloud auth, DNS/time/network and management APIs are reachable.",
+        "failureEffect": "No cloud administration; full cloud outage outside R1/R3.",
+        "alternative": "Wait/escalate service incident; no fictional offline Entra login."
+      },
+      {
+        "id": "E1-RE03",
+        "from": "E1-R-EMERG",
+        "to": "E1-R-CUSTODY",
+        "dependency": "Independent supported emergency method retrieval.",
+        "failureEffect": "Emergency account exists but is unusable.",
+        "alternative": "Second independent custody path."
+      },
+      {
+        "id": "E1-RE04",
+        "from": "E1-R-CONFIG",
+        "to": "E1-R-BASE",
+        "dependency": "Trusted pre-change version and known coverage/retention.",
+        "failureEffect": "Unknown state may reintroduce malicious change.",
+        "alternative": "Earlier independently approved version; otherwise stop."
+      },
+      {
+        "id": "E1-RE05",
+        "from": "E1-R-CONFIG",
+        "to": "E1-R-EDGES",
+        "dependency": "Recreated IDs/roles/consent/CA references are reconciled.",
+        "failureEffect": "Objects present but intended access fails or unintended privilege persists.",
+        "alternative": "Keep dependent app contained until R3 tests pass."
+      },
+      {
+        "id": "E1-RE06",
+        "from": "E1-R-EDGES",
+        "to": "E1-R-BASE",
+        "dependency": "Baseline directed relationships and approved grants.",
+        "failureEffect": "Cannot prove semantic recovery.",
+        "alternative": "Manually reauthorize only explicit owner-approved edges; mark gap."
+      },
+      {
+        "id": "E1-RE07",
+        "from": "E1-R-CONFIG",
+        "to": "E1-R-LOGS",
+        "dependency": "Independent audit trail and acceptance evidence.",
+        "failureEffect": "No defensible recovery/custody acceptance.",
+        "alternative": "Witnessed offline log until approved evidence retrieval resumes."
+      },
+      {
+        "id": "E1-RE08",
+        "from": "E1-R-VAULT",
+        "to": "E1-R-EMERG",
+        "dependency": "Rejected normal vault requires tenant recovery sign-in when ordinary auth is blocked.",
+        "failureEffect": "If method is stored only here, bootstrap is circular.",
+        "alternative": "Do not use the normal vault as sole emergency custody."
+      },
+      {
+        "id": "E1-RE09",
+        "from": "E1-R-EMERG",
+        "to": "E1-R-VAULT",
+        "dependency": "Rejected design would retrieve the emergency method only from the same cloud vault.",
+        "failureEffect": "Normal authentication failure can block emergency authentication.",
+        "alternative": "E1-R-CUSTODY removes this proposed dependency; demonstrate before reliance."
+      }
+    ],
+    "rejectedEdgeIds": [
+      "E1-RE08",
+      "E1-RE09"
+    ],
+    "independentAnchors": [
+      {
+        "nodeId": "E1-R-CUSTODY",
+        "independentOf": [
+          "Hybrid AD/federation/PTA",
+          "Normal cloud vault, PIM and ITSM"
+        ],
+        "remainingDependencies": [
+          "Physical custodian availability",
+          "Working supported method/device",
+          "Entra and target service"
+        ],
+        "proofRequired": "Authorized R1 retrieval and two fresh sign-ins; not performed."
+      },
+      {
+        "nodeId": "E1-R-BASE",
+        "independentOf": [
+          "Exercised tenant administrator write access",
+          "Current live tenant configuration"
+        ],
+        "remainingDependencies": [
+          "Independent custodian and integrity anchor",
+          "Usable current restore/recreation method"
+        ],
+        "proofRequired": "Retrieve independently held approved baseline and execute R3 object+edge recovery; not performed."
+      },
+      {
+        "nodeId": "E1-R-LOGS",
+        "independentOf": [
+          "Emergency account session",
+          "Attacker-writable live configuration"
+        ],
+        "remainingDependencies": [
+          "Regional retained evidence access",
+          "Clock/provenance checks"
+        ],
+        "proofRequired": "Observe independent alert/log retrieval during R1/R3; not performed."
+      }
+    ],
+    "cycles": [
+      {
+        "id": "E1-RC01",
+        "nodeIds": [
+          "E1-R-EMERG",
+          "E1-R-VAULT"
+        ],
+        "status": "broken-by-design-not-tested",
+        "mitigation": "RE08/RE09 explicitly show the rejected bootstrap cycle. Select offline independent custody instead; no live proof of cycle removal exists."
+      }
+    ],
+    "restorationOrder": [
+      "Verify independent authority/custody and reachable cloud APIs",
+      "Retrieve independently trusted baseline and logs",
+      "Recover scoped parent objects",
+      "Recreate/verify directed relationships and credential handling",
+      "Run fresh positive/negative access acceptance",
+      "Measure RTO/RPO, compare unrelated state and retain rollback evidence"
+    ]
+  },
+  "controlApplicability": [
+    {
+      "controlId": "N-01",
+      "applicability": "applicable",
+      "rationale": "One tenant still contains distinct regional data, administrative and regulatory boundaries; the eight-type register prevents treating tenant count as the only boundary.",
+      "owner": "Enterprise architect",
+      "requirementRefs": [
+        "E1-Q01",
+        "E1-Q02"
+      ],
+      "requiredEvidence": [
+        "Approved eight-type boundary register and service/data-flow inventory"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-02",
+      "applicability": "applicable",
+      "rationale": "No mandatory independent identity requirement is declared; preserve one tenant unless actual regional service-fit evidence shows a specific unmet requirement.",
+      "owner": "Tenant owner",
+      "requirementRefs": [
+        "E1-Q01"
+      ],
+      "requiredEvidence": [
+        "Per-requirement one-tenant fit review and additional-tenant rejection rationale"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-03",
+      "applicability": "not-applicable",
+      "rationale": "The scenario accepts the corporate identity failure domain and has no protected autonomous environment; cloud-only emergency methods are not a separate Entra authority.",
+      "owner": "Enterprise risk authority",
+      "requirementRefs": [
+        "E1-Q01",
+        "E1-Q08"
+      ],
+      "requiredEvidence": [
+        "Signed acceptance of common corporate/Entra failure domain and change trigger"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-04",
+      "applicability": "not-applicable",
+      "rationale": "No acquired environment, transition trust or divestiture occurs in E1; do not invent an acquisition to justify tenant expansion.",
+      "owner": "Enterprise architect",
+      "requirementRefs": [
+        "E1-Q01"
+      ],
+      "requiredEvidence": [
+        "Scope confirmation; reopen if an acquisition or external transition begins"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-05",
+      "applicability": "applicable",
+      "rationale": "S1 office continuity accepts unavailable cloud sessions but still needs explicit contact, evidence, key and recovery behavior; it does not promise S3 autonomy.",
+      "owner": "Business continuity owner",
+      "requirementRefs": [
+        "E1-Q08"
+      ],
+      "requiredEvidence": [
+        "S1 dependency/failure matrix and offline contact/evidence retrieval observation"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-06",
+      "applicability": "applicable",
+      "rationale": "Regional app roles, elevated tenant roles, emergency accounts and baseline/key custody must not collapse into one normal administrator chain.",
+      "owner": "Identity security lead",
+      "requirementRefs": [
+        "E1-Q03",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Role/custody separation, protected-admin inventory and denied privilege-path tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-07",
+      "applicability": "applicable",
+      "rationale": "Tenant and key operations carry high business impact; supported phishing-resistant methods are required and emergency method support must be verified.",
+      "owner": "Authentication owner",
+      "requirementRefs": [
+        "E1-Q03",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Actual method enrollment/support and fresh protected/admin sign-in records"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-08",
+      "applicability": "applicable",
+      "rationale": "Normal hybrid failure must not block both cloud emergency methods; two separately controlled accounts need observed alerts and regular R1 drills.",
+      "owner": "Emergency custodian",
+      "requirementRefs": [
+        "E1-Q03"
+      ],
+      "requiredEvidence": [
+        "Authorized R1 two-account sign-in, custody, alert and rollback evidence"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-09",
+      "applicability": "applicable",
+      "rationale": "Prefer active PHS for AD-password hybrid users; the temporarily federated synthetic legacy cohort needs pre-sync freshness, explicit activation, fresh sign-ins and return testing instead of assumed automatic failover.",
+      "owner": "Hybrid identity owner",
+      "requirementRefs": [
+        "E1-Q04"
+      ],
+      "requiredEvidence": [
+        "Authorized R2 sync/activation/sign-in/negative-control/rollback matrix"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-10",
+      "applicability": "applicable",
+      "rationale": "Regional applications need reviewed workforce policy targets and report-only evaluation; app authorization and emergency exclusions remain separately controlled.",
+      "owner": "Conditional Access owner",
+      "requirementRefs": [
+        "E1-Q03",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "App/policy coverage, exclusion rationale, report-only results and rollback diff"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-11",
+      "applicability": "applicable",
+      "rationale": "The sync connector, deployment identity and app-managed identities each have distinct owner, purpose, privilege and credential/revocation paths.",
+      "owner": "Workload identity owner",
+      "requirementRefs": [
+        "E1-Q04",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Non-human inventory, credential lifecycle/expiry where exposed, issuer scopes and disablement tests; no application-managed expiry assumed for managed identities"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-12",
+      "applicability": "not-applicable",
+      "rationale": "No separately managed production logical AI agent is in this scenario; ordinary app replicas are not relabeled agents to manufacture applicability.",
+      "owner": "Application portfolio owner",
+      "requirementRefs": [
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Portfolio scope attestation; agent introduction requires sponsor/owner and a new review"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-13",
+      "applicability": "applicable",
+      "rationale": "App deployments and store access can use managed identity or narrow federation; environment-bound subjects prevent a build credential becoming tenant administration.",
+      "owner": "Release owner",
+      "requirementRefs": [
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Issuer/subject/audience/resource bindings and cross-environment deny tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-14",
+      "applicability": "not-applicable",
+      "rationale": "Office applications contain no legacy industrial device or control protocol; physical safety/OT compensating-control requirements are outside E1.",
+      "owner": "Business continuity owner",
+      "requirementRefs": [
+        "E1-Q08"
+      ],
+      "requiredEvidence": [
+        "Asset scope excluding industrial devices; reopen on manufacturing integration"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-15",
+      "applicability": "applicable",
+      "rationale": "Regional responders retain local authority and contact routes when central workflow is unavailable, but are not promised autonomous cloud enforcement during Entra outage.",
+      "owner": "Regional SOC lead",
+      "requirementRefs": [
+        "E1-Q02",
+        "E1-Q08"
+      ],
+      "requiredEvidence": [
+        "Regional response delegation, independent contacts and central-ingestion-loss procedure"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-16",
+      "applicability": "applicable",
+      "rationale": "Raw EU sign-in/app telemetry remains regional with integrity/retention/access rules; global summaries must be field-redacted, not an unrestricted workspace export.",
+      "owner": "EU telemetry owner",
+      "requirementRefs": [
+        "E1-Q02"
+      ],
+      "requiredEvidence": [
+        "Event schema, 365-day capacity/retention proof, export deny and summary-redaction checks"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-17",
+      "applicability": "applicable",
+      "rationale": "Regional payload protection depends on service-supported item labels/rights/encryption and app controls, not storage location or tenant count; a container label alone does not encrypt, retain or label every item.",
+      "owner": "Data protection owner",
+      "requirementRefs": [
+        "E1-Q02"
+      ],
+      "requiredEvidence": [
+        "Data classification, service coverage, rights/DLP and retention test matrix"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-18",
+      "applicability": "applicable",
+      "rationale": "Exclusive regional key authority is intentionally unresolved; storage, processing, operator, key, metadata and recovery dimensions cannot be collapsed into residency.",
+      "owner": "Regional legal/key authority",
+      "requirementRefs": [
+        "E1-Q02",
+        "E1-Q06"
+      ],
+      "requiredEvidence": [
+        "Separate signed dimensional determination and product-specific residual-access analysis"
+      ],
+      "implementationStatus": "unknown"
+    },
+    {
+      "controlId": "N-19",
+      "applicability": "not-applicable",
+      "rationale": "No second cloud provider is present; the proposed regional applications remain within the stated provider scope.",
+      "owner": "Cloud platform owner",
+      "requirementRefs": [
+        "E1-Q01"
+      ],
+      "requiredEvidence": [
+        "Provider inventory and trigger for reassessment if another cloud is added"
+      ],
+      "implementationStatus": "not-applicable"
+    },
+    {
+      "controlId": "N-20",
+      "applicability": "applicable",
+      "rationale": "The CI→app→data chain is an indirect privilege path even without a direct data-reader grant; ITSM only records workflow and cannot gate emergency bootstrap.",
+      "owner": "Integration owner",
+      "requirementRefs": [
+        "E1-Q03",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Directed integration grant inventory, reviewed deployment approvals and denial tests"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-21",
+      "applicability": "applicable",
+      "rationale": "A four-hour scoped configuration objective requires external baseline/log custody, coverage/retention checks and reconstruction of relationships, not only object restoration.",
+      "owner": "Recovery owner",
+      "requirementRefs": [
+        "E1-Q05"
+      ],
+      "requiredEvidence": [
+        "Authorized R3 baseline provenance, object/edge diffs, fresh acceptance and RTO/RPO"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-22",
+      "applicability": "applicable",
+      "rationale": "Policy and workload releases must have versioned desired state, drift detection and rollback without allowing deployment identities to rewrite the trusted recovery baseline.",
+      "owner": "Policy owner",
+      "requirementRefs": [
+        "E1-Q05",
+        "E1-Q07"
+      ],
+      "requiredEvidence": [
+        "Reviewed version history, custody ACLs, drift alerts and reversible release results"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-23",
+      "applicability": "applicable",
+      "rationale": "The proposed Azure app subscriptions need a shallow policy-oriented hierarchy; EU/US departments do not automatically become extra management-group levels.",
+      "owner": "Azure platform owner",
+      "requirementRefs": [
+        "E1-Q01",
+        "E1-Q02"
+      ],
+      "requiredEvidence": [
+        "Proposed shallow hierarchy and documented policy/residency justification for every branch"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-24",
+      "applicability": "applicable",
+      "rationale": "Regional obligations must trace to app/store controls, owners, exceptions and retained evidence; source confidence is distinct from an observed implementation.",
+      "owner": "Assurance lead",
+      "requirementRefs": [
+        "E1-Q02",
+        "E1-Q05",
+        "E1-Q06"
+      ],
+      "requiredEvidence": [
+        "Requirement→boundary→control→asset→evidence links and explicit unknown register"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-25",
+      "applicability": "applicable",
+      "rationale": "One tenant avoids unjustified operating overhead, but staffing, emergency custody, regional retention and recovery testing still need funded owners and lifecycle cost estimates.",
+      "owner": "Service owner and finance",
+      "requirementRefs": [
+        "E1-Q01",
+        "E1-Q03",
+        "E1-Q05"
+      ],
+      "requiredEvidence": [
+        "Cost/staffing estimates labeled assumptions, owner acceptance and drill/retention budget"
+      ],
+      "implementationStatus": "declared-only"
+    },
+    {
+      "controlId": "N-26",
+      "applicability": "applicable",
+      "rationale": "Unresolved key authority, untested recovery and unknown operating evidence prevent deployment approval even when the T1 design is a reasonable provisional choice.",
+      "owner": "Architecture review board",
+      "requirementRefs": [
+        "E1-Q01",
+        "E1-Q05",
+        "E1-Q06"
+      ],
+      "requiredEvidence": [
+        "Final shared-engine output plus resolved mandatory unknowns and authorized observations"
+      ],
+      "implementationStatus": "declared-only"
+    }
+  ],
+  "decision": {
+    "status": "provisional-not-authorized",
+    "selectedAlternativeId": "E1-ALT1",
+    "dimensions": {
+      "topology": "T1: existing single tenant",
+      "identity": "Shared corporate authority accepted; protected emergency methods are only on-premises-independent",
+      "sovereignty": "Regional residency/processing plus unresolved key authority",
+      "connectivity": "S1 office continuity, not autonomous S3",
+      "recovery": "External baseline/custody proposed; actual recovery dependencies unverified",
+      "economics": "No price quotation. Staffing, license, regional retention and drill costs require owner estimates."
+    },
+    "alternatives": [
+      {
+        "id": "E1-ALT1",
+        "name": "One tenant with regional data/application scopes",
+        "disposition": "selected-provisionally",
+        "reason": "Matches the declared shared-identity acceptance without adding unjustified tenants; regional service/legal fit and recovery still need proof.",
+        "tradeoffs": [
+          "Common Entra configuration/authentication failure domain remains.",
+          "Regional processing/key/telemetry controls require service-specific implementation.",
+          "Less tenant overhead does not eliminate regional operating cost."
+        ]
+      },
+      {
+        "id": "E1-ALT2",
+        "name": "Tenant per region with shared corporate administrators",
+        "disposition": "rejected",
+        "reason": "No declared mandatory requirement demands extra tenants, and shared administrator identities would retain a common authority path.",
+        "tradeoffs": [
+          "Adds duplicated lifecycle, policy, telemetry and recovery operations.",
+          "Does not itself establish residency, sovereign keys or identity independence."
+        ]
+      },
+      {
+        "id": "E1-ALT3",
+        "name": "S3 local identity at each office",
+        "disposition": "rejected",
+        "reason": "Autonomous industrial-style local operation is not required by the office workload and is not justified by the S1 scenario.",
+        "tradeoffs": [
+          "Adds local identity/key/update and recovery ownership.",
+          "Would need a different continuity and cost review."
+        ]
+      }
+    ],
+    "unmetPrerequisites": [
+      "E1-Q06 legal/key authority determination",
+      "Actual regional service/data/telemetry coverage",
+      "Authorized R1/R2/R3 exercises and measured targets",
+      "Funded staffing, response and independent baseline custody",
+      "Removal of the rejected normal-vault recovery cycle proven by retrieval"
+    ],
+    "assessmentInput": {
+      "boundary": "delegated",
+      "sovereignty": "residency",
+      "survivability": "1",
+      "ot": "no",
+      "boundaryFit": "met",
+      "identityDependency": "shared",
+      "sovereigntyEvidence": "unknown",
+      "localServices": "unknown",
+      "upstreamDependency": "present",
+      "recoveryRequirement": "shared-acceptable",
+      "recoveryDependency": "unknown",
+      "privilegePath": "contained",
+      "localAuthority": "unknown",
+      "safetyReview": "unknown",
+      "otFallback": "unknown",
+      "staffing": "unknown",
+      "monitoring": "unknown",
+      "response": "unknown",
+      "recoveryTest": "unknown",
+      "ma": "low",
+      "autonomy": "low",
+      "maturity": "managed"
+    },
+    "assessmentOutput": {
+      "contractVersion": "1.0",
+      "state": "insufficient-evidence",
+      "advisoryOnly": true,
+      "evidenceBasis": "self-reported",
+      "inputs": {
+        "boundary": "delegated",
+        "sovereignty": "residency",
+        "survivability": "1",
+        "ot": "no",
+        "boundaryFit": "met",
+        "identityDependency": "shared",
+        "sovereigntyEvidence": "unknown",
+        "localServices": "unknown",
+        "upstreamDependency": "present",
+        "recoveryRequirement": "shared-acceptable",
+        "recoveryDependency": "unknown",
+        "privilegePath": "contained",
+        "localAuthority": "unknown",
+        "safetyReview": "unknown",
+        "otFallback": "unknown",
+        "staffing": "unknown",
+        "monitoring": "unknown",
+        "response": "unknown",
+        "recoveryTest": "unknown",
+        "ma": "low",
+        "autonomy": "low",
+        "maturity": "managed"
+      },
+      "dimensions": {
+        "topology": {
+          "state": "insufficient-evidence",
+          "value": "T1",
+          "summary": "One tenant with scoped controls, subject to all declared mandatory gates."
+        },
+        "identity": {
+          "state": "candidate",
+          "value": "delegated",
+          "summary": "Shared authority may be acceptable only within the declared containment requirements."
+        },
+        "sovereignty": {
+          "state": "candidate",
+          "value": "residency",
+          "summary": "Evaluate data processing, operators, keys, telemetry and legal scope independently of tenant count."
+        },
+        "connectivity": {
+          "state": "insufficient-evidence",
+          "value": "S1",
+          "pattern": null,
+          "summary": "S1 describes required function and duration, not proven uptime or tenant count."
+        },
+        "recovery": {
+          "state": "insufficient-evidence",
+          "value": "shared-acceptable",
+          "summary": "Recovery authority and dependency declarations require independent review and a scoped restore exercise; no graph was inspected."
+        }
+      },
+      "readiness": {
+        "state": "insufficient-evidence",
+        "summary": "All applicable prerequisites must be satisfied. Declarations are self-reported, not inspected or operationally verified. A candidate is not deployment approval; maturity labels are not readiness evidence."
+      },
+      "gates": [
+        {
+          "id": "identity-authority",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "sovereignty-authority",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "disconnected-dependencies",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "ot-safety",
+          "applies": false,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "recovery-independence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "recovery-dependency-unknown"
+          ]
+        },
+        {
+          "id": "privilege-containment",
+          "applies": true,
+          "state": "candidate",
+          "reasonCodes": []
+        },
+        {
+          "id": "operating-evidence",
+          "applies": true,
+          "state": "insufficient-evidence",
+          "reasonCodes": [
+            "staffing-unknown",
+            "monitoring-unknown",
+            "response-unknown",
+            "recovery-test-unknown"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Inputs describe the proposed configuration and are self-reported; no tenant, configuration, authority graph, evidence file or live service has been inspected.",
+        "The one-tenant fit declaration concerns actual mandatory requirements, not acquisition frequency, legal labels, key ownership or organizational preference alone.",
+        "S0-S4 are continuity requirements; T1-T3 are tenant/authority patterns, T4 is a disconnected operating overlay, and T5 is a time-bounded transition pattern.",
+        "No security risk, cost, availability guarantee, legal approval or safety certification is calculated."
+      ],
+      "reasons": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "single-tenant-fit-declared",
+          "message": "The declaration says one tenant can meet the mandatory requirements. No additional tenant is justified by acquisition, key, regulatory or autonomy labels alone.",
+          "dimension": "topology",
+          "fields": [
+            "boundaryFit"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-03",
+            "STD-03"
+          ],
+          "claimIds": [
+            "C-01",
+            "C-02",
+            "C-03"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "maturity-label-not-evidence",
+          "message": "A developing, managed or automated maturity label neither establishes nor disproves operating readiness; staffing, monitoring, response and recovery evidence are evaluated separately.",
+          "dimension": "readiness",
+          "fields": [
+            "maturity"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "unmetPrerequisites": [
+        {
+          "code": "recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "rejectedAlternatives": [],
+      "nextValidationChecks": [
+        {
+          "code": "validate-recovery-dependency-unknown",
+          "message": "Declared recovery dependencies is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryDependency"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-local-services-unknown",
+          "message": "Tests of functions for the required outage duration is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "connectivity",
+          "fields": [
+            "localServices"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "validate-staffing-unknown",
+          "message": "Accountable staffing and skills is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-monitoring-unknown",
+          "message": "Monitoring capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "monitoring"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-response-unknown",
+          "message": "Incident response capability is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "response"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "validate-recovery-test-unknown",
+          "message": "Recovery exercise evidence is unknown; establish this mandatory fact before relying on the assessed configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "review-authority-paths",
+          "message": "Review the boundary register and authentication, administration, federation and transitive privilege paths with accountable owners.",
+          "dimension": "identity",
+          "fields": [
+            "boundaryFit",
+            "identityDependency",
+            "privilegePath"
+          ],
+          "sourceIds": [
+            "MS-02",
+            "MS-07"
+          ],
+          "claimIds": [
+            "C-02"
+          ],
+          "controlIds": [
+            "N-03"
+          ]
+        },
+        {
+          "code": "review-sovereignty-scope",
+          "message": "Validate applicable legal obligations, product/cloud availability, processing locations, operator scope and key controls; do not infer sovereign-cloud parity.",
+          "dimension": "sovereignty",
+          "fields": [
+            "sovereignty",
+            "sovereigntyEvidence"
+          ],
+          "sourceIds": [
+            "MS-14",
+            "MS-15",
+            "MS-11"
+          ],
+          "claimIds": [
+            "C-11"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "exercise-outage-functions",
+          "message": "Define the exact required functions and duration, then exercise identity, policy, keys, DNS, communications, telemetry and updates under an authorized upstream-outage scenario.",
+          "dimension": "connectivity",
+          "fields": [
+            "survivability",
+            "localServices",
+            "upstreamDependency"
+          ],
+          "sourceIds": [
+            "MS-19",
+            "MS-20",
+            "STD-02"
+          ],
+          "claimIds": [
+            "C-13"
+          ],
+          "controlIds": [
+            "N-05"
+          ]
+        },
+        {
+          "code": "exercise-independent-recovery",
+          "message": "Have owners review recovery dependencies and exercise an authorized restore with known-good identities, keys, configuration, communications and retained evidence.",
+          "dimension": "recovery",
+          "fields": [
+            "recoveryRequirement",
+            "recoveryDependency",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "MS-07",
+            "MS-08"
+          ],
+          "claimIds": [
+            "C-07"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        },
+        {
+          "code": "verify-operating-artifacts",
+          "message": "Inspect staffing assignments, monitoring coverage, response runbooks and dated recovery exercise artifacts. A self-description is not inspected configuration.",
+          "dimension": "readiness",
+          "fields": [
+            "staffing",
+            "monitoring",
+            "response",
+            "recoveryTest"
+          ],
+          "sourceIds": [
+            "STD-03",
+            "STD-05"
+          ],
+          "claimIds": [
+            "C-16"
+          ],
+          "controlIds": [
+            "N-26"
+          ]
+        }
+      ],
+      "validationErrors": []
+    },
+    "reconsiderWhen": [
+      "A mandatory independent identity or legal control requirement is established",
+      "Regional service/key/telemetry fit is not met",
+      "Recovery cycles or operating evidence remain unresolved",
+      "An acquisition, OT site or second cloud enters scope"
+    ]
+  },
+  "validation": {
+    "overallStatus": "blocked-no-authorized-lab",
+    "authorizationRef": "AUTH-REQUEST-01",
+    "executedEvidenceRefs": [
+      "LOCAL-NODE-TESTS-01"
+    ],
+    "scenarios": [
+      {
+        "id": "E1-V01",
+        "requirementRefs": [
+          "E1-Q03"
+        ],
+        "runbookRef": "R1",
+        "expected": [
+          "Two fresh approved emergency sign-ins and every-use alert within the fictional 30-minute objective."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "Requires separately approved Entra lab; local JSON/browser checks do not test sign-in."
+      },
+      {
+        "id": "E1-V02",
+        "requirementRefs": [
+          "E1-Q04"
+        ],
+        "runbookRef": "R2",
+        "expected": [
+          "PHS activation, fresh positive/negative sign-ins and rollback with measured sync/propagation."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "No Entra/AD/PHS switchover authorized."
+      },
+      {
+        "id": "E1-V03",
+        "requirementRefs": [
+          "E1-Q05"
+        ],
+        "runbookRef": "R3",
+        "expected": [
+          "Trusted scoped object+relationship recovery in four hours with baseline age within 24 hours."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "No tenant restore or relationship mutation authorized."
+      },
+      {
+        "id": "E1-V04",
+        "requirementRefs": [
+          "E1-Q02",
+          "E1-Q06"
+        ],
+        "runbookRef": "R3",
+        "expected": [
+          "Independent service/legal/key/telemetry fit determination."
+        ],
+        "observed": [],
+        "status": "not-executed-blocked",
+        "evidenceRefs": [],
+        "scope": "Synthetic requirements are not a legal or service-configuration validation."
+      }
+    ],
+    "limitations": [
+      "Case is a usable review example, not a deployed service.",
+      "All operational requirements remain declared/unknown.",
+      "Local structure, graph and engine checks cannot prove Entra/PHS recovery or regional compliance."
+    ]
+  }
+}
