@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser-native, 12-slide briefing on Adaptive Trust Fabric: boundaries, topology, survivability, identity, recovery and adoption.">
+  <title>Adaptive Trust Fabric | Presentation</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    :root {
+      --cp-card-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { min-height: 100svh; margin: 0; display: flex; flex-direction: column; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.5; }
+    a { color: var(--cp-link); }
+    button, select { font: inherit; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--cp-border-strong); border-radius: .625rem; background: var(--cp-surface); color: var(--cp-text); text-decoration: none; cursor: pointer; font-size: .9rem; font-weight: 650; }
+    button:hover, .button:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .button.primary { border-color: var(--cp-accent); background: var(--cp-accent); color: var(--cp-accent-fg); }
+    .button.primary:hover { background: var(--cp-accent-hover); }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
+    .skip-link { position: absolute; top: -80px; left: 16px; z-index: 1; padding: 12px; background: var(--cp-surface); }
+    .skip-link:focus { top: 12px; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 32px; border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+    .home-link { display: inline-flex; align-items: center; gap: 8px; color: var(--cp-text); text-decoration: none; font-size: .9rem; font-weight: 650; }
+    .deck-name { margin: 0; font-size: .9rem; font-weight: 700; }
+    .deck-name span { margin-left: 8px; color: var(--cp-text-muted); font-weight: 400; }
+    .toolbar-actions { display: flex; gap: 8px; }
+    .deck { width: min(1280px, calc(100% - 48px)); margin: 24px auto 16px; flex: 1; }
+    .slide { min-height: min(660px, calc(100svh - 226px)); display: flex; flex-direction: column; gap: 24px; padding: clamp(24px, 3.5vw, 48px); border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); box-shadow: var(--cp-card-shadow); }
+    .slide + .slide { margin-top: 24px; }
+    .slide[hidden] + .slide { margin-top: 0; }
+    .eyebrow { margin: 0 0 12px; color: var(--cp-accent); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.1; text-wrap: balance; }
+    h1 { font-size: clamp(2.75rem, 5.5vw, 4.75rem); letter-spacing: -.05em; }
+    h2 { max-width: 1060px; font-size: clamp(2rem, 3.8vw, 3.25rem); letter-spacing: -.04em; }
+    h3 { font-size: 1.35rem; letter-spacing: -.025em; }
+    h1 span, .accent { color: var(--cp-accent); }
+    .lead { max-width: 980px; margin-top: 16px; color: var(--cp-text-muted); font-size: clamp(1rem, 1.8vw, 1.2rem); }
+    .content { flex: 1; }
+    .two-up, .three-up, .four-up { display: grid; gap: 20px; align-content: center; }
+    .two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four-up { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .panel { padding: 24px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface-soft); }
+    .panel p { margin-top: 12px; color: var(--cp-text-muted); font-size: 1rem; }
+    .panel ul { margin: 16px 0 0; padding-left: 20px; color: var(--cp-text-muted); font-size: 1rem; }
+    .panel li + li { margin-top: 8px; }
+    .emphasis { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .big-marker { display: block; margin-bottom: 16px; color: var(--cp-accent); font: 700 2.5rem/1 Consolas, "Courier New", Courier, monospace; }
+    .pill { display: inline-block; padding: 8px 12px; border: 1px solid var(--cp-border); border-radius: .625rem; background: var(--cp-surface); color: var(--cp-text); font-size: .9rem; }
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .principle-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .principle { padding: 16px; border: 1px solid var(--cp-border); border-radius: .625rem; font-weight: 650; }
+    .principle span { display: block; margin-bottom: 4px; color: var(--cp-accent); font: .8rem Consolas, "Courier New", Courier, monospace; }
+    .source { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--cp-border); color: var(--cp-text-muted); font-size: .75rem; line-height: 1.6; }
+    .callout { padding: 16px 20px; border-left: 4px solid var(--cp-accent); background: var(--cp-accent-soft); font-size: 1.05rem; }
+    .architecture { display: grid; gap: 12px; align-content: center; }
+    .architecture .panel { padding: 20px 24px; }
+    .architecture .panel p { margin-top: 8px; }
+    .architecture-core { text-align: center; }
+    .architecture-core .pill-grid { justify-content: center; margin-top: 16px; }
+    .connector { color: var(--cp-accent); text-align: center; font-size: 1.2rem; line-height: 1; }
+    .decision-list { list-style: none; display: grid; gap: 12px; margin: 0; padding: 0; align-content: center; }
+    .decision-list li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 12px 16px; border: 1px solid var(--cp-border); border-radius: .625rem; }
+    .step-number { color: var(--cp-accent); font: 700 1.5rem Consolas, "Courier New", Courier, monospace; }
+    .decision-list h3 { font-size: 1.1rem; }
+    .decision-list p { margin-top: 4px; color: var(--cp-text-muted); font-size: .95rem; }
+    .topologies { display: grid; align-content: center; }
+    .topology { display: grid; grid-template-columns: 48px minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--cp-border); }
+    .topology:first-child { border-top: 1px solid var(--cp-border); }
+    .topology h3 { font-size: 1.15rem; }
+    .topology p { color: var(--cp-text-muted); font-size: .95rem; }
+    .tiers { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-content: center; }
+    .tier { padding: 24px 16px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface-soft); }
+    .tier:last-child { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .tier h3 { min-height: 48px; font-size: 1.15rem; }
+    .tier p { margin-top: 16px; color: var(--cp-text-muted); font-size: .95rem; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+    .boundary-grid span { padding: 12px; border: 1px solid var(--cp-border); border-radius: .625rem; background: var(--cp-surface); font-size: .95rem; }
+    .recovery-path { list-style: none; display: grid; gap: 12px; margin: 20px 0 0; padding: 0; counter-reset: recovery; }
+    .recovery-path li { counter-increment: recovery; padding: 12px; border: 1px solid var(--cp-border); border-radius: .625rem; background: var(--cp-surface); font-size: .95rem; }
+    .recovery-path li::before { content: counter(recovery) " / "; color: var(--cp-accent); font-family: Consolas, "Courier New", Courier, monospace; }
+    .dependency-loop { display: grid; gap: 16px; margin-top: 24px; padding: 20px; border: 2px dashed var(--cp-danger); border-radius: 16px; text-align: center; }
+    .dependency-loop strong { color: var(--cp-danger); }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metric { padding: 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface-soft); }
+    .metric strong { display: block; color: var(--cp-accent); font-size: 3rem; line-height: 1.1; letter-spacing: -.05em; }
+    .metric span { display: block; margin-top: 8px; color: var(--cp-text-muted); font-size: .9rem; }
+    .evidence-content { display: grid; gap: 20px; align-content: center; }
+    .phase-time { display: block; margin-bottom: 12px; color: var(--cp-accent); font: .9rem Consolas, "Courier New", Courier, monospace; }
+    .roadmap h3 { font-size: 1.2rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .deck-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(1280px, calc(100% - 48px)); margin: 0 auto; }
+    .jump { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .jump label { color: var(--cp-text-muted); font-size: .8rem; white-space: nowrap; }
+    .jump select { min-width: 0; max-width: 360px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--cp-border-strong); border-radius: .625rem; background: var(--cp-surface); color: var(--cp-text); font-size: .85rem; }
+    .progress-shell { width: min(1280px, calc(100% - 48px)); margin: 16px auto 0; }
+    progress { display: block; width: 100%; height: 4px; accent-color: var(--cp-accent); }
+    .deck-help { width: min(1280px, calc(100% - 48px)); margin: 12px auto 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; color: var(--cp-text-muted); font-size: .75rem; }
+    #deck-status { color: var(--cp-text); }
+    .site-footer { padding: 0 24px 16px; color: var(--cp-text-muted); font-size: .7rem; text-align: center; }
+    .no-script { padding: 20px; color: var(--cp-text); text-align: center; }
+    @media screen and (min-width: 901px) and (max-height: 850px) {
+      .toolbar { padding: 8px 24px; }
+      .deck { margin-block: 12px; }
+      .slide { min-height: calc(100svh - 212px); padding: 24px 32px; gap: 16px; }
+      h1 { font-size: 3.25rem; }
+      h2 { font-size: 2rem; }
+      .eyebrow { margin-bottom: 8px; }
+      .lead { margin-top: 12px; font-size: 1rem; line-height: 1.4; }
+      .two-up, .three-up, .four-up { gap: 16px; }
+      .panel { padding: 16px; }
+      .panel p { margin-top: 8px; font-size: .95rem; }
+      .panel ul { margin-top: 12px; font-size: .95rem; }
+      .panel li + li { margin-top: 4px; }
+      .big-marker { margin-bottom: 12px; font-size: 2rem; }
+      .principle-grid { margin-top: 16px; gap: 8px; }
+      .principle { padding: 12px; }
+      .pill { padding: 6px 10px; font-size: .85rem; }
+      .architecture { gap: 8px; }
+      .architecture .panel { padding: 12px 16px; }
+      .architecture-core .pill-grid { margin-top: 12px; }
+      .decision-list { gap: 8px; }
+      .decision-list li { padding: 8px 12px; }
+      .decision-list p { font-size: .9rem; }
+      .topology { padding-block: 10px; }
+      .tier { padding: 16px 12px; }
+      .callout { padding: 12px 16px; font-size: .95rem; }
+      .recovery-path { margin-top: 12px; gap: 8px; }
+      .recovery-path li { padding: 8px; font-size: .9rem; }
+      .dependency-loop { margin-top: 16px; gap: 12px; padding: 16px; }
+      .metric { padding: 16px; }
+      .metric strong { font-size: 2.5rem; }
+      .source { padding-top: 12px; font-size: .7rem; }
+      #slide-12 .two-up { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .progress-shell { margin-top: 12px; }
+      .deck-help { margin-block: 8px 12px; }
+      .site-footer { padding-bottom: 8px; }
+    }
+    @media (max-width: 900px) {
+      .toolbar { padding: 12px 24px; }
+      .deck-name span { display: none; }
+      .four-up, .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tier:last-child { grid-column: 1 / -1; }
+      .tier h3 { min-height: auto; }
+      .three-up { grid-template-columns: 1fr; }
+      .three-up .panel { padding: 20px; }
+      .topology { grid-template-columns: 40px minmax(0, 1fr); }
+      .topology p { grid-column: 2; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .toolbar { padding: 12px; gap: 8px; }
+      .deck-name { display: none; }
+      .toolbar button { padding: 8px 12px; font-size: .8rem; }
+      .deck { width: calc(100% - 24px); margin-block: 12px; }
+      .slide { padding: 24px 20px; gap: 20px; min-height: calc(100svh - 260px); }
+      .two-up, .four-up, .tiers { grid-template-columns: 1fr; }
+      .tier:last-child { grid-column: auto; }
+      .panel { padding: 20px; }
+      .principle-grid { gap: 8px; }
+      .principle { padding: 12px; font-size: .9rem; }
+      .decision-list li { grid-template-columns: 32px 1fr; gap: 8px; padding: 12px; }
+      .deck-controls { width: calc(100% - 24px); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .jump { grid-column: 1 / -1; grid-row: 1; }
+      .jump select { width: 100%; max-width: none; }
+      .progress-shell, .deck-help { width: calc(100% - 24px); }
+      .deck-help { margin-bottom: 16px; }
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 12mm; }
+      html { font-size: 14px; }
+      body { display: block; background: var(--cp-surface); }
+      .toolbar, .deck-controls, .progress-shell, .deck-help, .site-footer, .skip-link, .no-script { display: none !important; }
+      .deck { width: 100%; margin: 0; }
+      .slide, .slide[hidden] { display: flex !important; min-height: 180mm; margin: 0; padding: 6mm; gap: 16px; border: 0; border-radius: 0; box-shadow: none; break-after: page; break-inside: avoid; }
+      .slide + .slide { margin: 0; }
+      .slide:last-child { break-after: auto; }
+      h1 { font-size: 36pt; }
+      h2 { font-size: 24pt; }
+      .panel { padding: 16px; }
+      .architecture .panel { padding: 12px 16px; }
+      .source { font-size: 8pt; }
+      .two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .four-up, .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      #slide-12 .two-up { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .tiers { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .tier:last-child { grid-column: auto; }
+      .topology { grid-template-columns: 48px minmax(0, 1.1fr) minmax(0, 1fr); }
+      .topology p { grid-column: auto; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#deck">Skip to slides</a>
+  <header class="toolbar">
+    <a class="home-link" href="../index.html"><span aria-hidden="true">&larr;</span> All formats</a>
+    <p class="deck-name">Adaptive Trust Fabric <span>Presentation</span></p>
+    <div class="toolbar-actions">
+      <button id="fullscreen-button" type="button" aria-pressed="false" hidden>Fullscreen</button>
+      <button id="print-button" type="button" hidden>Print / PDF</button>
+    </div>
+  </header>
+
+  <noscript><p class="no-script">JavaScript is disabled. All slides are shown below; use your browser's Print command for a handout.</p></noscript>
+
+  <main class="deck" id="deck" aria-label="Adaptive Trust Fabric slide presentation">
+    <section class="slide" id="slide-1" data-label="The governing position" aria-labelledby="slide-1-title">
+      <header>
+        <p class="eyebrow">01 / Executive position / 17 November 2026</p>
+        <h1 id="slide-1-title" tabindex="-1">Adaptive<br><span>Trust Fabric</span></h1>
+        <p class="lead">One enterprise. Explicit trust. An architecture for identity, security and compliance that adapts to real boundaries.</p>
+      </header>
+      <div class="two-up content">
+        <div>
+          <p>Do not optimize for tenant count or centralization. Optimize for sovereignty, survivability, recoverability and the capacity to operate safely.</p>
+          <div class="principle-grid">
+            <div class="principle"><span>01 / INTENT</span>Centralize intent.</div>
+            <div class="principle"><span>02 / AUTHORITY</span>Federate enforcement.</div>
+            <div class="principle"><span>03 / CONTINUITY</span>Localize survival.</div>
+            <div class="principle"><span>04 / ASSURANCE</span>Prove recovery.</div>
+          </div>
+        </div>
+        <div class="panel emphasis">
+          <h3>A Microsoft-aligned connected core</h3>
+          <div class="pill-grid">
+            <span class="pill">Entra</span><span class="pill">Defender</span><span class="pill">Sentinel</span>
+            <span class="pill">Purview</span><span class="pill">Intune</span><span class="pill">Azure governance</span>
+          </div>
+          <p>Composed with native-cloud, sovereign, local and disconnected capabilities where verified constraints require them.</p>
+        </div>
+      </div>
+      <p class="source">Derived architectural position, not an official Microsoft product commitment. Evidence: MS-01, STD-01. <a href="index.html#evidence">Source catalog</a></p>
+    </section>
+
+    <section class="slide" id="slide-2" data-label="One tenant is the default, not the objective" aria-labelledby="slide-2-title">
+      <header>
+        <p class="eyebrow">02 / Boundary before topology</p>
+        <h2 id="slide-2-title" tabindex="-1">One tenant is the default.<br>Not the objective.</h2>
+        <p class="lead">Prefer a single Microsoft Entra tenant when it can meet all hard requirements. Introduce another control plane only for a defensible boundary outcome.</p>
+      </header>
+      <div class="two-up content">
+        <div class="panel emphasis">
+          <span class="big-marker">01</span>
+          <h3>Start with delegated boundaries</h3>
+          <p>Common collaboration, scoped administration and shared operating standards avoid unnecessary lifecycle complexity.</p>
+          <p>Do not create tenants merely to mirror an organization chart or allocate cost.</p>
+        </div>
+        <div class="panel">
+          <h3>Prove the exception</h3>
+          <ul>
+            <li>Independent identity or recovery authority</li>
+            <li>Sovereign, legal or regulatory constraints</li>
+            <li>Safety or prolonged mission independence</li>
+            <li>Bounded acquisition and divestiture transitions</li>
+          </ul>
+        </div>
+      </div>
+      <p class="callout">Separate resources do not automatically mean separate identity risk. Shared identities and privileged integrations can reconnect the boundary.</p>
+      <p class="source">Microsoft Explicit guidance with derived admission criteria. Evidence: MS-02, MS-03, MS-21. <a href="index.html#evidence">Source catalog</a></p>
+    </section>
+
+    <section class="slide" id="slide-3" data-label="A fabric of interoperating authorities" aria-labelledby="slide-3-title">
+      <header>
+        <p class="eyebrow">03 / Reference architecture</p>
+        <h2 id="slide-3-title" tabindex="-1">Common intent. Explicit authority.</h2>
+        <p class="lead">Policy ownership, identity, enforcement, telemetry and recovery are related concerns, not a single runtime dependency.</p>
+      </header>
+      <div class="architecture content" role="img" aria-label="Adaptive governance and independent recovery above a Microsoft connected core, with enforcement zones and local services below.">
+        <div class="two-up">
+          <div class="panel"><h3>Adaptive governance</h3><p>Obligations, policy as code, accountable owners and evidence.</p></div>
+          <div class="panel"><h3>Independent recovery authority</h3><p>Clean identities, keys, communications and known-good state.</p></div>
+        </div>
+        <div class="connector" aria-hidden="true">&darr;</div>
+        <div class="panel emphasis architecture-core">
+          <h3>Microsoft connected core</h3>
+          <div class="pill-grid"><span class="pill">Entra</span><span class="pill">Defender XDR</span><span class="pill">Sentinel</span><span class="pill">Purview</span><span class="pill">Intune</span><span class="pill">Azure governance</span></div>
+        </div>
+        <div class="connector" aria-hidden="true">&darr;</div>
+        <div class="two-up">
+          <div class="panel"><h3>Authoritative enforcement zones</h3><p>Tenant, native cloud, application, workload, data and facility.</p></div>
+          <div class="panel"><h3>S2-S4 local control planes</h3><p>Identity, policy, detection, updates, evidence and recovery.</p></div>
+        </div>
+      </div>
+      <p class="source">Derived reference architecture. Evidence: MS-01, MS-11, MS-18, MS-19. <a href="index.html#evidence">Source catalog</a></p>
+    </section>
+
+    <section class="slide" id="slide-4" data-label="The decision hierarchy" aria-labelledby="slide-4-title">
+      <header>
+        <p class="eyebrow">04 / Architecture fitness</p>
+        <h2 id="slide-4-title" tabindex="-1">A fatal constraint cannot be averaged away.</h2>
+        <p class="lead">Apply the decision hierarchy in order. A good aggregate score cannot compensate for a sovereignty violation, unsafe action or circular recovery dependency.</p>
+      </header>
+      <ol class="decision-list content">
+        <li class="emphasis"><span class="step-number">01</span><div><h3>Hard constraints</h3><p>Identify non-negotiable legal, safety, authority and continuity requirements.</p></div></li>
+        <li><span class="step-number">02</span><div><h3>Trust, authority and dependency graph</h3><p>Trace who can act, through which integrations, on which systems.</p></div></li>
+        <li><span class="step-number">03</span><div><h3>Scenario stress tests</h3><p>Test compromise, outages, isolation, recovery and organizational change.</p></div></li>
+        <li><span class="step-number">04</span><div><h3>Risk-adjusted optimization</h3><p>Compare feasible options on risk, cost, complexity and reversibility.</p></div></li>
+        <li><span class="step-number">05</span><div><h3>Capability and maturity feasibility</h3><p>Adopt only what the organization can operate, observe and recover safely.</p></div></li>
+      </ol>
+      <p class="source">Derived architectural decision method. Evidence: STD-03, STD-05. <a href="index.html#evidence">Source catalog</a></p>
+    </section>
+
+    <section class="slide" id="slide-5" data-label="Five topology patterns" aria-labelledby="slide-5-title">
+      <header>
+        <p class="eyebrow">05 / Topology library</p>
+        <h2 id="slide-5-title" tabindex="-1">Five patterns. No universal winner.</h2>
+        <p class="lead">Select the primary authority structure and add companion patterns where the mission requires them.</p>
+      </header>
+      <div class="topologies content">
+        <div class="topology"><span class="step-number">T1</span><h3>One global tenant with delegated boundaries</h3><p>Hard requirements fit within a common connected identity plane.</p></div>
+        <div class="topology"><span class="step-number">T2</span><h3>Federated multi-tenant enterprise</h3><p>Separate control planes with governed cross-boundary collaboration.</p></div>
+        <div class="topology"><span class="step-number">T3</span><h3>Sovereign or independently recoverable tenant</h3><p>Local identity, administrative or recovery authority is non-negotiable.</p></div>
+        <div class="topology"><span class="step-number">T4</span><h3>Disconnected enclave / cyber-physical cell</h3><p>Intentional isolation or mission independence from upstream services.</p></div>
+        <div class="topology"><span class="step-number">T5</span><h3>Acquisition transition zone</h3><p>Isolation-first discovery, staged trust and a tested detach path.</p></div>
+      </div>
+      <p class="source">Derived topology patterns. Evidence: MS-02, MS-03, MS-11, MS-18, MS-19, MS-20, STD-02. <a href="index.html#topologies">Explore use and rejection criteria</a></p>
+    </section>
+
+    <section class="slide" id="slide-6" data-label="Five survivability tiers" aria-labelledby="slide-6-title">
+      <header>
+        <p class="eyebrow">06 / Mission continuity</p>
+        <h2 id="slide-6-title" tabindex="-1">What must work when upstream does not?</h2>
+        <p class="lead">Assign a required tier to each environment. Design identity, policy, security operations and recovery to match it.</p>
+      </header>
+      <div class="tiers content">
+        <div class="tier"><span class="big-marker">S0</span><h3>Cloud-dependent</h3><p>Online SaaS and cloud operations.</p><p>Central identity, policy and SOC.</p></div>
+        <div class="tier"><span class="big-marker">S1</span><h3>Transient outage</h3><p>Hours of safe continuity.</p><p>Sessions, cached behavior and tested emergency access.</p></div>
+        <div class="tier"><span class="big-marker">S2</span><h3>Extended degraded</h3><p>Days of reduced function.</p><p>Selected local authorization, collection and restore capability.</p></div>
+        <div class="tier"><span class="big-marker">S3</span><h3>Independent operations</h3><p>Mission operation without upstream control planes.</p><p>Local authority, detection, keys and recovery.</p></div>
+        <div class="tier"><span class="big-marker">S4</span><h3>Disconnected / air-gapped</h3><p>Intentional isolation.</p><p>Local identity/PKI, signed updates and offline recovery roots.</p></div>
+      </div>
+      <p class="callout">A survivability tier is an operational contract to prove, not a product SLA or a claim that disconnected features match the cloud.</p>
+      <p class="source">Derived survivability model. Evidence: MS-18, MS-19, MS-20, STD-02. <a href="index.html#survivability">Explore tier requirements</a></p>
+    </section>
+
+    <section class="slide" id="slide-7" data-label="Sovereignty and physical safety" aria-labelledby="slide-7-title">
+      <header>
+        <p class="eyebrow">07 / Sovereignty and safety</p>
+        <h2 id="slide-7-title" tabindex="-1">Location is not the whole boundary.</h2>
+        <p class="lead">Data residency, cryptographic control and physical-process safety solve different problems. Evaluate each explicitly.</p>
+      </header>
+      <div class="two-up content">
+        <div class="panel">
+          <h3>Sovereignty has multiple dimensions</h3>
+          <div class="boundary-grid">
+            <span>Data residency</span><span>Processing location</span>
+            <span>Operator and administrator access</span><span>Cryptographic authority</span>
+            <span>Legal jurisdiction</span><span>Telemetry and recovery authority</span>
+          </div>
+          <p>Customer-managed keys address one dimension, not the entire sovereignty model.</p>
+        </div>
+        <div class="panel emphasis">
+          <span class="big-marker">OT</span>
+          <h3>Cyber response needs a safety case</h3>
+          <ul>
+            <li>Keep local operating authority proportional to mission risk.</li>
+            <li>Compensate for constrained assets with segmentation and monitoring.</li>
+            <li>Specify safe fail states, manual override and restoration conditions.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="source">Derived positions informed by Microsoft controls and OT guidance. Evidence: MS-14, MS-15, MS-18, STD-02. <a href="index.html#evidence">Source catalog</a></p>
+    </section>
+
+    <section class="slide" id="slide-8" data-label="Human, workload and agent identity" aria-labelledby="slide-8-title">
+      <header>
+        <p class="eyebrow">08 / Identity and authority</p>
+        <h2 id="slide-8-title" tabindex="-1">Every action needs accountable authority.</h2>
+        <p class="lead">Preserve the acting identity, its delegated authority and the evidence of what it did.</p>
+      </header>
+      <div class="three-up content">
+        <div class="panel"><span class="big-marker">H</span><h3>Humans</h3><ul><li>Phishing-resistant access for high-consequence roles</li><li>Least privilege and just-in-time elevation</li><li>Separately monitored emergency authority</li></ul></div>
+        <div class="panel"><span class="big-marker">W</span><h3>Workloads</h3><ul><li>Managed identities or workload federation</li><li>Bounded permissions and explicit trust relationships</li><li>Replace long-lived stored secrets where supported</li></ul></div>
+        <div class="panel"><span class="big-marker">A</span><h3>Agents</h3><ul><li>Unique identity and accountable sponsor</li><li>Blueprint-level guardrails and lifecycle governance</li><li>Least privilege, monitoring and revocation controls</li></ul></div>
+      </div>
+      <p class="source">Microsoft and standards guidance with derived control composition. Evidence: MS-05, MS-09, MS-10, MS-22, STD-04. <a href="index.html#standard">Explore the control standard</a></p>
+    </section>
+
+    <section class="slide" id="slide-9" data-label="Independent cyber recovery" aria-labelledby="slide-9-title">
+      <header>
+        <p class="eyebrow">09 / Cyber recovery</p>
+        <h2 id="slide-9-title" tabindex="-1">Recovery cannot depend on what failed.</h2>
+        <p class="lead">Availability keeps services running. Cyber recovery restores trustworthy authority after compromise.</p>
+      </header>
+      <div class="two-up content">
+        <div class="panel">
+          <h3>Reject circular recovery</h3>
+          <div class="dependency-loop" role="img" aria-label="A circular dependency: compromised identity is needed to access the vault, which is needed for the tools that restore the same identity.">
+            <span>Compromised identity</span><span aria-hidden="true">&darr;</span>
+            <span>Vault and recovery tools</span><span aria-hidden="true">&darr;</span>
+            <strong>Requires that same identity</strong>
+          </div>
+        </div>
+        <div class="panel emphasis">
+          <h3>Build a separate recovery graph</h3>
+          <ol class="recovery-path">
+            <li>Independent roots, keys and known-good state</li>
+            <li>Clean identities, devices and communications</li>
+            <li>Security operations and critical applications</li>
+            <li>Evidence, validation and controlled restoration of trust</li>
+          </ol>
+          <p>Define recovery objectives and exercise the complete dependency path.</p>
+        </div>
+      </div>
+      <p class="source">Derived recovery architecture. Evidence: MS-07, MS-08, MS-26. <a href="../position-paper/position-paper.html#s7">Read the operations and recovery position</a></p>
+    </section>
+
+    <section class="slide" id="slide-10" data-label="Evidence and adversarial validation" aria-labelledby="slide-10-title">
+      <header>
+        <p class="eyebrow">10 / Assurance</p>
+        <h2 id="slide-10-title" tabindex="-1">Challenge the architecture before deployment.</h2>
+        <p class="lead">Trace material positions to evidence and keep direct guidance distinct from architectural inference.</p>
+      </header>
+      <div class="evidence-content content">
+        <div class="metrics">
+          <div class="metric"><strong>33</strong><span>sources in the research catalog</span></div>
+          <div class="metric"><strong>18</strong><span>machine-readable claims</span></div>
+          <div class="metric"><strong>26</strong><span>normative architecture controls</span></div>
+          <div class="metric"><strong>10</strong><span>documented adversarial challenges</span></div>
+        </div>
+        <div class="three-up">
+          <div class="panel"><h3>More tenants = isolation?</h3><p>Shared identities and authority paths can preserve shared risk.</p></div>
+          <div class="panel"><h3>Keys = sovereignty?</h3><p>Key control is one dimension; processing, operators and jurisdiction still matter.</p></div>
+          <div class="panel"><h3>Air gaps = security?</h3><p>Local detection, updates, evidence and recovery remain essential.</p></div>
+        </div>
+        <p class="callout">MUST / SHOULD / MAY are the framework's control language, not an automatic compliance certification.</p>
+      </div>
+      <p class="source">Evidence classes: Microsoft Explicit / External Standard / Research Supported / Derived Architectural Position / Open/Contested. Examples: MS-02, MS-14, MS-18. <a href="index.html#challenge">Review all challenges</a></p>
+    </section>
+
+    <section class="slide" id="slide-11" data-label="The adoption roadmap" aria-labelledby="slide-11-title">
+      <header>
+        <p class="eyebrow">11 / Transition roadmap</p>
+        <h2 id="slide-11-title" tabindex="-1">Build capability before complexity.</h2>
+        <p class="lead">Stage adoption through operability gates. Expand only when ownership, monitoring, response and recovery can sustain the next boundary.</p>
+      </header>
+      <div class="four-up roadmap content">
+        <div class="panel"><span class="big-marker">01</span><span class="phase-time">0-90 days</span><h3>Control the roots</h3><ul><li>Boundary and authority register</li><li>Test emergency access</li><li>Export known-good configuration</li></ul></div>
+        <div class="panel"><span class="big-marker">02</span><span class="phase-time">3-9 months</span><h3>Standardize the core</h3><ul><li>Phishing-resistant privileged access</li><li>Policy as code</li><li>Information and collaboration controls</li></ul></div>
+        <div class="panel"><span class="big-marker">03</span><span class="phase-time">9-18 months</span><h3>Federate operations</h3><ul><li>S2-S4 local capabilities</li><li>Regional and tenant SOC authority</li><li>Acquisition detachability tests</li></ul></div>
+        <div class="panel emphasis"><span class="big-marker">04</span><span class="phase-time">18-36 months</span><h3>Prove recovery</h3><ul><li>Clean-room recovery drills</li><li>Combined control-plane failures</li><li>Continuous evidence and drift remediation</li></ul></div>
+      </div>
+      <p class="source">Derived roadmap, not a guaranteed implementation schedule. Evidence: STD-05 and the package's control standard. <a href="index.html#roadmap">Explore the full roadmap</a></p>
+    </section>
+
+    <section class="slide" id="slide-12" data-label="Make a decision you can prove" aria-labelledby="slide-12-title">
+      <header>
+        <p class="eyebrow">12 / Your next architecture review</p>
+        <h2 id="slide-12-title" tabindex="-1">Choose the architecture you can prove.</h2>
+        <p class="lead">Start with the organization's mission, then justify each boundary and dependency with evidence.</p>
+      </header>
+      <div class="content">
+        <div class="two-up">
+          <div class="panel"><span class="big-marker">01</span><h3>Which boundaries are non-negotiable?</h3><p>Identity, sovereignty, legal authority, safety and reversibility.</p></div>
+          <div class="panel"><span class="big-marker">02</span><h3>What must survive locally?</h3><p>Specify the required S-tier and the duration and impact of lost dependencies.</p></div>
+          <div class="panel"><span class="big-marker">03</span><h3>Can you recover without the compromised core?</h3><p>Prove independent authority, known-good state and clean recovery paths.</p></div>
+          <div class="panel"><span class="big-marker">04</span><h3>Can your operating model sustain it?</h3><p>Gate sophistication on ownership, skills, evidence and exercised runbooks.</p></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="index.html#assess">Run the topology assessment</a>
+          <a class="button" href="../position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read the position paper</a>
+          <a class="button" href="index.html#evidence">Explore the evidence</a>
+        </div>
+      </div>
+      <p class="source">Microsoft-aligned architectural position, not an official product commitment. Revalidate legal, regulatory, safety, licensing, preview, cloud, regional and service-limit requirements. <a href="../index.html">Choose another format</a></p>
+    </section>
+  </main>
+
+  <nav class="deck-controls" id="deck-controls" aria-label="Presentation controls" hidden>
+    <button id="previous-slide" type="button" aria-label="Previous slide"><span aria-hidden="true">&larr;</span> Previous</button>
+    <div class="jump">
+      <label for="slide-select">Go to slide</label>
+      <select id="slide-select"></select>
+    </div>
+    <button id="next-slide" type="button" aria-label="Next slide">Next <span aria-hidden="true">&rarr;</span></button>
+  </nav>
+  <div class="progress-shell" id="progress-shell" hidden><progress id="slide-progress" value="1" max="12" aria-label="Presentation progress"></progress></div>
+  <div class="deck-help" id="deck-help" hidden>
+    <p>Arrow keys / Page Up &amp; Down to navigate. Home / End to jump. F for fullscreen.</p>
+    <p id="deck-status" role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <footer class="site-footer">Research cutoff 17 Nov 2026 / Derived architectural guidance / <a href="../index.html">All formats</a></footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const slides = [...document.querySelectorAll(".slide")];
+      const previous = document.querySelector("#previous-slide");
+      const next = document.querySelector("#next-slide");
+      const select = document.querySelector("#slide-select");
+      const progress = document.querySelector("#slide-progress");
+      const status = document.querySelector("#deck-status");
+      const fullscreen = document.querySelector("#fullscreen-button");
+      const print = document.querySelector("#print-button");
+      let current = 0;
+
+      slides.forEach((slide, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = `${index + 1}. ${slide.dataset.label}`;
+        select.append(option);
+        slide.setAttribute("aria-roledescription", "slide");
+      });
+      progress.max = slides.length;
+
+      function showSlide(index, { focus = true, updateHash = true } = {}) {
+        const slide = slides[index];
+        if (!slide) {
+          status.textContent = "That slide is not available. Choose a slide from the list.";
+          return;
+        }
+        current = index;
+        slides.forEach((item, position) => { item.hidden = position !== index; });
+        previous.disabled = index === 0;
+        next.disabled = index === slides.length - 1;
+        select.value = String(index);
+        progress.value = index + 1;
+        status.textContent = `Slide ${index + 1} of ${slides.length}`;
+        document.title = `${slide.dataset.label} | Adaptive Trust Fabric`;
+        if (updateHash && window.location.hash !== `#${slide.id}`) {
+          window.history.replaceState(null, "", `#${slide.id}`);
+        }
+        if (focus) {
+          slide.querySelector("h1, h2").focus({ preventScroll: true });
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }
+      }
+
+      function moveSlide(direction) {
+        showSlide(Math.max(0, Math.min(slides.length - 1, current + direction)));
+      }
+
+      async function toggleFullscreen() {
+        if (!document.fullscreenEnabled) {
+          status.textContent = "Fullscreen is not available in this browser. Use its fullscreen command instead.";
+          return;
+        }
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else {
+            await document.documentElement.requestFullscreen();
+          }
+        } catch (error) {
+          console.error("Could not change presentation fullscreen mode.", error);
+          status.textContent = "Fullscreen could not be opened. Use your browser's fullscreen command instead.";
+        }
+      }
+
+      previous.addEventListener("click", () => moveSlide(-1));
+      next.addEventListener("click", () => moveSlide(1));
+      select.addEventListener("change", () => showSlide(Number(select.value)));
+      print.addEventListener("click", () => window.print());
+      fullscreen.addEventListener("click", toggleFullscreen);
+      document.addEventListener("fullscreenchange", () => {
+        const active = Boolean(document.fullscreenElement);
+        fullscreen.textContent = active ? "Exit fullscreen" : "Fullscreen";
+        fullscreen.setAttribute("aria-pressed", String(active));
+      });
+      document.addEventListener("keydown", event => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        const target = event.target;
+        if (target instanceof Element && target.closest("input, select, textarea, [contenteditable]")) return;
+        if (event.key === " " && target instanceof Element && target.closest("a, button")) return;
+
+        switch (event.key) {
+          case "ArrowRight":
+          case "PageDown":
+            event.preventDefault();
+            moveSlide(1);
+            break;
+          case "ArrowLeft":
+          case "PageUp":
+            event.preventDefault();
+            moveSlide(-1);
+            break;
+          case " ":
+            event.preventDefault();
+            moveSlide(event.shiftKey ? -1 : 1);
+            break;
+          case "Home":
+            event.preventDefault();
+            showSlide(0);
+            break;
+          case "End":
+            event.preventDefault();
+            showSlide(slides.length - 1);
+            break;
+          case "f":
+          case "F":
+            event.preventDefault();
+            toggleFullscreen();
+            break;
+        }
+      });
+      window.addEventListener("hashchange", () => {
+        const index = slides.findIndex(slide => `#${slide.id}` === window.location.hash);
+        if (index >= 0) showSlide(index, { updateHash: false });
+      });
+
+      document.querySelector("#deck-controls").hidden = false;
+      document.querySelector("#progress-shell").hidden = false;
+      document.querySelector("#deck-help").hidden = false;
+      fullscreen.hidden = !document.fullscreenEnabled;
+      print.hidden = false;
+      const initial = slides.findIndex(slide => `#${slide.id}` === window.location.hash);
+      showSlide(initial >= 0 ? initial : 0, { focus: false });
+    })();
+  </script>
+</body>
+</html>

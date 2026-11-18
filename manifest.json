@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 1285,
-      "sha256": "8afc50771bf3ddabe3aa561e0d62766d20d52b94890088e3af6ee8ede6c3c5f3"
+      "bytes": 16683,
+      "sha256": "b558e154b328cec3ae91a3241ede855d1534d382ee7e078fc7543fedae3d01ad"
     },
     {
       "path": "adaptive-trust-fabric-microsite/assets/app.js",
@@ -25,8 +25,8 @@
     },
     {
       "path": "adaptive-trust-fabric-microsite/index.html",
-      "bytes": 62984,
-      "sha256": "657ca48a6b7119b31e951c00ccb45b0417eacf18b6b1b83231b07d83a61c33a1"
+      "bytes": 63030,
+      "sha256": "73c55a30f9e2ac01fe33c0958046ffb86ee66493e797cd50187d44de5f656a49"
     },
     {
       "path": "position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf",
@@ -42,6 +42,21 @@
       "path": "position-paper/position-paper.html",
       "bytes": 52484,
       "sha256": "761c9c17eaf8499b35f048adfa9ffda2b165852c202c00c9f1bbf9b6e1c61157"
+    },
+    {
+      "path": "index.html",
+      "bytes": 12818,
+      "sha256": "7c4fa1b94e0fb0549a6d2c1efdcf7ad794e9c388ca7e4a76aea83b41aef3873d"
+    },
+    {
+      "path": "adaptive-trust-fabric-microsite/presentation.html",
+      "bytes": 44935,
+      "sha256": "6e7e14ac573bf139e3504ccdf6f5492eb96c20873e439fbb757be28a654e059e"
+    },
+    {
+      "path": "adaptive-trust-fabric-infographic.html",
+      "bytes": 240270,
+      "sha256": "68dfe562bd5bd45fa28dd17395870f8f08cdd46b68ae7ba90e7e24a73598e2db"
     }
   ]
 }

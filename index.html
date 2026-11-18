@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Adaptive Trust Fabric as an interactive microsite, a slide presentation or an architecture infographic.">
+  <title>Adaptive Trust Fabric | Choose your format</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    :root {
+      --cp-card-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; }
+    a { color: var(--cp-link); }
+    a:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 6px; }
+    .shell { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+    .skip-link { position: absolute; top: -80px; left: 16px; padding: 12px 16px; background: var(--cp-surface); border: 1px solid var(--cp-accent); border-radius: .625rem; z-index: 1; }
+    .skip-link:focus { top: 16px; }
+    .site-header { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid var(--cp-border); }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; }
+    .brand svg { color: var(--cp-accent); flex-shrink: 0; }
+    .header-meta { color: var(--cp-text-muted); font-size: .8rem; }
+    .hero { padding-block: 64px 40px; }
+    .eyebrow { margin: 0 0 16px; color: var(--cp-accent); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 1000px; margin: 0; font-size: clamp(2.5rem, 6.5vw, 5rem); font-weight: 700; line-height: 1.08; letter-spacing: -.05em; text-wrap: balance; }
+    h1 span { color: var(--cp-accent); }
+    .intro { max-width: 780px; margin: 24px 0 0; color: var(--cp-text-muted); font-size: clamp(1rem, 1.8vw, 1.2rem); }
+    .format-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-bottom: 48px; }
+    .format-card { display: flex; flex-direction: column; padding: 32px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); color: var(--cp-text); box-shadow: var(--cp-card-shadow); text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
+    .format-card:hover { border-color: var(--cp-accent); transform: translateY(-4px); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
+    .format-icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: .625rem; background: var(--cp-accent-soft); color: var(--cp-accent); }
+    .format-number { font-family: Consolas, "Courier New", Courier, monospace; color: var(--cp-text-soft); font-size: .8rem; }
+    .format-card h2 { margin: 0 0 16px; font-size: 1.65rem; line-height: 1.16; letter-spacing: -.035em; }
+    .format-card p { margin: 0; color: var(--cp-text-muted); }
+    .format-card ul { margin: 24px 0 32px; padding-left: 20px; color: var(--cp-text-muted); font-size: .9rem; }
+    .format-card li + li { margin-top: 8px; }
+    .card-action { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--cp-border); color: var(--cp-accent); font-weight: 700; }
+    .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; padding: 32px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-bg-elevated); }
+    .principles p { margin: 0; font-size: 1.05rem; font-weight: 650; }
+    .principles span { display: block; margin-bottom: 8px; color: var(--cp-accent); font: .75rem Consolas, "Courier New", Courier, monospace; }
+    .supporting { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 32px; }
+    .supporting p { margin: 0; color: var(--cp-text-muted); font-size: .9rem; }
+    .supporting-links { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: .9rem; }
+    .site-footer { padding-block: 24px 32px; border-top: 1px solid var(--cp-border); color: var(--cp-text-muted); font-size: .78rem; }
+    .site-footer p { max-width: 1000px; margin: 0; }
+    @media (max-width: 1000px) {
+      .format-grid { gap: 16px; }
+      .format-card { padding: 24px; }
+      .format-card h2 { font-size: 1.4rem; }
+    }
+    @media (max-width: 760px) {
+      .shell { width: calc(100% - 32px); }
+      .site-header { flex-wrap: wrap; gap: 12px; padding-block: 20px; }
+      .hero { padding-block: 40px 32px; }
+      .format-grid { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
+      .card-top { margin-bottom: 24px; }
+      .format-card h2 { font-size: 1.65rem; }
+      .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 24px; }
+      .supporting { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .format-card { transition: none; }
+      .format-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#formats">Skip to viewing options</a>
+  <header class="site-header shell">
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M5 8h8v8H5zM19 16h8v8h-8zM13 12h10v4M9 16v8h10"/>
+      </svg>
+      Adaptive Trust Fabric
+    </div>
+    <span class="header-meta">Version 1.0 / Research cutoff 17 Nov 2026</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">One architecture. Three ways to explore.</p>
+      <h1 id="page-title">Explicit trust.<br><span>Your choice of perspective.</span></h1>
+      <p class="intro">A Microsoft-aligned decision framework for identity, security and compliance across tenants, clouds, acquisitions, sovereign zones and disconnected operations. Choose the format that fits your conversation.</p>
+    </section>
+
+    <section class="format-grid" id="formats" aria-label="Choose a viewing format">
+      <a class="format-card" href="adaptive-trust-fabric-microsite/index.html" aria-labelledby="microsite-title">
+        <div class="card-top">
+          <span class="format-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="26" height="22" rx="3"/><path d="M3 11h26M9 8h.1M6 8h.1M8 16h7M8 20h5M19 16h5v7h-5z"/>
+            </svg>
+          </span>
+          <span class="format-number">01 / EXPLORE</span>
+        </div>
+        <h2 id="microsite-title">Interactive microsite</h2>
+        <p>Follow the complete architecture at your own pace and apply it to your organizational conditions.</p>
+        <ul>
+          <li>Rule-based topology assessment</li>
+          <li>Survivability and control explorer</li>
+          <li>Searchable evidence and roadmap</li>
+        </ul>
+        <span class="card-action">Explore the microsite <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="format-card" href="adaptive-trust-fabric-microsite/presentation.html" aria-labelledby="presentation-title">
+        <div class="card-top">
+          <span class="format-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 5h24M16 3v2M16 23v6M10 29l6-6 6 6"/><rect x="5" y="5" width="22" height="18" rx="1"/><path d="m13 10 7 4-7 4z"/>
+            </svg>
+          </span>
+          <span class="format-number">02 / PRESENT</span>
+        </div>
+        <h2 id="presentation-title">Slide presentation</h2>
+        <p>Lead a focused architecture briefing with a browser-native deck built from the same position and evidence.</p>
+        <ul>
+          <li>12 slides with a clear decision narrative</li>
+          <li>Keyboard controls and fullscreen</li>
+          <li>Print all slides or save as PDF</li>
+        </ul>
+        <span class="card-action">Open the presentation <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="format-card" href="adaptive-trust-fabric-infographic.html" aria-labelledby="infographic-title">
+        <div class="card-top">
+          <span class="format-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="6" y="3" width="20" height="26" rx="2"/><path d="M11 9h10M11 13h5M11 24v-5M16 24v-8M21 24v-4"/>
+            </svg>
+          </span>
+          <span class="format-number">03 / SUMMARIZE</span>
+        </div>
+        <h2 id="infographic-title">Architecture infographic</h2>
+        <p>Get the operating model, evidence depth and decision system in a concise visual overview.</p>
+        <ul>
+          <li>Architecture at a glance</li>
+          <li>Key patterns and implementation caveats</li>
+          <li>A printable briefing companion</li>
+        </ul>
+        <span class="card-action">View the infographic <span aria-hidden="true">&rarr;</span></span>
+      </a>
+    </section>
+
+    <section class="principles" aria-label="Governing principles">
+      <p><span>01 / INTENT</span>Centralize intent.</p>
+      <p><span>02 / AUTHORITY</span>Federate enforcement.</p>
+      <p><span>03 / CONTINUITY</span>Localize survival.</p>
+      <p><span>04 / ASSURANCE</span>Prove recovery.</p>
+    </section>
+
+    <section class="supporting" aria-label="Supporting material">
+      <p>33 sources. 26 normative controls. One boundary-driven position.</p>
+      <div class="supporting-links">
+        <a href="position-paper/Adaptive-Trust-Fabric-Position-Paper.pdf">Read the position paper</a>
+        <a href="adaptive-trust-fabric-microsite/data/research.json">Research data</a>
+        <a href="https://github.com/chadhage/adaptive-trust-fabric">GitHub repository</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <p>A Microsoft-aligned architectural position, not an official Microsoft product commitment. Revalidate legal, regulatory, safety, licensing, preview, service-limit, cloud and regional requirements before implementation. All three formats work locally when the complete repository is kept together.</p>
+  </footer>
+</body>
+</html>
